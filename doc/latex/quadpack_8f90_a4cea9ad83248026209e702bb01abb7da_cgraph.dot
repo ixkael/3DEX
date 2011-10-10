@@ -1,0 +1,17 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="qawc",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="qawce",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadpack_8f90.html#a51d7f754a9214f7490c035740fc0aef7"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="qc25c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadpack_8f90.html#af8148c1623b7cf59159c491cfb1856f4"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="qcheb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadpack_8f90.html#ad5beefcfdb335ea68ccf8397536c8c36"];
+  Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="qk15w",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadpack_8f90.html#a0c083838940925726abd5bc85fa29587"];
+  Node2 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="qsort",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadpack_8f90.html#a55e08a684c5a6315fb37dd0fdc66d8e6"];
+}

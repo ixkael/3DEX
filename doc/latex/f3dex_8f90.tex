@@ -1,0 +1,80 @@
+\hypertarget{f3dex_8f90}{
+\section{src/f90/mod/f3dex.f90 File Reference}
+\label{f3dex_8f90}\index{src/f90/mod/f3dex.f90@{src/f90/mod/f3dex.f90}}
+}
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{typef3dex_1_1recognized_params}{f3dex::recognizedParams}
+\end{DoxyCompactItemize}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacef3dex}{f3dex}
+\end{DoxyCompactItemize}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex_a4e944841262cc3bac00e25f2d188804d}{f3dex::txtfile2parameters} (paramfile, params)
+\item 
+subroutine \hyperlink{namespacef3dex_a1c162e19667698db3dad6391a9bcd797}{f3dex::f90ftpcld} (unit, colnum, frow, felem, np, data, status)
+\item 
+subroutine \hyperlink{namespacef3dex_a8bb386e1b869c35df30978b7e634b234}{f3dex::f90ftgcvd} (unit, colnum, frow, felem, np, nullval, data, anynull, status)
+\item 
+subroutine \hyperlink{namespacef3dex_abb1777616669f320b1792a0e8aba490a}{f3dex::f90ftgkyd} (unit, keyword, value, comment, status)
+\item 
+subroutine \hyperlink{namespacef3dex_a11254efdbb3dec3e0a04346a3b4420b7}{f3dex::get\_\-clean\_\-header} (unit, header, filename, error, xalso, xonly)
+\item 
+subroutine \hyperlink{namespacef3dex_a9973d07e7dbafd1082de1d3b37088668}{f3dex::cln2fits} (filename, cln, kln, nlmax, nnmax, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex_a11f3efc39a60c9d26a79c13bfe936ebc}{f3dex::almn2fits} (filename, almn, kln, cln, nlmax, nmmax, nnmax, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex_a6630d20765692f55b9c5389e877e35ae}{f3dex::fits2almn} (filename, nnmax, nlmax, nmmax, almn, kln, cln, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex_aa083709f672c84c29ddbe82767394723}{f3dex::print\_\-almn} (almn, nllim, nmlim, nnlim, nlmax, nmmax, nnmax, txt)
+\item 
+subroutine \hyperlink{namespacef3dex_ac047f1cdd1135ef77143db2f2dc67259}{f3dex::print\_\-spectrum} (spectr, nllim, nnlim, nlmax, nnmax, txt)
+\item 
+subroutine \hyperlink{namespacef3dex_a0e8960adb17a10a71b92df15ba3f63d8}{f3dex::almn2cln} (nnmax, nlmax, nmmax, almn, cln)
+\item 
+subroutine \hyperlink{namespacef3dex_ab59d82bd4e0bbb4ce1d8149ac252b8c4}{f3dex::getParameters\_\-survey2almn} (multiscale, zbounds, nr, nside, nnmax, nlmax, nmmax, iter\_\-order, nbpts, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, paramfile, almnoutfile, clnoutfile, h, w0, wa, omega\_\-l, omega\_\-b, omega\_\-m, rmaxinput)
+\item 
+subroutine \hyperlink{namespacef3dex_a2efa7687f0b6591321e5c86ea09aa1a7}{f3dex::extractFromFile} (nbpts, nr, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, survey)
+\item 
+subroutine \hyperlink{namespacef3dex_a177ac0f41749e15dd33c7a4477d13a0e}{f3dex::survey2almn\_\-srs} (nsmax, nnmax, nlmax, nmmax, rmax, nbpts, zbounds, survey, kln, almn)
+\begin{DoxyCompactList}\small\item\em Performs the Fourier-\/Bessel decomposition (backward algorithm) of a discrete survey. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex_ae28575da877299326cf5d412b7bda063}{f3dex::alnspring2almn} (nsmax, nlmax, nmmax, map, almn, zbounds)
+\item 
+subroutine \hyperlink{namespacef3dex_a902c376a4e5d7c84a39d6274dc904602}{f3dex::fieldalmn2overalmn} (almn, kln, rhomean, rmax, nnmax, nlmax, nmmax)
+\item 
+real(kind=8) \hyperlink{namespacef3dex_ac014e878f644407cfc3eb1af25137d44}{f3dex::wtime} ()
+\item 
+subroutine \hyperlink{namespacef3dex_ae2e71647b18208d49ce5ebc6dcc3dbea}{f3dex::almn2rmap} (map, almn, rho, nsmax, nnmax, nlmax, nmmax, kln, cln, plm)
+\item 
+subroutine \hyperlink{namespacef3dex_ac32aa4a30199fa62b6212bea55f59ff5}{f3dex::BSORT} (X, IY, N)
+\item 
+subroutine \hyperlink{namespacef3dex_ac7199c2a98971bf758240066422f4a5e}{f3dex::gen\_\-qln} (qln, nnmax, nlmax)
+\item 
+subroutine \hyperlink{namespacef3dex_a7aceee3f16c8792cfe12b2d7a53d7acc}{f3dex::gen\_\-kln} (kln, nnmax, nlmax, rmax)
+\item 
+subroutine \hyperlink{namespacef3dex_a8ff17a3652c0f3145393cc45fe0a2a6b}{f3dex::gen\_\-plm} (nsmax, nlmax, nmmax, plm)
+\item 
+subroutine \hyperlink{namespacef3dex_a6a90245c19e73ec2ce1f8fc42e4ab909}{f3dex::logrange} (x, mn, mx, npts)
+\item 
+subroutine \hyperlink{namespacef3dex_adcf1cf51ac34f733e7a776a7df065524}{f3dex::gen\_\-cln} (cln, kln, nnmax, nlmax, rmax)
+\item 
+subroutine \hyperlink{namespacef3dex_ad15a4c29088690f9ee5b97799abfc4a5}{f3dex::gen\_\-jln} (jlns, kln, rho, nnmax, nlmax)
+\item 
+real(DP) \hyperlink{namespacef3dex_aaab16fb8c4e26a33aa182fcad7916a59}{f3dex::dzrel} (cplxnb, cplxnbref)
+\item 
+real(DP) \hyperlink{namespacef3dex_aae21ba3275637af7c40a0f4810f890b8}{f3dex::dzabs} (cplxnb, cplxnbref)
+\item 
+subroutine \hyperlink{namespacef3dex_ae7f16ddea56702ffd83912c6def516d4}{f3dex::BJL} (L, X, JL)
+\begin{DoxyCompactList}\small\item\em Compute the value of the l-\/th order spherical bessel function at x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=SP), parameter, private \hyperlink{namespacef3dex_a5d027a15cdc55f7ea6b40a075c6f9eb8}{f3dex::s\_\-bad\_\-value} = HPX\_\-SBADVAL
+\item 
+real(kind=DP), parameter, private \hyperlink{namespacef3dex_af925e5023c935decb72a6698b234045d}{f3dex::d\_\-bad\_\-value} = HPX\_\-DBADVAL
+\end{DoxyCompactItemize}

@@ -36,3 +36,6 @@ AVAILABLE FEATURES
  survey2almn
  survey2almn_interactive 
  almn2rmap
+
+TEST COMMANDS
+ $ bin/survey2almn horizon_01_30k.txt out/almn_01_30_512.fits out/cln_01_30_512.fits 30 30 512 2000.0

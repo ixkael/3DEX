@@ -1,0 +1,698 @@
+\hypertarget{namespacef3dex}{
+\section{f3dex Module Reference}
+\label{namespacef3dex}\index{f3dex@{f3dex}}
+}
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{typef3dex_1_1recognized_params}{recognizedParams}
+\end{DoxyCompactItemize}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex_a4e944841262cc3bac00e25f2d188804d}{txtfile2parameters} (paramfile, params)
+\item 
+subroutine \hyperlink{namespacef3dex_a1c162e19667698db3dad6391a9bcd797}{f90ftpcld} (unit, colnum, frow, felem, np, data, status)
+\item 
+subroutine \hyperlink{namespacef3dex_a8bb386e1b869c35df30978b7e634b234}{f90ftgcvd} (unit, colnum, frow, felem, np, nullval, data, anynull, status)
+\item 
+subroutine \hyperlink{namespacef3dex_abb1777616669f320b1792a0e8aba490a}{f90ftgkyd} (unit, keyword, value, comment, status)
+\item 
+subroutine \hyperlink{namespacef3dex_a11254efdbb3dec3e0a04346a3b4420b7}{get\_\-clean\_\-header} (unit, header, filename, error, xalso, xonly)
+\item 
+subroutine \hyperlink{namespacef3dex_a9973d07e7dbafd1082de1d3b37088668}{cln2fits} (filename, cln, kln, nlmax, nnmax, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex_a11f3efc39a60c9d26a79c13bfe936ebc}{almn2fits} (filename, almn, kln, cln, nlmax, nmmax, nnmax, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex_a6630d20765692f55b9c5389e877e35ae}{fits2almn} (filename, nnmax, nlmax, nmmax, almn, kln, cln, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex_aa083709f672c84c29ddbe82767394723}{print\_\-almn} (almn, nllim, nmlim, nnlim, nlmax, nmmax, nnmax, txt)
+\item 
+subroutine \hyperlink{namespacef3dex_ac047f1cdd1135ef77143db2f2dc67259}{print\_\-spectrum} (spectr, nllim, nnlim, nlmax, nnmax, txt)
+\item 
+subroutine \hyperlink{namespacef3dex_a0e8960adb17a10a71b92df15ba3f63d8}{almn2cln} (nnmax, nlmax, nmmax, almn, cln)
+\item 
+subroutine \hyperlink{namespacef3dex_ab59d82bd4e0bbb4ce1d8149ac252b8c4}{getParameters\_\-survey2almn} (multiscale, zbounds, nr, nside, nnmax, nlmax, nmmax, iter\_\-order, nbpts, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, paramfile, almnoutfile, clnoutfile, h, w0, wa, omega\_\-l, omega\_\-b, omega\_\-m, rmaxinput)
+\item 
+subroutine \hyperlink{namespacef3dex_a2efa7687f0b6591321e5c86ea09aa1a7}{extractFromFile} (nbpts, nr, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, survey)
+\item 
+subroutine \hyperlink{namespacef3dex_a177ac0f41749e15dd33c7a4477d13a0e}{survey2almn\_\-srs} (nsmax, nnmax, nlmax, nmmax, rmax, nbpts, zbounds, survey, kln, almn)
+\begin{DoxyCompactList}\small\item\em Performs the Fourier-\/Bessel decomposition (backward algorithm) of a discrete survey. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex_ae28575da877299326cf5d412b7bda063}{alnspring2almn} (nsmax, nlmax, nmmax, map, almn, zbounds)
+\item 
+subroutine \hyperlink{namespacef3dex_a902c376a4e5d7c84a39d6274dc904602}{fieldalmn2overalmn} (almn, kln, rhomean, rmax, nnmax, nlmax, nmmax)
+\item 
+real(kind=8) \hyperlink{namespacef3dex_ac014e878f644407cfc3eb1af25137d44}{wtime} ()
+\item 
+subroutine \hyperlink{namespacef3dex_ae2e71647b18208d49ce5ebc6dcc3dbea}{almn2rmap} (map, almn, rho, nsmax, nnmax, nlmax, nmmax, kln, cln, plm)
+\item 
+subroutine \hyperlink{namespacef3dex_ac32aa4a30199fa62b6212bea55f59ff5}{BSORT} (X, IY, N)
+\item 
+subroutine \hyperlink{namespacef3dex_ac7199c2a98971bf758240066422f4a5e}{gen\_\-qln} (qln, nnmax, nlmax)
+\item 
+subroutine \hyperlink{namespacef3dex_a7aceee3f16c8792cfe12b2d7a53d7acc}{gen\_\-kln} (kln, nnmax, nlmax, rmax)
+\item 
+subroutine \hyperlink{namespacef3dex_a8ff17a3652c0f3145393cc45fe0a2a6b}{gen\_\-plm} (nsmax, nlmax, nmmax, plm)
+\item 
+subroutine \hyperlink{namespacef3dex_a6a90245c19e73ec2ce1f8fc42e4ab909}{logrange} (x, mn, mx, npts)
+\item 
+subroutine \hyperlink{namespacef3dex_adcf1cf51ac34f733e7a776a7df065524}{gen\_\-cln} (cln, kln, nnmax, nlmax, rmax)
+\item 
+subroutine \hyperlink{namespacef3dex_ad15a4c29088690f9ee5b97799abfc4a5}{gen\_\-jln} (jlns, kln, rho, nnmax, nlmax)
+\item 
+real(DP) \hyperlink{namespacef3dex_aaab16fb8c4e26a33aa182fcad7916a59}{dzrel} (cplxnb, cplxnbref)
+\item 
+real(DP) \hyperlink{namespacef3dex_aae21ba3275637af7c40a0f4810f890b8}{dzabs} (cplxnb, cplxnbref)
+\item 
+subroutine \hyperlink{namespacef3dex_ae7f16ddea56702ffd83912c6def516d4}{BJL} (L, X, JL)
+\begin{DoxyCompactList}\small\item\em Compute the value of the l-\/th order spherical bessel function at x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=SP), parameter, private \hyperlink{namespacef3dex_a5d027a15cdc55f7ea6b40a075c6f9eb8}{s\_\-bad\_\-value} = HPX\_\-SBADVAL
+\item 
+real(kind=DP), parameter, private \hyperlink{namespacef3dex_af925e5023c935decb72a6698b234045d}{d\_\-bad\_\-value} = HPX\_\-DBADVAL
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacef3dex_a0e8960adb17a10a71b92df15ba3f63d8}{
+\index{f3dex@{f3dex}!almn2cln@{almn2cln}}
+\index{almn2cln@{almn2cln}!f3dex@{f3dex}}
+\subsubsection[{almn2cln}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::almn2cln (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B),intent(in)}]{nnmax, }
+\item[{INTEGER(I4B),intent(in)}]{nlmax, }
+\item[{INTEGER(I4B),intent(in)}]{nmmax, }
+\item[{COMPLEX(DPC),dimension(1:nnmax,0:nlmax,0:nmmax),intent(in)}]{almn, }
+\item[{REAL(DP),dimension(0:nlmax, 1:nnmax),intent(out)}]{cln}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a0e8960adb17a10a71b92df15ba3f63d8}
+
+
+Definition at line 953 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a11f3efc39a60c9d26a79c13bfe936ebc}{
+\index{f3dex@{f3dex}!almn2fits@{almn2fits}}
+\index{almn2fits@{almn2fits}!f3dex@{f3dex}}
+\subsubsection[{almn2fits}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::almn2fits (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{COMPLEX(DP),dimension(1:nnmax,0:nlmax,0:nmmax),intent(in)}]{almn, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{kln, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{cln, }
+\item[{INTEGER(I4B),intent(in)}]{nlmax, }
+\item[{INTEGER(I4B),intent(in)}]{nmmax, }
+\item[{INTEGER(I4B),intent(in)}]{nnmax, }
+\item[{CHARACTER(LEN=80),dimension(1:nlheader),intent(in)}]{header, }
+\item[{INTEGER(I4B),intent(in)}]{nlheader}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a11f3efc39a60c9d26a79c13bfe936ebc}
+
+
+Definition at line 531 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_ae2e71647b18208d49ce5ebc6dcc3dbea}{
+\index{f3dex@{f3dex}!almn2rmap@{almn2rmap}}
+\index{almn2rmap@{almn2rmap}!f3dex@{f3dex}}
+\subsubsection[{almn2rmap}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::almn2rmap (
+\begin{DoxyParamCaption}
+\item[{real(DP),dimension(0:(12\_\-i8b$\ast$nsmax)$\ast$nsmax-\/1,1:1),intent(out)}]{map, }
+\item[{complex(DPC),dimension(1:nnmax,0:nlmax,0:nmmax),intent(in)}]{almn, }
+\item[{real(DP)}]{rho, }
+\item[{integer(I4B),intent(in)}]{nsmax, }
+\item[{integer(I4B),intent(in)}]{nnmax, }
+\item[{integer(I4B),intent(in)}]{nlmax, }
+\item[{integer(I4B),intent(in)}]{nmmax, }
+\item[{real(DP),dimension(0:nlmax,1:nnmax)}]{kln, }
+\item[{real(DP),dimension(0:nlmax,1:nnmax)}]{cln, }
+\item[{real(DP),dimension(0:( nsmax$\ast$(nmmax+1)$\ast$(2$\ast$nlmax-\/nmmax+2) ) ),intent(in)}]{plm}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ae2e71647b18208d49ce5ebc6dcc3dbea}
+
+
+Definition at line 2176 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_ae28575da877299326cf5d412b7bda063}{
+\index{f3dex@{f3dex}!alnspring2almn@{alnspring2almn}}
+\index{alnspring2almn@{alnspring2almn}!f3dex@{f3dex}}
+\subsubsection[{alnspring2almn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::alnspring2almn (
+\begin{DoxyParamCaption}
+\item[{integer(I4B),intent(in)}]{nsmax, }
+\item[{integer(I4B),intent(in)}]{nlmax, }
+\item[{integer(I4B),intent(in)}]{nmmax, }
+\item[{real(DP),dimension(0:nlmax,0:(12\_\-i8b$\ast$nsmax)$\ast$nsmax-\/1),intent(in)}]{map, }
+\item[{complex(DPC),dimension(1:1,0:nlmax,0:nmmax)}]{almn, }
+\item[{real(DP),dimension(1:2),intent(in),optional}]{zbounds}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ae28575da877299326cf5d412b7bda063}
+
+
+Definition at line 1823 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_ae7f16ddea56702ffd83912c6def516d4}{
+\index{f3dex@{f3dex}!BJL@{BJL}}
+\index{BJL@{BJL}!f3dex@{f3dex}}
+\subsubsection[{BJL}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::BJL (
+\begin{DoxyParamCaption}
+\item[{INTEGER}]{L, }
+\item[{real$\ast$8}]{X, }
+\item[{real$\ast$8}]{JL}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ae7f16ddea56702ffd83912c6def516d4}
+
+
+Compute the value of the l-\/th order spherical bessel function at x. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em L} & : order \\
+\hline
+\mbox{\tt in}  & {\em X} & : abscissa \\
+\hline
+\mbox{\tt out}  & {\em JL} & : result $ j_l(x) $ \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2687 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_ac32aa4a30199fa62b6212bea55f59ff5}{
+\index{f3dex@{f3dex}!BSORT@{BSORT}}
+\index{BSORT@{BSORT}!f3dex@{f3dex}}
+\subsubsection[{BSORT}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::BSORT (
+\begin{DoxyParamCaption}
+\item[{real(kind=DP),dimension(1:n)}]{X, }
+\item[{real(kind=DP),dimension(1:n,1:3)}]{IY, }
+\item[{integer(kind=I4B)}]{N}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ac32aa4a30199fa62b6212bea55f59ff5}
+
+
+Definition at line 2371 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a9973d07e7dbafd1082de1d3b37088668}{
+\index{f3dex@{f3dex}!cln2fits@{cln2fits}}
+\index{cln2fits@{cln2fits}!f3dex@{f3dex}}
+\subsubsection[{cln2fits}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::cln2fits (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{cln, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{kln, }
+\item[{INTEGER(I4B),intent(in)}]{nlmax, }
+\item[{INTEGER(I4B),intent(in)}]{nnmax, }
+\item[{CHARACTER(LEN=80),dimension(1:nlheader),intent(in)}]{header, }
+\item[{INTEGER(I4B),intent(in)}]{nlheader}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a9973d07e7dbafd1082de1d3b37088668}
+
+
+Definition at line 382 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_aae21ba3275637af7c40a0f4810f890b8}{
+\index{f3dex@{f3dex}!dzabs@{dzabs}}
+\index{dzabs@{dzabs}!f3dex@{f3dex}}
+\subsubsection[{dzabs}]{\setlength{\rightskip}{0pt plus 5cm}real(DP) f3dex::dzabs (
+\begin{DoxyParamCaption}
+\item[{complex(DP)}]{cplxnb, }
+\item[{complex(DP)}]{cplxnbref}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_aae21ba3275637af7c40a0f4810f890b8}
+
+
+Definition at line 2654 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_aaab16fb8c4e26a33aa182fcad7916a59}{
+\index{f3dex@{f3dex}!dzrel@{dzrel}}
+\index{dzrel@{dzrel}!f3dex@{f3dex}}
+\subsubsection[{dzrel}]{\setlength{\rightskip}{0pt plus 5cm}real(DP) f3dex::dzrel (
+\begin{DoxyParamCaption}
+\item[{complex(DP)}]{cplxnb, }
+\item[{complex(DP)}]{cplxnbref}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_aaab16fb8c4e26a33aa182fcad7916a59}
+
+
+Definition at line 2619 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a2efa7687f0b6591321e5c86ea09aa1a7}{
+\index{f3dex@{f3dex}!extractFromFile@{extractFromFile}}
+\index{extractFromFile@{extractFromFile}!f3dex@{f3dex}}
+\subsubsection[{extractFromFile}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::extractFromFile (
+\begin{DoxyParamCaption}
+\item[{integer(I4B)}]{nbpts, }
+\item[{integer(I4B)}]{nr, }
+\item[{integer(i4b),dimension(1:3)}]{iwhere, }
+\item[{integer(I4B)}]{inradian, }
+\item[{integer(I4B)}]{sorted, }
+\item[{real(DP)}]{convfc, }
+\item[{integer(I4B)}]{nbcolsinfile, }
+\item[{character(len=FILENAMELEN)}]{surveyfile, }
+\item[{real(kind=DP),dimension(1:nbpts,1:3)}]{survey}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a2efa7687f0b6591321e5c86ea09aa1a7}
+
+
+Definition at line 1350 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_a8bb386e1b869c35df30978b7e634b234}{
+\index{f3dex@{f3dex}!f90ftgcvd@{f90ftgcvd}}
+\index{f90ftgcvd@{f90ftgcvd}!f3dex@{f3dex}}
+\subsubsection[{f90ftgcvd}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::f90ftgcvd (
+\begin{DoxyParamCaption}
+\item[{integer(I4B),intent(in)}]{unit, }
+\item[{integer(I4B),intent(in)}]{colnum, }
+\item[{integer(I4B),intent(in)}]{frow, }
+\item[{integer(I4B),intent(in)}]{felem, }
+\item[{integer(I4B),intent(in)}]{np, }
+\item[{real(DP),intent(in)}]{nullval, }
+\item[{real(DP),dimension(0:),intent(out)}]{data, }
+\item[{logical(LGT),intent(out)}]{anynull, }
+\item[{integer(I4B),intent(out)}]{status}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a8bb386e1b869c35df30978b7e634b234}
+
+
+Definition at line 279 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_abb1777616669f320b1792a0e8aba490a}{
+\index{f3dex@{f3dex}!f90ftgkyd@{f90ftgkyd}}
+\index{f90ftgkyd@{f90ftgkyd}!f3dex@{f3dex}}
+\subsubsection[{f90ftgkyd}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::f90ftgkyd (
+\begin{DoxyParamCaption}
+\item[{integer(I4B),intent(in)}]{unit, }
+\item[{character(len=$\ast$),intent(in)}]{keyword, }
+\item[{real(DP),intent(out)}]{value, }
+\item[{character(len=$\ast$),intent(out)}]{comment, }
+\item[{integer(I4B),intent(out)}]{status}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_abb1777616669f320b1792a0e8aba490a}
+
+
+Definition at line 289 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a1c162e19667698db3dad6391a9bcd797}{
+\index{f3dex@{f3dex}!f90ftpcld@{f90ftpcld}}
+\index{f90ftpcld@{f90ftpcld}!f3dex@{f3dex}}
+\subsubsection[{f90ftpcld}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::f90ftpcld (
+\begin{DoxyParamCaption}
+\item[{integer(I4B),intent(in)}]{unit, }
+\item[{integer(I4B),intent(in)}]{colnum, }
+\item[{integer(I4B),intent(in)}]{frow, }
+\item[{integer(I4B),intent(in)}]{felem, }
+\item[{integer(I4B),intent(in)}]{np, }
+\item[{real(DP),dimension(0:),intent(in)}]{data, }
+\item[{integer(I4B),intent(out)}]{status}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a1c162e19667698db3dad6391a9bcd797}
+
+
+Definition at line 271 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a902c376a4e5d7c84a39d6274dc904602}{
+\index{f3dex@{f3dex}!fieldalmn2overalmn@{fieldalmn2overalmn}}
+\index{fieldalmn2overalmn@{fieldalmn2overalmn}!f3dex@{f3dex}}
+\subsubsection[{fieldalmn2overalmn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::fieldalmn2overalmn (
+\begin{DoxyParamCaption}
+\item[{COMPLEX(DP),dimension(1:nnmax,0:nlmax,0:nmmax)}]{almn, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax)}]{kln, }
+\item[{REAL(DP)}]{rhomean, }
+\item[{REAL(DP)}]{rmax, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{INTEGER(I4B)}]{nmmax}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a902c376a4e5d7c84a39d6274dc904602}
+
+
+Definition at line 2125 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_a6630d20765692f55b9c5389e877e35ae}{
+\index{f3dex@{f3dex}!fits2almn@{fits2almn}}
+\index{fits2almn@{fits2almn}!f3dex@{f3dex}}
+\subsubsection[{fits2almn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::fits2almn (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{INTEGER(I4B),intent(in)}]{nnmax, }
+\item[{INTEGER(I4B),intent(in)}]{nlmax, }
+\item[{INTEGER(I4B),intent(in)}]{nmmax, }
+\item[{COMPLEX(DP),dimension(1:nnmax,0:nlmax,0:nmmax),intent(out)}]{almn, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(out)}]{kln, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(out)}]{cln, }
+\item[{CHARACTER(LEN=80),dimension(1:nlheader),intent(out)}]{header, }
+\item[{INTEGER(I4B),intent(in)}]{nlheader}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a6630d20765692f55b9c5389e877e35ae}
+
+
+Definition at line 708 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_adcf1cf51ac34f733e7a776a7df065524}{
+\index{f3dex@{f3dex}!gen\_\-cln@{gen\_\-cln}}
+\index{gen\_\-cln@{gen\_\-cln}!f3dex@{f3dex}}
+\subsubsection[{gen\_\-cln}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::gen\_\-cln (
+\begin{DoxyParamCaption}
+\item[{REAl(DP),dimension(0:nlmax,1:nnmax)}]{cln, }
+\item[{REAl(DP),dimension(0:nlmax,1:nnmax)}]{kln, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{REAL(DP)}]{rmax}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_adcf1cf51ac34f733e7a776a7df065524}
+
+
+Definition at line 2555 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_ad15a4c29088690f9ee5b97799abfc4a5}{
+\index{f3dex@{f3dex}!gen\_\-jln@{gen\_\-jln}}
+\index{gen\_\-jln@{gen\_\-jln}!f3dex@{f3dex}}
+\subsubsection[{gen\_\-jln}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::gen\_\-jln (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax)}]{jlns, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax)}]{kln, }
+\item[{REAL(DP)}]{rho, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{INTEGER(I4B)}]{nlmax}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ad15a4c29088690f9ee5b97799abfc4a5}
+
+
+Definition at line 2586 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_a7aceee3f16c8792cfe12b2d7a53d7acc}{
+\index{f3dex@{f3dex}!gen\_\-kln@{gen\_\-kln}}
+\index{gen\_\-kln@{gen\_\-kln}!f3dex@{f3dex}}
+\subsubsection[{gen\_\-kln}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::gen\_\-kln (
+\begin{DoxyParamCaption}
+\item[{REAl(DP),dimension(0:nlmax,1:nnmax)}]{kln, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{REAL(DP)}]{rmax}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a7aceee3f16c8792cfe12b2d7a53d7acc}
+
+
+Definition at line 2477 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_a8ff17a3652c0f3145393cc45fe0a2a6b}{
+\index{f3dex@{f3dex}!gen\_\-plm@{gen\_\-plm}}
+\index{gen\_\-plm@{gen\_\-plm}!f3dex@{f3dex}}
+\subsubsection[{gen\_\-plm}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::gen\_\-plm (
+\begin{DoxyParamCaption}
+\item[{integer(I4B),intent(in)}]{nsmax, }
+\item[{integer(I4B),intent(in)}]{nlmax, }
+\item[{integer(I4B),intent(in)}]{nmmax, }
+\item[{real(DP),dimension(0:( nsmax$\ast$(nmmax+1)$\ast$(2$\ast$nlmax-\/nmmax+2) ),1:1 ),intent(out)}]{plm}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a8ff17a3652c0f3145393cc45fe0a2a6b}
+
+
+Definition at line 2518 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_ac7199c2a98971bf758240066422f4a5e}{
+\index{f3dex@{f3dex}!gen\_\-qln@{gen\_\-qln}}
+\index{gen\_\-qln@{gen\_\-qln}!f3dex@{f3dex}}
+\subsubsection[{gen\_\-qln}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::gen\_\-qln (
+\begin{DoxyParamCaption}
+\item[{REAl(DP),dimension(0:nlmax,1:nnmax)}]{qln, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{INTEGER(I4B)}]{nlmax}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ac7199c2a98971bf758240066422f4a5e}
+
+
+Definition at line 2407 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a11254efdbb3dec3e0a04346a3b4420b7}{
+\index{f3dex@{f3dex}!get\_\-clean\_\-header@{get\_\-clean\_\-header}}
+\index{get\_\-clean\_\-header@{get\_\-clean\_\-header}!f3dex@{f3dex}}
+\subsubsection[{get\_\-clean\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::get\_\-clean\_\-header (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B),intent(in)}]{unit, }
+\item[{CHARACTER(LEN=$\ast$),dimension(1:),intent(inout)}]{header, }
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{INTEGER(I4B),intent(out)}]{error, }
+\item[{character(len=8),dimension(1:),intent(in),optional}]{xalso, }
+\item[{character(len=8),dimension(1:),intent(in),optional}]{xonly}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a11254efdbb3dec3e0a04346a3b4420b7}
+
+
+Definition at line 304 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_ab59d82bd4e0bbb4ce1d8149ac252b8c4}{
+\index{f3dex@{f3dex}!getParameters\_\-survey2almn@{getParameters\_\-survey2almn}}
+\index{getParameters\_\-survey2almn@{getParameters\_\-survey2almn}!f3dex@{f3dex}}
+\subsubsection[{getParameters\_\-survey2almn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::getParameters\_\-survey2almn (
+\begin{DoxyParamCaption}
+\item[{integer(i4b)}]{multiscale, }
+\item[{real(kind=DP),dimension(1:2)}]{zbounds, }
+\item[{integer(i4b)}]{nr, }
+\item[{integer(i4b)}]{nside, }
+\item[{integer(i4b)}]{nnmax, }
+\item[{integer(i4b)}]{nlmax, }
+\item[{integer(i4b)}]{nmmax, }
+\item[{integer(i4b)}]{iter\_\-order, }
+\item[{integer(i4b)}]{nbpts, }
+\item[{integer(kind=i4b),dimension(1:3)}]{iwhere, }
+\item[{integer(i4b)}]{inradian, }
+\item[{integer(i4b)}]{sorted, }
+\item[{real(kind=DP)}]{convfc, }
+\item[{integer(i4b)}]{nbcolsinfile, }
+\item[{character(len=FILENAMELEN)}]{surveyfile, }
+\item[{character(len=FILENAMELEN)}]{paramfile, }
+\item[{character(len=FILENAMELEN)}]{almnoutfile, }
+\item[{character(len=FILENAMELEN)}]{clnoutfile, }
+\item[{real(kind=DP)}]{h, }
+\item[{real(kind=DP)}]{w0, }
+\item[{real(kind=DP)}]{wa, }
+\item[{real(kind=DP)}]{omega\_\-l, }
+\item[{real(kind=DP)}]{omega\_\-b, }
+\item[{real(kind=DP)}]{omega\_\-m, }
+\item[{real(kind=DP)}]{rmaxinput}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ab59d82bd4e0bbb4ce1d8149ac252b8c4}
+
+
+Definition at line 987 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_a6a90245c19e73ec2ce1f8fc42e4ab909}{
+\index{f3dex@{f3dex}!logrange@{logrange}}
+\index{logrange@{logrange}!f3dex@{f3dex}}
+\subsubsection[{logrange}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::logrange (
+\begin{DoxyParamCaption}
+\item[{real(DP),dimension(1:npts)}]{x, }
+\item[{real(DP)}]{mn, }
+\item[{real(DP)}]{mx, }
+\item[{integer}]{npts}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a6a90245c19e73ec2ce1f8fc42e4ab909}
+
+
+Definition at line 2533 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_aa083709f672c84c29ddbe82767394723}{
+\index{f3dex@{f3dex}!print\_\-almn@{print\_\-almn}}
+\index{print\_\-almn@{print\_\-almn}!f3dex@{f3dex}}
+\subsubsection[{print\_\-almn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::print\_\-almn (
+\begin{DoxyParamCaption}
+\item[{COMPLEX(DPC),dimension(1:nnmax,0:nlmax,0:nmmax),intent(in)}]{almn, }
+\item[{INTEGER(I4B)}]{nllim, }
+\item[{INTEGER(I4B)}]{nmlim, }
+\item[{INTEGER(I4B)}]{nnlim, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{INTEGER(I4B)}]{nmmax, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{CHARACTER(len=4)}]{txt}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_aa083709f672c84c29ddbe82767394723}
+
+
+Definition at line 905 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_ac047f1cdd1135ef77143db2f2dc67259}{
+\index{f3dex@{f3dex}!print\_\-spectrum@{print\_\-spectrum}}
+\index{print\_\-spectrum@{print\_\-spectrum}!f3dex@{f3dex}}
+\subsubsection[{print\_\-spectrum}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::print\_\-spectrum (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{spectr, }
+\item[{INTEGER(I4B)}]{nllim, }
+\item[{INTEGER(I4B)}]{nnlim, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{CHARACTER(len=4)}]{txt}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ac047f1cdd1135ef77143db2f2dc67259}
+
+
+Definition at line 929 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a177ac0f41749e15dd33c7a4477d13a0e}{
+\index{f3dex@{f3dex}!survey2almn\_\-srs@{survey2almn\_\-srs}}
+\index{survey2almn\_\-srs@{survey2almn\_\-srs}!f3dex@{f3dex}}
+\subsubsection[{survey2almn\_\-srs}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::survey2almn\_\-srs (
+\begin{DoxyParamCaption}
+\item[{integer(I4B)}]{nsmax, }
+\item[{integer(I4B)}]{nnmax, }
+\item[{integer(I4B)}]{nlmax, }
+\item[{integer(I4B)}]{nmmax, }
+\item[{real(DP)}]{rmax, }
+\item[{integer(I4B)}]{nbpts, }
+\item[{real(DP),dimension(1:2)}]{zbounds, }
+\item[{real(DP),dimension(1:nbpts,1:3)}]{survey, }
+\item[{real(DP),dimension(0:nlmax,1:nnmax)}]{kln, }
+\item[{complex(DP),dimension(1:nnmax,0:nlmax,0:nmmax)}]{almn}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a177ac0f41749e15dd33c7a4477d13a0e}
+
+
+Performs the Fourier-\/Bessel decomposition (backward algorithm) of a discrete survey. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em (nnmax,nlmax,nmmax)} & : decomposition triplet \\
+\hline
+\mbox{\tt in}  & {\em nsmax} & : Healpix nside parameter \\
+\hline
+\mbox{\tt in}  & {\em (rmax,zbounds)} & : radial and angular cut \\
+\hline
+\mbox{\tt in}  & {\em kln} & : Hankel (scaling) coefficients \\
+\hline
+\mbox{\tt in}  & {\em (survey,nbpts)} & : survey array and its length \\
+\hline
+\mbox{\tt out}  & {\em almn} & : almn decomposition coefficients \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1532 of file f3dex.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex_a4e944841262cc3bac00e25f2d188804d}{
+\index{f3dex@{f3dex}!txtfile2parameters@{txtfile2parameters}}
+\index{txtfile2parameters@{txtfile2parameters}!f3dex@{f3dex}}
+\subsubsection[{txtfile2parameters}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex::txtfile2parameters (
+\begin{DoxyParamCaption}
+\item[{character(len=FILENAMELEN)}]{paramfile, }
+\item[{TYPE(recognizedParams)}]{params}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_a4e944841262cc3bac00e25f2d188804d}
+
+
+Definition at line 33 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_ac014e878f644407cfc3eb1af25137d44}{
+\index{f3dex@{f3dex}!wtime@{wtime}}
+\index{wtime@{wtime}!f3dex@{f3dex}}
+\subsubsection[{wtime}]{\setlength{\rightskip}{0pt plus 5cm}real ( kind = 8 ) f3dex::wtime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex_ac014e878f644407cfc3eb1af25137d44}
+
+
+Definition at line 2154 of file f3dex.f90.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespacef3dex_af925e5023c935decb72a6698b234045d}{
+\index{f3dex@{f3dex}!d\_\-bad\_\-value@{d\_\-bad\_\-value}}
+\index{d\_\-bad\_\-value@{d\_\-bad\_\-value}!f3dex@{f3dex}}
+\subsubsection[{d\_\-bad\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=DP),parameter,private {\bf f3dex::d\_\-bad\_\-value} = HPX\_\-DBADVAL}}
+\label{namespacef3dex_af925e5023c935decb72a6698b234045d}
+
+
+Definition at line 12 of file f3dex.f90.
+
+\hypertarget{namespacef3dex_a5d027a15cdc55f7ea6b40a075c6f9eb8}{
+\index{f3dex@{f3dex}!s\_\-bad\_\-value@{s\_\-bad\_\-value}}
+\index{s\_\-bad\_\-value@{s\_\-bad\_\-value}!f3dex@{f3dex}}
+\subsubsection[{s\_\-bad\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=SP),parameter,private {\bf f3dex::s\_\-bad\_\-value} = HPX\_\-SBADVAL}}
+\label{namespacef3dex_a5d027a15cdc55f7ea6b40a075c6f9eb8}
+
+
+Definition at line 11 of file f3dex.f90.
+

@@ -1,0 +1,886 @@
+\hypertarget{quadpack_8f90}{
+\section{src/f90/mod/quadpack.f90 File Reference}
+\label{quadpack_8f90}\index{src/f90/mod/quadpack.f90@{src/f90/mod/quadpack.f90}}
+}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{quadpack_8f90_a44906a25a31588f7e4f41f0e5253193a}{qag} (f, a, b, epsabs, epsrel, key, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_ab602437c218a2c74d6a13f9462f98854}{qage} (f, a, b, epsabs, epsrel, key, limit, result, abserr, neval, ier, alist, blist, rlist, elist, iord, last)
+\item 
+subroutine \hyperlink{quadpack_8f90_ac59eaf7c56c1d421d129425895fa0107}{qagi} (f, bound, inf, epsabs, epsrel, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_a99cf2a02a14029fad4762555f04cac0e}{qagp} (f, a, b, npts2, points, epsabs, epsrel, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_a00a116a91c0699e57d15abc61dcd531b}{qags} (f, a, b, epsabs, epsrel, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_a4cea9ad83248026209e702bb01abb7da}{qawc} (f, a, b, c, epsabs, epsrel, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_a51d7f754a9214f7490c035740fc0aef7}{qawce} (f, a, b, c, epsabs, epsrel, limit, result, abserr, neval, ier, alist, blist, rlist, elist, iord, last)
+\item 
+subroutine \hyperlink{quadpack_8f90_aefd54eff8d0418a0f533f571d80ec5e5}{qawf} (f, a, omega, integr, epsabs, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_abe17af7f3ad5cf264791d326bbd15192}{qawfe} (f, a, omega, integr, epsabs, limlst, limit, maxp1, result, abserr, neval, ier, rslst, erlst, ierlst, lst, alist, blist, rlist, elist, iord, nnlog, chebmo)
+\item 
+subroutine \hyperlink{quadpack_8f90_aaa4f15baf0dadd3383219f0d42a62752}{qawo} (f, a, b, omega, integr, epsabs, epsrel, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_a22846cb66e25f85c2eaa2b7fc1d6c81b}{qaws} (f, a, b, alfa, beta, integr, epsabs, epsrel, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_adf40beeb87b948ed57824e42c023f518}{qawse} (f, a, b, alfa, beta, integr, epsabs, epsrel, limit, result, abserr, neval, ier, alist, blist, rlist, elist, iord, last)
+\item 
+subroutine \hyperlink{quadpack_8f90_af8148c1623b7cf59159c491cfb1856f4}{qc25c} (f, a, b, c, result, abserr, krul, neval)
+\item 
+subroutine \hyperlink{quadpack_8f90_ab0843f4831942d2c9bf3430cb71aca06}{qc25o} (f, a, b, omega, integr, nrmom, maxp1, ksave, result, abserr, neval, resabs, resasc, momcom, chebmo)
+\item 
+subroutine \hyperlink{quadpack_8f90_a034546450320f53f05096bc12af9b5bc}{qc25s} (f, a, b, bl, br, alfa, beta, ri, rj, rg, rh, result, abserr, resasc, integr, neval)
+\item 
+subroutine \hyperlink{quadpack_8f90_ad5beefcfdb335ea68ccf8397536c8c36}{qcheb} (x, fval, cheb12, cheb24)
+\item 
+subroutine \hyperlink{quadpack_8f90_a5a75101d080f224c63adde98a0e64386}{qextr} (n, epstab, result, abserr, res3la, nres)
+\item 
+subroutine \hyperlink{quadpack_8f90_abbba06307e0e8c4daa2651945570ba1c}{qfour} (f, a, b, omega, integr, epsabs, epsrel, limit, icall, maxp1, result, abserr, neval, ier, alist, blist, rlist, elist, iord, nnlog, momcom, chebmo)
+\item 
+subroutine \hyperlink{quadpack_8f90_a1722ad5ba07cec52d38c9ebf9df80a2d}{qk15} (f, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_a59164415fc33f2f3bf4ebc4ee2220f7e}{qk15i} (f, boun, inf, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_a0c083838940925726abd5bc85fa29587}{qk15w} (f, w, p1, p2, p3, p4, kp, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_a27241a527b249e9de59a5ed6bee5f805}{qk21} (f, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_aded2e8dd2218fbd159b78c0e8975a4cd}{qk31} (f, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_aface4edf24710a0b323f5aaeb6bdec34}{qk41} (f, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_a73edb4987a87a40ebf4731ab63d7f03e}{qk51} (f, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_acb4a48f5e54a2c5f951d0828e8f8146d}{qk61} (f, a, b, result, abserr, resabs, resasc)
+\item 
+subroutine \hyperlink{quadpack_8f90_aa732651ae77f9486d6e3d17999c699ab}{qmomo} (alfa, beta, ri, rj, rg, rh, integr)
+\item 
+subroutine \hyperlink{quadpack_8f90_a611318e7c2d2bafa649b25519dc1b55d}{qng} (f, a, b, epsabs, epsrel, result, abserr, neval, ier)
+\item 
+subroutine \hyperlink{quadpack_8f90_a55e08a684c5a6315fb37dd0fdc66d8e6}{qsort} (limit, last, maxerr, ermax, elist, iord, nrmax)
+\item 
+real \hyperlink{quadpack_8f90_aa5883d04ddfdfe9356462d43567a2a08}{qwgtc} (x, c, p2, p3, p4, kp)
+\item 
+real \hyperlink{quadpack_8f90_a24e54bf3e5c0bd729e50fd85f02b9cda}{qwgto} (x, omega, p2, p3, p4, integr)
+\item 
+real \hyperlink{quadpack_8f90_a018e1602a4bb65f8d28bbff344bf8150}{qwgts} (x, a, b, alfa, beta, integr)
+\item 
+subroutine \hyperlink{quadpack_8f90_a44fdaa08281ed3009542bc9257fa965d}{timestamp} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{quadpack_8f90_a44906a25a31588f7e4f41f0e5253193a}{
+\index{quadpack.f90@{quadpack.f90}!qag@{qag}}
+\index{qag@{qag}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qag}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qag (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{integer}]{key, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a44906a25a31588f7e4f41f0e5253193a}
+
+
+Definition at line 1 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_ab602437c218a2c74d6a13f9462f98854}{
+\index{quadpack.f90@{quadpack.f90}!qage@{qage}}
+\index{qage@{qage}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qage}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qage (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{integer}]{key, }
+\item[{integer}]{limit, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier, }
+\item[{real,dimension(limit)}]{alist, }
+\item[{real,dimension(limit)}]{blist, }
+\item[{real,dimension(limit)}]{rlist, }
+\item[{real,dimension(limit)}]{elist, }
+\item[{integer,dimension(limit)}]{iord, }
+\item[{integer}]{last}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_ab602437c218a2c74d6a13f9462f98854}
+
+
+Definition at line 108 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_ac59eaf7c56c1d421d129425895fa0107}{
+\index{quadpack.f90@{quadpack.f90}!qagi@{qagi}}
+\index{qagi@{qagi}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qagi}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qagi (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{bound, }
+\item[{integer}]{inf, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_ac59eaf7c56c1d421d129425895fa0107}
+
+
+Definition at line 475 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_a99cf2a02a14029fad4762555f04cac0e}{
+\index{quadpack.f90@{quadpack.f90}!qagp@{qagp}}
+\index{qagp@{qagp}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qagp}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qagp (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{integer}]{npts2, }
+\item[{real,dimension(40)}]{points, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a99cf2a02a14029fad4762555f04cac0e}
+
+
+Definition at line 1022 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_a00a116a91c0699e57d15abc61dcd531b}{
+\index{quadpack.f90@{quadpack.f90}!qags@{qags}}
+\index{qags@{qags}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qags}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qags (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a00a116a91c0699e57d15abc61dcd531b}
+
+
+Definition at line 1691 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_a4cea9ad83248026209e702bb01abb7da}{
+\index{quadpack.f90@{quadpack.f90}!qawc@{qawc}}
+\index{qawc@{qawc}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qawc}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qawc (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{c, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a4cea9ad83248026209e702bb01abb7da}
+
+
+Definition at line 2218 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_a51d7f754a9214f7490c035740fc0aef7}{
+\index{quadpack.f90@{quadpack.f90}!qawce@{qawce}}
+\index{qawce@{qawce}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qawce}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qawce (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{c, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{integer}]{limit, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier, }
+\item[{real,dimension(limit)}]{alist, }
+\item[{real,dimension(limit)}]{blist, }
+\item[{real,dimension(limit)}]{rlist, }
+\item[{real,dimension(limit)}]{elist, }
+\item[{integer,dimension(limit)}]{iord, }
+\item[{integer}]{last}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a51d7f754a9214f7490c035740fc0aef7}
+
+
+Definition at line 2332 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_aefd54eff8d0418a0f533f571d80ec5e5}{
+\index{quadpack.f90@{quadpack.f90}!qawf@{qawf}}
+\index{qawf@{qawf}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qawf}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qawf (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{omega, }
+\item[{integer}]{integr, }
+\item[{real}]{epsabs, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_aefd54eff8d0418a0f533f571d80ec5e5}
+
+
+Definition at line 2689 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_abe17af7f3ad5cf264791d326bbd15192}{
+\index{quadpack.f90@{quadpack.f90}!qawfe@{qawfe}}
+\index{qawfe@{qawfe}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qawfe}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qawfe (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{omega, }
+\item[{integer}]{integr, }
+\item[{real}]{epsabs, }
+\item[{integer}]{limlst, }
+\item[{integer}]{limit, }
+\item[{integer}]{maxp1, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier, }
+\item[{real,dimension(limlst)}]{rslst, }
+\item[{real,dimension(limlst)}]{erlst, }
+\item[{integer,dimension(limlst)}]{ierlst, }
+\item[{integer}]{lst, }
+\item[{real,dimension(limit)}]{alist, }
+\item[{real,dimension(limit)}]{blist, }
+\item[{real,dimension(limit)}]{rlist, }
+\item[{real,dimension(limit)}]{elist, }
+\item[{integer,dimension(limit)}]{iord, }
+\item[{integer,dimension(limit)}]{nnlog, }
+\item[{real,dimension(maxp1,25)}]{chebmo}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_abe17af7f3ad5cf264791d326bbd15192}
+
+
+Definition at line 2825 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_aaa4f15baf0dadd3383219f0d42a62752}{
+\index{quadpack.f90@{quadpack.f90}!qawo@{qawo}}
+\index{qawo@{qawo}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qawo}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qawo (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{omega, }
+\item[{integer}]{integr, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_aaa4f15baf0dadd3383219f0d42a62752}
+
+
+Definition at line 3276 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_a22846cb66e25f85c2eaa2b7fc1d6c81b}{
+\index{quadpack.f90@{quadpack.f90}!qaws@{qaws}}
+\index{qaws@{qaws}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qaws}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qaws (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{alfa, }
+\item[{real}]{beta, }
+\item[{integer}]{integr, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a22846cb66e25f85c2eaa2b7fc1d6c81b}
+
+
+Definition at line 3418 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_adf40beeb87b948ed57824e42c023f518}{
+\index{quadpack.f90@{quadpack.f90}!qawse@{qawse}}
+\index{qawse@{qawse}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qawse}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qawse (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{alfa, }
+\item[{real}]{beta, }
+\item[{integer}]{integr, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{integer}]{limit, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier, }
+\item[{real,dimension(limit)}]{alist, }
+\item[{real,dimension(limit)}]{blist, }
+\item[{real,dimension(limit)}]{rlist, }
+\item[{real,dimension(limit)}]{elist, }
+\item[{integer,dimension(limit)}]{iord, }
+\item[{integer}]{last}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_adf40beeb87b948ed57824e42c023f518}
+
+
+Definition at line 3543 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_af8148c1623b7cf59159c491cfb1856f4}{
+\index{quadpack.f90@{quadpack.f90}!qc25c@{qc25c}}
+\index{qc25c@{qc25c}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qc25c}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qc25c (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{c, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{krul, }
+\item[{integer}]{neval}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_af8148c1623b7cf59159c491cfb1856f4}
+
+
+Definition at line 3934 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_ab0843f4831942d2c9bf3430cb71aca06}{
+\index{quadpack.f90@{quadpack.f90}!qc25o@{qc25o}}
+\index{qc25o@{qc25o}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qc25o}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qc25o (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{omega, }
+\item[{integer}]{integr, }
+\item[{integer}]{nrmom, }
+\item[{integer}]{maxp1, }
+\item[{integer}]{ksave, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc, }
+\item[{integer}]{momcom, }
+\item[{real,dimension(maxp1,25)}]{chebmo}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_ab0843f4831942d2c9bf3430cb71aca06}
+
+
+Definition at line 4116 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_a034546450320f53f05096bc12af9b5bc}{
+\index{quadpack.f90@{quadpack.f90}!qc25s@{qc25s}}
+\index{qc25s@{qc25s}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qc25s}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qc25s (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{bl, }
+\item[{real}]{br, }
+\item[{real}]{alfa, }
+\item[{real}]{beta, }
+\item[{real,dimension(25)}]{ri, }
+\item[{real,dimension(25)}]{rj, }
+\item[{real,dimension(25)}]{rg, }
+\item[{real,dimension(25)}]{rh, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resasc, }
+\item[{integer}]{integr, }
+\item[{integer}]{neval}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a034546450320f53f05096bc12af9b5bc}
+
+
+Definition at line 4564 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_ad5beefcfdb335ea68ccf8397536c8c36}{
+\index{quadpack.f90@{quadpack.f90}!qcheb@{qcheb}}
+\index{qcheb@{qcheb}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qcheb}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qcheb (
+\begin{DoxyParamCaption}
+\item[{real,dimension(11)}]{x, }
+\item[{real,dimension(25)}]{fval, }
+\item[{real,dimension(13)}]{cheb12, }
+\item[{real,dimension(25)}]{cheb24}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_ad5beefcfdb335ea68ccf8397536c8c36}
+
+
+Definition at line 4950 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a5a75101d080f224c63adde98a0e64386}{
+\index{quadpack.f90@{quadpack.f90}!qextr@{qextr}}
+\index{qextr@{qextr}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qextr}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qextr (
+\begin{DoxyParamCaption}
+\item[{integer}]{n, }
+\item[{real,dimension(52)}]{epstab, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real,dimension(3)}]{res3la, }
+\item[{integer}]{nres}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a5a75101d080f224c63adde98a0e64386}
+
+
+Definition at line 5113 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_abbba06307e0e8c4daa2651945570ba1c}{
+\index{quadpack.f90@{quadpack.f90}!qfour@{qfour}}
+\index{qfour@{qfour}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qfour}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qfour (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{omega, }
+\item[{integer}]{integr, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{integer}]{limit, }
+\item[{integer}]{icall, }
+\item[{integer}]{maxp1, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier, }
+\item[{real,dimension(limit)}]{alist, }
+\item[{real,dimension(limit)}]{blist, }
+\item[{real,dimension(limit)}]{rlist, }
+\item[{real,dimension(limit)}]{elist, }
+\item[{integer,dimension(limit)}]{iord, }
+\item[{integer,dimension(limit)}]{nnlog, }
+\item[{integer}]{momcom, }
+\item[{real,dimension(maxp1,25)}]{chebmo}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_abbba06307e0e8c4daa2651945570ba1c}
+
+
+Definition at line 5342 of file quadpack.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadpack_8f90_a1722ad5ba07cec52d38c9ebf9df80a2d}{
+\index{quadpack.f90@{quadpack.f90}!qk15@{qk15}}
+\index{qk15@{qk15}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk15}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk15 (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a1722ad5ba07cec52d38c9ebf9df80a2d}
+
+
+Definition at line 6005 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a59164415fc33f2f3bf4ebc4ee2220f7e}{
+\index{quadpack.f90@{quadpack.f90}!qk15i@{qk15i}}
+\index{qk15i@{qk15i}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk15i}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk15i (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{boun, }
+\item[{integer}]{inf, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a59164415fc33f2f3bf4ebc4ee2220f7e}
+
+
+Definition at line 6180 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a0c083838940925726abd5bc85fa29587}{
+\index{quadpack.f90@{quadpack.f90}!qk15w@{qk15w}}
+\index{qk15w@{qk15w}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk15w}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk15w (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real,external}]{w, }
+\item[{real}]{p1, }
+\item[{real}]{p2, }
+\item[{real}]{p3, }
+\item[{real}]{p4, }
+\item[{integer}]{kp, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a0c083838940925726abd5bc85fa29587}
+
+
+Definition at line 6380 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a27241a527b249e9de59a5ed6bee5f805}{
+\index{quadpack.f90@{quadpack.f90}!qk21@{qk21}}
+\index{qk21@{qk21}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk21}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk21 (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a27241a527b249e9de59a5ed6bee5f805}
+
+
+Definition at line 6577 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_aded2e8dd2218fbd159b78c0e8975a4cd}{
+\index{quadpack.f90@{quadpack.f90}!qk31@{qk31}}
+\index{qk31@{qk31}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk31}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk31 (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_aded2e8dd2218fbd159b78c0e8975a4cd}
+
+
+Definition at line 6762 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_aface4edf24710a0b323f5aaeb6bdec34}{
+\index{quadpack.f90@{quadpack.f90}!qk41@{qk41}}
+\index{qk41@{qk41}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk41}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk41 (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_aface4edf24710a0b323f5aaeb6bdec34}
+
+
+Definition at line 6950 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a73edb4987a87a40ebf4731ab63d7f03e}{
+\index{quadpack.f90@{quadpack.f90}!qk51@{qk51}}
+\index{qk51@{qk51}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk51}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk51 (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a73edb4987a87a40ebf4731ab63d7f03e}
+
+
+Definition at line 7146 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_acb4a48f5e54a2c5f951d0828e8f8146d}{
+\index{quadpack.f90@{quadpack.f90}!qk61@{qk61}}
+\index{qk61@{qk61}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qk61}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qk61 (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{real}]{resabs, }
+\item[{real}]{resasc}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_acb4a48f5e54a2c5f951d0828e8f8146d}
+
+
+Definition at line 7351 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_aa732651ae77f9486d6e3d17999c699ab}{
+\index{quadpack.f90@{quadpack.f90}!qmomo@{qmomo}}
+\index{qmomo@{qmomo}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qmomo}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qmomo (
+\begin{DoxyParamCaption}
+\item[{real}]{alfa, }
+\item[{real}]{beta, }
+\item[{real,dimension(25)}]{ri, }
+\item[{real,dimension(25)}]{rj, }
+\item[{real,dimension(25)}]{rg, }
+\item[{real,dimension(25)}]{rh, }
+\item[{integer}]{integr}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_aa732651ae77f9486d6e3d17999c699ab}
+
+
+Definition at line 7567 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a611318e7c2d2bafa649b25519dc1b55d}{
+\index{quadpack.f90@{quadpack.f90}!qng@{qng}}
+\index{qng@{qng}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qng}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qng (
+\begin{DoxyParamCaption}
+\item[{real,external}]{f, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{epsabs, }
+\item[{real}]{epsrel, }
+\item[{real}]{result, }
+\item[{real}]{abserr, }
+\item[{integer}]{neval, }
+\item[{integer}]{ier}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a611318e7c2d2bafa649b25519dc1b55d}
+
+
+Definition at line 7722 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a55e08a684c5a6315fb37dd0fdc66d8e6}{
+\index{quadpack.f90@{quadpack.f90}!qsort@{qsort}}
+\index{qsort@{qsort}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qsort}]{\setlength{\rightskip}{0pt plus 5cm}subroutine qsort (
+\begin{DoxyParamCaption}
+\item[{integer}]{limit, }
+\item[{integer}]{last, }
+\item[{integer}]{maxerr, }
+\item[{real}]{ermax, }
+\item[{real,dimension(last)}]{elist, }
+\item[{integer,dimension(last)}]{iord, }
+\item[{integer}]{nrmax}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a55e08a684c5a6315fb37dd0fdc66d8e6}
+
+
+Definition at line 8090 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_aa5883d04ddfdfe9356462d43567a2a08}{
+\index{quadpack.f90@{quadpack.f90}!qwgtc@{qwgtc}}
+\index{qwgtc@{qwgtc}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qwgtc}]{\setlength{\rightskip}{0pt plus 5cm}real qwgtc (
+\begin{DoxyParamCaption}
+\item[{real}]{x, }
+\item[{real}]{c, }
+\item[{real}]{p2, }
+\item[{real}]{p3, }
+\item[{real}]{p4, }
+\item[{integer}]{kp}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_aa5883d04ddfdfe9356462d43567a2a08}
+
+
+Definition at line 8251 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a24e54bf3e5c0bd729e50fd85f02b9cda}{
+\index{quadpack.f90@{quadpack.f90}!qwgto@{qwgto}}
+\index{qwgto@{qwgto}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qwgto}]{\setlength{\rightskip}{0pt plus 5cm}real qwgto (
+\begin{DoxyParamCaption}
+\item[{real}]{x, }
+\item[{real}]{omega, }
+\item[{real}]{p2, }
+\item[{real}]{p3, }
+\item[{real}]{p4, }
+\item[{integer}]{integr}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a24e54bf3e5c0bd729e50fd85f02b9cda}
+
+
+Definition at line 8299 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a018e1602a4bb65f8d28bbff344bf8150}{
+\index{quadpack.f90@{quadpack.f90}!qwgts@{qwgts}}
+\index{qwgts@{qwgts}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{qwgts}]{\setlength{\rightskip}{0pt plus 5cm}real qwgts (
+\begin{DoxyParamCaption}
+\item[{real}]{x, }
+\item[{real}]{a, }
+\item[{real}]{b, }
+\item[{real}]{alfa, }
+\item[{real}]{beta, }
+\item[{integer}]{integr}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a018e1602a4bb65f8d28bbff344bf8150}
+
+
+Definition at line 8349 of file quadpack.f90.
+
+\hypertarget{quadpack_8f90_a44fdaa08281ed3009542bc9257fa965d}{
+\index{quadpack.f90@{quadpack.f90}!timestamp@{timestamp}}
+\index{timestamp@{timestamp}!quadpack.f90@{quadpack.f90}}
+\subsubsection[{timestamp}]{\setlength{\rightskip}{0pt plus 5cm}subroutine timestamp (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{quadpack_8f90_a44fdaa08281ed3009542bc9257fa965d}
+
+
+Definition at line 8405 of file quadpack.f90.
+
