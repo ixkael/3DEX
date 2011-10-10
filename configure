@@ -1,0 +1,103 @@
+#! /bin/sh
+#
+# configuration script for 3DEX
+# to configure the F90 code.
+#
+# Version : v1.0
+# Date : July 2011
+#
+
+# version number
+F3DEXVERSION=1.0
+
+#-------------
+welcome () {
+    echo
+    echo "*****************************"
+    echo " 3DEX - Configuration script"
+    echo "*****************************"
+    echo
+}
+
+
+# read functions definition
+. ./3dexconfig_functions.sh
+
+# foreplay1
+setTopDefaults
+DMPX_CONF_DIR=${DMPX_CONF_DIR_HOME}
+
+# ----------------- options parsing ----------------------
+usage="Usage: ./$(basename $0) [?|-h|-L|-v]"
+usage2="Type    ./$(basename $0) -h    for extended help"
+# do not accept options starting with a non-dash or with double dash
+if [ ${#} -gt 0 ]; then
+	    if [ "${1:0:1}" != "-"  -o  "${1:0:2}" = "--"  -o "${1}" = "-" ]; then
+		echo 
+		echo "${usage}"
+		echo
+		echo "${usage2}"
+		echo
+		exit -1
+	    fi
+fi
+
+while getopts 'hLv' OPTION
+do
+    case ${OPTION} in
+	h) 
+	echo
+	echo "Configure script for 3DEX ${F3DEXVERSION}"
+	echo
+	echo "${usage}"
+	echo
+	echo "?   Print usage and exit" 
+	echo
+	echo "-h  Print this help message and exit" 
+	echo
+	echo "-L  Put the configuration directory in ${DMPX_CONF_DIR_INPLACE}" 
+	echo "    (instead of installer's home: ${DMPX_CONF_DIR_HOME})."
+	echo "    Recommended when doing a system wide installation to be used by several users."
+	echo
+	echo "-v  Print 3DEX version and exit"
+	echo
+	exit 0
+	;;
+	L)
+        DMPX_CONF_DIR=${DMPX_CONF_DIR_INPLACE}
+	echo 
+        echo "Note: the configuration directory will be ${DMPX_CONF_DIR}"
+	echo
+	;;
+	v)
+	echo "${F3DEXVERSION}"
+	exit 0
+	;;
+	?)
+	echo
+	echo "${usage}"
+	echo
+	echo "${usage2}"
+	echo
+	exit -1
+	;;
+   esac
+done
+# --------------------------------------------------------
+
+#-------------
+
+# foreplay2
+setConfDir
+welcome
+makeTopConf
+readyTopMakefile
+#installProfile
+
+# loop over main menu
+eval f90conffile=$DMPX_CONF_F90
+	   f90_config $f90conffile;
+
+# done
+goodBye
+exit

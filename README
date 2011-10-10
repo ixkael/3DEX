@@ -24,6 +24,13 @@ INSTALLATION
  Please run the ./configure command.
  It will edit the 'make' file/command.
  Then, run 'make' as usual.
+ 'make clean' to delete .o files.
+ 'make tidy' and 'make distclean' to uninstall.
+
+ NOTE
+  The library architecture and the installation scripts
+  are directly inspired by the HEALPix package, 
+  which is under GPL licence.
 
 AVAILABLE FEATURES
  survey2almn

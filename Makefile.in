@@ -1,0 +1,83 @@
+# input Makefile
+# DO NOT EDIT!
+# Run ./configure to produce the Makefile instead.
+
+
+HEALPIX		=
+F90_BINDIR	=
+F90_INCDIR	=
+F90_LIBDIR	= 
+FITSDIR		=
+LIBFITS		=
+
+F90_FC	= gfortran
+F90_FFLAGS	=
+F90_CC		=
+F90_CFLAGS	=
+F90_PIXFLAGS	=
+
+F90_LDFLAGS	=
+F90_AR        	=
+F90_I8FLAG  	=
+
+F90_MOD	=
+
+F90_OS	=
+
+F90_MKFLAGS	= FC="$(F90_FC)" FFLAGS="$(F90_FFLAGS)" LDFLAGS="$(F90_LDFLAGS)" \
+	CC="$(F90_CC)" CFLAGS="$(F90_CFLAGS)" MOD="$(F90_MOD)" OS="$(F90_OS)" HEALPIX=$(HEALPIX) \
+	LIBDIR=$(F90_LIBDIR) INCDIR=$(F90_INCDIR) PIXFLAGS="$(F90_PIXFLAGS)" BINDIR=$(F90_BINDIR) AR="$(F90_AR)" \
+
+
+all: f90-modules f90-library f90-prog
+
+test: f90-test
+
+RM	= rm -f
+LS = ls
+
+F90-PROG = almnfile2rmap survey2almn survey2almn_interactive
+
+f90-prog: almnfile2rmap survey2almn survey2almn_interactive
+
+f90-all: f90-modules f90-library f90-prog
+
+f90-modules:
+	@cd src/f90/mod; $(MAKE) $(F90_MKFLAGS)
+
+f90-library: f90-modules
+
+almnfile2rmap: f90-modules f90-library
+	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
+ 
+survey2almn: f90-modules f90-library
+	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
+
+survey2almn_interactive: f90-modules f90-library
+	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
+	
+hankel: f90-modules f90-library
+	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
+
+clean:
+	for p in $(F90-PROG) mod; do \
+	$(RM) src/f90/$$p/*.o src/f90/$$p/*.$(F90_MOD) src/f90/$$p/lib*.a src/f90/$$p/*.pc src/f90/$$p/*.pcl src/f90/$$p/*.il ; \
+	done
+
+vclean: clean
+	for p in $(F90-PROG); do \
+	$(RM) $(F90_BINDIR)/$$p; \
+	$(RM) src/f90/$$p/*.o; \
+	done
+	$(RM) $(F90_INCDIR)/*.$(F90_MOD)
+	$(RM) $(F90_INCDIR)/*.pc $(F90_INCDIR)/*.pcl
+	$(RM) $(F90_LIBDIR)/*.a
+
+tidy: vclean
+	$(RM) Makefile.bak
+
+distclean: tidy
+	$(RM) Makefile
+	$(RM) Makefile_tmp
+	$(RM) Makefile_bk*
+	$(RM) -r $(F90_BINDIR) $(F90_INCDIR) $(F90_LIBDIR)
