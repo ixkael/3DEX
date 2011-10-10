@@ -1,0 +1,31 @@
+===================
+ 3DEX version 1.0
+===================
+
+3DEX is a Fortran package providing programs and functions 
+to perform fast Fourier-Bessel decomposition of 3D fields.
+
+It is distributed in the hope that it will be useful, 
+but without any warranty. See the GNU General Public 
+License for more details.
+
+Please contact the authors if you have any question, 
+demand or proposal of new features.
+
+AUTHORS 
+ Boris Leistedt (boris.leistedt@gmail.com)
+ François Lanusse (francois.lanusse@gmail.com)
+
+REQUIREMENTS 
+ Healpix (v2.12 or higher)
+ and Healpix requirements (cfitsio, etc)
+
+INSTALLATION
+ Please run the ./configure command.
+ It will edit the 'make' file/command.
+ Then, run 'make' as usual.
+
+AVAILABLE FEATURES
+ survey2almn
+ survey2almn_interactive 
+ almn2rmap
