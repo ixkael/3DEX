@@ -30,7 +30,7 @@ INSTALLATION
  NOTE
   The library architecture and the installation scripts
   are directly inspired by the HEALPix package, 
-  which is under GPL licence.
+  which is under GPL 3.0 license.
 
 AVAILABLE FEATURES
  survey2almn
