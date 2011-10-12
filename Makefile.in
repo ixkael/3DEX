@@ -36,9 +36,9 @@ test: f90-test
 RM	= rm -f
 LS = ls
 
-F90-PROG = almnfile2rmap survey2almn survey2almn_interactive almn2cln
+F90-PROG = almnfile2rmap survey2almn survey2almn_lm survey2almn_interactive almn2cln 
 
-f90-prog: almnfile2rmap survey2almn survey2almn_interactive almn2cln
+f90-prog: almnfile2rmap survey2almn survey2almn_lm survey2almn_interactive almn2cln
 
 f90-all: f90-modules f90-library f90-prog
 
@@ -51,6 +51,9 @@ almnfile2rmap: f90-modules f90-library
 	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
  
 survey2almn: f90-modules f90-library
+	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
+
+survey2almn_lm: f90-modules f90-library
 	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
 
 survey2almn_interactive: f90-modules f90-library
