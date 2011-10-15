@@ -7,7 +7,7 @@ enable_language(Fortran)
 
 
 # CFITSIO
-link_directories($ENV{CFITSIO_DIR})
+link_directories($ENV{CFITSIO})
 
 # HEALPIX 
 include_directories($ENV{HEALPIX}/include)
