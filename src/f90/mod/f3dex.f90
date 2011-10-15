@@ -1520,85 +1520,6 @@ CONTAINS
 !!$    
 !!$    !===============================================================================
 !!$    !===============================================================================
-
-
-  !> Performs the Fourier-Bessel decomposition (backward algorithm) of a discrete survey.
-  !!@param[in] (nnmax, nlmax, nmmax) : decomposition triplet
-  !!@param[in] nsmax : Healpix nside parameter 
-  !!@param[in] (rmax, zbounds) : radial and angular cut 
-  !!@param[in] kln : Hankel (scaling) coefficients
-  !!@param[in] (survey, nbpts) : survey array and its length
-  !!@param[out] almn : almn decomposition coefficients
-  SUBROUTINE survey2almn_srs( nsmax, nnmax, nlmax, nmmax, rmax, nbpts, &
-       & zbounds, survey, kln, almn)
-    !
-    integer(I4B)  :: status, nbpts, ipring, nrr, nb_iter
-    integer(I4B)  :: nsmax, nnmax, nlmax, nmmax, n, p, k, m, l
-    real(DP)	  :: rmax, tempval, order
-    !	
-    real(DP),    dimension(:,:), allocatable	     :: map
-    real(DP), dimension(1:nbpts,1:3)         	     :: survey
-    real(DP),    dimension(1:2)       	             :: zbounds
-    real(DP),    dimension(0:nlmax,1:nnmax)         :: kln
-    !real(DP),    dimension(:,:,:) , allocatable     :: jln
-    real(DP)                                        :: jln
-    real(DP),    dimension(:,:)   , allocatable     ::  plm
-    complex(DP), dimension(1:nnmax,0:nlmax,0:nmmax) :: almn
-    character(len=*), PARAMETER                     :: code = "survey2almn_srs"
-    !
-    almn = cmplx( 0.0, 0.0, kind=DP )
-    !
-
-120 FORMAT(A,I3)
-
-    ALLOCATE(map(0:nlmax,0:(12*nsmax**2-1)),stat = status)
-    CALL assert_alloc(status,code,"map")
-
-    DO n = 1, nnmax
-
-       !print*,"----------------------------------------"
-       print*,"ORDER n= ",n!,OMP_GET_THREAD_NUM()
-       map = 0.0_dp
-
-       !$OMP PARALLEL DO REDUCTION(+:map)  SCHEDULE(DYNAMIC,512) &
-       !$OMP SHARED(nnmax,nsmax,nlmax,nmmax,almn,n,survey,kln,zbounds) &
-       !$OMP PRIVATE(status,p,ipring,l,jln)
-
-       DO p = 1, nbpts
-          !
-          CALL ang2pix_ring(nsmax, survey(p,2), survey(p,1), ipring)
-          ! 	
-          DO l = 0, nlmax
-             !
-             jln = 0.0_dp
-             CALL BJL( l , kln(l,n)*survey(p,3) , jln ) 
-             !
-             map(l,ipring) = map(l,ipring) + kln(l,n) * jln
-             !
-          ENDDO
-          !
-       ENDDO
-       
-       !$OMP END PARALLEL DO
-
-       !print*,map(0,0:5)
-       !print*,map(0,6:11)
-       
-       CALL alnspring2almn( nsmax, nlmax, nmmax, map, &
-            & almn(n:n, 0:nlmax,0:nmmax), zbounds )
-
-    ENDDO
-
-    DEALLOCATE( map )    
-
-    RETURN
-    !
-  END subroutine survey2almn_srs
-
-
-!!$
-!!$    !===============================================================================
-!!$    !===============================================================================
 !!$
 !!$    
 !!$    SUBROUTINE almn2alnspring_pre( nsmax, nlmax, nmmax, map, almn, plm )
@@ -1945,14 +1866,10 @@ CONTAINS
           call select_rings(cth(ithl), zbounds_in, keep_north(ithl), keep_south(ithl), keep_it(ithl))
        enddo
 
-       !-----------------------------------------------------------------------
-       !  computes the integral in phi : phas_lm(theta)
-       !  for each parallele from Pole to Equator (use symmetry for S. Hemisphere)
-       !-----------------------------------------------------------------------
        phasl_n = 0_dpc
        phasl_s = 0_dpc
 
-       !$OMP parallel default(none) NUM_THREADS(8) &
+       !$OMP parallel default(none) &
        !$OMP  shared(nsmax, nlmax, nmmax, npix, nrings, nphmx, &
        !$OMP      lchk, uchk, nph, startpix, kphi0, w8ring_in, &
        !$OMP      phasl_n, phasl_s, keep_north, keep_south, chunksize,map) &
@@ -1994,7 +1911,6 @@ CONTAINS
                 !
              endif
           enddo ! loop on ring
-
        enddo
        !$OMP end do
 
@@ -2008,12 +1924,6 @@ CONTAINS
        call init_rescale()
        OVFLOW = rescale_tab(1)
        UNFLOW = rescale_tab(-1)
-
-       !-----------------------------------------------------------------------
-       !              computes the a_lm by integrating over theta
-       !                  lambda_lm(theta) * phas_lm(theta)
-       !                         for each m and l
-       !-----------------------------------------------------------------------
 
        !$OMP parallel default(none) NUM_THREADS(8) &
        !$OMP shared(nlmax, nmmax, lchk, uchk, rescale_tab, ovflow, unflow, &
@@ -2050,7 +1960,6 @@ CONTAINS
                	phm = phasl_n(m,m,ithl) - phasl_s(m,m,ithl) ! diff (if (l+m) odd)
                	phas_sd(-1:0) =  (/ real(phm, kind=dp), aimag(phm) /)
                	phas_sd(1:2) =  (/ real(php, kind=dp), aimag(php) /)
-
                 if (m >= l_min) then
                    lam_lm = lam_mm * corfac !Actual lam_mm 
                    dalm(1:2, m) = dalm(1:2, m) + phas_sd(par_lm:par_lm+1) *lam_lm
@@ -2137,11 +2046,12 @@ CONTAINS
     real(DP),     dimension(:,:),   allocatable     :: map_north, map_south
 
     real(DP), dimension(1:2)         :: zbounds_in
+    real(DP), dimension(1:3)         :: surveytemp 
     real(DP), dimension(1:2*nsmax,1) :: w8ring_in
-    integer(I4B) :: s, l, m, n, p, ipring, ith, scalem, scalel   ! alm related
-    integer(I8B) :: istart_south, istart_north, npix  ! map related
+    integer(I4B) :: s, l, m, n, p, ipring, ith, scalem, scalel  
+    integer(I8B) :: istart_south, istart_north, npix  
     integer(I8B) :: itotstart_north, itotstart_south, itotend_north, itotend_south
-    integer(I4B) :: nrings, nphmx
+    integer(I4B) :: nrings, nphmx, sizenorth, sizesouth
     real(DP)     :: omega_pix, jln
     integer(i4b), parameter :: SMAXCHK = 30
     integer(kind=i4b), parameter :: RSMAX = 20, RSMIN = -20
@@ -2154,6 +2064,7 @@ CONTAINS
     real(DP),     dimension(:,:), allocatable :: dalm
     real(DP),     dimension(:),   allocatable :: mfac
     real(DP),     dimension(:,:), allocatable :: recfac
+    real(DP), dimension(:), allocatable :: tempaccjln
 
     integer(I4B)                              :: l_min
     complex(DPC)                              :: php, phm
@@ -2174,6 +2085,7 @@ CONTAINS
 
     character(LEN=*), PARAMETER :: code = 'survey2almn_opt'
     integer(I4B) :: status
+
     !=======================================================================
 
     zbounds_in = (/-1.d0 , 1.d0/)
@@ -2235,10 +2147,15 @@ CONTAINS
     UNFLOW = rescale_tab(-1)
     almn(1:nnmax,0:nlmax,0:nmmax) = 0.0 ! set the whole alm array to zero
 
+    print*,"================================================"
+    print*,"   Computing 3D cones and partial maps"
+    print*,"   > Modified FFT 3D algorithm"
+    print*,"------------------------------------------------"
+
     ! loop on chunks
     do ichunk = 0, nchunks-1 ! for each chunk
 
-       print*,"ichunk : ",ichunk+1," on ", nchunks
+       print*,"> Block : ",ichunk+1," on ", nchunks
 
        lchk = ichunk * chunksize + 1  ! first ring of the chunk
        uchk = min(lchk+chunksize - 1, nrings)  ! last ring of the chunk
@@ -2254,63 +2171,59 @@ CONTAINS
 
        itotstart_north = startpix(0)
        itotend_north = startpix(uchk-lchk)+nph(uchk-lchk)-1
-       itotstart_south = npix-startpix(uchk-1-lchk)-nph(uchk-1-lchk)
-       itotend_south = npix-startpix(0)-nph(0)+nph(0)-1
+       itotstart_south = npix-startpix(uchk-lchk)-nph(uchk-lchk)
+       itotend_south = npix-startpix(0)-1
+       sizenorth = (itotend_north-itotstart_north)
+       sizesouth = (itotend_south-itotstart_south)
 
        !print*,"North hemisphere:",itotstart_north,itotend_north
        !print*,"South hemisphere:",itotstart_south,itotend_south
 
-       allocate(map_north(0:nlmax,0:(itotend_north-itotstart_north)),stat = status)
+       allocate(map_north(0:nlmax,0:sizenorth),stat = status)
        call assert_alloc(status,code,'map_north')
-       allocate(map_south(0:nlmax,0:(itotend_south-itotstart_south)),stat = status)
+       allocate(map_south(0:nlmax,0:sizesouth),stat = status)
        call assert_alloc(status,code,'map_south')
 
-       do n=1, nnmax ! loop on n parameter
+       ! loop on n parameter 
+       do n=1, nnmax
 
-          !print*,"N = ",n
-
-          ! initialize maps
+          !print*,"> N = ",n 
           map_north=0.0_dp
           map_south=0.0_dp
 
-          ! loop on the survey
+          !$OMP parallel default(none) &
+          !$OMP private(p, l, ipring, jln, tempaccjln, status, surveytemp ) &
+          !$OMP shared(n, survey, nsmax, nbpts, nlmax, kln, map_north, map_south, &
+          !$OMP        itotend_north, itotstart_south, itotend_south, itotstart_north )
+
+          allocate(tempaccjln(0:nlmax),stat = status)
+          call assert_alloc(status,code,'tempaccjln')
+
+          !$OMP do reduction(+:map_north, map_south) schedule(dynamic,1024) 
           do p=1, nbpts
-             ! locate point
-             CALL ang2pix_ring(nsmax, survey(p,2), survey(p,1), ipring)
-             ! if north
-             if ( ipring >= itotstart_north .AND. ipring <= itotend_north ) then
-                do l=0, nlmax
-                   jln = 0.0_dp
-                   !print*, ipring, "N",  ipring-itotstart_north
-                   CALL BJL( l , kln(l,n)*survey(p,3) , jln ) 
-                   map_north(l,ipring-itotstart_north) = map_north(l,ipring-itotstart_north) + kln(l,n) * jln
-                enddo
+             surveytemp(1:3) = survey(p,1:3)
+             CALL ang2pix_ring(nsmax, surveytemp(2), surveytemp(1), ipring) 
+             do l=0, nlmax
+                CALL BJL( l , kln(l,n)*surveytemp(3), jln ) 
+                tempaccjln(l) =  kln(l,n)*jln
+             enddo
+             if ( ipring .GE. itotstart_north .AND. ipring .LE. itotend_north ) then ! if north
+                map_north(:,ipring-itotstart_north) =  map_north(:,ipring-itotstart_north) + tempaccjln(:)
              endif
-             ! if south
-             if ( ipring >= itotstart_south .AND. ipring <= itotend_south ) then
-                do l=0, nlmax
-                   jln = 0.0_dp
-                   !print*, ipring, "S", ipring-itotstart_south
-                   CALL BJL( l , kln(l,n)*survey(p,3) , jln ) 
-                   map_south(l,ipring-itotstart_south) = map_south(l,ipring-itotstart_south) + kln(l,n) * jln
-                enddo
+             if ( ipring .GE. itotstart_south .AND. ipring .LE. itotend_south ) then ! if south
+                map_south(:,ipring-itotstart_south) =  map_south(:,ipring-itotstart_south) + tempaccjln(:)
              endif
-
           enddo
+          !$OMP end do
 
-          !if (ichunk==0) then
-          !   print*, map_north(0,0:5)
-          !   print*, map_north(0,6:7), map_south(0,0:3)
-          !endif
-          
-          !-----------------------------------------------------------------------
-          !  computes the integral in phi : phas_lm(theta)
-          !  for each parallele from Pole to Equator (use symmetry for S. Hemisphere)
-          !-----------------------------------------------------------------------
+          deallocate(tempaccjln)
+
+          !$OMP end parallel
+
           phasl_n = 0_dpc
           phasl_s = 0_dpc
 
-          !$OMP parallel default(none) NUM_THREADS(8) &
+          !$OMP parallel default(none) &
           !$OMP  shared(nsmax, nlmax, nmmax, npix, nrings, nphmx, n, &
           !$OMP      itotstart_north, itotend_north, itotstart_south, itotend_south, &
           !$OMP      lchk, uchk, nph, startpix, kphi0, w8ring_in, &
@@ -2345,17 +2258,16 @@ CONTAINS
                    phasl_n(l,0:nmmax,ithl) = phas_n(0:nmmax,ithl) + phasl_n(l,0:nmmax,ithl)
                    !
                 endif
-
-                if (ith < nrings .and. keep_south(ithl)) then
+                if (ith < nrings .and. keep_south(ithl) ) then
                    !
-                   ring(0:nphl-1) = map_south(l,(istart_south-itotstart_south):(istart_south+nphl-1-itotstart_south))! * w8ring_in(ith,1)
+                   ring(0:nphl-1) = map_south(l,(istart_south-itotstart_south):&
+                        &(istart_south+nphl-1-itotstart_south))! * w8ring_in(ith,1)
                    call ring_analysis(nsmax, nlmax, nmmax, ring, nphl, phas_s(0,ithl), kphi0(ithl))
                    phasl_s(l,0:nmmax,ithl) = phas_s(0:nmmax,ithl) + phasl_s(l,0:nmmax,ithl)
                    !
                 endif
              enddo ! loop on ring
-
-          enddo
+          enddo ! loop on l
           !$OMP end do
 
           if (do_openmp()) then
@@ -2368,13 +2280,7 @@ CONTAINS
           OVFLOW = rescale_tab(1)
           UNFLOW = rescale_tab(-1)
 
-          !-----------------------------------------------------------------------
-          !              computes the a_lm by integrating over theta
-          !                  lambda_lm(theta) * phas_lm(theta)
-          !                         for each m and l
-          !-----------------------------------------------------------------------
-
-          !$OMP parallel default(none) NUM_THREADS(8) &
+          !$OMP parallel default(none) &
           !$OMP shared(nlmax, nmmax, lchk, uchk, rescale_tab, n, ovflow, unflow, &
           !$OMP    cth, sth, mfac, almn, phasl_n, phasl_s, keep_it, omega_pix) &
           !$OMP private(recfac, dalm, phas_sd, status, m, ithl, l_min, &
@@ -2388,7 +2294,7 @@ CONTAINS
              call assert_alloc(status,code,'dalm')
           endif
 
-          !$OMP do schedule(dynamic,1)
+          !$OMP do reduction(+:almn) schedule(dynamic,1)
           do m = 0, nmmax
              ! generate recursion factors (recfac) for Ylm of degree m
              call gen_recfac(nlmax, m, recfac)
@@ -2397,7 +2303,7 @@ CONTAINS
              dalm(1:2, m:nlmax ) = 0.0_dp
 
              do ithl = 0, uchk - lchk
-                l_min = l_min_ylm(m, sth(ithl))
+                l_min = 0 !l_min_ylm(m, sth(ithl))
                 if (keep_it(ithl) .and. nlmax >= l_min) then ! avoid un-necessary calculations (EH, 09-2001)
                    ! determine lam_mm
                    call compute_lam_mm(mfac(m), m, sth(ithl), lam_mm, corfac, scalem)
@@ -2409,7 +2315,6 @@ CONTAINS
                    phm = phasl_n(m,m,ithl) - phasl_s(m,m,ithl) ! diff (if (l+m) odd)
                    phas_sd(-1:0) =  (/ real(phm, kind=dp), aimag(phm) /)
                    phas_sd(1:2) =  (/ real(php, kind=dp), aimag(php) /)
-
                    if (m >= l_min) then
                       lam_lm = lam_mm * corfac !Actual lam_mm 
                       dalm(1:2, m) = dalm(1:2, m) + phas_sd(par_lm:par_lm+1) *lam_lm
@@ -2468,9 +2373,13 @@ CONTAINS
 
        enddo ! loop on n
 
-       deallocate(map_north,map_south)
+       deallocate(map_north, map_south)
 
     enddo ! loop on chunks
+
+    print*,"------------------------------------------------"
+    print*,"   Finished"
+    print*,"================================================"
 
     !     --------------------
     !     free memory and exit
@@ -2484,6 +2393,92 @@ CONTAINS
     RETURN
     !
   END SUBROUTINE survey2almn_opt
+
+
+  !===============================================================================
+  !===============================================================================
+
+
+  !> Performs the Fourier-Bessel decomposition (backward algorithm) of a discrete survey.
+  !!@param[in] (nnmax, nlmax, nmmax) : decomposition triplet
+  !!@param[in] nsmax : Healpix nside parameter 
+  !!@param[in] (rmax, zbounds) : radial and angular cut 
+  !!@param[in] kln : Hankel (scaling) coefficients
+  !!@param[in] (survey, nbpts) : survey array and its length
+  !!@param[out] almn : almn decomposition coefficients
+  SUBROUTINE survey2almn_srs( nsmax, nnmax, nlmax, nmmax, rmax, nbpts, &
+       & zbounds, survey, kln, almn)
+    !
+    integer(I4B)  :: status, nbpts, ipring, nrr, nb_iter
+    integer(I4B)  :: nsmax, nnmax, nlmax, nmmax, n, p, k, m, l
+    real(DP)	  :: rmax, tempval, order
+    !	
+    real(DP),    dimension(:,:), allocatable	     :: map
+    real(DP), dimension(1:nbpts,1:3)         	     :: survey
+    real(DP), dimension(1:3)                         :: surveytemp
+    real(DP),    dimension(1:2)       	             :: zbounds
+    real(DP),    dimension(0:nlmax,1:nnmax)         :: kln
+    !real(DP),    dimension(:,:,:) , allocatable     :: jln
+    real(DP)                                        :: jln
+    real(DP),    dimension(:,:)   , allocatable     ::  plm
+    complex(DP), dimension(1:nnmax,0:nlmax,0:nmmax) :: almn
+    character(len=*), PARAMETER                     :: code = "survey2almn_srs"
+    !
+
+    almn = cmplx( 0.0, 0.0, kind=DP )
+
+120 FORMAT(A,I3)
+
+    ALLOCATE(map(0:nlmax,0:(12*nsmax**2-1)),stat = status)
+    CALL assert_alloc(status,code,"map")
+
+    print*,"================================================"
+    print*,"   Computing multidimensional maps" 
+    print*,"   > Modified FFT 3D algorithm"
+    print*,"------------------------------------------------"
+
+    DO n = 1, nnmax
+
+       print*,"> Order n = ",n!,OMP_GET_THREAD_NUM()
+       map = 0.0_dp
+
+       !$OMP PARALLEL DO REDUCTION(+:map)  SCHEDULE(DYNAMIC,512) &
+       !$OMP SHARED(nnmax,nsmax,nlmax,nmmax,almn,n,survey,kln,zbounds) &
+       !$OMP PRIVATE(status,p,ipring,l,jln)
+
+       DO p = 1, nbpts
+          !
+          surveytemp(1:3) = survey(p,1:3)
+          CALL ang2pix_ring(nsmax, surveytemp(2), surveytemp(1), ipring)
+          ! 	
+          DO l = 0, nlmax
+             !
+             jln = 0.0_dp
+             CALL BJL( l , kln(l,n)*surveytemp(3) , jln )
+             !$OMP ATOMIC
+             map(l,ipring) = map(l,ipring) + kln(l,n) * jln
+             !
+          ENDDO
+       ENDDO
+
+       !$OMP END PARALLEL DO
+
+       CALL alnspring2almn( nsmax, nlmax, nmmax, map, &
+            & almn(n:n, 0:nlmax,0:nmmax), zbounds )
+
+    ENDDO
+
+    print*,"------------------------------------------------"
+    print*,"   Finished"
+    print*,"================================================"
+
+
+    DEALLOCATE( map )    
+
+    RETURN
+    !
+  END subroutine survey2almn_srs
+
 
   !===============================================================================
   !===============================================================================
@@ -2615,10 +2610,6 @@ CONTAINS
           ! get pixel location information
           call get_pixel_layout(nsmax, ith, cth, sth(ithl), nph(ithl), startpix(ithl), kphi0(ithl))
        enddo
-       !        -----------------------------------------------------
-       !        for each theta, and each m, computes
-       !        b(m,theta) = sum_over_l>m (lambda_l_m(theta) * a_l_m)
-       !        ------------------------------------------------------
 
        b_north(:,:) = 0_dpc ! pad with zeros
        b_south(:,:) = 0_dpc
@@ -2700,9 +2691,7 @@ CONTAINS
           istart_north = startpix(ithl)
           istart_south = npix-istart_north-nphl
           ith  = ithl + lchk
-          !        ---------------------------------------------------------------
-          !        sum_m  b(m,theta)*exp(i*m*phi)   -> f(phi,theta) by FFT
-          !        ---------------------------------------------------------------
+
           call ring_synthesis(nsmax,nlmax,nmmax,b_north(0,ithl),nphl,ring,kphi0(ithl))   ! north hemisph. + equator
           map(istart_north:istart_north+nphl-1,1) = map(istart_north:istart_north+nphl-1,1) + ring(0:nphl-1)
 
@@ -2783,6 +2772,10 @@ CONTAINS
           character(LEN=*), parameter :: code = 'BESSEL'
           integer(I4B) :: status
 
+          print*,"------------------------------------------------"
+          print*,"   Computing scaling coefficients..."
+          print*,"-----------------------"
+
 
           !$OMP parallel &
           !$OMP shared(qln,rmax,nnmax,nlmax,status) &
@@ -2797,7 +2790,7 @@ CONTAINS
              order = real(l) + 0.5_dp
              lastRoot = 1
 
-             PRINT*, "ORDER l=",l
+             PRINT*, "Order l =",l
 
              A=0.0
              B=2000.0
@@ -2832,6 +2825,10 @@ CONTAINS
           !$OMP end do
           deallocate(roots)
           !$OMP end parallel
+
+          print*,"-----------------------"
+          print*,"   Done."
+          print*,"------------------------------------------------"
 
 
         END SUBROUTINE gen_qln
@@ -2927,6 +2924,9 @@ CONTAINS
           REAl(DP), DIMENSION(0:nlmax,1:nnmax) :: kln
           REAl(DP), DIMENSION(0:nlmax,1:nnmax) :: cln
 
+          print*,"------------------------------------------------"
+          print*,"   Computing normalization coefficients..."
+
           !$OMP PARALLEL &
           !$OMP SHARED(cln,rmax,kln,nnmax,nlmax) &
           !$OMP PRIVATE(l,n,k,tempval)	  
@@ -2941,6 +2941,9 @@ CONTAINS
           ENDDO
           !$OMP END DO
           !$OMP END PARALLEL   	
+
+          print*,"   Done."
+          print*,"------------------------------------------------"
 
         END SUBROUTINE gen_cln
 
