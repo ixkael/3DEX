@@ -13,29 +13,56 @@ Please contact the authors if you have any question,
 demand or proposal of new features.
 
 AUTHORS 
+-------------------
  Boris Leistedt (boris.leistedt@gmail.com)
  François Lanusse (francois.lanusse@gmail.com)
 
 REQUIREMENTS 
+-------------------
  Healpix (v2.12 or higher)
  and Healpix requirements (cfitsio, etc)
 
-INSTALLATION
+INSTALLATION - HEALPIX-LIKE
+-------------------
  Please run the ./configure command.
- It will edit the 'make' file/command.
- Then, run 'make' as usual.
- 'make clean' to delete .o files.
- 'make tidy' and 'make distclean' to uninstall.
+ It will edit the 'Makefile'
+ Then, run 'make' as usual
+ 'make clean' to delete .o files
+ 'make tidy' and 'make distclean' to uninstall
+ 
+INSTALLATION WITH CMAKE
+-------------------
+  'export CFITSIO=/usr/local/lib' to locate cfitsio library (libcfitsio.a)
+  'export HEALPIX=/Users/silver/sofware/Healpix_2.20a'  to locate Healpix (Fortran build)
+  'mkdir build' to create a temporary directory (name doesn't matter)
+  'cd build' to use the correct path
+  'cmake ..' to launch cmake in the main project root directory
+  'make' to compile and build the F90 tree, libraries and executables
+  'make install' to install programs, modules and the library in /bin, /include and /lib
 
- NOTE
+NOTE
+-------------------
   The library architecture and the installation scripts
   are directly inspired by the HEALPix package, 
   which is under GPL 3.0 license.
 
 AVAILABLE FEATURES
- survey2almn
- survey2almn_interactive 
- almn2rmap
+-------------------
+ > survey2almn
+    Fourier-Bessel decomposition from a raw survey/sample (high-memory mode, not suitable with too many threads)
+    
+ > survey2almn_lm
+    Fourier-Bessel decomposition from a raw survey/sample (low-memory mode, suitable for clusters)
+ 
+ > survey2almn_interactive 
+    Interactive Fourier-Bessel decomposition (high-memory mode, with redshift to distance conversion using fiducial)
+ 
+ > almn2rmap
+    Extract FB decomposition from .fits file and reconstructs the smoothed field at given distance
+ 
+ > almn2cln
+ 	Extract FB decomposition from .fits file, compute the spectrum and exports .fits
 
 TEST COMMANDS
- $ bin/survey2almn horizon_01_30k.txt out/almn_01_30_512.fits out/cln_01_30_512.fits 30 30 512 2000.0
+-------------------
+ > bin/survey2almn horizon_01_30k.txt out/almn_01_30_512.fits out/cln_01_30_512.fits 30 30 512 2000.0
