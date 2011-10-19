@@ -67,12 +67,7 @@ findFITSInclude () {
 	fi
     done
 }
-#-------------
-# findFFTW () {
-#     for dir in /usr/lib /usr/local/lib $1; do
-# 	[ -r "${dir}/lib${LIBFFTW}.a" ] && FFTWDIR=$dir
-#     done
-# }
+
 #-------------
 fullPath () {
     t='TEMP=`cd $TEMP; pwd`'
@@ -334,42 +329,6 @@ GuessCompiler () {
 	    crashAndBurn;;
     esac
 }
-
-# -----------------------------------------------------------------
-
-# askFFT () {
-#     FFT="0"
-#     echo "Which FFT do you want to use ?"
-#     echo " 0) the one already contained in the 3DEX package "
-#     echo " 1) FFTW (see www.fftw.org)"
-#     echo "   (it requires the double precision FFTW to be installed)"
-# ###    echo "   (it can NOT be used with the OpenMP implementation of 3DEX)"
-#     echoLn "Enter choice                                      ($FFT): "
-#     read answer
-#     [ "x$answer" != "x" ] && FFT="$answer"
-#     if [ $FFT = 1 ] ; then
-# 	echoLn "enter full name of fftw library (lib${LIBFFTW}.a): "
-# 	read answer
-# 	[ "x$answer" != "x" ] && LIBFFTW=`${BASENAME} $answer ".a" | sed "s/^lib//"`
-
-# 	findFFTW $LIBDIR
-# 	echoLn "enter location of fftw library ($FFTWDIR): "
-# 	read answer
-# 	[ "x$answer" != "x" ] && FFTWDIR=$answer
-
-# 	lib="${FFTWDIR}/lib${LIBFFTW}.a"
-# 	if [ ! -r $lib ]; then
-# 	    echo "error: fftw library $lib not found"
-# 	    crashAndBurn
-# 	fi
-
-# 	FFTSRC="healpix_fftw"
-# 	FFTLD="-L${FFTWDIR} -l${LIBFFTW}"
-
-# 	countUnderScore
-#     fi
-#     LDFLAGS="$LDFLAGS $FFTLD"
-# }
 
 # -----------------------------------------------------------------
 

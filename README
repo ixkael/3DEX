@@ -50,19 +50,20 @@ AVAILABLE FEATURES
 -------------------
  > survey2almn
     Fourier-Bessel decomposition from a raw survey/sample (high-memory mode, not suitable with too many threads)
+    Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
     
  > survey2almn_lm
     Fourier-Bessel decomposition from a raw survey/sample (low-memory mode, suitable for clusters)
+    Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
  
  > survey2almn_interactive 
     Interactive Fourier-Bessel decomposition (high-memory mode, with redshift to distance conversion using fiducial)
+    Test: bin/survey2almn_interactive test/parameters.txt (and just type test/2mrs30.out)
  
  > almn2rmap
     Extract FB decomposition from .fits file and reconstructs the smoothed field at given distance
+    Test: bin/almnfile2rmap out/almn.fits map.fits 400.0 256 10 10 2000.0
  
  > almn2cln
  	Extract FB decomposition from .fits file, compute the spectrum and exports .fits
-
-TEST COMMANDS
--------------------
- > bin/survey2almn horizon_01_30k.txt out/almn_01_30_512.fits out/cln_01_30_512.fits 30 30 512 2000.0
+ 	Test: bin/almn2cln out/almn.fits out/cln.fits 50 50

@@ -1,7 +1,6 @@
-PROGRAM almnfile2rmap
+PROGRAM almn2cln
 
-!COMMAND : almnfile2map almninfile mapoutfile rho nside nnmax nlmax rmax
-!TEST : bin/almnfile2rmap out/almn.fits map.fits 400.0 256 10 10 2000.0
+!TEST : bin/almn2cln out/almn.fits out/cln.fits 50 50
     
     USE f3dex
     USE cosmotools
