@@ -1,6 +1,6 @@
-PROGRAM almn2cln
+PROGRAM almnfile2cln
 
-!TEST : bin/almn2cln out/almn.fits out/cln.fits 50 50
+!TEST : bin/almnfile2cln out/almn.fits out/cln.fits 50 50
     
     USE f3dex
     USE cosmotools
@@ -18,7 +18,7 @@ PROGRAM almn2cln
     REAL(DP), DIMENSION(:,:), ALLOCATABLE :: kln, cln, plm
     REAL(kind=DP), DIMENSION(:,:), ALLOCATABLE :: spectr 
     COMPLEX(KIND=DP), DIMENSION(:,:,:), ALLOCATABLE :: almn
-    CHARACTER(len=*), PARAMETER :: code = "almn2cln"
+    CHARACTER(len=*), PARAMETER :: code = "almnfile2cln"
     
     PRINT*,"=================================================="
     PRINT*," 3DEX F90 LIBRARY"
@@ -95,7 +95,7 @@ PROGRAM almn2cln
 	
     PRINT*,"=================================================="
     PRINT*," "
-    PRINT*,"SPECTRUM COMPUTATION (almn2cln) - SUMMARY"
+    PRINT*,"SPECTRUM COMPUTATION (almnfile2cln) - SUMMARY"
     PRINT*," "
     PRINT*,"(nmax,lmax,mmax) :", nnmax, nlmax, nmmax
     PRINT*,"Elapsed time :",time2-time1

@@ -32,7 +32,7 @@ set(3DEXTAG "-l3dex")
 # build executables
 set(MODULES f3dex.mod" "cosmotools.mod)
 set(MODULES_SRC "src/f90/mod/f3dex.f90" "src/f90/mod/cosmotools.f90" "src/f90/mod/rfsfns.f"  "src/f90/mod/quadpack.f90")
-set(EXECUTABLES survey2almn survey2almn_lm survey2almn_interactive almnfile2rmap almn2cln)
+set(EXECUTABLES survey2almn survey2almn_lm survey2almn_interactive almnfile2rmap almnfile2cln)
 
 add_library(3dex ${MODULES_SRC})   
 

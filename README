@@ -64,6 +64,6 @@ AVAILABLE FEATURES
     Extract FB decomposition from .fits file and reconstructs the smoothed field at given distance
     Test: bin/almnfile2rmap out/almn.fits map.fits 400.0 256 10 10 2000.0
  
- > almn2cln
+ > almnfile2cln
  	Extract FB decomposition from .fits file, compute the spectrum and exports .fits
- 	Test: bin/almn2cln out/almn.fits out/cln.fits 50 50
+ 	Test: bin/almnfile2cln out/almn.fits out/cln.fits 50 50
