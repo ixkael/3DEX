@@ -3,9 +3,13 @@ PROGRAM survey2almn_lm
   !COMMAND : bin/survey2almn test/horizon_02_30k.txt out/almn_02_50_1024.fits out/cln_02_50_1024.fits 50 50 1024 2000.0
   !TEST : bin/survey2almn test/horizon_01_30k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
   ! export OMP_NUM_THREADS=8 
-  
-  USE f3dex
-  USE cosmotools
+
+  USE f3dex_transforms
+  USE f3dex_cosmotools
+  USE f3dex_stats
+  USE f3dex_fitstools
+  USE f3dex_utils
+
   USE healpix_types
   USE healpix_modules
 
@@ -155,7 +159,7 @@ PROGRAM survey2almn_lm
   ALLOCATE( spectr(0:nlmax,1:nnmax), stat = status )
   CALL assert_alloc(status,code,"spectrnl")
   spectr = 0.0_dp
-  CALL almn2cln( nnmax, nlmax, nmmax, almn, spectr)
+  CALL almn2cln_naive( nnmax, nlmax, nmmax, almn, spectr)
   PRINT*,"   Done."
   PRINT*,"------------------------------------------------"
   PRINT*," "
@@ -167,8 +171,8 @@ PROGRAM survey2almn_lm
   PRINT*,"------------------------------------------------"
   !CALL PRINT_spectrum(cln, 3, 3, nlmax, nnmax," cln")
   !CALL PRINT_spectrum(kln, 3, 3, nlmax, nnmax," kln")
-  CALL PRINT_almn(almn, 3, 3, 3, nlmax, nmmax, nnmax,"almn")
-  !CALL PRINT_spectrum(spectr, 3, 3, nnmax, nlmax,"sptr")
+  !CALL PRINT_almn(almn, 10, 10, 10, nlmax, nmmax, nnmax,"almn")
+  !CALL PRINT_spectrum(spectr, 10, 10, nnmax, nlmax,"sptr")
   PRINT*,"------------------------------------------------"
 
   time2 = wtime()

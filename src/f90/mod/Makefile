@@ -1,8 +1,9 @@
 # -*- Makefile -*-
 
-obj0 = quadpack.o 
-obj1 = rfsfns.o
-obj2 = cosmotools.o f3dex.o
+obj0 = ../external/quadpack.o ../external/quadrule.o
+obj1 = ../external/rfsfns.o
+obj2 = f3dex_stats.o f3dex_utils.o f3dex_fitstools.o
+obj3 = f3dex_cosmotools.o f3dex_transforms.o
 
 obj   = $(obj0) $(obj1) $(obj2) $(obj3)
 
@@ -28,9 +29,12 @@ default: lib3dex.a
 	$(FC) $(FFLAGS) $(ADDUS) $(PPFLAGS) -c $< -o $@;; \
 	esac
 
-cosmotools.o: $(obj0)
-
-f3dex.o: $(obj1)
+f3dex_cosmotools.o: $(obj2)
+f3dex_utils.o: $(obj1)
+f3dex_stats.o: $(obj1)
+f3dex_transforms.o: $(obj2)
+f3dex_fitstools.o: $(obj1)
+../external/rfsfns.o: $(obj0)
 
 lib3dex.a: $(obj)
 	$(AR) lib3dex.a $(obj)

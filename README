@@ -33,7 +33,7 @@ INSTALLATION - HEALPIX-LIKE
 INSTALLATION WITH CMAKE
 -------------------
   'export CFITSIO=/usr/local/lib' to locate cfitsio library (libcfitsio.a)
-  'export HEALPIX=/Users/silver/sofware/Healpix_2.20a'  to locate Healpix (Fortran build)
+  'export HEALPIX=/Users/silver/software/Healpix_2.20a'  to locate Healpix (Fortran build)
   'mkdir build' to create a temporary directory (name doesn't matter)
   'cd build' to use the correct path
   'cmake ..' to launch cmake in the main project root directory
@@ -49,15 +49,15 @@ NOTE
 AVAILABLE FEATURES
 -------------------
  > survey2almn
-    Fourier-Bessel decomposition from a raw survey/sample (high-memory mode, not suitable with too many threads)
+    Fourier-Bessel decomposition from a raw survey/sample (normal mode)
     Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
     
  > survey2almn_lm
-    Fourier-Bessel decomposition from a raw survey/sample (low-memory mode, suitable for clusters)
+    Fourier-Bessel decomposition from a raw survey/sample (slower, but low-memory requirements. Suitable for Nside>1024)
     Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
  
  > survey2almn_interactive 
-    Interactive Fourier-Bessel decomposition (high-memory mode, with redshift to distance conversion using fiducial)
+    Interactive Fourier-Bessel decomposition (with redshift to distance conversion using fiducial)
     Test: bin/survey2almn_interactive test/parameters.txt (and just type test/2mrs30.out)
  
  > almn2rmap

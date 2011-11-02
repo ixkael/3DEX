@@ -5,6 +5,8 @@ set(CMAKE_Fortran_COMPILER_INIT gfortran)
 project(3DEX)
 enable_language(Fortran)
 
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/lib)
 
 # CFITSIO
 link_directories($ENV{CFITSIO})
@@ -27,26 +29,20 @@ else (Fortran_COMPILER_NAME STREQUAL "gfortran")
 endif (Fortran_COMPILER_NAME STREQUAL "gfortran")
 
 set(LIBS "-lcfitsio -lhealpix")
-set(3DEXTAG "-l3dex")
+set(3DEXTAG "-L${LIBRARY_OUTPUT_PATH} -l3dex")
 
 # build executables
-set(MODULES f3dex.mod" "cosmotools.mod)
-set(MODULES_SRC "src/f90/mod/f3dex.f90" "src/f90/mod/cosmotools.f90" "src/f90/mod/rfsfns.f"  "src/f90/mod/quadpack.f90")
-set(EXECUTABLES survey2almn survey2almn_lm survey2almn_interactive almnfile2rmap almn2cln)
+set(MODULES "f3dex_stats.mod" "f3dex_cosmotools.mod" "f3dex_fitstools.mod"
+"f3dex_utils.mod" "f3dex_transforms.mod")
+set(MODULES_SRC "src/f90/mod/f3dex_fitstools.f90"
+"src/f90/mod/f3dex_cosmotools.f90" "src/f90/mod/f3dex_utils.f90"
+"src/f90/mod/f3dex_stats.f90" "src/f90/mod/f3dex_transforms.f90"
+"src/f90/external/rfsfns.f"  "src/f90/external/quadpack.f90"  "src/f90/external/quadrule.f90")
+set(EXECUTABLES survey2almn survey2almn_lm survey2almn_interactive almnfile2rmap)
 
 add_library(3dex ${MODULES_SRC})   
 
 foreach (p ${EXECUTABLES})
-  add_executable (${p} "src/f90/${p}/${p}.f90" ${MODULES_SRC})
-  target_link_libraries(${p} ${LIBS} ${3DEX})
+  add_executable (${p} "src/f90/${p}/${p}.f90")
+  target_link_libraries(${p} ${LIBS} ${3DEXTAG})
 endforeach (p)
-
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lib3dex.a
-	DESTINATION ${PROJECT_SOURCE_DIR}/lib)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODULES}
-	DESTINATION ${PROJECT_SOURCE_DIR}/include)
-foreach (p ${EXECUTABLES})
-   install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${p}
-	DESTINATION ${PROJECT_SOURCE_DIR}/bin)
-endforeach (p)
-

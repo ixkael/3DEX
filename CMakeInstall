@@ -1,0 +1,10 @@
+mkdir build
+cd build
+cmake ..
+make
+
+if [[ ! -d "include" ]] ; then
+   mkdir include
+fi
+mv *.mod include
+rm -rf build
