@@ -1,0 +1,326 @@
+\hypertarget{namespacef3dex__cosmotools}{
+\section{f3dex\_\-cosmotools Module Reference}
+\label{namespacef3dex__cosmotools}\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}}
+}
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{typef3dex__cosmotools_1_1recognized_params}{recognizedParams}
+\end{DoxyCompactItemize}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_abeb005e8bef92ebc0927b69db637906d}{equatorial2galactic\_\-deg} (delta, alpha, b, l)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_a0caf479bc891741c90e36f878444e333}{inquireAndDelete} (filename)
+\item 
+LOGICAL \hyperlink{namespacef3dex__cosmotools_ae0ff007b365be41cbcf5e7ed24cccac2}{DOesFileExists} (filename)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_a36578d36cffe32d26a9fd914d032ef3a}{read\_\-survey} (file, nbptsmax, nbcolsinfile, nbpts, surveytemp)
+\item 
+REAL(DP) \hyperlink{namespacef3dex__cosmotools_a25e2703c39b2d99c864537823f2f8402}{int\_\-NC} (x, f, n)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_a78ae43d2bd5f180e65c710dc694bcee4}{cosmo\_\-z2s} (h\_\-in, omega\_\-m\_\-in, omega\_\-l\_\-in, omega\_\-b\_\-in, wa\_\-in, w0\_\-in, z, nbpts\_\-in, sk)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_abdbb37c7c522bf29ebf089412b9d7854}{chi\_\-z0} (zin, chi)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_aae4fa92003adf2bfde48fa0dfcbf6b51}{chi\_\-z1} (zin, chi)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_a6c29a874ae95da9fb207a2f63729eecf}{chi\_\-z2} (zin, chi)
+\item 
+REAL \hyperlink{namespacef3dex__cosmotools_abba0e9b02d0f46a5abce5a0830da7f4d}{fz} (z)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_a609d3f29da9fc1be3bf27757e25532eb}{txtfile2parameters} (paramfile, params)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_a8405dbd12e86a408520f40f1b0a68919}{getParameters\_\-survey2almn} (multiscale, zbounds, nr, nside, nnmax, nlmax, nmmax, iter\_\-order, nbpts, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, paramfile, almnoutfile, clnoutfile, h, w0, wa, omega\_\-l, omega\_\-b, omega\_\-m, rmaxinput)
+\item 
+subroutine \hyperlink{namespacef3dex__cosmotools_aaef3c07f112a83e6ff7a2762d5202fae}{extractFromFile} (nbpts, nr, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, survey)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+REAL(DP), parameter \hyperlink{namespacef3dex__cosmotools_a211d492263b2040371280021352d9154}{c} = 299792458\_\-dp
+\item 
+REAL(DP), parameter \hyperlink{namespacef3dex__cosmotools_a8953fe6dc399fcf889789bee9702ee65}{tcmb} = 2726000\_\-dp
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacef3dex__cosmotools_abdbb37c7c522bf29ebf089412b9d7854}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!chi\_\-z0@{chi\_\-z0}}
+\index{chi\_\-z0@{chi\_\-z0}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{chi\_\-z0}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::chi\_\-z0 (
+\begin{DoxyParamCaption}
+\item[{REAL(DP)}]{zin, }
+\item[{REAL(DP)}]{chi}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_abdbb37c7c522bf29ebf089412b9d7854}
+
+
+Definition at line 183 of file f3dex\_\-cosmotools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__cosmotools_aae4fa92003adf2bfde48fa0dfcbf6b51}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!chi\_\-z1@{chi\_\-z1}}
+\index{chi\_\-z1@{chi\_\-z1}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{chi\_\-z1}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::chi\_\-z1 (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(1:nbpts)}]{zin, }
+\item[{REAL(DP),dimension(1:nbpts)}]{chi}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_aae4fa92003adf2bfde48fa0dfcbf6b51}
+
+
+Definition at line 209 of file f3dex\_\-cosmotools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__cosmotools_a6c29a874ae95da9fb207a2f63729eecf}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!chi\_\-z2@{chi\_\-z2}}
+\index{chi\_\-z2@{chi\_\-z2}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{chi\_\-z2}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::chi\_\-z2 (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(1:nbpts)}]{zin, }
+\item[{REAL(DP),dimension(1:nbpts)}]{chi}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_a6c29a874ae95da9fb207a2f63729eecf}
+
+
+Definition at line 254 of file f3dex\_\-cosmotools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__cosmotools_a78ae43d2bd5f180e65c710dc694bcee4}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!cosmo\_\-z2s@{cosmo\_\-z2s}}
+\index{cosmo\_\-z2s@{cosmo\_\-z2s}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{cosmo\_\-z2s}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::cosmo\_\-z2s (
+\begin{DoxyParamCaption}
+\item[{REAL(DP)}]{h\_\-in, }
+\item[{REAL(DP)}]{omega\_\-m\_\-in, }
+\item[{REAL(DP)}]{omega\_\-l\_\-in, }
+\item[{REAL(DP)}]{omega\_\-b\_\-in, }
+\item[{REAL(DP)}]{wa\_\-in, }
+\item[{REAL(DP)}]{w0\_\-in, }
+\item[{REAL(DP),dimension(1:nbpts\_\-in)}]{z, }
+\item[{INTEGER(I4B)}]{nbpts\_\-in, }
+\item[{REAL(DP),dimension(1:nbpts\_\-in)}]{sk}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_a78ae43d2bd5f180e65c710dc694bcee4}
+
+
+Definition at line 113 of file f3dex\_\-cosmotools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__cosmotools_ae0ff007b365be41cbcf5e7ed24cccac2}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!DOesFileExists@{DOesFileExists}}
+\index{DOesFileExists@{DOesFileExists}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{DOesFileExists}]{\setlength{\rightskip}{0pt plus 5cm}LOGICAL f3dex\_\-cosmotools::DOesFileExists (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(len=FILENAMELEN)}]{filename}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_ae0ff007b365be41cbcf5e7ed24cccac2}
+
+
+Definition at line 55 of file f3dex\_\-cosmotools.f90.
+
+\hypertarget{namespacef3dex__cosmotools_abeb005e8bef92ebc0927b69db637906d}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!equatorial2galactic\_\-deg@{equatorial2galactic\_\-deg}}
+\index{equatorial2galactic\_\-deg@{equatorial2galactic\_\-deg}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{equatorial2galactic\_\-deg}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::equatorial2galactic\_\-deg (
+\begin{DoxyParamCaption}
+\item[{REAL(DP)}]{delta, }
+\item[{REAL(DP)}]{alpha, }
+\item[{REAL(DP)}]{b, }
+\item[{REAL(DP)}]{l}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_abeb005e8bef92ebc0927b69db637906d}
+
+
+Definition at line 27 of file f3dex\_\-cosmotools.f90.
+
+\hypertarget{namespacef3dex__cosmotools_aaef3c07f112a83e6ff7a2762d5202fae}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!extractFromFile@{extractFromFile}}
+\index{extractFromFile@{extractFromFile}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{extractFromFile}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::extractFromFile (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B)}]{nbpts, }
+\item[{INTEGER(I4B)}]{nr, }
+\item[{INTEGER(i4b),dimension(1:3)}]{iwhere, }
+\item[{INTEGER(I4B)}]{inradian, }
+\item[{INTEGER(I4B)}]{sorted, }
+\item[{REAL(DP)}]{convfc, }
+\item[{INTEGER(I4B)}]{nbcolsinfile, }
+\item[{character(len=FILENAMELEN)}]{surveyfile, }
+\item[{REAL(kind=DP),dimension(1:nbpts,1:3)}]{survey}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_aaef3c07f112a83e6ff7a2762d5202fae}
+
+
+Definition at line 905 of file f3dex\_\-cosmotools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__cosmotools_abba0e9b02d0f46a5abce5a0830da7f4d}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!fz@{fz}}
+\index{fz@{fz}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{fz}]{\setlength{\rightskip}{0pt plus 5cm}REAL f3dex\_\-cosmotools::fz (
+\begin{DoxyParamCaption}
+\item[{REAL(DP)}]{z}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_abba0e9b02d0f46a5abce5a0830da7f4d}
+
+
+Definition at line 294 of file f3dex\_\-cosmotools.f90.
+
+\hypertarget{namespacef3dex__cosmotools_a8405dbd12e86a408520f40f1b0a68919}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!getParameters\_\-survey2almn@{getParameters\_\-survey2almn}}
+\index{getParameters\_\-survey2almn@{getParameters\_\-survey2almn}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{getParameters\_\-survey2almn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::getParameters\_\-survey2almn (
+\begin{DoxyParamCaption}
+\item[{INTEGER(i4b)}]{multiscale, }
+\item[{REAL(kind=DP),dimension(1:2)}]{zbounds, }
+\item[{INTEGER(i4b)}]{nr, }
+\item[{INTEGER(i4b)}]{nside, }
+\item[{INTEGER(i4b)}]{nnmax, }
+\item[{INTEGER(i4b)}]{nlmax, }
+\item[{INTEGER(i4b)}]{nmmax, }
+\item[{INTEGER(i4b)}]{iter\_\-order, }
+\item[{INTEGER(i4b)}]{nbpts, }
+\item[{INTEGER(kind=i4b),dimension(1:3)}]{iwhere, }
+\item[{INTEGER(i4b)}]{inradian, }
+\item[{INTEGER(i4b)}]{sorted, }
+\item[{REAL(kind=DP)}]{convfc, }
+\item[{INTEGER(i4b)}]{nbcolsinfile, }
+\item[{character(len=FILENAMELEN)}]{surveyfile, }
+\item[{character(len=FILENAMELEN)}]{paramfile, }
+\item[{character(len=FILENAMELEN)}]{almnoutfile, }
+\item[{character(len=FILENAMELEN)}]{clnoutfile, }
+\item[{REAL(kind=DP)}]{h, }
+\item[{REAL(kind=DP)}]{w0, }
+\item[{REAL(kind=DP)}]{wa, }
+\item[{REAL(kind=DP)}]{omega\_\-l, }
+\item[{REAL(kind=DP)}]{omega\_\-b, }
+\item[{REAL(kind=DP)}]{omega\_\-m, }
+\item[{REAL(kind=DP)}]{rmaxinput}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_a8405dbd12e86a408520f40f1b0a68919}
+
+
+Definition at line 545 of file f3dex\_\-cosmotools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__cosmotools_a0caf479bc891741c90e36f878444e333}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!inquireAndDelete@{inquireAndDelete}}
+\index{inquireAndDelete@{inquireAndDelete}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{inquireAndDelete}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::inquireAndDelete (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(len=FILENAMELEN)}]{filename}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_a0caf479bc891741c90e36f878444e333}
+
+
+Definition at line 39 of file f3dex\_\-cosmotools.f90.
+
+\hypertarget{namespacef3dex__cosmotools_a25e2703c39b2d99c864537823f2f8402}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!int\_\-NC@{int\_\-NC}}
+\index{int\_\-NC@{int\_\-NC}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{int\_\-NC}]{\setlength{\rightskip}{0pt plus 5cm}REAL(DP) f3dex\_\-cosmotools::int\_\-NC (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(1:n)}]{x, }
+\item[{REAL(DP),dimension(1:n)}]{f, }
+\item[{INTEGER(I4B)}]{n}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_a25e2703c39b2d99c864537823f2f8402}
+
+
+Definition at line 94 of file f3dex\_\-cosmotools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__cosmotools_a36578d36cffe32d26a9fd914d032ef3a}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!read\_\-survey@{read\_\-survey}}
+\index{read\_\-survey@{read\_\-survey}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{read\_\-survey}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::read\_\-survey (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(len=FILENAMELEN)}]{file, }
+\item[{INTEGER(I4B)}]{nbptsmax, }
+\item[{INTEGER(I4B)}]{nbcolsinfile, }
+\item[{INTEGER(I4B)}]{nbpts, }
+\item[{REAL(DP),dimension(1:nbptsmax, 1:nbcolsinfile)}]{surveytemp}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_a36578d36cffe32d26a9fd914d032ef3a}
+
+
+Definition at line 68 of file f3dex\_\-cosmotools.f90.
+
+\hypertarget{namespacef3dex__cosmotools_a609d3f29da9fc1be3bf27757e25532eb}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!txtfile2parameters@{txtfile2parameters}}
+\index{txtfile2parameters@{txtfile2parameters}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{txtfile2parameters}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-cosmotools::txtfile2parameters (
+\begin{DoxyParamCaption}
+\item[{character(len=FILENAMELEN)}]{paramfile, }
+\item[{TYPE(recognizedParams)}]{params}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__cosmotools_a609d3f29da9fc1be3bf27757e25532eb}
+
+
+Definition at line 310 of file f3dex\_\-cosmotools.f90.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespacef3dex__cosmotools_a211d492263b2040371280021352d9154}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!c@{c}}
+\index{c@{c}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{c}]{\setlength{\rightskip}{0pt plus 5cm}REAL(DP),parameter {\bf f3dex\_\-cosmotools::c} = 299792458\_\-dp}}
+\label{namespacef3dex__cosmotools_a211d492263b2040371280021352d9154}
+
+
+Definition at line 11 of file f3dex\_\-cosmotools.f90.
+
+\hypertarget{namespacef3dex__cosmotools_a8953fe6dc399fcf889789bee9702ee65}{
+\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!tcmb@{tcmb}}
+\index{tcmb@{tcmb}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
+\subsubsection[{tcmb}]{\setlength{\rightskip}{0pt plus 5cm}REAL(DP),parameter {\bf f3dex\_\-cosmotools::tcmb} = 2726000\_\-dp}}
+\label{namespacef3dex__cosmotools_a8953fe6dc399fcf889789bee9702ee65}
+
+
+Definition at line 12 of file f3dex\_\-cosmotools.f90.
+

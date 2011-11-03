@@ -1,0 +1,29 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="survey2almn_lm",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="f3dex_stats::almn2cln_naive",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__stats.html#af82543b20c426be1736a4fed0d1ca80c"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="f3dex_fitstools::almn2fits",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__fitstools.html#a3bb8fd149a1c137d3176d484e28bbef0"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="f3dex_fitstools::f90ftpcld",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__fitstools.html#a83e1158f828e86e43f1dc68bc0e7c59b"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="f3dex_fitstools::cln2fits",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__fitstools.html#aab1f14e65c2837494cb15ff4fd54b372"];
+  Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="f3dex_transforms::gen_cln",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__transforms.html#aa6cd797c56b97503bf2d52131f6e5554"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="f3dex_transforms::BJL",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830",tooltip="Compute the value of the l-th order spherical bessel FUNCTION at x."];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="f3dex_transforms::gen_kln",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__transforms.html#a4b80bc7cad52998fd0aff935a1695ee7"];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="f3dex_transforms::gen_qln",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__transforms.html#a02b926f933d186f2c9d9ab6d478a1601"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="f3dex_transforms::survey2almn_opt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__transforms.html#aa03041ae9480a0e4abc522b846a40cc8"];
+  Node10 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="f3dex_utils::wtime",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__utils.html#ac5aa172010ec6cd9bd4c5273904b0405"];
+}

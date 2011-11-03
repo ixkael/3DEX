@@ -1,0 +1,105 @@
+\hypertarget{namespacef3dex__utils}{
+\section{f3dex\_\-utils Module Reference}
+\label{namespacef3dex__utils}\index{f3dex\_\-utils@{f3dex\_\-utils}}
+}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex__utils_aa75468d58041cdc91e52ce3fadb073b3}{bubblesort} (Y, N)
+\item 
+subroutine \hyperlink{namespacef3dex__utils_a2cce76cb1a695da8315cbf60507ec322}{BSORT} (X, IY, N)
+\item 
+REAL(kind=8) \hyperlink{namespacef3dex__utils_ac5aa172010ec6cd9bd4c5273904b0405}{wtime} ()
+\item 
+subroutine \hyperlink{namespacef3dex__utils_a8b9740b049b3d24092401ae075810f51}{PRINT\_\-spectrum} (spectr, nllim, nnlim, nlmax, nnmax, txt)
+\item 
+subroutine \hyperlink{namespacef3dex__utils_aeba2230de9ec307ae71577d102a0d91d}{PRINT\_\-almn} (almn, nllim, nmlim, nnlim, nlmax, nmmax, nnmax, txt)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacef3dex__utils_a2cce76cb1a695da8315cbf60507ec322}{
+\index{f3dex\_\-utils@{f3dex\_\-utils}!BSORT@{BSORT}}
+\index{BSORT@{BSORT}!f3dex_utils@{f3dex\_\-utils}}
+\subsubsection[{BSORT}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-utils::BSORT (
+\begin{DoxyParamCaption}
+\item[{REAL(kind=DP),dimension(1:n)}]{X, }
+\item[{REAL(kind=DP),dimension(1:n,1:3)}]{IY, }
+\item[{INTEGER(kind=I4B)}]{N}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__utils_a2cce76cb1a695da8315cbf60507ec322}
+
+
+Definition at line 35 of file f3dex\_\-utils.f90.
+
+\hypertarget{namespacef3dex__utils_aa75468d58041cdc91e52ce3fadb073b3}{
+\index{f3dex\_\-utils@{f3dex\_\-utils}!bubblesort@{bubblesort}}
+\index{bubblesort@{bubblesort}!f3dex_utils@{f3dex\_\-utils}}
+\subsubsection[{bubblesort}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-utils::bubblesort (
+\begin{DoxyParamCaption}
+\item[{REAL(kind=DP),dimension(1:n)}]{Y, }
+\item[{INTEGER(kind=I4B)}]{N}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__utils_aa75468d58041cdc91e52ce3fadb073b3}
+
+
+Definition at line 15 of file f3dex\_\-utils.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__utils_aeba2230de9ec307ae71577d102a0d91d}{
+\index{f3dex\_\-utils@{f3dex\_\-utils}!PRINT\_\-almn@{PRINT\_\-almn}}
+\index{PRINT\_\-almn@{PRINT\_\-almn}!f3dex_utils@{f3dex\_\-utils}}
+\subsubsection[{PRINT\_\-almn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-utils::PRINT\_\-almn (
+\begin{DoxyParamCaption}
+\item[{COMPLEX(DPC),dimension(1:nnmax,0:nlmax,0:nmmax),intent(in)}]{almn, }
+\item[{INTEGER(I4B)}]{nllim, }
+\item[{INTEGER(I4B)}]{nmlim, }
+\item[{INTEGER(I4B)}]{nnlim, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{INTEGER(I4B)}]{nmmax, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{CHARACTER(len=4)}]{txt}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__utils_aeba2230de9ec307ae71577d102a0d91d}
+
+
+Definition at line 108 of file f3dex\_\-utils.f90.
+
+\hypertarget{namespacef3dex__utils_a8b9740b049b3d24092401ae075810f51}{
+\index{f3dex\_\-utils@{f3dex\_\-utils}!PRINT\_\-spectrum@{PRINT\_\-spectrum}}
+\index{PRINT\_\-spectrum@{PRINT\_\-spectrum}!f3dex_utils@{f3dex\_\-utils}}
+\subsubsection[{PRINT\_\-spectrum}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-utils::PRINT\_\-spectrum (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{spectr, }
+\item[{INTEGER(I4B)}]{nllim, }
+\item[{INTEGER(I4B)}]{nnlim, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{INTEGER(I4B)}]{nnmax, }
+\item[{CHARACTER(len=4)}]{txt}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__utils_a8b9740b049b3d24092401ae075810f51}
+
+
+Definition at line 87 of file f3dex\_\-utils.f90.
+
+\hypertarget{namespacef3dex__utils_ac5aa172010ec6cd9bd4c5273904b0405}{
+\index{f3dex\_\-utils@{f3dex\_\-utils}!wtime@{wtime}}
+\index{wtime@{wtime}!f3dex_utils@{f3dex\_\-utils}}
+\subsubsection[{wtime}]{\setlength{\rightskip}{0pt plus 5cm}REAL ( kind = 8 ) f3dex\_\-utils::wtime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__utils_ac5aa172010ec6cd9bd4c5273904b0405}
+
+
+Definition at line 68 of file f3dex\_\-utils.f90.
+

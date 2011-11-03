@@ -1,0 +1,203 @@
+\hypertarget{namespacef3dex__fitstools}{
+\section{f3dex\_\-fitstools Module Reference}
+\label{namespacef3dex__fitstools}\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}}
+}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_aab1f14e65c2837494cb15ff4fd54b372}{cln2fits} (filename, cln, kln, nlmax, nnmax, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_a3bb8fd149a1c137d3176d484e28bbef0}{almn2fits} (filename, almn, kln, cln, nlmax, nmmax, nnmax, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_a106cd0d1eb3bcd38d2c43228f499f57b}{fits2almn} (filename, nnmax, nlmax, nmmax, almn, kln, cln, header, nlheader)
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_a83e1158f828e86e43f1dc68bc0e7c59b}{f90ftpcld} (unit, colnum, frow, felem, np, data, status)
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_ada7b447f4ace46eabf663495c3a8c8c2}{f90ftgcvd} (unit, colnum, frow, felem, np, nullval, data, anynull, status)
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_ab7baecf48bb7833c32bc7be570f947c1}{f90ftgkyd} (unit, keyword, value, comment, status)
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_a0d143b6a055e5c50c19b86e75d94c663}{get\_\-clean\_\-header} (unit, header, filename, error, xalso, xonly)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+REAL(kind=SP), parameter, private \hyperlink{namespacef3dex__fitstools_a7841ef704a851792da5858a872caa0e4}{s\_\-bad\_\-value} = HPX\_\-SBADVAL
+\item 
+REAL(kind=DP), parameter, private \hyperlink{namespacef3dex__fitstools_ae70f4f4f98f16a18e429bfd5f014d650}{d\_\-bad\_\-value} = HPX\_\-DBADVAL
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/Subroutine Documentation}
+\hypertarget{namespacef3dex__fitstools_a3bb8fd149a1c137d3176d484e28bbef0}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!almn2fits@{almn2fits}}
+\index{almn2fits@{almn2fits}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{almn2fits}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::almn2fits (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{COMPLEX(DP),dimension(1:nnmax,0:nlmax,0:nmmax),intent(in)}]{almn, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{kln, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{cln, }
+\item[{INTEGER(I4B),intent(in)}]{nlmax, }
+\item[{INTEGER(I4B),intent(in)}]{nmmax, }
+\item[{INTEGER(I4B),intent(in)}]{nnmax, }
+\item[{CHARACTER(LEN=80),dimension(1:nlheader),intent(in)}]{header, }
+\item[{INTEGER(I4B),intent(in)}]{nlheader}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_a3bb8fd149a1c137d3176d484e28bbef0}
+
+
+Definition at line 164 of file f3dex\_\-fitstools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__fitstools_aab1f14e65c2837494cb15ff4fd54b372}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!cln2fits@{cln2fits}}
+\index{cln2fits@{cln2fits}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{cln2fits}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::cln2fits (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{cln, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(in)}]{kln, }
+\item[{INTEGER(I4B),intent(in)}]{nlmax, }
+\item[{INTEGER(I4B),intent(in)}]{nnmax, }
+\item[{CHARACTER(LEN=80),dimension(1:nlheader),intent(in)}]{header, }
+\item[{INTEGER(I4B),intent(in)}]{nlheader}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_aab1f14e65c2837494cb15ff4fd54b372}
+
+
+Definition at line 18 of file f3dex\_\-fitstools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__fitstools_ada7b447f4ace46eabf663495c3a8c8c2}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!f90ftgcvd@{f90ftgcvd}}
+\index{f90ftgcvd@{f90ftgcvd}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{f90ftgcvd}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::f90ftgcvd (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B),intent(in)}]{unit, }
+\item[{INTEGER(I4B),intent(in)}]{colnum, }
+\item[{INTEGER(I4B),intent(in)}]{frow, }
+\item[{INTEGER(I4B),intent(in)}]{felem, }
+\item[{INTEGER(I4B),intent(in)}]{np, }
+\item[{REAL(DP),intent(in)}]{nullval, }
+\item[{REAL(DP),dimension(0:),intent(out)}]{data, }
+\item[{LOGICAL(LGT),intent(out)}]{anynull, }
+\item[{INTEGER(I4B),intent(out)}]{status}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_ada7b447f4ace46eabf663495c3a8c8c2}
+
+
+Definition at line 542 of file f3dex\_\-fitstools.f90.
+
+\hypertarget{namespacef3dex__fitstools_ab7baecf48bb7833c32bc7be570f947c1}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!f90ftgkyd@{f90ftgkyd}}
+\index{f90ftgkyd@{f90ftgkyd}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{f90ftgkyd}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::f90ftgkyd (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B),intent(in)}]{unit, }
+\item[{character(len=$\ast$),intent(in)}]{keyword, }
+\item[{REAL(DP),intent(out)}]{value, }
+\item[{character(len=$\ast$),intent(out)}]{comment, }
+\item[{INTEGER(I4B),intent(out)}]{status}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_ab7baecf48bb7833c32bc7be570f947c1}
+
+
+Definition at line 554 of file f3dex\_\-fitstools.f90.
+
+\hypertarget{namespacef3dex__fitstools_a83e1158f828e86e43f1dc68bc0e7c59b}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!f90ftpcld@{f90ftpcld}}
+\index{f90ftpcld@{f90ftpcld}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{f90ftpcld}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::f90ftpcld (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B),intent(in)}]{unit, }
+\item[{INTEGER(I4B),intent(in)}]{colnum, }
+\item[{INTEGER(I4B),intent(in)}]{frow, }
+\item[{INTEGER(I4B),intent(in)}]{felem, }
+\item[{INTEGER(I4B),intent(in)}]{np, }
+\item[{REAL(DP),dimension(0:),intent(in)}]{data, }
+\item[{INTEGER(I4B),intent(out)}]{status}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_a83e1158f828e86e43f1dc68bc0e7c59b}
+
+
+Definition at line 532 of file f3dex\_\-fitstools.f90.
+
+\hypertarget{namespacef3dex__fitstools_a106cd0d1eb3bcd38d2c43228f499f57b}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!fits2almn@{fits2almn}}
+\index{fits2almn@{fits2almn}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{fits2almn}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::fits2almn (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{INTEGER(I4B),intent(in)}]{nnmax, }
+\item[{INTEGER(I4B),intent(in)}]{nlmax, }
+\item[{INTEGER(I4B),intent(in)}]{nmmax, }
+\item[{COMPLEX(DP),dimension(1:nnmax,0:nlmax,0:nmmax),intent(out)}]{almn, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(out)}]{kln, }
+\item[{REAL(DP),dimension(0:nlmax,1:nnmax),intent(out)}]{cln, }
+\item[{CHARACTER(LEN=80),dimension(1:nlheader),intent(out)}]{header, }
+\item[{INTEGER(I4B),intent(in)}]{nlheader}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_a106cd0d1eb3bcd38d2c43228f499f57b}
+
+
+Definition at line 338 of file f3dex\_\-fitstools.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__fitstools_a0d143b6a055e5c50c19b86e75d94c663}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!get\_\-clean\_\-header@{get\_\-clean\_\-header}}
+\index{get\_\-clean\_\-header@{get\_\-clean\_\-header}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{get\_\-clean\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::get\_\-clean\_\-header (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B),intent(in)}]{unit, }
+\item[{CHARACTER(LEN=$\ast$),dimension(1:),intent(inout)}]{header, }
+\item[{CHARACTER(LEN=$\ast$),intent(in)}]{filename, }
+\item[{INTEGER(I4B),intent(out)}]{error, }
+\item[{character(len=8),dimension(1:),intent(in),optional}]{xalso, }
+\item[{character(len=8),dimension(1:),intent(in),optional}]{xonly}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_a0d143b6a055e5c50c19b86e75d94c663}
+
+
+Definition at line 566 of file f3dex\_\-fitstools.f90.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespacef3dex__fitstools_ae70f4f4f98f16a18e429bfd5f014d650}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!d\_\-bad\_\-value@{d\_\-bad\_\-value}}
+\index{d\_\-bad\_\-value@{d\_\-bad\_\-value}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{d\_\-bad\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}REAL(kind=DP),parameter,private {\bf f3dex\_\-fitstools::d\_\-bad\_\-value} = HPX\_\-DBADVAL}}
+\label{namespacef3dex__fitstools_ae70f4f4f98f16a18e429bfd5f014d650}
+
+
+Definition at line 12 of file f3dex\_\-fitstools.f90.
+
+\hypertarget{namespacef3dex__fitstools_a7841ef704a851792da5858a872caa0e4}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!s\_\-bad\_\-value@{s\_\-bad\_\-value}}
+\index{s\_\-bad\_\-value@{s\_\-bad\_\-value}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{s\_\-bad\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}REAL(kind=SP),parameter,private {\bf f3dex\_\-fitstools::s\_\-bad\_\-value} = HPX\_\-SBADVAL}}
+\label{namespacef3dex__fitstools_a7841ef704a851792da5858a872caa0e4}
+
+
+Definition at line 11 of file f3dex\_\-fitstools.f90.
+

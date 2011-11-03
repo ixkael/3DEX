@@ -1,0 +1,13 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="f3dex_cosmotools::chi_z2",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="f3dex_cosmotools::fz",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__cosmotools.html#abba0e9b02d0f46a5abce5a0830da7f4d"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="ncc_set",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadrule_8f90.html#a45c034914a08b905c6dbe38d8ef5c5d9"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="sum_sub",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadrule_8f90.html#a268ec8eaa9ed225402666340aecb03d4"];
+}

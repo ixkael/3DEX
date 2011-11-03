@@ -1,0 +1,1037 @@
+\hypertarget{quadrule_8f90}{
+\section{/Users/bl/Dropbox/3DEX/src/f90/external/quadrule.f90 File Reference}
+\label{quadrule_8f90}\index{/Users/bl/Dropbox/3DEX/src/f90/external/quadrule.f90@{/Users/bl/Dropbox/3DEX/src/f90/external/quadrule.f90}}
+}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{quadrule_8f90_a5db7bba3aa7d37d932b3f545141b52d4}{bashforth\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a33c49c6fa2701ed35a7132dfa2ee7a90}{bdf\_\-set} (norder, alpha, beta, gamma)
+\item 
+subroutine \hyperlink{quadrule_8f90_a7888ddfbe8865b018471ece2f1ac169b}{bdfc\_\-set} (norder, weight, xtab)
+\item 
+subroutine \hyperlink{quadrule_8f90_ae1f2722140b0af5e1a2bf8e5877222aa}{bdfp\_\-set} (norder, weight, xtab)
+\item 
+subroutine \hyperlink{quadrule_8f90_aed98218103418a57a42bce561d3f221a}{bdf\_\-sum} (func, norder, weight, xtab, diftab, result)
+\item 
+subroutine \hyperlink{quadrule_8f90_ade9f4e674221ccedd6251da05db6bbba}{cheb\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a54208a5fdf9d1d82565b1aa741c51811}{cheb\_\-to\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_aa1f1a725b4cc2ef2f039255e99227f0d}{cheb\_\-tc\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_ac7f04c61f2321ddc4bbf90358305d11e}{cheb\_\-u\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_ab73cf601dce50b6fc79d82a6ee87bb67}{d\_\-swap} (x, y)
+\item 
+double precision \hyperlink{quadrule_8f90_a1196e8a1c04167d129db7f177728d7fc}{d\_\-pi} ()
+\item 
+subroutine \hyperlink{quadrule_8f90_a7841cf442902dd98d08b6a4d89a9a7bf}{dvec\_\-reverse} (n, a)
+\item 
+double precision \hyperlink{quadrule_8f90_a688af4295664e9e84424169e79729a11}{gamma} (x)
+\item 
+subroutine \hyperlink{quadrule_8f90_a85e94b692189c91a3f77d8f4c210f70f}{hermite\_\-com} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a837c192f4116548551a6c0b69465adbb}{hermite\_\-recur} (p2, dp2, p1, x, norder)
+\item 
+subroutine \hyperlink{quadrule_8f90_ae9c37528989dee8bb6c51ff8a4626c05}{hermite\_\-root} (x, norder, dp2, p1)
+\item 
+subroutine \hyperlink{quadrule_8f90_aef932141d0758eb99a63c743dbb0e893}{hermite\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a85d3b6982259e08e48b68f923ebaf48a}{jacobi\_\-com} (norder, xtab, weight, alpha, beta)
+\item 
+subroutine \hyperlink{quadrule_8f90_a23d5d91dbc68f334297c326bf251545b}{jacobi\_\-recur} (p2, dp2, p1, x, norder, alpha, beta, b, c)
+\item 
+subroutine \hyperlink{quadrule_8f90_a37ab0713ac179df20db1cbade4750d7c}{jacobi\_\-root} (x, norder, alpha, beta, dp2, p1, b, c)
+\item 
+subroutine \hyperlink{quadrule_8f90_a0fea29cd1cc25389b93d13d5680c4cc1}{kronrod\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a5e526b2dfca36cb4303a7ac532cc7e55}{laguerre\_\-com} (norder, xtab, weight, alpha)
+\item 
+subroutine \hyperlink{quadrule_8f90_a37a4edc203821495156eaa63b1c4d7fa}{laguerre\_\-recur} (p2, dp2, p1, x, norder, alpha, b, c)
+\item 
+subroutine \hyperlink{quadrule_8f90_a50878552a6862bdc03e4e7d904d7b154}{laguerre\_\-root} (x, norder, alpha, dp2, p1, b, c)
+\item 
+subroutine \hyperlink{quadrule_8f90_a35fe6a5ac275303facfa7b695addee7f}{laguerre\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a5b2ffde45facf187cd2716ab11d0dbef}{laguerre\_\-sum} (func, a, norder, xtab, weight, result)
+\item 
+subroutine \hyperlink{quadrule_8f90_a0a7d1ce74b60aacdf3cab1fe515cb484}{legendre\_\-com} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a0204938f840315c0ede180bd7ddf3d7a}{legendre\_\-recur} (p2, dp2, p1, x, norder)
+\item 
+subroutine \hyperlink{quadrule_8f90_a68e328951e712e3b7e2bc9f6dcf8fc6a}{legendre\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a5bc99575d37146760cfa51cfccd5b400}{legendre\_\-set\_\-cos} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_acc5a8a6f431a042e02f59fbc20041ae0}{legendre\_\-set\_\-cos2} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_aa56be14b0d5564b164cc213f31c0d137}{legendre\_\-set\_\-log} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a86c4a711a482034df5404bc3c78e55fd}{legendre\_\-set\_\-sqrtx\_\-01} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a66bcf2a4c79e18ca6f0bcd21e9a665ad}{legendre\_\-set\_\-sqrtx2\_\-01} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a1c24bdbb65fec4d3f0f0d2f066002c62}{legendre\_\-set\_\-x0\_\-01} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a18d682e70c431b86cae6a7d62b8148fa}{legendre\_\-set\_\-x1} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a05a8f595777fdbdfaa618868856a48a5}{legendre\_\-set\_\-x1\_\-01} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a8323fd380b28f282745e9b88ab0f5a74}{legendre\_\-set\_\-x2} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a82fb68c4ded02b55802a7f1768f66d76}{legendre\_\-set\_\-x2\_\-01} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a78a0044231676591f20f6a799a9177cd}{lobatto\_\-set} (norder, xtab, weight)
+\item 
+double precision \hyperlink{quadrule_8f90_a6bd375a88b7077d216c6532d98f9425c}{log\_\-gamma} (x)
+\item 
+subroutine \hyperlink{quadrule_8f90_a7b182dbe7e6b57c218f9a6d3f89b5130}{moulton\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a661d42ddf0d8116d8f9353e456918ca0}{ncc\_\-com} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a0b336aacd3856d5d5e724522dd3e6e8a}{nc\_\-com} (norder, a, b, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a45c034914a08b905c6dbe38d8ef5c5d9}{ncc\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a2ab54bf6aad3867d7b66db6bc056b420}{nco\_\-com} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_a27acf87e9cb1d5f166f347d6e2650710}{nco\_\-set} (norder, xtab, weight)
+\item 
+real \hyperlink{quadrule_8f90_a0e44da10711c05b4fb80b5add1efa261}{r\_\-pi} ()
+\item 
+subroutine \hyperlink{quadrule_8f90_a707a104aaec64bd98bd8996e11171677}{radau\_\-set} (norder, xtab, weight)
+\item 
+subroutine \hyperlink{quadrule_8f90_aaa549734d177cfe892a84e25e267ee4d}{rule\_\-adjust} (a, b, c, d, norder, x, w)
+\item 
+subroutine \hyperlink{quadrule_8f90_adae6ebad1d51cf128e8f0247ef582ac9}{summer} (func, norder, xtab, weight, result)
+\item 
+subroutine \hyperlink{quadrule_8f90_ae2cd4600769ef44fbc01ccd971c0fc73}{summer\_\-gk} (func, norderg, weightg, resultg, norderk, xtabk, weightk, resultk)
+\item 
+subroutine \hyperlink{quadrule_8f90_a268ec8eaa9ed225402666340aecb03d4}{sum\_\-sub} (func, a, b, nsub, norder, xlo, xhi, xtab, weight, result)
+\item 
+subroutine \hyperlink{quadrule_8f90_a423ae8e8d1445586d8ba40e7a7e0d5f4}{sum\_\-sub\_\-gk} (func, a, b, nsub, norderg, weightg, resultg, norderk, xtabk, weightk, resultk, error)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{quadrule_8f90_a5db7bba3aa7d37d932b3f545141b52d4}{
+\index{quadrule.f90@{quadrule.f90}!bashforth\_\-set@{bashforth\_\-set}}
+\index{bashforth\_\-set@{bashforth\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{bashforth\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine bashforth\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a5db7bba3aa7d37d932b3f545141b52d4}
+
+
+Definition at line 1 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a33c49c6fa2701ed35a7132dfa2ee7a90}{
+\index{quadrule.f90@{quadrule.f90}!bdf\_\-set@{bdf\_\-set}}
+\index{bdf\_\-set@{bdf\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{bdf\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine bdf\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{alpha, }
+\item[{double precision}]{beta, }
+\item[{double precision}]{gamma}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a33c49c6fa2701ed35a7132dfa2ee7a90}
+
+
+Definition at line 197 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_aed98218103418a57a42bce561d3f221a}{
+\index{quadrule.f90@{quadrule.f90}!bdf\_\-sum@{bdf\_\-sum}}
+\index{bdf\_\-sum@{bdf\_\-sum}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{bdf\_\-sum}]{\setlength{\rightskip}{0pt plus 5cm}subroutine bdf\_\-sum (
+\begin{DoxyParamCaption}
+\item[{double precision,external}]{func, }
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{diftab, }
+\item[{double precision}]{result}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_aed98218103418a57a42bce561d3f221a}
+
+
+Definition at line 519 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a7888ddfbe8865b018471ece2f1ac169b}{
+\index{quadrule.f90@{quadrule.f90}!bdfc\_\-set@{bdfc\_\-set}}
+\index{bdfc\_\-set@{bdfc\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{bdfc\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine bdfc\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision,dimension(norder)}]{xtab}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a7888ddfbe8865b018471ece2f1ac169b}
+
+
+Definition at line 281 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_ae1f2722140b0af5e1a2bf8e5877222aa}{
+\index{quadrule.f90@{quadrule.f90}!bdfp\_\-set@{bdfp\_\-set}}
+\index{bdfp\_\-set@{bdfp\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{bdfp\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine bdfp\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision,dimension(norder)}]{xtab}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_ae1f2722140b0af5e1a2bf8e5877222aa}
+
+
+Definition at line 400 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_ade9f4e674221ccedd6251da05db6bbba}{
+\index{quadrule.f90@{quadrule.f90}!cheb\_\-set@{cheb\_\-set}}
+\index{cheb\_\-set@{cheb\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{cheb\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine cheb\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_ade9f4e674221ccedd6251da05db6bbba}
+
+
+Definition at line 590 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_aa1f1a725b4cc2ef2f039255e99227f0d}{
+\index{quadrule.f90@{quadrule.f90}!cheb\_\-tc\_\-set@{cheb\_\-tc\_\-set}}
+\index{cheb\_\-tc\_\-set@{cheb\_\-tc\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{cheb\_\-tc\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine cheb\_\-tc\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_aa1f1a725b4cc2ef2f039255e99227f0d}
+
+
+Definition at line 816 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a54208a5fdf9d1d82565b1aa741c51811}{
+\index{quadrule.f90@{quadrule.f90}!cheb\_\-to\_\-set@{cheb\_\-to\_\-set}}
+\index{cheb\_\-to\_\-set@{cheb\_\-to\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{cheb\_\-to\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine cheb\_\-to\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a54208a5fdf9d1d82565b1aa741c51811}
+
+
+Definition at line 739 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_ac7f04c61f2321ddc4bbf90358305d11e}{
+\index{quadrule.f90@{quadrule.f90}!cheb\_\-u\_\-set@{cheb\_\-u\_\-set}}
+\index{cheb\_\-u\_\-set@{cheb\_\-u\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{cheb\_\-u\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine cheb\_\-u\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_ac7f04c61f2321ddc4bbf90358305d11e}
+
+
+Definition at line 909 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a1196e8a1c04167d129db7f177728d7fc}{
+\index{quadrule.f90@{quadrule.f90}!d\_\-pi@{d\_\-pi}}
+\index{d\_\-pi@{d\_\-pi}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{d\_\-pi}]{\setlength{\rightskip}{0pt plus 5cm}double precision d\_\-pi (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a1196e8a1c04167d129db7f177728d7fc}
+
+
+Definition at line 1017 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_ab73cf601dce50b6fc79d82a6ee87bb67}{
+\index{quadrule.f90@{quadrule.f90}!d\_\-swap@{d\_\-swap}}
+\index{d\_\-swap@{d\_\-swap}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{d\_\-swap}]{\setlength{\rightskip}{0pt plus 5cm}subroutine d\_\-swap (
+\begin{DoxyParamCaption}
+\item[{double precision}]{x, }
+\item[{double precision}]{y}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_ab73cf601dce50b6fc79d82a6ee87bb67}
+
+
+Definition at line 985 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a7841cf442902dd98d08b6a4d89a9a7bf}{
+\index{quadrule.f90@{quadrule.f90}!dvec\_\-reverse@{dvec\_\-reverse}}
+\index{dvec\_\-reverse@{dvec\_\-reverse}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{dvec\_\-reverse}]{\setlength{\rightskip}{0pt plus 5cm}subroutine dvec\_\-reverse (
+\begin{DoxyParamCaption}
+\item[{integer}]{n, }
+\item[{double precision,dimension(n)}]{a}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a7841cf442902dd98d08b6a4d89a9a7bf}
+
+
+Definition at line 1044 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a688af4295664e9e84424169e79729a11}{
+\index{quadrule.f90@{quadrule.f90}!gamma@{gamma}}
+\index{gamma@{gamma}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{gamma}]{\setlength{\rightskip}{0pt plus 5cm}double precision gamma (
+\begin{DoxyParamCaption}
+\item[{double precision}]{x}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a688af4295664e9e84424169e79729a11}
+
+
+Definition at line 1088 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a85e94b692189c91a3f77d8f4c210f70f}{
+\index{quadrule.f90@{quadrule.f90}!hermite\_\-com@{hermite\_\-com}}
+\index{hermite\_\-com@{hermite\_\-com}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{hermite\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}subroutine hermite\_\-com (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a85e94b692189c91a3f77d8f4c210f70f}
+
+
+Definition at line 1178 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a837c192f4116548551a6c0b69465adbb}{
+\index{quadrule.f90@{quadrule.f90}!hermite\_\-recur@{hermite\_\-recur}}
+\index{hermite\_\-recur@{hermite\_\-recur}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{hermite\_\-recur}]{\setlength{\rightskip}{0pt plus 5cm}subroutine hermite\_\-recur (
+\begin{DoxyParamCaption}
+\item[{double precision}]{p2, }
+\item[{double precision}]{dp2, }
+\item[{double precision}]{p1, }
+\item[{double precision}]{x, }
+\item[{integer}]{norder}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a837c192f4116548551a6c0b69465adbb}
+
+
+Definition at line 1286 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_ae9c37528989dee8bb6c51ff8a4626c05}{
+\index{quadrule.f90@{quadrule.f90}!hermite\_\-root@{hermite\_\-root}}
+\index{hermite\_\-root@{hermite\_\-root}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{hermite\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}subroutine hermite\_\-root (
+\begin{DoxyParamCaption}
+\item[{double precision}]{x, }
+\item[{integer}]{norder, }
+\item[{double precision}]{dp2, }
+\item[{double precision}]{p1}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_ae9c37528989dee8bb6c51ff8a4626c05}
+
+
+Definition at line 1348 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_aef932141d0758eb99a63c743dbb0e893}{
+\index{quadrule.f90@{quadrule.f90}!hermite\_\-set@{hermite\_\-set}}
+\index{hermite\_\-set@{hermite\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{hermite\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine hermite\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_aef932141d0758eb99a63c743dbb0e893}
+
+
+Definition at line 1403 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a85d3b6982259e08e48b68f923ebaf48a}{
+\index{quadrule.f90@{quadrule.f90}!jacobi\_\-com@{jacobi\_\-com}}
+\index{jacobi\_\-com@{jacobi\_\-com}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{jacobi\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}subroutine jacobi\_\-com (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision}]{alpha, }
+\item[{double precision}]{beta}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a85d3b6982259e08e48b68f923ebaf48a}
+
+
+Definition at line 2563 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a23d5d91dbc68f334297c326bf251545b}{
+\index{quadrule.f90@{quadrule.f90}!jacobi\_\-recur@{jacobi\_\-recur}}
+\index{jacobi\_\-recur@{jacobi\_\-recur}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{jacobi\_\-recur}]{\setlength{\rightskip}{0pt plus 5cm}subroutine jacobi\_\-recur (
+\begin{DoxyParamCaption}
+\item[{double precision}]{p2, }
+\item[{double precision}]{dp2, }
+\item[{double precision}]{p1, }
+\item[{double precision}]{x, }
+\item[{integer}]{norder, }
+\item[{double precision}]{alpha, }
+\item[{double precision}]{beta, }
+\item[{double precision,dimension(norder)}]{b, }
+\item[{double precision,dimension(norder)}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a23d5d91dbc68f334297c326bf251545b}
+
+
+Definition at line 2752 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a37ab0713ac179df20db1cbade4750d7c}{
+\index{quadrule.f90@{quadrule.f90}!jacobi\_\-root@{jacobi\_\-root}}
+\index{jacobi\_\-root@{jacobi\_\-root}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{jacobi\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}subroutine jacobi\_\-root (
+\begin{DoxyParamCaption}
+\item[{double precision}]{x, }
+\item[{integer}]{norder, }
+\item[{double precision}]{alpha, }
+\item[{double precision}]{beta, }
+\item[{double precision}]{dp2, }
+\item[{double precision}]{p1, }
+\item[{double precision,dimension(norder)}]{b, }
+\item[{double precision,dimension(norder)}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a37ab0713ac179df20db1cbade4750d7c}
+
+
+Definition at line 2825 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a0fea29cd1cc25389b93d13d5680c4cc1}{
+\index{quadrule.f90@{quadrule.f90}!kronrod\_\-set@{kronrod\_\-set}}
+\index{kronrod\_\-set@{kronrod\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{kronrod\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine kronrod\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a0fea29cd1cc25389b93d13d5680c4cc1}
+
+
+Definition at line 2892 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a5e526b2dfca36cb4303a7ac532cc7e55}{
+\index{quadrule.f90@{quadrule.f90}!laguerre\_\-com@{laguerre\_\-com}}
+\index{laguerre\_\-com@{laguerre\_\-com}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{laguerre\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}subroutine laguerre\_\-com (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision}]{alpha}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a5e526b2dfca36cb4303a7ac532cc7e55}
+
+
+Definition at line 3212 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a37a4edc203821495156eaa63b1c4d7fa}{
+\index{quadrule.f90@{quadrule.f90}!laguerre\_\-recur@{laguerre\_\-recur}}
+\index{laguerre\_\-recur@{laguerre\_\-recur}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{laguerre\_\-recur}]{\setlength{\rightskip}{0pt plus 5cm}subroutine laguerre\_\-recur (
+\begin{DoxyParamCaption}
+\item[{double precision}]{p2, }
+\item[{double precision}]{dp2, }
+\item[{double precision}]{p1, }
+\item[{double precision}]{x, }
+\item[{integer}]{norder, }
+\item[{double precision}]{alpha, }
+\item[{double precision,dimension(norder)}]{b, }
+\item[{double precision,dimension(norder)}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a37a4edc203821495156eaa63b1c4d7fa}
+
+
+Definition at line 3344 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a50878552a6862bdc03e4e7d904d7b154}{
+\index{quadrule.f90@{quadrule.f90}!laguerre\_\-root@{laguerre\_\-root}}
+\index{laguerre\_\-root@{laguerre\_\-root}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{laguerre\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}subroutine laguerre\_\-root (
+\begin{DoxyParamCaption}
+\item[{double precision}]{x, }
+\item[{integer}]{norder, }
+\item[{double precision}]{alpha, }
+\item[{double precision}]{dp2, }
+\item[{double precision}]{p1, }
+\item[{double precision,dimension(norder)}]{b, }
+\item[{double precision,dimension(norder)}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a50878552a6862bdc03e4e7d904d7b154}
+
+
+Definition at line 3416 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a35fe6a5ac275303facfa7b695addee7f}{
+\index{quadrule.f90@{quadrule.f90}!laguerre\_\-set@{laguerre\_\-set}}
+\index{laguerre\_\-set@{laguerre\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{laguerre\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine laguerre\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a35fe6a5ac275303facfa7b695addee7f}
+
+
+Definition at line 3481 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a5b2ffde45facf187cd2716ab11d0dbef}{
+\index{quadrule.f90@{quadrule.f90}!laguerre\_\-sum@{laguerre\_\-sum}}
+\index{laguerre\_\-sum@{laguerre\_\-sum}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{laguerre\_\-sum}]{\setlength{\rightskip}{0pt plus 5cm}subroutine laguerre\_\-sum (
+\begin{DoxyParamCaption}
+\item[{double precision,external}]{func, }
+\item[{double precision}]{a, }
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision}]{result}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a5b2ffde45facf187cd2716ab11d0dbef}
+
+
+Definition at line 4063 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a0a7d1ce74b60aacdf3cab1fe515cb484}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-com@{legendre\_\-com}}
+\index{legendre\_\-com@{legendre\_\-com}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-com (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a0a7d1ce74b60aacdf3cab1fe515cb484}
+
+
+Definition at line 4167 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a0204938f840315c0ede180bd7ddf3d7a}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-recur@{legendre\_\-recur}}
+\index{legendre\_\-recur@{legendre\_\-recur}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-recur}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-recur (
+\begin{DoxyParamCaption}
+\item[{double precision}]{p2, }
+\item[{double precision}]{dp2, }
+\item[{double precision}]{p1, }
+\item[{double precision}]{x, }
+\item[{integer}]{norder}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a0204938f840315c0ede180bd7ddf3d7a}
+
+
+Definition at line 4328 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a68e328951e712e3b7e2bc9f6dcf8fc6a}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set@{legendre\_\-set}}
+\index{legendre\_\-set@{legendre\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a68e328951e712e3b7e2bc9f6dcf8fc6a}
+
+
+Definition at line 4393 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a5bc99575d37146760cfa51cfccd5b400}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-cos@{legendre\_\-set\_\-cos}}
+\index{legendre\_\-set\_\-cos@{legendre\_\-set\_\-cos}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-cos}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-cos (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a5bc99575d37146760cfa51cfccd5b400}
+
+
+Definition at line 5186 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_acc5a8a6f431a042e02f59fbc20041ae0}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-cos2@{legendre\_\-set\_\-cos2}}
+\index{legendre\_\-set\_\-cos2@{legendre\_\-set\_\-cos2}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-cos2}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-cos2 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_acc5a8a6f431a042e02f59fbc20041ae0}
+
+
+Definition at line 5342 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_aa56be14b0d5564b164cc213f31c0d137}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-log@{legendre\_\-set\_\-log}}
+\index{legendre\_\-set\_\-log@{legendre\_\-set\_\-log}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-log}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-log (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_aa56be14b0d5564b164cc213f31c0d137}
+
+
+Definition at line 5492 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a66bcf2a4c79e18ca6f0bcd21e9a665ad}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-sqrtx2\_\-01@{legendre\_\-set\_\-sqrtx2\_\-01}}
+\index{legendre\_\-set\_\-sqrtx2\_\-01@{legendre\_\-set\_\-sqrtx2\_\-01}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-sqrtx2\_\-01}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-sqrtx2\_\-01 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a66bcf2a4c79e18ca6f0bcd21e9a665ad}
+
+
+Definition at line 5770 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a86c4a711a482034df5404bc3c78e55fd}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-sqrtx\_\-01@{legendre\_\-set\_\-sqrtx\_\-01}}
+\index{legendre\_\-set\_\-sqrtx\_\-01@{legendre\_\-set\_\-sqrtx\_\-01}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-sqrtx\_\-01}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-sqrtx\_\-01 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a86c4a711a482034df5404bc3c78e55fd}
+
+
+Definition at line 5704 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a1c24bdbb65fec4d3f0f0d2f066002c62}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-x0\_\-01@{legendre\_\-set\_\-x0\_\-01}}
+\index{legendre\_\-set\_\-x0\_\-01@{legendre\_\-set\_\-x0\_\-01}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-x0\_\-01}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-x0\_\-01 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a1c24bdbb65fec4d3f0f0d2f066002c62}
+
+
+Definition at line 5834 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a18d682e70c431b86cae6a7d62b8148fa}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-x1@{legendre\_\-set\_\-x1}}
+\index{legendre\_\-set\_\-x1@{legendre\_\-set\_\-x1}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-x1}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-x1 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a18d682e70c431b86cae6a7d62b8148fa}
+
+
+Definition at line 6002 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a05a8f595777fdbdfaa618868856a48a5}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-x1\_\-01@{legendre\_\-set\_\-x1\_\-01}}
+\index{legendre\_\-set\_\-x1\_\-01@{legendre\_\-set\_\-x1\_\-01}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-x1\_\-01}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-x1\_\-01 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a05a8f595777fdbdfaa618868856a48a5}
+
+
+Definition at line 6192 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a8323fd380b28f282745e9b88ab0f5a74}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-x2@{legendre\_\-set\_\-x2}}
+\index{legendre\_\-set\_\-x2@{legendre\_\-set\_\-x2}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-x2}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-x2 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a8323fd380b28f282745e9b88ab0f5a74}
+
+
+Definition at line 6360 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a82fb68c4ded02b55802a7f1768f66d76}{
+\index{quadrule.f90@{quadrule.f90}!legendre\_\-set\_\-x2\_\-01@{legendre\_\-set\_\-x2\_\-01}}
+\index{legendre\_\-set\_\-x2\_\-01@{legendre\_\-set\_\-x2\_\-01}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{legendre\_\-set\_\-x2\_\-01}]{\setlength{\rightskip}{0pt plus 5cm}subroutine legendre\_\-set\_\-x2\_\-01 (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a82fb68c4ded02b55802a7f1768f66d76}
+
+
+Definition at line 6550 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a78a0044231676591f20f6a799a9177cd}{
+\index{quadrule.f90@{quadrule.f90}!lobatto\_\-set@{lobatto\_\-set}}
+\index{lobatto\_\-set@{lobatto\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{lobatto\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine lobatto\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a78a0044231676591f20f6a799a9177cd}
+
+
+Definition at line 6718 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a6bd375a88b7077d216c6532d98f9425c}{
+\index{quadrule.f90@{quadrule.f90}!log\_\-gamma@{log\_\-gamma}}
+\index{log\_\-gamma@{log\_\-gamma}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{log\_\-gamma}]{\setlength{\rightskip}{0pt plus 5cm}double precision log\_\-gamma (
+\begin{DoxyParamCaption}
+\item[{double precision}]{x}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a6bd375a88b7077d216c6532d98f9425c}
+
+
+Definition at line 7297 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a7b182dbe7e6b57c218f9a6d3f89b5130}{
+\index{quadrule.f90@{quadrule.f90}!moulton\_\-set@{moulton\_\-set}}
+\index{moulton\_\-set@{moulton\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{moulton\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine moulton\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a7b182dbe7e6b57c218f9a6d3f89b5130}
+
+
+Definition at line 7405 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a0b336aacd3856d5d5e724522dd3e6e8a}{
+\index{quadrule.f90@{quadrule.f90}!nc\_\-com@{nc\_\-com}}
+\index{nc\_\-com@{nc\_\-com}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{nc\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}subroutine nc\_\-com (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision}]{a, }
+\item[{double precision}]{b, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a0b336aacd3856d5d5e724522dd3e6e8a}
+
+
+Definition at line 7701 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a661d42ddf0d8116d8f9353e456918ca0}{
+\index{quadrule.f90@{quadrule.f90}!ncc\_\-com@{ncc\_\-com}}
+\index{ncc\_\-com@{ncc\_\-com}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{ncc\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}subroutine ncc\_\-com (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a661d42ddf0d8116d8f9353e456918ca0}
+
+
+Definition at line 7629 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a45c034914a08b905c6dbe38d8ef5c5d9}{
+\index{quadrule.f90@{quadrule.f90}!ncc\_\-set@{ncc\_\-set}}
+\index{ncc\_\-set@{ncc\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{ncc\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine ncc\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a45c034914a08b905c6dbe38d8ef5c5d9}
+
+
+Definition at line 7799 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a2ab54bf6aad3867d7b66db6bc056b420}{
+\index{quadrule.f90@{quadrule.f90}!nco\_\-com@{nco\_\-com}}
+\index{nco\_\-com@{nco\_\-com}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{nco\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}subroutine nco\_\-com (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a2ab54bf6aad3867d7b66db6bc056b420}
+
+
+Definition at line 8212 of file quadrule.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{quadrule_8f90_a27acf87e9cb1d5f166f347d6e2650710}{
+\index{quadrule.f90@{quadrule.f90}!nco\_\-set@{nco\_\-set}}
+\index{nco\_\-set@{nco\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{nco\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine nco\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a27acf87e9cb1d5f166f347d6e2650710}
+
+
+Definition at line 8271 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a0e44da10711c05b4fb80b5add1efa261}{
+\index{quadrule.f90@{quadrule.f90}!r\_\-pi@{r\_\-pi}}
+\index{r\_\-pi@{r\_\-pi}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{r\_\-pi}]{\setlength{\rightskip}{0pt plus 5cm}real r\_\-pi (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a0e44da10711c05b4fb80b5add1efa261}
+
+
+Definition at line 8435 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a707a104aaec64bd98bd8996e11171677}{
+\index{quadrule.f90@{quadrule.f90}!radau\_\-set@{radau\_\-set}}
+\index{radau\_\-set@{radau\_\-set}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{radau\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}subroutine radau\_\-set (
+\begin{DoxyParamCaption}
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a707a104aaec64bd98bd8996e11171677}
+
+
+Definition at line 8462 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_aaa549734d177cfe892a84e25e267ee4d}{
+\index{quadrule.f90@{quadrule.f90}!rule\_\-adjust@{rule\_\-adjust}}
+\index{rule\_\-adjust@{rule\_\-adjust}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{rule\_\-adjust}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rule\_\-adjust (
+\begin{DoxyParamCaption}
+\item[{double precision}]{a, }
+\item[{double precision}]{b, }
+\item[{double precision}]{c, }
+\item[{double precision}]{d, }
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{x, }
+\item[{double precision,dimension(norder)}]{w}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_aaa549734d177cfe892a84e25e267ee4d}
+
+
+Definition at line 8847 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a268ec8eaa9ed225402666340aecb03d4}{
+\index{quadrule.f90@{quadrule.f90}!sum\_\-sub@{sum\_\-sub}}
+\index{sum\_\-sub@{sum\_\-sub}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{sum\_\-sub}]{\setlength{\rightskip}{0pt plus 5cm}subroutine sum\_\-sub (
+\begin{DoxyParamCaption}
+\item[{double precision,external}]{func, }
+\item[{double precision}]{a, }
+\item[{double precision}]{b, }
+\item[{integer}]{nsub, }
+\item[{integer}]{norder, }
+\item[{double precision}]{xlo, }
+\item[{double precision}]{xhi, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision}]{result}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a268ec8eaa9ed225402666340aecb03d4}
+
+
+Definition at line 9045 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_a423ae8e8d1445586d8ba40e7a7e0d5f4}{
+\index{quadrule.f90@{quadrule.f90}!sum\_\-sub\_\-gk@{sum\_\-sub\_\-gk}}
+\index{sum\_\-sub\_\-gk@{sum\_\-sub\_\-gk}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{sum\_\-sub\_\-gk}]{\setlength{\rightskip}{0pt plus 5cm}subroutine sum\_\-sub\_\-gk (
+\begin{DoxyParamCaption}
+\item[{double precision,external}]{func, }
+\item[{double precision}]{a, }
+\item[{double precision}]{b, }
+\item[{integer}]{nsub, }
+\item[{integer}]{norderg, }
+\item[{double precision,dimension(norderg)}]{weightg, }
+\item[{double precision}]{resultg, }
+\item[{integer}]{norderk, }
+\item[{double precision,dimension(norderk)}]{xtabk, }
+\item[{double precision,dimension(norderk)}]{weightk, }
+\item[{double precision}]{resultk, }
+\item[{double precision}]{error}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_a423ae8e8d1445586d8ba40e7a7e0d5f4}
+
+
+Definition at line 9173 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_adae6ebad1d51cf128e8f0247ef582ac9}{
+\index{quadrule.f90@{quadrule.f90}!summer@{summer}}
+\index{summer@{summer}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{summer}]{\setlength{\rightskip}{0pt plus 5cm}subroutine summer (
+\begin{DoxyParamCaption}
+\item[{double precision,external}]{func, }
+\item[{integer}]{norder, }
+\item[{double precision,dimension(norder)}]{xtab, }
+\item[{double precision,dimension(norder)}]{weight, }
+\item[{double precision}]{result}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_adae6ebad1d51cf128e8f0247ef582ac9}
+
+
+Definition at line 8901 of file quadrule.f90.
+
+\hypertarget{quadrule_8f90_ae2cd4600769ef44fbc01ccd971c0fc73}{
+\index{quadrule.f90@{quadrule.f90}!summer\_\-gk@{summer\_\-gk}}
+\index{summer\_\-gk@{summer\_\-gk}!quadrule.f90@{quadrule.f90}}
+\subsubsection[{summer\_\-gk}]{\setlength{\rightskip}{0pt plus 5cm}subroutine summer\_\-gk (
+\begin{DoxyParamCaption}
+\item[{double precision,external}]{func, }
+\item[{integer}]{norderg, }
+\item[{double precision,dimension(norderg)}]{weightg, }
+\item[{double precision}]{resultg, }
+\item[{integer}]{norderk, }
+\item[{double precision,dimension(norderk)}]{xtabk, }
+\item[{double precision,dimension(norderk)}]{weightk, }
+\item[{double precision}]{resultk}
+\end{DoxyParamCaption}
+)}}
+\label{quadrule_8f90_ae2cd4600769ef44fbc01ccd971c0fc73}
+
+
+Definition at line 8959 of file quadrule.f90.
+

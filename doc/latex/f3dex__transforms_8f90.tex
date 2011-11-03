@@ -1,0 +1,41 @@
+\hypertarget{f3dex__transforms_8f90}{
+\section{/Users/bl/Dropbox/3DEX/src/f90/mod/f3dex\_\-transforms.f90 File Reference}
+\label{f3dex__transforms_8f90}\index{/Users/bl/Dropbox/3DEX/src/f90/mod/f3dex\_\-transforms.f90@{/Users/bl/Dropbox/3DEX/src/f90/mod/f3dex\_\-transforms.f90}}
+}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacef3dex__transforms}{f3dex\_\-transforms}
+\end{DoxyCompactItemize}
+\subsection*{Functions/Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_aef309274871cf8eb0405b63f14ab26a2}{f3dex\_\-transforms::alnspring2almn} (nsmax, nlmax, nmmax, map, almn, zbounds)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_aa03041ae9480a0e4abc522b846a40cc8}{f3dex\_\-transforms::survey2almn\_\-opt} (nsmax, nnmax, nlmax, nmmax, survey, nbpts, almn, kln, zbounds)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_ae19f381573ccd64c64102bbd4181483f}{f3dex\_\-transforms::survey2almn\_\-srs} (nsmax, nnmax, nlmax, nmmax, rmax, nbpts, zbounds, survey, kln, almn)
+\begin{DoxyCompactList}\small\item\em Performs the Fourier-\/Bessel decomposition (backward algorithm) of a discrete survey. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__transforms_a4675d50d585b89b97772a0fa7dde4c5f}{f3dex\_\-transforms::fieldalmn2overalmn} (almn, kln, rhomean, rmax, nnmax, nlmax, nmmax)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_a3e792eb35f030b601d9262ac031cfdb9}{f3dex\_\-transforms::almn2rmap} (map, almn, rho, nsmax, nnmax, nlmax, nmmax, kln, cln, plm)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_a02b926f933d186f2c9d9ab6d478a1601}{f3dex\_\-transforms::gen\_\-qln} (qln, nnmax, nlmax)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_a4b80bc7cad52998fd0aff935a1695ee7}{f3dex\_\-transforms::gen\_\-kln} (kln, nnmax, nlmax, rmax)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_a2cd270ebc1186ae3872ab2e0068cff9d}{f3dex\_\-transforms::logrange} (x, mn, mx, npts)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_aa6cd797c56b97503bf2d52131f6e5554}{f3dex\_\-transforms::gen\_\-cln} (cln, kln, nnmax, nlmax, rmax)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_ad1ab102a8307876c7af8bd6868ea7ef2}{f3dex\_\-transforms::gen\_\-jln} (jlns, kln, rho, nnmax, nlmax)
+\item 
+subroutine \hyperlink{namespacef3dex__transforms_a9b68481c890d75c3e3f4cbd4a7109830}{f3dex\_\-transforms::BJL} (L, X, JL)
+\begin{DoxyCompactList}\small\item\em Compute the value of the l-\/th order spherical bessel FUNCTION at x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+REAL(kind=SP), parameter, private \hyperlink{namespacef3dex__transforms_a2fbf86c61b3f102ffaa43870e3523f02}{f3dex\_\-transforms::s\_\-bad\_\-value} = HPX\_\-SBADVAL
+\item 
+REAL(kind=DP), parameter, private \hyperlink{namespacef3dex__transforms_a179e0089cbbd29b50ea12d1a8298b99a}{f3dex\_\-transforms::d\_\-bad\_\-value} = HPX\_\-DBADVAL
+\end{DoxyCompactItemize}

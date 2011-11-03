@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>3DEX: src/f90/almnfile2rmap/almnfile2rmap.f90 Source File</title>
+<title>3DEX: /Users/bl/Dropbox/3DEX/src/f90/almnfile2rmap/almnfile2rmap.f90 Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -58,147 +58,151 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">src/f90/almnfile2rmap/almnfile2rmap.f90</div>  </div>
+<div class="title">/Users/bl/Dropbox/3DEX/src/f90/almnfile2rmap/almnfile2rmap.f90</div>  </div>
 </div>
 <div class="contents">
 <a href="almnfile2rmap_8f90.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="almnfile2rmap_8f90.html#a6d0dedf259bd8fd264834dfa2b7c1e54">00001</a> <span class="keyword">PROGRAM</span> <a class="code" href="almnfile2rmap_8f90.html#a6d0dedf259bd8fd264834dfa2b7c1e54">almnfile2rmap</a>
 <a name="l00002"></a>00002 
-<a name="l00003"></a>00003 <span class="comment">!COMMAND : almnfile2map almninfile mapoutfile rho nside nnmax nlmax rmax</span>
-<a name="l00004"></a>00004 <span class="comment">!TEST : bin/almnfile2rmap out/almn.fits map.fits 400.0 256 10 10 2000.0</span>
-<a name="l00005"></a>00005     
-<a name="l00006"></a>00006     USE <span class="keywordflow">f3dex</span>
-<a name="l00007"></a>00007     USE <span class="keywordflow">cosmotools</span>
-<a name="l00008"></a>00008     USE <span class="keywordflow">healpix_types</span>
-<a name="l00009"></a>00009     USE <span class="keywordflow">healpix_modules</span>
-<a name="l00010"></a>00010     USE <span class="keywordflow">misc_utils</span>
-<a name="l00011"></a>00011     USE <span class="keywordflow">fitstools</span>
-<a name="l00012"></a>00012     USE <span class="keywordflow">alm_tools</span>
-<a name="l00013"></a>00013     
-<a name="l00014"></a>00014     <span class="keywordtype">REAL(DP)</span> :: rmax              
-<a name="l00015"></a>00015     <span class="keywordtype">REAL*8</span> :: time1, time2
-<a name="l00016"></a>00016     <span class="keywordtype">REAL(DP)</span> :: rho
-<a name="l00017"></a>00017     <span class="keywordtype">INTEGER(I4B)</span> :: n_args, nnmax, nlmax, nmmax, nside, status
-<a name="l00018"></a>00018     <span class="keywordtype">LOGICAL(LGT)</span> :: renormalization, fileexists
-<a name="l00019"></a>00019     <span class="keywordtype">CHARACTER(len=80)</span>, <span class="keywordtype">DIMENSION(1:120)</span>:: header
-<a name="l00020"></a>00020     <span class="keywordtype">CHARACTER(len=FILENAMELEN)</span> :: headersfile, arg, almninfile, mapoutfile
-<a name="l00021"></a>00021     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: map, kln, cln, plm 
-<a name="l00022"></a>00022     <span class="keywordtype">COMPLEX(KIND=DP)</span>, <span class="keywordtype">DIMENSION(:,:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: almn
-<a name="l00023"></a>00023     <span class="keywordtype">CHARACTER(len=*)</span>, <span class="keywordtype">PARAMETER</span> :: code = <span class="stringliteral">&quot;almn2rmap&quot;</span>
-<a name="l00024"></a>00024     
-<a name="l00025"></a>00025     PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
-<a name="l00026"></a>00026     PRINT*,<span class="stringliteral">&quot; 3DEX F90 LIBRARY&quot;</span>
-<a name="l00027"></a>00027     PRINT*,<span class="stringliteral">&quot; STARTING FIELD RECONSTRUCTION&quot;</span>
-<a name="l00028"></a>00028     PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
-<a name="l00029"></a>00029     PRINT*,<span class="stringliteral">&quot; &quot;</span>
-<a name="l00030"></a>00030     
-<a name="l00031"></a>00031     <span class="comment">!---------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032     <span class="comment">! Parameters extraction</span>
-<a name="l00033"></a>00033  
-<a name="l00034"></a>00034     n_args = nArguments()
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036     CALL getArgument(1, arg)
-<a name="l00037"></a>00037     almninfile = trim(adjustl(arg))
-<a name="l00038"></a>00038     <span class="keyword">INQUIRE</span>( file=almninfile, exist=fileexists)
-<a name="l00039"></a>00039     <span class="keyword">IF</span>( fileexists .eqv. .FALSE. ) CALL fatal_error(<span class="stringliteral">&quot;almnfile : this file doesn&#39;t exist!&quot;</span>)
-<a name="l00040"></a>00040     
-<a name="l00041"></a>00041     CALL getArgument(2, arg)
-<a name="l00042"></a>00042     mapoutfile = trim(adjustl(arg))
-<a name="l00043"></a>00043     <span class="keyword">INQUIRE</span>( file=mapoutfile, exist=fileexists)
-<a name="l00044"></a>00044     <span class="keyword">IF</span>( fileexists .eqv. .TRUE. ) CALL fatal_error(<span class="stringliteral">&quot;mapfile : this file already exists!&quot;</span>)
-<a name="l00045"></a>00045     
-<a name="l00046"></a>00046     CALL getArgument(3, arg)
-<a name="l00047"></a>00047     <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(F7.9)&#39;</span>) rho
-<a name="l00048"></a>00048     PRINT*,<span class="stringliteral">&quot;rho :&quot;</span>,rho
+<a name="l00003"></a>00003   <span class="comment">!COMMAND : almnfile2map almninfile mapoutfile rho nside nnmax nlmax rmax</span>
+<a name="l00004"></a>00004   <span class="comment">!TEST : bin/almnfile2rmap out/almn.fits map.fits 400.0 256 10 10 2000.0</span>
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006   USE <span class="keywordflow">f3dex_transforms</span>
+<a name="l00007"></a>00007   USE <span class="keywordflow">f3dex_cosmotools</span>
+<a name="l00008"></a>00008   USE <span class="keywordflow">f3dex_stats</span>
+<a name="l00009"></a>00009   USE <span class="keywordflow">f3dex_fitstools</span>
+<a name="l00010"></a>00010   USE <span class="keywordflow">f3dex_utils</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012   USE <span class="keywordflow">healpix_types</span>
+<a name="l00013"></a>00013   USE <span class="keywordflow">healpix_modules</span>
+<a name="l00014"></a>00014   USE <span class="keywordflow">misc_utils</span>
+<a name="l00015"></a>00015   USE <span class="keywordflow">fitstools</span>
+<a name="l00016"></a>00016   USE <span class="keywordflow">alm_tools</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018   <span class="keywordtype">REAL(DP)</span> :: rmax              
+<a name="l00019"></a>00019   <span class="keywordtype">REAL*8</span> :: time1, time2
+<a name="l00020"></a>00020   <span class="keywordtype">REAL(DP)</span> :: rho
+<a name="l00021"></a>00021   <span class="keywordtype">INTEGER(I4B)</span> :: n_args, nnmax, nlmax, nmmax, nside, status
+<a name="l00022"></a>00022   <span class="keywordtype">LOGICAL(LGT)</span> :: renormalization, fileexists
+<a name="l00023"></a>00023   <span class="keywordtype">CHARACTER(len=80)</span>, <span class="keywordtype">DIMENSION(1:120)</span>:: header
+<a name="l00024"></a>00024   <span class="keywordtype">CHARACTER(len=FILENAMELEN)</span> :: headersfile, arg, almninfile, mapoutfile
+<a name="l00025"></a>00025   <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: map, kln, cln, plm 
+<a name="l00026"></a>00026   <span class="keywordtype">COMPLEX(KIND=DP)</span>, <span class="keywordtype">DIMENSION(:,:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: almn
+<a name="l00027"></a>00027   <span class="keywordtype">CHARACTER(len=*)</span>, <span class="keywordtype">PARAMETER</span> :: code = <span class="stringliteral">&quot;almn2rmap&quot;</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029   PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
+<a name="l00030"></a>00030   PRINT*,<span class="stringliteral">&quot; 3DEX F90 LIBRARY&quot;</span>
+<a name="l00031"></a>00031   PRINT*,<span class="stringliteral">&quot; STARTING FIELD RECONSTRUCTION&quot;</span>
+<a name="l00032"></a>00032   PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
+<a name="l00033"></a>00033   PRINT*,<span class="stringliteral">&quot; &quot;</span>
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035   <span class="comment">!---------------------------------------------------------------------------</span>
+<a name="l00036"></a>00036   <span class="comment">! Parameters extraction</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038   n_args = nArguments()
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040   CALL getArgument(1, arg)
+<a name="l00041"></a>00041   almninfile = trim(adjustl(arg))
+<a name="l00042"></a>00042   <span class="keyword">INQUIRE</span>( file=almninfile, exist=fileexists)
+<a name="l00043"></a>00043   <span class="keyword">IF</span>( fileexists .eqv. .FALSE. ) CALL fatal_error(<span class="stringliteral">&quot;almnfile : this file doesn&#39;t exist!&quot;</span>)
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045   CALL getArgument(2, arg)
+<a name="l00046"></a>00046   mapoutfile = trim(adjustl(arg))
+<a name="l00047"></a>00047   <span class="keyword">INQUIRE</span>( file=mapoutfile, exist=fileexists)
+<a name="l00048"></a>00048   <span class="keyword">IF</span>( fileexists .eqv. .TRUE. ) CALL fatal_error(<span class="stringliteral">&quot;mapfile : this file already exists!&quot;</span>)
 <a name="l00049"></a>00049 
-<a name="l00050"></a>00050     CALL getArgument(4, arg)
-<a name="l00051"></a>00051     <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nside
-<a name="l00052"></a>00052     
-<a name="l00053"></a>00053     CALL getArgument(5, arg)
-<a name="l00054"></a>00054     <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nnmax
-<a name="l00055"></a>00055  
-<a name="l00056"></a>00056     CALL getArgument(6, arg)
-<a name="l00057"></a>00057     <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nlmax
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059     <span class="keyword">IF</span>( n_args == 7 ) <span class="keyword">then</span>
-<a name="l00060"></a>00060         CALL getArgument(7, arg)
-<a name="l00061"></a>00061      <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(F7.9)&#39;</span>) rmax
-<a name="l00062"></a>00062      renormalization = .TRUE.
-<a name="l00063"></a>00063      PRINT*,rmax
-<a name="l00064"></a>00064     <span class="keyword">ELSE</span> 
-<a name="l00065"></a>00065         rmax = 0.0
-<a name="l00066"></a>00066         renormalization = .FALSE.
-<a name="l00067"></a>00067     <span class="keyword">ENDIF</span>
-<a name="l00068"></a>00068         
-<a name="l00069"></a>00069     <span class="comment">!---------------------------------------------------------------------------</span>
-<a name="l00070"></a>00070     <span class="comment">! Preliminaries</span>
-<a name="l00071"></a>00071  
-<a name="l00072"></a>00072     nmmax = nlmax
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074     time1 = <a class="code" href="namespacef3dex.html#ac014e878f644407cfc3eb1af25137d44">wtime</a>()
-<a name="l00075"></a>00075     
-<a name="l00076"></a>00076     <span class="comment">!Allocating memory</span>
-<a name="l00077"></a>00077     <span class="keyword">ALLOCATE</span>(almn(1:nnmax,0:nlmax,0:nmmax), stat = status )
-<a name="l00078"></a>00078     call assert_alloc(status,code,<span class="stringliteral">&quot;almn&quot;</span>)
-<a name="l00079"></a>00079     <span class="keyword">ALLOCATE</span>(kln(0:nlmax,1:nnmax),stat = status)
-<a name="l00080"></a>00080     CALL assert_alloc(status,code,<span class="stringliteral">&quot;kln&quot;</span>)
-<a name="l00081"></a>00081     <span class="keyword">ALLOCATE</span>(cln(0:nlmax,1:nnmax),stat = status)
-<a name="l00082"></a>00082     CALL assert_alloc(status,code,<span class="stringliteral">&quot;cln&quot;</span>)
-<a name="l00083"></a>00083     
-<a name="l00084"></a>00084     <span class="comment">!Extraction from fits file</span>
-<a name="l00085"></a>00085     PRINT*,<span class="stringliteral">&quot;Starting extraction...&quot;</span>
-<a name="l00086"></a>00086     CALL <a class="code" href="namespacef3dex.html#a6630d20765692f55b9c5389e877e35ae">fits2almn</a>(almninfile, nnmax, nlmax, nmmax, almn, kln, cln, header,120)
-<a name="l00087"></a>00087     PRINT*,<span class="stringliteral">&quot;Done&quot;</span>
-<a name="l00088"></a>00088     
-<a name="l00089"></a>00089     <span class="comment">!If necessary, print the extracted data</span>
-<a name="l00090"></a>00090     <span class="comment">!CALL print_spectrum(cln, nlmax, nnmax, nlmax, nnmax,&quot; cln&quot;)</span>
-<a name="l00091"></a>00091     <span class="comment">!CALL print_spectrum(kln,nlmax, nnmax, nlmax, nnmax,&quot; kln&quot;)</span>
-<a name="l00092"></a>00092     <span class="comment">!CALL print_almn(almn, 3, 3, 3, nlmax, nmmax, nnmax,&quot;almn&quot;)</span>
-<a name="l00093"></a>00093     
-<a name="l00094"></a>00094     <span class="comment">!Change the cln&#39;s normalization?</span>
-<a name="l00095"></a>00095     <span class="keyword">IF</span>( renormalization .eqv. .TRUE. ) <span class="keyword">THEN</span>
-<a name="l00096"></a>00096      CALL <a class="code" href="namespacef3dex.html#adcf1cf51ac34f733e7a776a7df065524">gen_cln</a>(cln, kln, nnmax, nlmax, rmax)
-<a name="l00097"></a>00097     <span class="keyword">ELSE</span>
-<a name="l00098"></a>00098      cln = 1.0_dp
-<a name="l00099"></a>00099     <span class="keyword">ENDIF</span>
-<a name="l00100"></a>00100     
-<a name="l00101"></a>00101     <span class="comment">!Allocating data and harmonics</span>
-<a name="l00102"></a>00102     <span class="keyword">ALLOCATE</span>( map(0:(12*nside**2),1:1) )
-<a name="l00103"></a>00103     map = 0.0_dp
-<a name="l00104"></a>00104     <span class="keyword">ALLOCATE</span>( plm(0:(nside*(nmmax+1)*(2*nlmax-nmmax+2)),1:1) )
-<a name="l00105"></a>00105     CALL plm_gen( nside, nlmax, nmmax, plm )
-<a name="l00106"></a>00106  
-<a name="l00107"></a>00107     <span class="comment">!---------------------------------------------------------------------------</span>
-<a name="l00108"></a>00108     <span class="comment">! Map reconstruction</span>
-<a name="l00109"></a>00109  
-<a name="l00110"></a>00110     <span class="comment">!Computing reconstructed map</span>
-<a name="l00111"></a>00111     PRINT*,<span class="stringliteral">&quot;Starting reconstruction...&quot;</span>
-<a name="l00112"></a>00112     CALL <a class="code" href="namespacef3dex.html#ae2e71647b18208d49ce5ebc6dcc3dbea">almn2rmap</a>(map, almn, rho, nside, nnmax, nlmax, nmmax, kln, cln, plm)
-<a name="l00113"></a>00113     PRINT*,<span class="stringliteral">&quot;Done&quot;</span>
-<a name="l00114"></a>00114     
-<a name="l00115"></a>00115     time2 = <a class="code" href="namespacef3dex.html#ac014e878f644407cfc3eb1af25137d44">wtime</a>()
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117     <span class="comment">!---------------------------------------------------------------------------</span>
-<a name="l00118"></a>00118     <span class="comment">! End of the procedure</span>
-<a name="l00119"></a>00119  
-<a name="l00120"></a>00120     PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
-<a name="l00121"></a>00121     PRINT*,<span class="stringliteral">&quot; &quot;</span>
-<a name="l00122"></a>00122     PRINT*,<span class="stringliteral">&quot;RECONSTRUCTION (almnfil2rmap) - SUMMARY&quot;</span>
-<a name="l00123"></a>00123     PRINT*,<span class="stringliteral">&quot; &quot;</span>
-<a name="l00124"></a>00124     PRINT*,<span class="stringliteral">&quot;rho / nside&quot;</span>, rho, nside
-<a name="l00125"></a>00125     PRINT*,<span class="stringliteral">&quot;(nmax,lmax,mmax) :&quot;</span>, nnmax, nlmax, nmmax
-<a name="l00126"></a>00126     PRINT*,<span class="stringliteral">&quot;Elapsed time :&quot;</span>,time2-time1
-<a name="l00127"></a>00127     PRINT*,<span class="stringliteral">&quot; &quot;</span>
-<a name="l00128"></a>00128     PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
-<a name="l00129"></a>00129     PRINT*,<span class="stringliteral">&quot; &quot;</span>
-<a name="l00130"></a>00130     <span class="comment">!Fits output</span>
-<a name="l00131"></a>00131     PRINT*,<span class="stringliteral">&quot;Starting map output...&quot;</span>
-<a name="l00132"></a>00132     CALL write_minimal_header(header, <span class="stringliteral">&#39;MAP&#39;</span>, nside=nside, ordering=<span class="stringliteral">&#39;Ring&#39;</span>)
-<a name="l00133"></a>00133     CALL write_bintab( map, (12*nside**2), 1, header, 120, mapoutfile )
-<a name="l00134"></a>00134     PRINT*,<span class="stringliteral">&quot;Done&quot;</span>
-<a name="l00135"></a>00135     PRINT*,<span class="stringliteral">&quot; &quot;</span>
-<a name="l00136"></a>00136     PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
-<a name="l00137"></a>00137     
-<a name="l00138"></a>00138 <span class="keyword">END PROGRAM</span>
+<a name="l00050"></a>00050   CALL getArgument(3, arg)
+<a name="l00051"></a>00051   <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(F7.9)&#39;</span>) rho
+<a name="l00052"></a>00052   PRINT*,<span class="stringliteral">&quot;rho :&quot;</span>,rho
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054   CALL getArgument(4, arg)
+<a name="l00055"></a>00055   <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nside
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057   CALL getArgument(5, arg)
+<a name="l00058"></a>00058   <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nnmax
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060   CALL getArgument(6, arg)
+<a name="l00061"></a>00061   <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nlmax
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063   <span class="keyword">IF</span>( n_args == 7 ) <span class="keyword">then</span>
+<a name="l00064"></a>00064      CALL getArgument(7, arg)
+<a name="l00065"></a>00065      <span class="keyword">READ</span>(arg,<span class="stringliteral">&#39;(F7.9)&#39;</span>) rmax
+<a name="l00066"></a>00066      renormalization = .TRUE.
+<a name="l00067"></a>00067      PRINT*,rmax
+<a name="l00068"></a>00068   <span class="keyword">ELSE</span> 
+<a name="l00069"></a>00069      rmax = 0.0
+<a name="l00070"></a>00070      renormalization = .FALSE.
+<a name="l00071"></a>00071   <span class="keyword">ENDIF</span>
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073   <span class="comment">!---------------------------------------------------------------------------</span>
+<a name="l00074"></a>00074   <span class="comment">! Preliminaries</span>
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076   nmmax = nlmax
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078   time1 = <a class="code" href="namespacef3dex__utils.html#ac5aa172010ec6cd9bd4c5273904b0405">wtime</a>()
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080   <span class="comment">!Allocating memory</span>
+<a name="l00081"></a>00081   <span class="keyword">ALLOCATE</span>(almn(1:nnmax,0:nlmax,0:nmmax), stat = status )
+<a name="l00082"></a>00082   call assert_alloc(status,code,<span class="stringliteral">&quot;almn&quot;</span>)
+<a name="l00083"></a>00083   <span class="keyword">ALLOCATE</span>(kln(0:nlmax,1:nnmax),stat = status)
+<a name="l00084"></a>00084   CALL assert_alloc(status,code,<span class="stringliteral">&quot;kln&quot;</span>)
+<a name="l00085"></a>00085   <span class="keyword">ALLOCATE</span>(cln(0:nlmax,1:nnmax),stat = status)
+<a name="l00086"></a>00086   CALL assert_alloc(status,code,<span class="stringliteral">&quot;cln&quot;</span>)
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088   <span class="comment">!Extraction from fits file</span>
+<a name="l00089"></a>00089   PRINT*,<span class="stringliteral">&quot;Starting extraction...&quot;</span>
+<a name="l00090"></a>00090   CALL <a class="code" href="namespacef3dex__fitstools.html#a106cd0d1eb3bcd38d2c43228f499f57b">fits2almn</a>(almninfile, nnmax, nlmax, nmmax, almn, kln, cln, header,120)
+<a name="l00091"></a>00091   PRINT*,<span class="stringliteral">&quot;Done&quot;</span>
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093   <span class="comment">!If necessary, print the extracted data</span>
+<a name="l00094"></a>00094   <span class="comment">!CALL print_spectrum(cln, nlmax, nnmax, nlmax, nnmax,&quot; cln&quot;)</span>
+<a name="l00095"></a>00095   <span class="comment">!CALL print_spectrum(kln,nlmax, nnmax, nlmax, nnmax,&quot; kln&quot;)</span>
+<a name="l00096"></a>00096   <span class="comment">!CALL print_almn(almn, 3, 3, 3, nlmax, nmmax, nnmax,&quot;almn&quot;)</span>
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098   <span class="comment">!Change the cln&#39;s normalization?</span>
+<a name="l00099"></a>00099   <span class="keyword">IF</span>( renormalization .eqv. .TRUE. ) <span class="keyword">THEN</span>
+<a name="l00100"></a>00100      CALL <a class="code" href="namespacef3dex__transforms.html#aa6cd797c56b97503bf2d52131f6e5554">gen_cln</a>(cln, kln, nnmax, nlmax, rmax)
+<a name="l00101"></a>00101   <span class="keyword">ELSE</span>
+<a name="l00102"></a>00102      cln = 1.0_dp
+<a name="l00103"></a>00103   <span class="keyword">ENDIF</span>
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105   <span class="comment">!Allocating data and harmonics</span>
+<a name="l00106"></a>00106   <span class="keyword">ALLOCATE</span>( map(0:(12*nside**2),1:1) )
+<a name="l00107"></a>00107   map = 0.0_dp
+<a name="l00108"></a>00108   <span class="keyword">ALLOCATE</span>( plm(0:(nside*(nmmax+1)*(2*nlmax-nmmax+2)),1:1) )
+<a name="l00109"></a>00109   CALL plm_gen( nside, nlmax, nmmax, plm )
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111   <span class="comment">!---------------------------------------------------------------------------</span>
+<a name="l00112"></a>00112   <span class="comment">! Map reconstruction</span>
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114   <span class="comment">!Computing reconstructed map</span>
+<a name="l00115"></a>00115   PRINT*,<span class="stringliteral">&quot;Starting reconstruction...&quot;</span>
+<a name="l00116"></a>00116   CALL <a class="code" href="namespacef3dex__transforms.html#a3e792eb35f030b601d9262ac031cfdb9">almn2rmap</a>(map, almn, rho, nside, nnmax, nlmax, nmmax, kln, cln, plm)
+<a name="l00117"></a>00117   PRINT*,<span class="stringliteral">&quot;Done&quot;</span>
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119   time2 = <a class="code" href="namespacef3dex__utils.html#ac5aa172010ec6cd9bd4c5273904b0405">wtime</a>()
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121   <span class="comment">!---------------------------------------------------------------------------</span>
+<a name="l00122"></a>00122   <span class="comment">! End of the procedure</span>
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124   PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
+<a name="l00125"></a>00125   PRINT*,<span class="stringliteral">&quot; &quot;</span>
+<a name="l00126"></a>00126   PRINT*,<span class="stringliteral">&quot;RECONSTRUCTION (almnfil2rmap) - SUMMARY&quot;</span>
+<a name="l00127"></a>00127   PRINT*,<span class="stringliteral">&quot; &quot;</span>
+<a name="l00128"></a>00128   PRINT*,<span class="stringliteral">&quot;rho / nside&quot;</span>, rho, nside
+<a name="l00129"></a>00129   PRINT*,<span class="stringliteral">&quot;(nmax,lmax,mmax) :&quot;</span>, nnmax, nlmax, nmmax
+<a name="l00130"></a>00130   PRINT*,<span class="stringliteral">&quot;Elapsed time :&quot;</span>,time2-time1
+<a name="l00131"></a>00131   PRINT*,<span class="stringliteral">&quot; &quot;</span>
+<a name="l00132"></a>00132   PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
+<a name="l00133"></a>00133   PRINT*,<span class="stringliteral">&quot; &quot;</span>
+<a name="l00134"></a>00134   <span class="comment">!Fits output</span>
+<a name="l00135"></a>00135   PRINT*,<span class="stringliteral">&quot;Starting map output...&quot;</span>
+<a name="l00136"></a>00136   CALL write_minimal_header(header, <span class="stringliteral">&#39;MAP&#39;</span>, nside=nside, ordering=<span class="stringliteral">&#39;Ring&#39;</span>)
+<a name="l00137"></a>00137   CALL write_bintab( map, (12*nside**2), 1, header, 120, mapoutfile )
+<a name="l00138"></a>00138   PRINT*,<span class="stringliteral">&quot;Done&quot;</span>
+<a name="l00139"></a>00139   PRINT*,<span class="stringliteral">&quot; &quot;</span>
+<a name="l00140"></a>00140   PRINT*,<span class="stringliteral">&quot;==================================================&quot;</span>
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142 <span class="keyword">END PROGRAM almnfile2rmap</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -215,7 +219,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Mon Oct 10 2011 11:13:17 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 3 2011 18:14:23 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
