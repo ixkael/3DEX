@@ -638,4 +638,79 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!       
 
+   SUBROUTINE bitab2fits( file, tab, dim1start, dim1end, dim2start, dim2end )
+   
+   CHARACTER(len=FILENAMELEN) ::  file
+   CHARACTER(len=80), DIMENSION(1:120) :: header
+   INTEGER(I4B) :: status,  dim1start, dim1end, dim2start, dim2end
+   INTEGER(I8B) :: d1, d2, npix, loc
+   REAL(DP), DIMENSION(dim1start:dim1end,dim2start:dim2end) :: tab
+   REAL(DP), DIMENSION(:,:), ALLOCATABLE :: temptab
+   CHARACTER(len=*), PARAMETER :: code = "bitab2fits"
+  
+   npix = dim2end-dim2start+1
+   header(:) = ' '
+   loc = 0
+   
+   ALLOCATE( temptab(0:npix-1,1:3),stat = status )
+   CALL assert_alloc(status,code,'temptab')
+   
+   DO d1=dim1start, dim1end
+      temptab = 0.0
+      DO d2=0, npix-1
+         temptab(d2,1) = REAL(d1)
+         temptab(d2,2) = REAL(dim2start+d2)
+         temptab(d2,3) = tab(d1,dim2start+d2)
+      ENDDO
+      CALL write_bintabh(temptab, npix, 3, header, 120, file, firstpix=loc)
+      loc = loc + npix
+   ENDDO
+   
+   DEALLOCATE(temptab)
+
+   END SUBROUTINE bitab2fits
+      
+  ! ---------------------------------------------------------------------------------------!       
+
+   SUBROUTINE fits2bitab( file, tab, dim1start, dim1end, dim2start, dim2end )
+   
+   CHARACTER(len=FILENAMELEN) ::  file
+   CHARACTER(len=80), DIMENSION(1:120) :: header
+   INTEGER(I8B) :: d1, d2, loc, npix, c1, c2
+   INTEGER(I4B) :: status,  dim1start, dim1end, dim2start, dim2end
+   REAL(DP), DIMENSION(dim1start:dim1end,dim2start:dim2end) :: tab
+   REAL(DP), DIMENSION(:,:), ALLOCATABLE :: temptab
+   REAL(DP) :: c3
+   CHARACTER(len=*), PARAMETER :: code = "fits2bitab"
+   
+   npix = dim2end-dim2start+1
+   header(:) = ' '
+   loc = 0
+   tab = 0.0
+   
+   ALLOCATE( temptab(0:npix-1,1:3),stat = status )
+   CALL assert_alloc(status,code,'temptab')
+   
+   DO d1=dim1start, dim1end
+      temptab = -1.0
+      CALL input_tod(file, temptab, npix, 3, firstpix=loc)
+      DO d2=0, npix-1
+         c1 = INT(temptab(d2,1))
+         c2 = INT(temptab(d2,2))
+         c3 = temptab(d2,3)
+         IF( (c1 .GE. 0.0) .AND. (c2 .GE. 0.0) .AND. &
+           & (c1 .GE. dim1start) .AND. (c1 .LE. dim1end) .AND. & 
+           & (c2 .GE. dim2start) .AND. (c2 .LE. dim2end) ) THEN
+             tab(c1,c2) = c3
+         ENDIF
+      ENDDO
+      loc = loc + npix
+   ENDDO
+   
+   DEALLOCATE(temptab)
+   
+   END SUBROUTINE fits2bitab      
+      
+  ! ---------------------------------------------------------------------------------------!       
+      
 END MODULE f3dex_fitstools
