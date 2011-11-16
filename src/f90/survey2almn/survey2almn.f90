@@ -170,7 +170,7 @@ PROGRAM survey2almn
   print*,"------------------------------------------------"
   !CALL print_spectrum(cln, 3, 3, nlmax, nnmax," cln")
   !CALL print_spectrum(kln, 3, 3, nlmax, nnmax," kln")
-  !CALL print_almn(almn, 10, 10, 10, nlmax, nmmax, nnmax,"almn")
+  CALL print_almn(almn, 5, 5, 5, nlmax, nmmax, nnmax,"almn")
   !CALL print_spectrum(spectr, 10, 10, nnmax, nlmax,"sptr")
   print*,"------------------------------------------------"
 
