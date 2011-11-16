@@ -1,10 +1,23 @@
+
+# 3DEX Installation script - CMake
+
+# Cleaning directories and previous build
+rm -rf build
+rm -rf include
+rm -rf lib
+rm -rf bin
+
+# Running CMake and make
 mkdir build
 cd build
 cmake ..
 make
 
+# Moving Fortran modules to include dir
 if [[ ! -d "include" ]] ; then
-   mkdir include
+   mkdir ../include
 fi
-mv *.mod include
+mv *.mod ../include
 rm -rf build
+
+# Terminated

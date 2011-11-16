@@ -8,6 +8,9 @@ enable_language(Fortran)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/lib)
 
+# LAPACK
+link_directories($ENV{LAPACK})
+
 # CFITSIO
 link_directories($ENV{CFITSIO})
 
@@ -28,21 +31,23 @@ else (Fortran_COMPILER_NAME STREQUAL "gfortran")
   set(CMAKE_Fortran_FLAGS "-TODO")
 endif (Fortran_COMPILER_NAME STREQUAL "gfortran")
 
-set(LIBS "-lcfitsio -lhealpix")
+set(LIBS "-lcfitsio -lhealpix -llapack -lblas -fopenmp")
 set(3DEXTAG "-L${LIBRARY_OUTPUT_PATH} -l3dex")
 
 # build executables
 set(MODULES "f3dex_stats.mod" "f3dex_cosmotools.mod" "f3dex_fitstools.mod"
-"f3dex_utils.mod" "f3dex_transforms.mod")
+"f3dex_utils.mod" "f3dex_transforms.mod" "f3dex_utests.mod")
 set(MODULES_SRC "src/f90/mod/f3dex_fitstools.f90"
 "src/f90/mod/f3dex_cosmotools.f90" "src/f90/mod/f3dex_utils.f90"
 "src/f90/mod/f3dex_stats.f90" "src/f90/mod/f3dex_transforms.f90"
-"src/f90/external/rfsfns.f"  "src/f90/external/quadpack.f90"  "src/f90/external/quadrule.f90")
-set(EXECUTABLES survey2almn survey2almn_lm survey2almn_interactive almnfile2rmap)
+"src/f90/external/rfsfns.f"  "src/f90/external/quadpack.f90"  
+"src/f90/external/quadrule.f90" "src/f90/mod/f3dex_utests.f90")
+set(EXECUTABLES survey2almn survey2almn_lm survey2almn_interactive
+ almnfile2rmap compute_legen_plm compute_qln utests compute_qml_pl)
 
 add_library(3dex ${MODULES_SRC})   
 
 foreach (p ${EXECUTABLES})
   add_executable (${p} "src/f90/${p}/${p}.f90")
-  target_link_libraries(${p} ${LIBS} ${3DEXTAG})
+  target_link_libraries(${p} ${3DEXTAG} ${LIBS})
 endforeach (p)

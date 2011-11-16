@@ -2,7 +2,7 @@
 
 VPATH	= $(BINDIR)
 exec	= $(BINDIR)/almnfile2rmap
-src	= almnfile2rmap.f90
+src		= almnfile2rmap.f90
 obj 	= almnfile2rmap.o
 
 %.o: %.f90 $(inc)

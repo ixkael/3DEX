@@ -59,6 +59,24 @@ findFITSLib () {
     done
 }
 #-------------
+findLAPACKLib () {
+    for dir in $1 /usr/lib /usr/lib64 /usr/local/lib /usr/local/lib64 /usr/local/lib/cfitsio /usr/local/lib64/cftisio /usr/local/src/cfitsio ${HOME}/lib ${HOME}/lib64 ./src/cxx/${DMPX_TARGET}/lib/ ; do
+	if [ -r "${dir}/lib${LIBLAPACK}.a" ] ; then
+	    FITSDIR=$dir
+	    break
+	fi	    
+    done
+}
+#-------------
+findBLASLib () {
+    for dir in $1 /usr/lib /usr/lib64 /usr/local/lib /usr/local/lib64 /usr/local/lib/cfitsio /usr/local/lib64/cftisio /usr/local/src/cfitsio ${HOME}/lib ${HOME}/lib64 ./src/cxx/${DMPX_TARGET}/lib/ ; do
+	if [ -r "${dir}/lib${LIBBLAS}.a" ] ; then
+	    FITSDIR=$dir
+	    break
+	fi	    
+    done
+}
+#-------------
 findFITSInclude () {
     for dir in $* /usr/include /usr/local/include /usr/local/src/cfitsio ${HOME}/include ${HOME}/include64 ./src/cxx/${DMPX_TARGET}/include/ ; do
 	if [ -r "${dir}/fitsio.h" ] ; then
@@ -134,7 +152,7 @@ setF90Defaults () {
     FFLAGS="-I\$(F90_INCDIR)"
     CFLAGS="-O"
     LDFLAGS="-L\$(F90_LIBDIR) -l3dex"
-    PIXFLAGS="-I\$(HEALPIX)/include -L\$(HEALPIX)/lib -L\$(FITSDIR) -lhealpix -lhpxgif -l\$(LIBFITS)"
+    PIXFLAGS="-I\$(HEALPIX)/include -L\$(HEALPIX)/lib -L\$(FITSDIR) -lhealpix -lhpxgif -l\$(LIBFITS) -l\$(LIBBLAS) -l\$(LIBLAPACK)"
     F90_BINDIR="./bin"
     F90_INCDIR="./include"
     F90_LIBDIR="./lib"
@@ -505,7 +523,7 @@ IdentifyCompiler () {
 		CC="gcc"
 	elif [ $ng95 != 0 ] ; then
 	        FCNAME="g95 compiler"
-		FFLAGS="$FFLAGS -DGFORTRAN"
+		FFLAGS="$FFLAGS -DGFORTRAN -lgfortran"
 		OFLAGS="-O3"
 		CC="gcc"
 		FI8FLAG="-i8" # change default INTEGER to 64 bits
@@ -754,11 +772,40 @@ askUserMisc () {
     read answer
     [ "x$answer" != "x" ] && FITSDIR=$answer
     fullPath FITSDIR
-
+    
+    
     lib="${FITSDIR}/lib${LIBFITS}.a"
     if [ ! -r $lib ]; then
 	echo
 	echo "error: fits library $lib not found"
+	echo
+	crashAndBurn
+    fi
+    
+    findBLASLib $LIBDIR
+    echoLn "enter location of BLAS library ($BLASDIR): "
+    read answer
+    [ "x$answer" != "x" ] && BLASDIR=$answer
+    fullPath BLASDIR
+    
+    lib="${BLASDIR}/lib${LIBBLAS}.a"
+    if [ ! -r $lib ]; then
+	echo
+	echo "error: BLAS library $lib not found"
+	echo
+	crashAndBurn
+    fi
+    
+    findLAPACKLib $LIBDIR
+    echoLn "enter location of LAPACK library ($LAPACKDIR): "
+    read answer
+    [ "x$answer" != "x" ] && LAPACKDIR=$answer
+    fullPath LAPACKDIR
+    
+    lib="${LAPACKDIR}/lib${LIBLAPACK}.a"
+    if [ ! -r $lib ]; then
+	echo
+	echo "error: LAPACK library $lib not found"
 	echo
 	crashAndBurn
     fi
@@ -802,6 +849,8 @@ editF90Makefile () {
 	${SED} "s|^F90_CFLAGS.*$|F90_CFLAGS	= $CFLAGS|" |\
 	${SED} "s|^FITSDIR.*$|FITSDIR	= $FITSDIR|" |\
 	${SED} "s|^LIBFITS.*$|LIBFITS	= $LIBFITS|" |\
+	${SED} "s|^LIBBLAS.*$|LIBBLAS	= $LIBBLAS|" |\
+	${SED} "s|^LIBLAPACK.*$|LIBLAPACK	= $LIBLAPACK|" |\
 	${SED} "s|^F90_BINDIR.*$|F90_BINDIR	= $F90_BINDIR|" |\
 	${SED} "s|^F90_INCDIR.*$|F90_INCDIR	= $F90_INCDIR|" |\
 	${SED} "s|^F90_LIBDIR.*$|F90_LIBDIR	= $F90_LIBDIR|" |\
@@ -1060,6 +1109,12 @@ setTopDefaults() {
 
     LIBFITS="cfitsio"
     FITSDIR="/usr/local/lib"
+    
+    LIBBLAS="blas"
+    BLASDIR="/usr/local/lib"
+    
+    LIBLAPACK="lapack"
+    LAPACKDIR="/usr/local/lib"
 
     edited_makefile=0
 

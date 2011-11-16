@@ -9,6 +9,10 @@ F90_INCDIR	=
 F90_LIBDIR	= 
 FITSDIR		=
 LIBFITS		=
+BLASDIR		=
+LIBBLAS		=
+LAPACKDIR	=
+LIBLAPACK	=
 
 F90_FC	= gfortran
 F90_FFLAGS	=
@@ -31,14 +35,10 @@ F90_MKFLAGS	= FC="$(F90_FC)" FFLAGS="$(F90_FFLAGS)" LDFLAGS="$(F90_LDFLAGS)" \
 
 all: f90-modules f90-library f90-prog
 
-test: f90-test
-
 RM	= rm -f
 LS = ls
 
-F90-PROG = almnfile2rmap survey2almn survey2almn_lm survey2almn_interactive 
-
-f90-prog: almnfile2rmap survey2almn survey2almn_lm survey2almn_interactive compute_plm compute_qln
+f90-prog: almnfile2rmap survey2almn survey2almn_lm survey2almn_interactive compute_legen_plm compute_qln compute_qml_pl utests
 
 f90-all: f90-external f90-modules f90-library f90-prog
 
@@ -62,19 +62,25 @@ survey2almn_lm: f90-modules f90-library
 survey2almn_interactive: f90-modules f90-library
 	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
 
-compute_plm: f90-modules f90-library
+compute_legen_plm: f90-modules f90-library
 	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
 	
 compute_qln: f90-modules f90-library
 	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
 
+compute_qml_pl: f90-modules f90-library
+	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)	
+	
+utests: f90-modules f90-library
+	@cd src/f90/$@; $(MAKE) $(F90_MKFLAGS)
+
 clean:
-	for p in $(F90-PROG) mod; do \
+	for p in $(f90-prog) mod; do \
 	$(RM) src/f90/$$p/*.o src/f90/$$p/*.$(F90_MOD) src/f90/$$p/lib*.a src/f90/$$p/*.pc src/f90/$$p/*.pcl src/f90/$$p/*.il ; \
 	done
 
 vclean: clean
-	for p in $(F90-PROG); do \
+	for p in $(f90-prog); do \
 	$(RM) $(F90_BINDIR)/$$p; \
 	$(RM) src/f90/$$p/*.o; \
 	done
