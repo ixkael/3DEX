@@ -10,7 +10,6 @@ PROGRAM compute_qml_pl
   USE f3dex_stats
   USE f3dex_fitstools
   USE f3dex_utils
-  USE f3dex_utests
 
   USE healpix_types
   USE healpix_modules
