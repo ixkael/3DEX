@@ -90,6 +90,9 @@ if (MPI_FOUND)
   add_executable(survey2almn_mpi src/cxx/sbtools.cpp src/cxx/survey.cpp src/cxx/survey2almn_mpi.cpp)
   target_link_libraries(survey2almn_mpi ${3DEXTAG} ${CXX_LIBS})
 
+  add_executable(compute_qln_cxx src/cxx/sbtools.cpp src/cxx/compute_qln.cpp)
+  target_link_libraries(compute_qln_cxx ${3DEXTAG} ${CXX_LIBS}) 
+  
 endif (MPI_FOUND)
 
 ############################################################
