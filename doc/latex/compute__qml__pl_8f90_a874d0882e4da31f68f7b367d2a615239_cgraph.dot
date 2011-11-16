@@ -1,0 +1,13 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="compute_qml_pl",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="f3dex_stats::gen_angles_map",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3",tooltip="Generates &lt;xxt&gt; correlation angles map."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="f3dex_utils::message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36",tooltip="Print preformated messages."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="f3dex_fitstools::tritab2fits",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__fitstools.html#a98c44872e5b5937bef4cccfcc2a21c43",tooltip="Write tri-tab to file."];
+}

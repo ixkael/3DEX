@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>3DEX: /Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90 Source File</title>
+<title>3DEX: /Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90 Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -58,7 +58,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90</div>  </div>
+<div class="title">/Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90</div>  </div>
 </div>
 <div class="contents">
 <a href="f3dex__transforms_8f90.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="namespacef3dex__transforms.html">00001</a> <span class="keyword">MODULE</span> f3dex_transforms
@@ -711,898 +711,884 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00648"></a>00648     <span class="keyword">ENDDO</span>
 <a name="l00649"></a>00649     <span class="comment">!$OMP END parallel DO</span>
 <a name="l00650"></a>00650 
-<a name="l00651"></a>00651     PRINT*,<span class="stringliteral">&quot;================================================&quot;</span>
-<a name="l00652"></a>00652     PRINT*,<span class="stringliteral">&quot;   Computing 3D cones and partial maps&quot;</span>
-<a name="l00653"></a>00653     PRINT*,<span class="stringliteral">&quot;   &gt; ModIFied FFT 3D algorithm&quot;</span>
-<a name="l00654"></a>00654     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
+<a name="l00651"></a>00651     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, start=.TRUE., msg=<span class="stringliteral">&quot;ModIFied FFT 3D algorithm&quot;</span>)
+<a name="l00652"></a>00652 
+<a name="l00653"></a>00653     <span class="comment">! loop on chunks</span>
+<a name="l00654"></a>00654     <span class="keyword">DO</span> ichunk = 0, nchunks-1 <span class="comment">! for each chunk</span>
 <a name="l00655"></a>00655 
-<a name="l00656"></a>00656     <span class="comment">! loop on chunks</span>
-<a name="l00657"></a>00657     <span class="keyword">DO</span> ichunk = 0, nchunks-1 <span class="comment">! for each chunk</span>
-<a name="l00658"></a>00658 
-<a name="l00659"></a>00659        PRINT*,<span class="stringliteral">&quot;&gt; Block : &quot;</span>,ichunk+1,<span class="stringliteral">&quot; on &quot;</span>, nchunks
+<a name="l00656"></a>00656        CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Block :&quot;</span>,i=ichunk+1,msg2=<span class="stringliteral">&quot; on &quot;</span>, i2=nchunks)
+<a name="l00657"></a>00657 
+<a name="l00658"></a>00658        lchk = ichunk * chunksize + 1  <span class="comment">! first ring of the chunk</span>
+<a name="l00659"></a>00659        uchk = min(lchk+chunksize - 1, nrings)  <span class="comment">! last ring of the chunk</span>
 <a name="l00660"></a>00660 
-<a name="l00661"></a>00661        lchk = ichunk * chunksize + 1  <span class="comment">! first ring of the chunk</span>
-<a name="l00662"></a>00662        uchk = min(lchk+chunksize - 1, nrings)  <span class="comment">! last ring of the chunk</span>
-<a name="l00663"></a>00663 
-<a name="l00664"></a>00664        <span class="comment">! locate pixels</span>
-<a name="l00665"></a>00665        <span class="keyword">DO</span> ith = lchk, uchk <span class="comment">! for each ring</span>
-<a name="l00666"></a>00666           ithl = ith - lchk <span class="comment">!local index</span>
-<a name="l00667"></a>00667           <span class="comment">! get pixel location information</span>
-<a name="l00668"></a>00668           CALL get_pixel_layout(nsmax, ith, cth(ithl), sth(ithl), nph(ithl), startpix(ithl), kphi0(ithl))
-<a name="l00669"></a>00669           <span class="comment">! find out which rings are to be analysed</span>
-<a name="l00670"></a>00670           CALL select_rings(cth(ithl), zbounds_in, keep_north(ithl), keep_south(ithl), keep_it(ithl))
-<a name="l00671"></a>00671        <span class="keyword">ENDDO</span>
-<a name="l00672"></a>00672 
-<a name="l00673"></a>00673        itotstart_north = startpix(0)
-<a name="l00674"></a>00674        itotEND_north = startpix(uchk-lchk)+nph(uchk-lchk)-1
-<a name="l00675"></a>00675        itotstart_south = npix-startpix(uchk-lchk)-nph(uchk-lchk)
-<a name="l00676"></a>00676        itotEND_south = npix-startpix(0)-1
-<a name="l00677"></a>00677        sizenorth = (itotEND_north-itotstart_north)
-<a name="l00678"></a>00678        sizesouth = (itotEND_south-itotstart_south)
+<a name="l00661"></a>00661        <span class="comment">! locate pixels</span>
+<a name="l00662"></a>00662        <span class="keyword">DO</span> ith = lchk, uchk <span class="comment">! for each ring</span>
+<a name="l00663"></a>00663           ithl = ith - lchk <span class="comment">!local index</span>
+<a name="l00664"></a>00664           <span class="comment">! get pixel location information</span>
+<a name="l00665"></a>00665           CALL get_pixel_layout(nsmax, ith, cth(ithl), sth(ithl), nph(ithl), startpix(ithl), kphi0(ithl))
+<a name="l00666"></a>00666           <span class="comment">! find out which rings are to be analysed</span>
+<a name="l00667"></a>00667           CALL select_rings(cth(ithl), zbounds_in, keep_north(ithl), keep_south(ithl), keep_it(ithl))
+<a name="l00668"></a>00668        <span class="keyword">ENDDO</span>
+<a name="l00669"></a>00669 
+<a name="l00670"></a>00670        itotstart_north = startpix(0)
+<a name="l00671"></a>00671        itotEND_north = startpix(uchk-lchk)+nph(uchk-lchk)-1
+<a name="l00672"></a>00672        itotstart_south = npix-startpix(uchk-lchk)-nph(uchk-lchk)
+<a name="l00673"></a>00673        itotEND_south = npix-startpix(0)-1
+<a name="l00674"></a>00674        sizenorth = (itotEND_north-itotstart_north)
+<a name="l00675"></a>00675        sizesouth = (itotEND_south-itotstart_south)
+<a name="l00676"></a>00676 
+<a name="l00677"></a>00677        <span class="comment">!PRINT*,&quot;North hemisphere:&quot;,itotstart_north,itotEND_north</span>
+<a name="l00678"></a>00678        <span class="comment">!PRINT*,&quot;South hemisphere:&quot;,itotstart_south,itotEND_south</span>
 <a name="l00679"></a>00679 
-<a name="l00680"></a>00680        <span class="comment">!PRINT*,&quot;North hemisphere:&quot;,itotstart_north,itotEND_north</span>
-<a name="l00681"></a>00681        <span class="comment">!PRINT*,&quot;South hemisphere:&quot;,itotstart_south,itotEND_south</span>
-<a name="l00682"></a>00682 
-<a name="l00683"></a>00683        <span class="keyword">ALLOCATE</span>(map_north(0:nlmax,0:sizenorth),stat = status)
-<a name="l00684"></a>00684        CALL assert_alloc(status,code,<span class="stringliteral">&#39;map_north&#39;</span>)
-<a name="l00685"></a>00685        <span class="keyword">ALLOCATE</span>(map_south(0:nlmax,0:sizesouth),stat = status)
-<a name="l00686"></a>00686        CALL assert_alloc(status,code,<span class="stringliteral">&#39;map_south&#39;</span>)
+<a name="l00680"></a>00680        <span class="keyword">ALLOCATE</span>(map_north(0:nlmax,0:sizenorth),stat = status)
+<a name="l00681"></a>00681        CALL assert_alloc(status,code,<span class="stringliteral">&#39;map_north&#39;</span>)
+<a name="l00682"></a>00682        <span class="keyword">ALLOCATE</span>(map_south(0:nlmax,0:sizesouth),stat = status)
+<a name="l00683"></a>00683        CALL assert_alloc(status,code,<span class="stringliteral">&#39;map_south&#39;</span>)
+<a name="l00684"></a>00684 
+<a name="l00685"></a>00685        <span class="comment">! loop on n parameter </span>
+<a name="l00686"></a>00686        <span class="keyword">DO</span> n=1, nnmax
 <a name="l00687"></a>00687 
-<a name="l00688"></a>00688        <span class="comment">! loop on n parameter </span>
-<a name="l00689"></a>00689        <span class="keyword">DO</span> n=1, nnmax
-<a name="l00690"></a>00690 
-<a name="l00691"></a>00691           <span class="comment">!PRINT*,&quot;&gt; N = &quot;,n </span>
-<a name="l00692"></a>00692           map_north=0.0_dp
-<a name="l00693"></a>00693           map_south=0.0_dp
-<a name="l00694"></a>00694 
-<a name="l00695"></a>00695           <span class="comment">!$OMP parallel default(private) &amp;</span>
-<a name="l00696"></a>00696           <span class="comment">!$OMP private(p, l, ipring, jln, tempaccjln, status, r ) &amp;</span>
-<a name="l00697"></a>00697           <span class="comment">!$OMP shared(n, survey, nsmax, nbpts, nlmax, kln, map_north, map_south, &amp;</span>
-<a name="l00698"></a>00698           <span class="comment">!$OMP   iprings, itotEND_north, itotstart_south, itotEND_south, itotstart_north )</span>
+<a name="l00688"></a>00688           <span class="comment">!PRINT*,&quot;&gt; N = &quot;,n </span>
+<a name="l00689"></a>00689           map_north=0.0_dp
+<a name="l00690"></a>00690           map_south=0.0_dp
+<a name="l00691"></a>00691 
+<a name="l00692"></a>00692           <span class="comment">!$OMP parallel default(private) &amp;</span>
+<a name="l00693"></a>00693           <span class="comment">!$OMP private(p, l, ipring, jln, tempaccjln, status, r ) &amp;</span>
+<a name="l00694"></a>00694           <span class="comment">!$OMP shared(n, survey, nsmax, nbpts, nlmax, kln, map_north, map_south, &amp;</span>
+<a name="l00695"></a>00695           <span class="comment">!$OMP   iprings, itotEND_north, itotstart_south, itotEND_south, itotstart_north )</span>
+<a name="l00696"></a>00696 
+<a name="l00697"></a>00697           <span class="keyword">ALLOCATE</span>(tempaccjln(0:nlmax),stat = status)
+<a name="l00698"></a>00698           CALL assert_alloc(status,code,<span class="stringliteral">&#39;tempaccjln&#39;</span>)
 <a name="l00699"></a>00699 
-<a name="l00700"></a>00700           <span class="keyword">ALLOCATE</span>(tempaccjln(0:nlmax),stat = status)
-<a name="l00701"></a>00701           CALL assert_alloc(status,code,<span class="stringliteral">&#39;tempaccjln&#39;</span>)
-<a name="l00702"></a>00702 
-<a name="l00703"></a>00703           <span class="comment">!$OMP DO reduction(+:map_north, map_south) schedule(dynamic,1024) </span>
-<a name="l00704"></a>00704           <span class="keyword">DO</span> p=1, nbpts
-<a name="l00705"></a>00705              r = survey(p,3)
-<a name="l00706"></a>00706              ipring = iprings(p)
-<a name="l00707"></a>00707              <span class="keyword">DO</span> l=0, nlmax
-<a name="l00708"></a>00708                 CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*r, jln ) 
-<a name="l00709"></a>00709                 tempaccjln(l) =  kln(l,n)*jln
-<a name="l00710"></a>00710              <span class="keyword">ENDDO</span>
-<a name="l00711"></a>00711 
-<a name="l00712"></a>00712              <span class="keyword">IF</span> ( ipring .GE. itotstart_north .AND. ipring .LE. itotEND_north ) <span class="keyword">THEN</span> <span class="comment">! IF north</span>
-<a name="l00713"></a>00713                 map_north(:,ipring-itotstart_north) =  map_north(:,ipring-itotstart_north) + tempaccjln(:)
+<a name="l00700"></a>00700           <span class="comment">!$OMP DO reduction(+:map_north, map_south) schedule(dynamic,1024) </span>
+<a name="l00701"></a>00701           <span class="keyword">DO</span> p=1, nbpts
+<a name="l00702"></a>00702              r = survey(p,3)
+<a name="l00703"></a>00703              ipring = iprings(p)
+<a name="l00704"></a>00704              <span class="keyword">DO</span> l=0, nlmax
+<a name="l00705"></a>00705                 CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*r, jln ) 
+<a name="l00706"></a>00706                 tempaccjln(l) =  kln(l,n)*jln
+<a name="l00707"></a>00707              <span class="keyword">ENDDO</span>
+<a name="l00708"></a>00708 
+<a name="l00709"></a>00709              <span class="keyword">IF</span> ( ipring .GE. itotstart_north .AND. ipring .LE. itotEND_north ) <span class="keyword">THEN</span> <span class="comment">! IF north</span>
+<a name="l00710"></a>00710                 map_north(:,ipring-itotstart_north) =  map_north(:,ipring-itotstart_north) + tempaccjln(:)
+<a name="l00711"></a>00711              <span class="keyword">ENDIF</span>
+<a name="l00712"></a>00712              <span class="keyword">IF</span> ( ipring .GE. itotstart_south .AND. ipring .LE. itotEND_south ) <span class="keyword">THEN</span> <span class="comment">! IF south</span>
+<a name="l00713"></a>00713                 map_south(:,ipring-itotstart_south) =  map_south(:,ipring-itotstart_south) + tempaccjln(:)
 <a name="l00714"></a>00714              <span class="keyword">ENDIF</span>
-<a name="l00715"></a>00715              <span class="keyword">IF</span> ( ipring .GE. itotstart_south .AND. ipring .LE. itotEND_south ) <span class="keyword">THEN</span> <span class="comment">! IF south</span>
-<a name="l00716"></a>00716                 map_south(:,ipring-itotstart_south) =  map_south(:,ipring-itotstart_south) + tempaccjln(:)
-<a name="l00717"></a>00717              <span class="keyword">ENDIF</span>
-<a name="l00718"></a>00718           <span class="keyword">ENDDO</span>
-<a name="l00719"></a>00719           <span class="comment">!$OMP END DO</span>
-<a name="l00720"></a>00720 
-<a name="l00721"></a>00721           <span class="keyword">deALLOCATE</span>(tempaccjln)
-<a name="l00722"></a>00722 
-<a name="l00723"></a>00723           <span class="comment">!$OMP END parallel</span>
-<a name="l00724"></a>00724 
-<a name="l00725"></a>00725           <span class="comment">!PRINT*,map_north(6,0:6)</span>
+<a name="l00715"></a>00715           <span class="keyword">ENDDO</span>
+<a name="l00716"></a>00716           <span class="comment">!$OMP END DO</span>
+<a name="l00717"></a>00717 
+<a name="l00718"></a>00718           <span class="keyword">deALLOCATE</span>(tempaccjln)
+<a name="l00719"></a>00719 
+<a name="l00720"></a>00720           <span class="comment">!$OMP END parallel</span>
+<a name="l00721"></a>00721 
+<a name="l00722"></a>00722           <span class="comment">!PRINT*,map_north(6,0:6)</span>
+<a name="l00723"></a>00723 
+<a name="l00724"></a>00724           phasl_n = 0_dpc
+<a name="l00725"></a>00725           phasl_s = 0_dpc
 <a name="l00726"></a>00726 
-<a name="l00727"></a>00727           phasl_n = 0_dpc
-<a name="l00728"></a>00728           phasl_s = 0_dpc
-<a name="l00729"></a>00729 
-<a name="l00730"></a>00730           <span class="comment">!$OMP parallel default(none) &amp;</span>
-<a name="l00731"></a>00731           <span class="comment">!$OMP  shared(nsmax, nlmax, nmmax, npix, nrings, nphmx, n, &amp;</span>
-<a name="l00732"></a>00732           <span class="comment">!$OMP      itotstart_north, itotEND_north, itotstart_south, itotEND_south, &amp;</span>
-<a name="l00733"></a>00733           <span class="comment">!$OMP      lchk, uchk, nph, startpix, kphi0, w8ring_in, &amp;</span>
-<a name="l00734"></a>00734           <span class="comment">!$OMP      phasl_n, phasl_s, keep_north, keep_south, chunksize, map_north, map_south ) &amp;</span>
-<a name="l00735"></a>00735           <span class="comment">!$OMP  private(ithl, nphl, istart_north, istart_south, l, ith, ring, status,  phas_n, phas_s)</span>
-<a name="l00736"></a>00736 
-<a name="l00737"></a>00737           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l00738"></a>00738              <span class="keyword">ALLOCATE</span>(ring(0:nphmx-1),stat = status)
-<a name="l00739"></a>00739              CALL assert_alloc(status,code,<span class="stringliteral">&#39;ring&#39;</span>)
-<a name="l00740"></a>00740              <span class="keyword">ALLOCATE</span>(phas_n(0:nmmax,0:chunksize-1),stat = status)
-<a name="l00741"></a>00741              CALL assert_alloc(status,code,<span class="stringliteral">&#39;phas_n&#39;</span>)
-<a name="l00742"></a>00742              <span class="keyword">ALLOCATE</span>(phas_s(0:nmmax,0:chunksize-1),stat = status)
-<a name="l00743"></a>00743              CALL assert_alloc(status,code,<span class="stringliteral">&#39;phas_s&#39;</span>)
-<a name="l00744"></a>00744           <span class="keyword">ENDIF</span>
+<a name="l00727"></a>00727           <span class="comment">!$OMP parallel default(none) &amp;</span>
+<a name="l00728"></a>00728           <span class="comment">!$OMP  shared(nsmax, nlmax, nmmax, npix, nrings, nphmx, n, &amp;</span>
+<a name="l00729"></a>00729           <span class="comment">!$OMP      itotstart_north, itotEND_north, itotstart_south, itotEND_south, &amp;</span>
+<a name="l00730"></a>00730           <span class="comment">!$OMP      lchk, uchk, nph, startpix, kphi0, w8ring_in, &amp;</span>
+<a name="l00731"></a>00731           <span class="comment">!$OMP      phasl_n, phasl_s, keep_north, keep_south, chunksize, map_north, map_south ) &amp;</span>
+<a name="l00732"></a>00732           <span class="comment">!$OMP  private(ithl, nphl, istart_north, istart_south, l, ith, ring, status,  phas_n, phas_s)</span>
+<a name="l00733"></a>00733 
+<a name="l00734"></a>00734           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l00735"></a>00735              <span class="keyword">ALLOCATE</span>(ring(0:nphmx-1),stat = status)
+<a name="l00736"></a>00736              CALL assert_alloc(status,code,<span class="stringliteral">&#39;ring&#39;</span>)
+<a name="l00737"></a>00737              <span class="keyword">ALLOCATE</span>(phas_n(0:nmmax,0:chunksize-1),stat = status)
+<a name="l00738"></a>00738              CALL assert_alloc(status,code,<span class="stringliteral">&#39;phas_n&#39;</span>)
+<a name="l00739"></a>00739              <span class="keyword">ALLOCATE</span>(phas_s(0:nmmax,0:chunksize-1),stat = status)
+<a name="l00740"></a>00740              CALL assert_alloc(status,code,<span class="stringliteral">&#39;phas_s&#39;</span>)
+<a name="l00741"></a>00741           <span class="keyword">ENDIF</span>
+<a name="l00742"></a>00742 
+<a name="l00743"></a>00743           phas_n = 0_dpc
+<a name="l00744"></a>00744           phas_s = 0_dpc
 <a name="l00745"></a>00745 
-<a name="l00746"></a>00746           phas_n = 0_dpc
-<a name="l00747"></a>00747           phas_s = 0_dpc
+<a name="l00746"></a>00746           <span class="comment">!$OMP DO schedule(dynamic,1)</span>
+<a name="l00747"></a>00747           <span class="keyword">DO</span> l = 0, nlmax
 <a name="l00748"></a>00748 
-<a name="l00749"></a>00749           <span class="comment">!$OMP DO schedule(dynamic,1)</span>
-<a name="l00750"></a>00750           <span class="keyword">DO</span> l = 0, nlmax
-<a name="l00751"></a>00751 
-<a name="l00752"></a>00752              <span class="keyword">DO</span> ith = lchk, uchk
-<a name="l00753"></a>00753                 ithl = ith - lchk <span class="comment">!local index</span>
-<a name="l00754"></a>00754                 nphl = nph(ithl)
-<a name="l00755"></a>00755                 istart_north = startpix(ithl)
-<a name="l00756"></a>00756                 istart_south = npix-istart_north-nphl
-<a name="l00757"></a>00757                 <span class="comment">! DO Fourier Transform on rings</span>
-<a name="l00758"></a>00758                 <span class="keyword">IF</span> (keep_north(ithl)) <span class="keyword">THEN</span>
-<a name="l00759"></a>00759                    <span class="comment">!</span>
-<a name="l00760"></a>00760                    ring(0:nphl-1) = map_north(l,(istart_north-itotstart_north):(istart_north+nphl-1-itotstart_north))<span class="comment">! * w8ring_in(ith,1)</span>
-<a name="l00761"></a>00761                    CALL ring_analysis(nsmax, nlmax, nmmax, ring, nphl, phas_n(0,ithl), kphi0(ithl))
-<a name="l00762"></a>00762                    phasl_n(l,0:nmmax,ithl) = phas_n(0:nmmax,ithl) + phasl_n(l,0:nmmax,ithl)
+<a name="l00749"></a>00749              <span class="keyword">DO</span> ith = lchk, uchk
+<a name="l00750"></a>00750                 ithl = ith - lchk <span class="comment">!local index</span>
+<a name="l00751"></a>00751                 nphl = nph(ithl)
+<a name="l00752"></a>00752                 istart_north = startpix(ithl)
+<a name="l00753"></a>00753                 istart_south = npix-istart_north-nphl
+<a name="l00754"></a>00754                 <span class="comment">! DO Fourier Transform on rings</span>
+<a name="l00755"></a>00755                 <span class="keyword">IF</span> (keep_north(ithl)) <span class="keyword">THEN</span>
+<a name="l00756"></a>00756                    <span class="comment">!</span>
+<a name="l00757"></a>00757                    ring(0:nphl-1) = map_north(l,(istart_north-itotstart_north):(istart_north+nphl-1-itotstart_north))<span class="comment">! * w8ring_in(ith,1)</span>
+<a name="l00758"></a>00758                    CALL ring_analysis(nsmax, nlmax, nmmax, ring, nphl, phas_n(0,ithl), kphi0(ithl))
+<a name="l00759"></a>00759                    phasl_n(l,0:nmmax,ithl) = phas_n(0:nmmax,ithl) + phasl_n(l,0:nmmax,ithl)
+<a name="l00760"></a>00760                    <span class="comment">!</span>
+<a name="l00761"></a>00761                 <span class="keyword">ENDIF</span>
+<a name="l00762"></a>00762                 <span class="keyword">IF</span> (ith &lt; nrings .and. keep_south(ithl) ) <span class="keyword">THEN</span>
 <a name="l00763"></a>00763                    <span class="comment">!</span>
-<a name="l00764"></a>00764                 <span class="keyword">ENDIF</span>
-<a name="l00765"></a>00765                 <span class="keyword">IF</span> (ith &lt; nrings .and. keep_south(ithl) ) <span class="keyword">THEN</span>
-<a name="l00766"></a>00766                    <span class="comment">!</span>
-<a name="l00767"></a>00767                    ring(0:nphl-1) = map_south(l,(istart_south-itotstart_south):&amp;
-<a name="l00768"></a>00768                         &amp;(istart_south+nphl-1-itotstart_south))<span class="comment">! * w8ring_in(ith,1)</span>
-<a name="l00769"></a>00769                    CALL ring_analysis(nsmax, nlmax, nmmax, ring, nphl, phas_s(0,ithl), kphi0(ithl))
-<a name="l00770"></a>00770                    phasl_s(l,0:nmmax,ithl) = phas_s(0:nmmax,ithl) + phasl_s(l,0:nmmax,ithl)
-<a name="l00771"></a>00771                    <span class="comment">!</span>
-<a name="l00772"></a>00772                 <span class="keyword">ENDIF</span>
-<a name="l00773"></a>00773              <span class="keyword">ENDDO</span> <span class="comment">! loop on ring</span>
-<a name="l00774"></a>00774           <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
-<a name="l00775"></a>00775           <span class="comment">!$OMP END DO</span>
-<a name="l00776"></a>00776 
-<a name="l00777"></a>00777           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l00778"></a>00778              <span class="keyword">deALLOCATE</span>(ring)
-<a name="l00779"></a>00779              <span class="keyword">deALLOCATE</span>(phas_s,phas_n)
-<a name="l00780"></a>00780           <span class="keyword">ENDIF</span>
-<a name="l00781"></a>00781           <span class="comment">!$OMP END parallel</span>
-<a name="l00782"></a>00782 
-<a name="l00783"></a>00783           CALL init_rescale()
-<a name="l00784"></a>00784           OVFLOW = rescale_tab(1)
-<a name="l00785"></a>00785           UNFLOW = rescale_tab(-1)
-<a name="l00786"></a>00786 
-<a name="l00787"></a>00787           <span class="comment">!$OMP parallel default(none) &amp;</span>
-<a name="l00788"></a>00788           <span class="comment">!$OMP shared(nlmax, nmmax, lchk, uchk, rescale_tab, n, ovflow, unflow, &amp;</span>
-<a name="l00789"></a>00789           <span class="comment">!$OMP    cth, sth, mfac, almn, phasl_n, phasl_s, keep_it, omega_pix) &amp;</span>
-<a name="l00790"></a>00790           <span class="comment">!$OMP private(recfac, dalm, phas_sd, status, m, ithl, l_min, &amp;</span>
-<a name="l00791"></a>00791           <span class="comment">!$OMP   scalem, scalel, corfac, par_lm, lam_mm, lam_lm, lam_0, lam_1, lam_2, &amp;</span>
-<a name="l00792"></a>00792           <span class="comment">!$OMP   cth_ring, l, php, phm)</span>
-<a name="l00793"></a>00793 
-<a name="l00794"></a>00794           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l00795"></a>00795              <span class="keyword">ALLOCATE</span>(recfac(0:1,0:nlmax),stat = status)
-<a name="l00796"></a>00796              CALL assert_alloc(status,code,<span class="stringliteral">&#39;recfac&#39;</span>)
-<a name="l00797"></a>00797              <span class="keyword">ALLOCATE</span>(dalm(1:2,0:nlmax),stat = status)
-<a name="l00798"></a>00798              CALL assert_alloc(status,code,<span class="stringliteral">&#39;dalm&#39;</span>)
-<a name="l00799"></a>00799           <span class="keyword">ENDIF</span>
-<a name="l00800"></a>00800 
-<a name="l00801"></a>00801           <span class="comment">!$OMP DO reduction(+:almn) schedule(dynamic,1)</span>
-<a name="l00802"></a>00802           <span class="keyword">DO</span> m = 0, nmmax
-<a name="l00803"></a>00803              <span class="comment">! generate recursion factors (recfac) for Ylm of degree m</span>
-<a name="l00804"></a>00804              CALL gen_recfac(nlmax, m, recfac)
+<a name="l00764"></a>00764                    ring(0:nphl-1) = map_south(l,(istart_south-itotstart_south):&amp;
+<a name="l00765"></a>00765                         &amp;(istart_south+nphl-1-itotstart_south))<span class="comment">! * w8ring_in(ith,1)</span>
+<a name="l00766"></a>00766                    CALL ring_analysis(nsmax, nlmax, nmmax, ring, nphl, phas_s(0,ithl), kphi0(ithl))
+<a name="l00767"></a>00767                    phasl_s(l,0:nmmax,ithl) = phas_s(0:nmmax,ithl) + phasl_s(l,0:nmmax,ithl)
+<a name="l00768"></a>00768                    <span class="comment">!</span>
+<a name="l00769"></a>00769                 <span class="keyword">ENDIF</span>
+<a name="l00770"></a>00770              <span class="keyword">ENDDO</span> <span class="comment">! loop on ring</span>
+<a name="l00771"></a>00771           <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
+<a name="l00772"></a>00772           <span class="comment">!$OMP END DO</span>
+<a name="l00773"></a>00773 
+<a name="l00774"></a>00774           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l00775"></a>00775              <span class="keyword">deALLOCATE</span>(ring)
+<a name="l00776"></a>00776              <span class="keyword">deALLOCATE</span>(phas_s,phas_n)
+<a name="l00777"></a>00777           <span class="keyword">ENDIF</span>
+<a name="l00778"></a>00778           <span class="comment">!$OMP END parallel</span>
+<a name="l00779"></a>00779 
+<a name="l00780"></a>00780           CALL init_rescale()
+<a name="l00781"></a>00781           OVFLOW = rescale_tab(1)
+<a name="l00782"></a>00782           UNFLOW = rescale_tab(-1)
+<a name="l00783"></a>00783 
+<a name="l00784"></a>00784           <span class="comment">!$OMP parallel default(none) &amp;</span>
+<a name="l00785"></a>00785           <span class="comment">!$OMP shared(nlmax, nmmax, lchk, uchk, rescale_tab, n, ovflow, unflow, &amp;</span>
+<a name="l00786"></a>00786           <span class="comment">!$OMP    cth, sth, mfac, almn, phasl_n, phasl_s, keep_it, omega_pix) &amp;</span>
+<a name="l00787"></a>00787           <span class="comment">!$OMP private(recfac, dalm, phas_sd, status, m, ithl, l_min, &amp;</span>
+<a name="l00788"></a>00788           <span class="comment">!$OMP   scalem, scalel, corfac, par_lm, lam_mm, lam_lm, lam_0, lam_1, lam_2, &amp;</span>
+<a name="l00789"></a>00789           <span class="comment">!$OMP   cth_ring, l, php, phm)</span>
+<a name="l00790"></a>00790 
+<a name="l00791"></a>00791           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l00792"></a>00792              <span class="keyword">ALLOCATE</span>(recfac(0:1,0:nlmax),stat = status)
+<a name="l00793"></a>00793              CALL assert_alloc(status,code,<span class="stringliteral">&#39;recfac&#39;</span>)
+<a name="l00794"></a>00794              <span class="keyword">ALLOCATE</span>(dalm(1:2,0:nlmax),stat = status)
+<a name="l00795"></a>00795              CALL assert_alloc(status,code,<span class="stringliteral">&#39;dalm&#39;</span>)
+<a name="l00796"></a>00796           <span class="keyword">ENDIF</span>
+<a name="l00797"></a>00797 
+<a name="l00798"></a>00798           <span class="comment">!$OMP DO reduction(+:almn) schedule(dynamic,1)</span>
+<a name="l00799"></a>00799           <span class="keyword">DO</span> m = 0, nmmax
+<a name="l00800"></a>00800              <span class="comment">! generate recursion factors (recfac) for Ylm of degree m</span>
+<a name="l00801"></a>00801              CALL gen_recfac(nlmax, m, recfac)
+<a name="l00802"></a>00802 
+<a name="l00803"></a>00803              <span class="comment">! introduce DOuble precision vector to perform summation over ith for each l</span>
+<a name="l00804"></a>00804              dalm(1:2, m:nlmax ) = 0.0_dp
 <a name="l00805"></a>00805 
-<a name="l00806"></a>00806              <span class="comment">! introduce DOuble precision vector to perform summation over ith for each l</span>
-<a name="l00807"></a>00807              dalm(1:2, m:nlmax ) = 0.0_dp
-<a name="l00808"></a>00808 
-<a name="l00809"></a>00809              <span class="keyword">DO</span> ithl = 0, uchk - lchk
-<a name="l00810"></a>00810                 l_min = 0 <span class="comment">!l_min_ylm(m, sth(ithl))</span>
-<a name="l00811"></a>00811                 <span class="keyword">IF</span> (keep_it(ithl) .and. nlmax &gt;= l_min) <span class="keyword">THEN</span> <span class="comment">! avoid un-necessary calculations (EH, 09-2001)</span>
-<a name="l00812"></a>00812                    <span class="comment">! determine lam_mm</span>
-<a name="l00813"></a>00813                    CALL compute_lam_mm(mfac(m), m, sth(ithl), lam_mm, corfac, scalem)
+<a name="l00806"></a>00806              <span class="keyword">DO</span> ithl = 0, uchk - lchk
+<a name="l00807"></a>00807                 l_min = 0 <span class="comment">!l_min_ylm(m, sth(ithl))</span>
+<a name="l00808"></a>00808                 <span class="keyword">IF</span> (keep_it(ithl) .and. nlmax &gt;= l_min) <span class="keyword">THEN</span> <span class="comment">! avoid un-necessary calculations (EH, 09-2001)</span>
+<a name="l00809"></a>00809                    <span class="comment">! determine lam_mm</span>
+<a name="l00810"></a>00810                    CALL compute_lam_mm(mfac(m), m, sth(ithl), lam_mm, corfac, scalem)
+<a name="l00811"></a>00811 
+<a name="l00812"></a>00812                    <span class="comment">!           ---------- l = m ----------</span>
+<a name="l00813"></a>00813                    par_lm = 1
 <a name="l00814"></a>00814 
-<a name="l00815"></a>00815                    <span class="comment">!           ---------- l = m ----------</span>
-<a name="l00816"></a>00816                    par_lm = 1
-<a name="l00817"></a>00817 
-<a name="l00818"></a>00818                    php = phasl_n(m,m,ithl) + phasl_s(m,m,ithl) <span class="comment">! sum  (IF (l+m) even)</span>
-<a name="l00819"></a>00819                    phm = phasl_n(m,m,ithl) - phasl_s(m,m,ithl) <span class="comment">! dIFf (IF (l+m) odd)</span>
-<a name="l00820"></a>00820                    phas_sd(-1:0) =  (/ <span class="keywordtype">REAL(phm, kind=dp)</span>, aimag(phm) /)
-<a name="l00821"></a>00821                    phas_sd(1:2) =  (/ <span class="keywordtype">REAL(php, kind=dp)</span>, aimag(php) /)
-<a name="l00822"></a>00822                    <span class="keyword">IF</span> (m &gt;= l_min) <span class="keyword">THEN</span>
-<a name="l00823"></a>00823                       lam_lm = lam_mm * corfac <span class="comment">!Actual lam_mm </span>
-<a name="l00824"></a>00824                       dalm(1:2, m) = dalm(1:2, m) + phas_sd(par_lm:par_lm+1) *lam_lm
-<a name="l00825"></a>00825                    <span class="keyword">ENDIF</span>
-<a name="l00826"></a>00826 
-<a name="l00827"></a>00827 
-<a name="l00828"></a>00828                    <span class="comment">!           ---------- l &gt; m ----------</span>
-<a name="l00829"></a>00829                    lam_0 = 0.0_dp
-<a name="l00830"></a>00830                    lam_1 = 1.0_dp
-<a name="l00831"></a>00831                    scalel=0
-<a name="l00832"></a>00832                    cth_ring = cth(ithl)
-<a name="l00833"></a>00833                    lam_2 = cth_ring * lam_1 * recfac(0,m)
-<a name="l00834"></a>00834 
-<a name="l00835"></a>00835                    <span class="keyword">DO</span> l = m+1, nlmax
-<a name="l00836"></a>00836 
-<a name="l00837"></a>00837                       php = phasl_n(l,m,ithl) + phasl_s(l,m,ithl) <span class="comment">! sum  (IF (l+m) even)</span>
-<a name="l00838"></a>00838                       phm = phasl_n(l,m,ithl) - phasl_s(l,m,ithl) <span class="comment">! dIFf (IF (l+m) odd)</span>
-<a name="l00839"></a>00839                       phas_sd(-1:0) =  (/ <span class="keywordtype">REAL(phm, kind=dp)</span>, aimag(phm) /)
-<a name="l00840"></a>00840                       phas_sd(1:2) =  (/ <span class="keywordtype">REAL(php, kind=dp)</span>, aimag(php) /)
-<a name="l00841"></a>00841 
-<a name="l00842"></a>00842                       par_lm = - par_lm  <span class="comment">! = (-1)^(l+m)</span>
-<a name="l00843"></a>00843 
-<a name="l00844"></a>00844                       <span class="keyword">IF</span> (l &gt;= l_min) <span class="keyword">THEN</span>
-<a name="l00845"></a>00845                          lam_lm = lam_2 * corfac * lam_mm
-<a name="l00846"></a>00846                          dalm(1:2, l) = dalm(1:2, l) &amp;
-<a name="l00847"></a>00847                               &amp;       +  phas_sd(par_lm:par_lm+1) *lam_lm
-<a name="l00848"></a>00848                       <span class="keyword">ENDIF</span>
-<a name="l00849"></a>00849 
-<a name="l00850"></a>00850                       lam_0 = lam_1 * recfac(1,l-1)
-<a name="l00851"></a>00851                       lam_1 = lam_2
-<a name="l00852"></a>00852                       lam_2 = (cth_ring * lam_1 - lam_0) * recfac(0,l)
-<a name="l00853"></a>00853                       <span class="keyword">IF</span> (abs(lam_2) &gt; OVFLOW) <span class="keyword">THEN</span>
-<a name="l00854"></a>00854                          lam_1 = lam_1*UNFLOW
-<a name="l00855"></a>00855                          lam_2 = lam_2*UNFLOW
-<a name="l00856"></a>00856                          scalel= scalel + 1
-<a name="l00857"></a>00857                          corfac= rescale_tab(max(scalem+scalel,RSMIN))
-<a name="l00858"></a>00858                       ELSEIF (abs(lam_2) &lt; UNFLOW) <span class="keyword">THEN</span>
-<a name="l00859"></a>00859                          lam_1 = lam_1*OVFLOW
-<a name="l00860"></a>00860                          lam_2 = lam_2*OVFLOW
-<a name="l00861"></a>00861                          scalel= scalel - 1
-<a name="l00862"></a>00862                          corfac= rescale_tab(max(scalem+scalel,RSMIN))
-<a name="l00863"></a>00863                       <span class="keyword">ENDIF</span>
-<a name="l00864"></a>00864 
-<a name="l00865"></a>00865                    <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
-<a name="l00866"></a>00866                 <span class="keyword">ENDIF</span> <span class="comment">! test on cut sky and nlmax</span>
-<a name="l00867"></a>00867              <span class="keyword">ENDDO</span> <span class="comment">! loop on ithl</span>
-<a name="l00868"></a>00868              <span class="keyword">DO</span> l = m, nlmax
-<a name="l00869"></a>00869                 almn(n, l, m) = almn(n, l, m) + cmplx(dalm(1, l), dalm(2, l), kind=DP)
-<a name="l00870"></a>00870              <span class="keyword">ENDDO</span>
-<a name="l00871"></a>00871           <span class="keyword">ENDDO</span> <span class="comment">! loop on m</span>
-<a name="l00872"></a>00872           <span class="comment">!$OMP END DO</span>
-<a name="l00873"></a>00873           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l00874"></a>00874              <span class="keyword">deALLOCATE</span> (recfac,dalm)
-<a name="l00875"></a>00875           <span class="keyword">ENDIF</span>
-<a name="l00876"></a>00876           <span class="comment">!$OMP END parallel</span>
-<a name="l00877"></a>00877 
-<a name="l00878"></a>00878        <span class="keyword">ENDDO</span> <span class="comment">! loop on n</span>
-<a name="l00879"></a>00879 
-<a name="l00880"></a>00880        <span class="keyword">deALLOCATE</span>(map_north, map_south)
-<a name="l00881"></a>00881 
-<a name="l00882"></a>00882     <span class="keyword">ENDDO</span> <span class="comment">! loop on chunks</span>
-<a name="l00883"></a>00883 
-<a name="l00884"></a>00884     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
-<a name="l00885"></a>00885     PRINT*,<span class="stringliteral">&quot;   Finished&quot;</span>
-<a name="l00886"></a>00886     PRINT*,<span class="stringliteral">&quot;================================================&quot;</span>
-<a name="l00887"></a>00887 
-<a name="l00888"></a>00888     <span class="comment">!     --------------------</span>
-<a name="l00889"></a>00889     <span class="comment">!     free memory and exit</span>
-<a name="l00890"></a>00890     <span class="comment">!     --------------------</span>
-<a name="l00891"></a>00891 
-<a name="l00892"></a>00892     <span class="keyword">deALLOCATE</span>(mfac)
-<a name="l00893"></a>00893     <span class="keyword">IF</span> (.not.DO_openmp()) <span class="keyword">THEN</span>
-<a name="l00894"></a>00894        <span class="keyword">deALLOCATE</span> (ring,recfac,dalm)
-<a name="l00895"></a>00895        <span class="keyword">deALLOCATE</span>(phas_n,phas_s)
-<a name="l00896"></a>00896     <span class="keyword">ENDIF</span>
-<a name="l00897"></a>00897     RETURN
-<a name="l00898"></a>00898     <span class="comment">!</span>
-<a name="l00899"></a>00899 <span class="keyword">  END SUBROUTINE survey2almn_opt</span>
-<a name="l00900"></a>00900 
-<a name="l00901"></a>00901   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l00902"></a>00902 
-<a name="l00910"></a><a class="code" href="namespacef3dex__transforms.html#ae19f381573ccd64c64102bbd4181483f">00910</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#ae19f381573ccd64c64102bbd4181483f">survey2almn_srs</a>( nsmax, nnmax, nlmax, nmmax, rmax, nbpts, &amp;
-<a name="l00911"></a>00911        &amp; zbounds, survey, kln, almn)
-<a name="l00912"></a>00912     <span class="comment">!</span>
-<a name="l00913"></a>00913     <span class="keywordtype">INTEGER(I4B)</span>  :: status, nbpts, ipring, nrr, nb_iter
-<a name="l00914"></a>00914     <span class="keywordtype">INTEGER(I4B)</span>  :: nsmax, nnmax, nlmax, nmmax, n, p, k, m, l
-<a name="l00915"></a>00915     <span class="keywordtype">REAL</span>(DP)   :: rmax, tempval, order
-<a name="l00916"></a>00916     <span class="comment">! </span>
-<a name="l00917"></a>00917     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(:,:)</span>, allocatable      :: map
-<a name="l00918"></a>00918     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(1:nbpts,1:3)</span>               :: survey
-<a name="l00919"></a>00919     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(1:3)</span>                         :: surveytemp
-<a name="l00920"></a>00920     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(1:2)</span>                     :: zbounds
-<a name="l00921"></a>00921     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span>         :: kln
-<a name="l00922"></a>00922     <span class="comment">!REAL(DP),    dimension(:,:,:) , allocatable     :: jln</span>
-<a name="l00923"></a>00923     <span class="keywordtype">REAL(DP)</span>                                        :: jln
-<a name="l00924"></a>00924     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(:,:)</span>   , <span class="keywordtype">allocatable</span>     ::  plm
-<a name="l00925"></a>00925     <span class="keywordtype">complex(DP)</span>, <span class="keywordtype">dimension(1:nnmax,0:nlmax,0:nmmax)</span> :: almn
-<a name="l00926"></a>00926     <span class="keywordtype">character(len=*)</span>, <span class="keywordtype">PARAMETER</span>                     :: code = <span class="stringliteral">&quot;survey2almn_srs&quot;</span>
-<a name="l00927"></a>00927     <span class="comment">!</span>
-<a name="l00928"></a>00928 
-<a name="l00929"></a>00929     almn = cmplx( 0.0, 0.0, kind=DP )
+<a name="l00815"></a>00815                    php = phasl_n(m,m,ithl) + phasl_s(m,m,ithl) <span class="comment">! sum  (IF (l+m) even)</span>
+<a name="l00816"></a>00816                    phm = phasl_n(m,m,ithl) - phasl_s(m,m,ithl) <span class="comment">! dIFf (IF (l+m) odd)</span>
+<a name="l00817"></a>00817                    phas_sd(-1:0) =  (/ <span class="keywordtype">REAL(phm, kind=dp)</span>, aimag(phm) /)
+<a name="l00818"></a>00818                    phas_sd(1:2) =  (/ <span class="keywordtype">REAL(php, kind=dp)</span>, aimag(php) /)
+<a name="l00819"></a>00819                    <span class="keyword">IF</span> (m &gt;= l_min) <span class="keyword">THEN</span>
+<a name="l00820"></a>00820                       lam_lm = lam_mm * corfac <span class="comment">!Actual lam_mm </span>
+<a name="l00821"></a>00821                       dalm(1:2, m) = dalm(1:2, m) + phas_sd(par_lm:par_lm+1) *lam_lm
+<a name="l00822"></a>00822                    <span class="keyword">ENDIF</span>
+<a name="l00823"></a>00823 
+<a name="l00824"></a>00824 
+<a name="l00825"></a>00825                    <span class="comment">!           ---------- l &gt; m ----------</span>
+<a name="l00826"></a>00826                    lam_0 = 0.0_dp
+<a name="l00827"></a>00827                    lam_1 = 1.0_dp
+<a name="l00828"></a>00828                    scalel=0
+<a name="l00829"></a>00829                    cth_ring = cth(ithl)
+<a name="l00830"></a>00830                    lam_2 = cth_ring * lam_1 * recfac(0,m)
+<a name="l00831"></a>00831 
+<a name="l00832"></a>00832                    <span class="keyword">DO</span> l = m+1, nlmax
+<a name="l00833"></a>00833 
+<a name="l00834"></a>00834                       php = phasl_n(l,m,ithl) + phasl_s(l,m,ithl) <span class="comment">! sum  (IF (l+m) even)</span>
+<a name="l00835"></a>00835                       phm = phasl_n(l,m,ithl) - phasl_s(l,m,ithl) <span class="comment">! dIFf (IF (l+m) odd)</span>
+<a name="l00836"></a>00836                       phas_sd(-1:0) =  (/ <span class="keywordtype">REAL(phm, kind=dp)</span>, aimag(phm) /)
+<a name="l00837"></a>00837                       phas_sd(1:2) =  (/ <span class="keywordtype">REAL(php, kind=dp)</span>, aimag(php) /)
+<a name="l00838"></a>00838 
+<a name="l00839"></a>00839                       par_lm = - par_lm  <span class="comment">! = (-1)^(l+m)</span>
+<a name="l00840"></a>00840 
+<a name="l00841"></a>00841                       <span class="keyword">IF</span> (l &gt;= l_min) <span class="keyword">THEN</span>
+<a name="l00842"></a>00842                          lam_lm = lam_2 * corfac * lam_mm
+<a name="l00843"></a>00843                          dalm(1:2, l) = dalm(1:2, l) &amp;
+<a name="l00844"></a>00844                               &amp;       +  phas_sd(par_lm:par_lm+1) *lam_lm
+<a name="l00845"></a>00845                       <span class="keyword">ENDIF</span>
+<a name="l00846"></a>00846 
+<a name="l00847"></a>00847                       lam_0 = lam_1 * recfac(1,l-1)
+<a name="l00848"></a>00848                       lam_1 = lam_2
+<a name="l00849"></a>00849                       lam_2 = (cth_ring * lam_1 - lam_0) * recfac(0,l)
+<a name="l00850"></a>00850                       <span class="keyword">IF</span> (abs(lam_2) &gt; OVFLOW) <span class="keyword">THEN</span>
+<a name="l00851"></a>00851                          lam_1 = lam_1*UNFLOW
+<a name="l00852"></a>00852                          lam_2 = lam_2*UNFLOW
+<a name="l00853"></a>00853                          scalel= scalel + 1
+<a name="l00854"></a>00854                          corfac= rescale_tab(max(scalem+scalel,RSMIN))
+<a name="l00855"></a>00855                       ELSEIF (abs(lam_2) &lt; UNFLOW) <span class="keyword">THEN</span>
+<a name="l00856"></a>00856                          lam_1 = lam_1*OVFLOW
+<a name="l00857"></a>00857                          lam_2 = lam_2*OVFLOW
+<a name="l00858"></a>00858                          scalel= scalel - 1
+<a name="l00859"></a>00859                          corfac= rescale_tab(max(scalem+scalel,RSMIN))
+<a name="l00860"></a>00860                       <span class="keyword">ENDIF</span>
+<a name="l00861"></a>00861 
+<a name="l00862"></a>00862                    <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
+<a name="l00863"></a>00863                 <span class="keyword">ENDIF</span> <span class="comment">! test on cut sky and nlmax</span>
+<a name="l00864"></a>00864              <span class="keyword">ENDDO</span> <span class="comment">! loop on ithl</span>
+<a name="l00865"></a>00865              <span class="keyword">DO</span> l = m, nlmax
+<a name="l00866"></a>00866                 almn(n, l, m) = almn(n, l, m) + cmplx(dalm(1, l), dalm(2, l), kind=DP)
+<a name="l00867"></a>00867              <span class="keyword">ENDDO</span>
+<a name="l00868"></a>00868           <span class="keyword">ENDDO</span> <span class="comment">! loop on m</span>
+<a name="l00869"></a>00869           <span class="comment">!$OMP END DO</span>
+<a name="l00870"></a>00870           <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l00871"></a>00871              <span class="keyword">deALLOCATE</span> (recfac,dalm)
+<a name="l00872"></a>00872           <span class="keyword">ENDIF</span>
+<a name="l00873"></a>00873           <span class="comment">!$OMP END parallel</span>
+<a name="l00874"></a>00874 
+<a name="l00875"></a>00875        <span class="keyword">ENDDO</span> <span class="comment">! loop on n</span>
+<a name="l00876"></a>00876 
+<a name="l00877"></a>00877        <span class="keyword">deALLOCATE</span>(map_north, map_south)
+<a name="l00878"></a>00878 
+<a name="l00879"></a>00879     <span class="keyword">ENDDO</span> <span class="comment">! loop on chunks</span>
+<a name="l00880"></a>00880 
+<a name="l00881"></a>00881     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,fin=.TRUE.)
+<a name="l00882"></a>00882 
+<a name="l00883"></a>00883     <span class="comment">!     --------------------</span>
+<a name="l00884"></a>00884     <span class="comment">!     free memory and exit</span>
+<a name="l00885"></a>00885     <span class="comment">!     --------------------</span>
+<a name="l00886"></a>00886 
+<a name="l00887"></a>00887     <span class="keyword">deALLOCATE</span>(mfac)
+<a name="l00888"></a>00888     <span class="keyword">IF</span> (.not.DO_openmp()) <span class="keyword">THEN</span>
+<a name="l00889"></a>00889        <span class="keyword">deALLOCATE</span> (ring,recfac,dalm)
+<a name="l00890"></a>00890        <span class="keyword">deALLOCATE</span>(phas_n,phas_s)
+<a name="l00891"></a>00891     <span class="keyword">ENDIF</span>
+<a name="l00892"></a>00892     RETURN
+<a name="l00893"></a>00893     <span class="comment">!</span>
+<a name="l00894"></a>00894 <span class="keyword">  END SUBROUTINE survey2almn_opt</span>
+<a name="l00895"></a>00895 
+<a name="l00896"></a>00896   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l00897"></a>00897 
+<a name="l00905"></a><a class="code" href="namespacef3dex__transforms.html#ae19f381573ccd64c64102bbd4181483f">00905</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#ae19f381573ccd64c64102bbd4181483f">survey2almn_srs</a>( nsmax, nnmax, nlmax, nmmax, rmax, nbpts, &amp;
+<a name="l00906"></a>00906        &amp; zbounds, survey, kln, almn)
+<a name="l00907"></a>00907     <span class="comment">!</span>
+<a name="l00908"></a>00908     <span class="keywordtype">INTEGER(I4B)</span>  :: status, nbpts, ipring, nrr, nb_iter
+<a name="l00909"></a>00909     <span class="keywordtype">INTEGER(I4B)</span>  :: nsmax, nnmax, nlmax, nmmax, n, p, k, m, l
+<a name="l00910"></a>00910     <span class="keywordtype">REAL</span>(DP)   :: rmax, tempval, order
+<a name="l00911"></a>00911     <span class="comment">! </span>
+<a name="l00912"></a>00912     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(:,:)</span>, allocatable      :: map
+<a name="l00913"></a>00913     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(1:nbpts,1:3)</span>               :: survey
+<a name="l00914"></a>00914     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(1:3)</span>                         :: surveytemp
+<a name="l00915"></a>00915     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(1:2)</span>                     :: zbounds
+<a name="l00916"></a>00916     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span>         :: kln
+<a name="l00917"></a>00917     <span class="comment">!REAL(DP),    dimension(:,:,:) , allocatable     :: jln</span>
+<a name="l00918"></a>00918     <span class="keywordtype">REAL(DP)</span>                                        :: jln
+<a name="l00919"></a>00919     <span class="keywordtype">REAL(DP)</span>,    <span class="keywordtype">dimension(:,:)</span>   , <span class="keywordtype">allocatable</span>     ::  plm
+<a name="l00920"></a>00920     <span class="keywordtype">complex(DP)</span>, <span class="keywordtype">dimension(1:nnmax,0:nlmax,0:nmmax)</span> :: almn
+<a name="l00921"></a>00921     <span class="keywordtype">character(len=*)</span>, <span class="keywordtype">PARAMETER</span>                     :: code = <span class="stringliteral">&quot;survey2almn_srs&quot;</span>
+<a name="l00922"></a>00922     <span class="comment">!</span>
+<a name="l00923"></a>00923 
+<a name="l00924"></a>00924     almn = cmplx( 0.0, 0.0, kind=DP )
+<a name="l00925"></a>00925 
+<a name="l00926"></a>00926 120 FORMAT(A,I3)
+<a name="l00927"></a>00927 
+<a name="l00928"></a>00928     <span class="keyword">ALLOCATE</span>(map(0:nlmax,0:(12*nsmax**2-1)),stat = status)
+<a name="l00929"></a>00929     CALL assert_alloc(status,code,<span class="stringliteral">&quot;map&quot;</span>)
 <a name="l00930"></a>00930 
-<a name="l00931"></a>00931 120 FORMAT(A,I3)
-<a name="l00932"></a>00932 
-<a name="l00933"></a>00933     <span class="keyword">ALLOCATE</span>(map(0:nlmax,0:(12*nsmax**2-1)),stat = status)
-<a name="l00934"></a>00934     CALL assert_alloc(status,code,<span class="stringliteral">&quot;map&quot;</span>)
+<a name="l00931"></a>00931     PRINT*,<span class="stringliteral">&quot;================================================&quot;</span>
+<a name="l00932"></a>00932     PRINT*,<span class="stringliteral">&quot;   Computing multidimensional maps&quot;</span> 
+<a name="l00933"></a>00933     PRINT*,<span class="stringliteral">&quot;   &gt; ModIFied FFT 3D algorithm&quot;</span>
+<a name="l00934"></a>00934     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
 <a name="l00935"></a>00935 
-<a name="l00936"></a>00936     PRINT*,<span class="stringliteral">&quot;================================================&quot;</span>
-<a name="l00937"></a>00937     PRINT*,<span class="stringliteral">&quot;   Computing multidimensional maps&quot;</span> 
-<a name="l00938"></a>00938     PRINT*,<span class="stringliteral">&quot;   &gt; ModIFied FFT 3D algorithm&quot;</span>
-<a name="l00939"></a>00939     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
+<a name="l00936"></a>00936     <span class="keyword">DO</span> n = 1, nnmax
+<a name="l00937"></a>00937 
+<a name="l00938"></a>00938        PRINT*,<span class="stringliteral">&quot;&gt; Order n = &quot;</span>,n<span class="comment">!,OMP_GET_THREAD_NUM()</span>
+<a name="l00939"></a>00939        map = 0.0_dp
 <a name="l00940"></a>00940 
-<a name="l00941"></a>00941     <span class="keyword">DO</span> n = 1, nnmax
-<a name="l00942"></a>00942 
-<a name="l00943"></a>00943        PRINT*,<span class="stringliteral">&quot;&gt; Order n = &quot;</span>,n<span class="comment">!,OMP_GET_THREAD_NUM()</span>
-<a name="l00944"></a>00944        map = 0.0_dp
-<a name="l00945"></a>00945 
-<a name="l00946"></a>00946        <span class="comment">!$OMP PARALLEL DO REDUCTION(+:map)  SCHEDULE(DYNAMIC,512) &amp;</span>
-<a name="l00947"></a>00947        <span class="comment">!$OMP SHARED(nnmax,nsmax,nlmax,nmmax,almn,n,survey,kln,zbounds) &amp;</span>
-<a name="l00948"></a>00948        <span class="comment">!$OMP PRIVATE(status,p,ipring,l,jln)</span>
-<a name="l00949"></a>00949 
-<a name="l00950"></a>00950        <span class="keyword">DO</span> p = 1, nbpts
-<a name="l00951"></a>00951           <span class="comment">!</span>
-<a name="l00952"></a>00952           surveytemp(1:3) = survey(p,1:3)
-<a name="l00953"></a>00953           CALL ang2pix_ring(nsmax, surveytemp(2), surveytemp(1), ipring)
-<a name="l00954"></a>00954           <span class="comment">!  </span>
-<a name="l00955"></a>00955           <span class="keyword">DO</span> l = 0, nlmax
+<a name="l00941"></a>00941        <span class="comment">!$OMP PARALLEL DO REDUCTION(+:map)  SCHEDULE(DYNAMIC,512) &amp;</span>
+<a name="l00942"></a>00942        <span class="comment">!$OMP SHARED(nnmax,nsmax,nlmax,nmmax,almn,n,survey,kln,zbounds) &amp;</span>
+<a name="l00943"></a>00943        <span class="comment">!$OMP PRIVATE(status,p,ipring,l,jln)</span>
+<a name="l00944"></a>00944 
+<a name="l00945"></a>00945        <span class="keyword">DO</span> p = 1, nbpts
+<a name="l00946"></a>00946           <span class="comment">!</span>
+<a name="l00947"></a>00947           surveytemp(1:3) = survey(p,1:3)
+<a name="l00948"></a>00948           CALL ang2pix_ring(nsmax, surveytemp(2), surveytemp(1), ipring)
+<a name="l00949"></a>00949           <span class="comment">!  </span>
+<a name="l00950"></a>00950           <span class="keyword">DO</span> l = 0, nlmax
+<a name="l00951"></a>00951              <span class="comment">!</span>
+<a name="l00952"></a>00952              jln = 0.0_dp
+<a name="l00953"></a>00953              CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*surveytemp(3) , jln )
+<a name="l00954"></a>00954              <span class="comment">!$OMP ATOMIC</span>
+<a name="l00955"></a>00955              map(l,ipring) = map(l,ipring) + kln(l,n) * jln
 <a name="l00956"></a>00956              <span class="comment">!</span>
-<a name="l00957"></a>00957              jln = 0.0_dp
-<a name="l00958"></a>00958              CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*surveytemp(3) , jln )
-<a name="l00959"></a>00959              <span class="comment">!$OMP ATOMIC</span>
-<a name="l00960"></a>00960              map(l,ipring) = map(l,ipring) + kln(l,n) * jln
-<a name="l00961"></a>00961              <span class="comment">!</span>
-<a name="l00962"></a>00962           <span class="keyword">ENDDO</span>
-<a name="l00963"></a>00963 
-<a name="l00964"></a>00964        <span class="keyword">ENDDO</span>
-<a name="l00965"></a>00965 
-<a name="l00966"></a>00966        <span class="comment">!$OMP END PARALLEL DO</span>
+<a name="l00957"></a>00957           <span class="keyword">ENDDO</span>
+<a name="l00958"></a>00958 
+<a name="l00959"></a>00959        <span class="keyword">ENDDO</span>
+<a name="l00960"></a>00960 
+<a name="l00961"></a>00961        <span class="comment">!$OMP END PARALLEL DO</span>
+<a name="l00962"></a>00962 
+<a name="l00963"></a>00963        <span class="comment">!PRINT*,map(6,0:6)</span>
+<a name="l00964"></a>00964 
+<a name="l00965"></a>00965        CALL <a class="code" href="namespacef3dex__transforms.html#aef309274871cf8eb0405b63f14ab26a2">alnspring2almn</a>( nsmax, nlmax, nmmax, map, &amp;
+<a name="l00966"></a>00966             &amp; almn(n:n, 0:nlmax,0:nmmax), zbounds )
 <a name="l00967"></a>00967 
-<a name="l00968"></a>00968        <span class="comment">!PRINT*,map(6,0:6)</span>
+<a name="l00968"></a>00968     <span class="keyword">ENDDO</span>
 <a name="l00969"></a>00969 
-<a name="l00970"></a>00970        CALL <a class="code" href="namespacef3dex__transforms.html#aef309274871cf8eb0405b63f14ab26a2">alnspring2almn</a>( nsmax, nlmax, nmmax, map, &amp;
-<a name="l00971"></a>00971             &amp; almn(n:n, 0:nlmax,0:nmmax), zbounds )
-<a name="l00972"></a>00972 
-<a name="l00973"></a>00973     <span class="keyword">ENDDO</span>
+<a name="l00970"></a>00970     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
+<a name="l00971"></a>00971     PRINT*,<span class="stringliteral">&quot;   Finished&quot;</span>
+<a name="l00972"></a>00972     PRINT*,<span class="stringliteral">&quot;================================================&quot;</span>
+<a name="l00973"></a>00973 
 <a name="l00974"></a>00974 
-<a name="l00975"></a>00975     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
-<a name="l00976"></a>00976     PRINT*,<span class="stringliteral">&quot;   Finished&quot;</span>
-<a name="l00977"></a>00977     PRINT*,<span class="stringliteral">&quot;================================================&quot;</span>
-<a name="l00978"></a>00978 
-<a name="l00979"></a>00979 
-<a name="l00980"></a>00980     <span class="keyword">DEALLOCATE</span>( map )    
-<a name="l00981"></a>00981 
-<a name="l00982"></a>00982     RETURN
-<a name="l00983"></a>00983     <span class="comment">!</span>
-<a name="l00984"></a>00984 <span class="keyword">  END SUBROUTINE survey2almn_srs</span>
-<a name="l00985"></a>00985 
-<a name="l00986"></a>00986   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l00987"></a>00987 
-<a name="l00988"></a><a class="code" href="namespacef3dex__transforms.html#a4675d50d585b89b97772a0fa7dde4c5f">00988</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a4675d50d585b89b97772a0fa7dde4c5f">fieldalmn2overalmn</a>( almn, kln, rhomean, rmax, nnmax, nlmax, nmmax )
-<a name="l00989"></a>00989 
-<a name="l00990"></a>00990     <span class="keyword">IMPLICIT NONE</span>
-<a name="l00991"></a>00991 
-<a name="l00992"></a>00992     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, nmmax, n
-<a name="l00993"></a>00993     <span class="keywordtype">REAL(DP)</span> :: rmax, rhomean
-<a name="l00994"></a>00994     <span class="keywordtype">COMPLEX(DP)</span>,<span class="keywordtype">DIMENSION(1:nnmax,0:nlmax,0:nmmax)</span> :: almn
-<a name="l00995"></a>00995     <span class="keywordtype">REAL(DP)</span>,<span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: kln
-<a name="l00996"></a>00996     <span class="keywordtype">REAL(DP)</span>,<span class="keywordtype">DIMENSION(1:nnmax,1:1,1:1)</span> :: jln
-<a name="l00997"></a>00997 
-<a name="l00998"></a>00998     PRINT*, <span class="stringliteral">&quot;rhomean&quot;</span>, rhomean
-<a name="l00999"></a>00999 
-<a name="l01000"></a>01000     almn(:,:,:) = almn(:,:,:) / rhomean
-<a name="l01001"></a>01001 
-<a name="l01002"></a>01002     <span class="keyword">DO</span> n = 1, nnmax
-<a name="l01003"></a>01003        CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( 1 , kln(1,n)*rmax , jln(n,1,1) )
-<a name="l01004"></a>01004        PRINT*,sqrt(FOURPI)*(rmax**2.0)*jln(n,1,1)
-<a name="l01005"></a>01005        almn(n,0,0) = almn(n,0,0) - sqrt(FOURPI)*(rmax**2.0)*jln(n,1,1)
-<a name="l01006"></a>01006     <span class="keyword">ENDDO</span>
-<a name="l01007"></a>01007 
-<a name="l01008"></a>01008     RETURN
-<a name="l01009"></a>01009 
-<a name="l01010"></a>01010 <span class="keyword">  END SUBROUTINE fieldalmn2overalmn</span>
-<a name="l01011"></a>01011 
-<a name="l01012"></a>01012   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l01013"></a>01013 
-<a name="l01014"></a><a class="code" href="namespacef3dex__transforms.html#a3e792eb35f030b601d9262ac031cfdb9">01014</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a3e792eb35f030b601d9262ac031cfdb9">almn2rmap</a>(map, almn, rho, nsmax, nnmax, nlmax, nmmax, kln, cln, plm)
-<a name="l01015"></a>01015 
-<a name="l01016"></a>01016     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01017"></a>01017 
-<a name="l01018"></a>01018     <span class="keywordtype">REAL(DP)</span>             :: rho
-<a name="l01019"></a>01019     <span class="keywordtype">INTEGER(I4B)</span>, <span class="keywordtype">intent(IN)</span>                     :: nsmax, nnmax, nlmax, nmmax
-<a name="l01020"></a>01020     <span class="keywordtype">complex(DPC)</span>, <span class="keywordtype">intent(IN)</span>,  <span class="keywordtype">dimension(1:nnmax,0:nlmax,0:nmmax)</span>      :: almn
-<a name="l01021"></a>01021     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">intent(OUT)</span>, <span class="keywordtype">dimension(0:(12_i8b*nsmax)*nsmax-1,1:1)</span> :: map
-<a name="l01022"></a>01022     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">intent(IN)</span>,  <span class="keywordtype">dimension(0:( nsmax*(nmmax+1)*(2*nlmax-nmmax+2) ) )</span>   :: plm
-<a name="l01023"></a>01023 
-<a name="l01024"></a>01024     <span class="keywordtype">INTEGER(I4B)</span> :: l, m, ith, n
-<a name="l01025"></a>01025     <span class="keywordtype">INTEGER(I8B)</span> :: istart_south, istart_north, npix
-<a name="l01026"></a>01026     <span class="keywordtype">INTEGER(I4B)</span> :: nrings, nphmx
-<a name="l01027"></a>01027 
-<a name="l01028"></a>01028     <span class="keywordtype">INTEGER(I8B)</span> :: n_lm, n_plm, i_mm
-<a name="l01029"></a>01029     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span>  :: cln, kln,jlns
-<a name="l01030"></a>01030     <span class="keywordtype">complex(DPC)</span>, <span class="keywordtype">dimension(-1:1)</span>             :: b_ns
-<a name="l01031"></a>01031     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(:,:)</span>, <span class="keywordtype">allocatable</span> :: dalm
-<a name="l01032"></a>01032     <span class="keywordtype">INTEGER(i4b)</span>                              :: ll, l_min, l_start
-<a name="l01033"></a>01033     <span class="keywordtype">REAL(DP)</span>                                  :: cth
-<a name="l01034"></a>01034     <span class="keywordtype">complex(DPC)</span>, <span class="keywordtype">dimension(:,:)</span>, <span class="keywordtype">allocatable</span> :: b_north, b_south
-<a name="l01035"></a>01035     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(:)</span>,   <span class="keywordtype">allocatable</span> :: ring
-<a name="l01036"></a>01036     <span class="keywordtype">INTEGER(i4b)</span>             :: nchunks, chunksize, ichunk, lchk, uchk, ithl, nphl
-<a name="l01037"></a>01037     <span class="keywordtype">INTEGER(i4b)</span>, <span class="keywordtype">parameter</span> :: SMAXCHK = 50
-<a name="l01038"></a>01038     <span class="keywordtype">INTEGER(I8B)</span>, <span class="keywordtype">dimension(0:SMAXCHK-1)</span> :: startpix
-<a name="l01039"></a>01039     <span class="keywordtype">INTEGER(I4B)</span>, <span class="keywordtype">dimension(0:SMAXCHK-1)</span> :: nph, kphi0
-<a name="l01040"></a>01040     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(0:SMAXCHK-1)</span> :: sth
-<a name="l01041"></a>01041 
-<a name="l01042"></a>01042     <span class="keywordtype">character(LEN=*)</span>, <span class="keywordtype">parameter</span> :: code = <span class="stringliteral">&#39;ALM2MAP&#39;</span>
-<a name="l01043"></a>01043     <span class="keywordtype">INTEGER(I4B)</span> :: status
-<a name="l01044"></a>01044     <span class="comment">!=======================================================================</span>
-<a name="l01045"></a>01045 
-<a name="l01046"></a>01046     <span class="comment">! Healpix definitions</span>
-<a name="l01047"></a>01047     nrings = 2*nsmax           <span class="comment">! number of isolatitude rings on N. hemisphere + equat</span>
-<a name="l01048"></a>01048     npix   = (12_I8B*nsmax)*nsmax    <span class="comment">! total number of pixels on the sphere</span>
-<a name="l01049"></a>01049     nphmx  = 4*nsmax           <span class="comment">! maximum number of pixels/ring</span>
-<a name="l01050"></a>01050     n_lm   = ((nmmax+1_I8B)*(2*nlmax-nmmax+2))/2 <span class="comment">!number of (l,m) with m in[0,M] and l in [m,L]</span>
-<a name="l01051"></a>01051     n_plm  = n_lm * nrings
-<a name="l01052"></a>01052 
-<a name="l01053"></a>01053     <span class="comment">!     --- ALLOCATEs space for arrays ---</span>
-<a name="l01054"></a>01054     nchunks   = nrings/SMAXCHK + 1  <span class="comment">! number of chunks</span>
-<a name="l01055"></a>01055     chunksize = (nrings+nchunks-1)/nchunks <span class="comment">! &lt;= SMAXCHK</span>
-<a name="l01056"></a>01056 
-<a name="l01057"></a>01057     <span class="keyword">ALLOCATE</span>(b_north(0:nmmax, 0:chunksize-1),stat = status)
-<a name="l01058"></a>01058     CALL assert_alloc(status,code,<span class="stringliteral">&#39;b_north&#39;</span>)
-<a name="l01059"></a>01059 
-<a name="l01060"></a>01060     <span class="keyword">ALLOCATE</span>(b_south(0:nmmax, 0:chunksize-1),stat = status)
-<a name="l01061"></a>01061     CALL assert_alloc(status,code,<span class="stringliteral">&#39;b_south&#39;</span>)
-<a name="l01062"></a>01062 
-<a name="l01063"></a>01063     <span class="keyword">IF</span> (.not. DO_openmp()) <span class="keyword">THEN</span>
-<a name="l01064"></a>01064        <span class="keyword">ALLOCATE</span>(dalm(0:1,0:nlmax), stat = status)
-<a name="l01065"></a>01065        CALL assert_alloc(status,code,<span class="stringliteral">&#39;dalm&#39;</span>)
-<a name="l01066"></a>01066        <span class="keyword">ALLOCATE</span>(ring(0:nphmx-1),stat = status)
-<a name="l01067"></a>01067        CALL assert_alloc(status,code,<span class="stringliteral">&#39;ring&#39;</span>)
-<a name="l01068"></a>01068     <span class="keyword">ENDIF</span>
+<a name="l00975"></a>00975     <span class="keyword">DEALLOCATE</span>( map )    
+<a name="l00976"></a>00976 
+<a name="l00977"></a>00977     RETURN
+<a name="l00978"></a>00978     <span class="comment">!</span>
+<a name="l00979"></a>00979 <span class="keyword">  END SUBROUTINE survey2almn_srs</span>
+<a name="l00980"></a>00980 
+<a name="l00981"></a>00981   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l00982"></a>00982 
+<a name="l00983"></a><a class="code" href="namespacef3dex__transforms.html#a4675d50d585b89b97772a0fa7dde4c5f">00983</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a4675d50d585b89b97772a0fa7dde4c5f">fieldalmn2overalmn</a>( almn, kln, rhomean, rmax, nnmax, nlmax, nmmax )
+<a name="l00984"></a>00984 
+<a name="l00985"></a>00985     <span class="keyword">IMPLICIT NONE</span>
+<a name="l00986"></a>00986 
+<a name="l00987"></a>00987     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, nmmax, n
+<a name="l00988"></a>00988     <span class="keywordtype">REAL(DP)</span> :: rmax, rhomean
+<a name="l00989"></a>00989     <span class="keywordtype">COMPLEX(DP)</span>,<span class="keywordtype">DIMENSION(1:nnmax,0:nlmax,0:nmmax)</span> :: almn
+<a name="l00990"></a>00990     <span class="keywordtype">REAL(DP)</span>,<span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: kln
+<a name="l00991"></a>00991     <span class="keywordtype">REAL(DP)</span>,<span class="keywordtype">DIMENSION(1:nnmax,1:1,1:1)</span> :: jln
+<a name="l00992"></a>00992 
+<a name="l00993"></a>00993     PRINT*, <span class="stringliteral">&quot;rhomean&quot;</span>, rhomean
+<a name="l00994"></a>00994 
+<a name="l00995"></a>00995     almn(:,:,:) = almn(:,:,:) / rhomean
+<a name="l00996"></a>00996 
+<a name="l00997"></a>00997     <span class="keyword">DO</span> n = 1, nnmax
+<a name="l00998"></a>00998        CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( 1 , kln(1,n)*rmax , jln(n,1,1) )
+<a name="l00999"></a>00999        PRINT*,sqrt(FOURPI)*(rmax**2.0)*jln(n,1,1)
+<a name="l01000"></a>01000        almn(n,0,0) = almn(n,0,0) - sqrt(FOURPI)*(rmax**2.0)*jln(n,1,1)
+<a name="l01001"></a>01001     <span class="keyword">ENDDO</span>
+<a name="l01002"></a>01002 
+<a name="l01003"></a>01003     RETURN
+<a name="l01004"></a>01004 
+<a name="l01005"></a>01005 <span class="keyword">  END SUBROUTINE fieldalmn2overalmn</span>
+<a name="l01006"></a>01006 
+<a name="l01007"></a>01007   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01008"></a>01008 
+<a name="l01009"></a><a class="code" href="namespacef3dex__transforms.html#a3e792eb35f030b601d9262ac031cfdb9">01009</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a3e792eb35f030b601d9262ac031cfdb9">almn2rmap</a>(map, almn, rho, nsmax, nnmax, nlmax, nmmax, kln, cln, plm)
+<a name="l01010"></a>01010 
+<a name="l01011"></a>01011     <span class="keyword">IMPLICIT NONE</span>
+<a name="l01012"></a>01012 
+<a name="l01013"></a>01013     <span class="keywordtype">REAL(DP)</span>             :: rho
+<a name="l01014"></a>01014     <span class="keywordtype">INTEGER(I4B)</span>, <span class="keywordtype">intent(IN)</span>                     :: nsmax, nnmax, nlmax, nmmax
+<a name="l01015"></a>01015     <span class="keywordtype">complex(DPC)</span>, <span class="keywordtype">intent(IN)</span>,  <span class="keywordtype">dimension(1:nnmax,0:nlmax,0:nmmax)</span>      :: almn
+<a name="l01016"></a>01016     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">intent(OUT)</span>, <span class="keywordtype">dimension(0:(12_i8b*nsmax)*nsmax-1,1:1)</span> :: map
+<a name="l01017"></a>01017     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">intent(IN)</span>,  <span class="keywordtype">dimension(0:( nsmax*(nmmax+1)*(2*nlmax-nmmax+2) ) )</span>   :: plm
+<a name="l01018"></a>01018 
+<a name="l01019"></a>01019     <span class="keywordtype">INTEGER(I4B)</span> :: l, m, ith, n
+<a name="l01020"></a>01020     <span class="keywordtype">INTEGER(I8B)</span> :: istart_south, istart_north, npix
+<a name="l01021"></a>01021     <span class="keywordtype">INTEGER(I4B)</span> :: nrings, nphmx
+<a name="l01022"></a>01022 
+<a name="l01023"></a>01023     <span class="keywordtype">INTEGER(I8B)</span> :: n_lm, n_plm, i_mm
+<a name="l01024"></a>01024     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span>  :: cln, kln,jlns
+<a name="l01025"></a>01025     <span class="keywordtype">complex(DPC)</span>, <span class="keywordtype">dimension(-1:1)</span>             :: b_ns
+<a name="l01026"></a>01026     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(:,:)</span>, <span class="keywordtype">allocatable</span> :: dalm
+<a name="l01027"></a>01027     <span class="keywordtype">INTEGER(i4b)</span>                              :: ll, l_min, l_start
+<a name="l01028"></a>01028     <span class="keywordtype">REAL(DP)</span>                                  :: cth
+<a name="l01029"></a>01029     <span class="keywordtype">complex(DPC)</span>, <span class="keywordtype">dimension(:,:)</span>, <span class="keywordtype">allocatable</span> :: b_north, b_south
+<a name="l01030"></a>01030     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(:)</span>,   <span class="keywordtype">allocatable</span> :: ring
+<a name="l01031"></a>01031     <span class="keywordtype">INTEGER(i4b)</span>             :: nchunks, chunksize, ichunk, lchk, uchk, ithl, nphl
+<a name="l01032"></a>01032     <span class="keywordtype">INTEGER(i4b)</span>, <span class="keywordtype">parameter</span> :: SMAXCHK = 50
+<a name="l01033"></a>01033     <span class="keywordtype">INTEGER(I8B)</span>, <span class="keywordtype">dimension(0:SMAXCHK-1)</span> :: startpix
+<a name="l01034"></a>01034     <span class="keywordtype">INTEGER(I4B)</span>, <span class="keywordtype">dimension(0:SMAXCHK-1)</span> :: nph, kphi0
+<a name="l01035"></a>01035     <span class="keywordtype">REAL(DP)</span>,     <span class="keywordtype">dimension(0:SMAXCHK-1)</span> :: sth
+<a name="l01036"></a>01036 
+<a name="l01037"></a>01037     <span class="keywordtype">character(LEN=*)</span>, <span class="keywordtype">parameter</span> :: code = <span class="stringliteral">&#39;ALM2MAP&#39;</span>
+<a name="l01038"></a>01038     <span class="keywordtype">INTEGER(I4B)</span> :: status
+<a name="l01039"></a>01039     <span class="comment">!=======================================================================</span>
+<a name="l01040"></a>01040 
+<a name="l01041"></a>01041     <span class="comment">! Healpix definitions</span>
+<a name="l01042"></a>01042     nrings = 2*nsmax           <span class="comment">! number of isolatitude rings on N. hemisphere + equat</span>
+<a name="l01043"></a>01043     npix   = (12_I8B*nsmax)*nsmax    <span class="comment">! total number of pixels on the sphere</span>
+<a name="l01044"></a>01044     nphmx  = 4*nsmax           <span class="comment">! maximum number of pixels/ring</span>
+<a name="l01045"></a>01045     n_lm   = ((nmmax+1_I8B)*(2*nlmax-nmmax+2))/2 <span class="comment">!number of (l,m) with m in[0,M] and l in [m,L]</span>
+<a name="l01046"></a>01046     n_plm  = n_lm * nrings
+<a name="l01047"></a>01047 
+<a name="l01048"></a>01048     <span class="comment">!     --- ALLOCATEs space for arrays ---</span>
+<a name="l01049"></a>01049     nchunks   = nrings/SMAXCHK + 1  <span class="comment">! number of chunks</span>
+<a name="l01050"></a>01050     chunksize = (nrings+nchunks-1)/nchunks <span class="comment">! &lt;= SMAXCHK</span>
+<a name="l01051"></a>01051 
+<a name="l01052"></a>01052     <span class="keyword">ALLOCATE</span>(b_north(0:nmmax, 0:chunksize-1),stat = status)
+<a name="l01053"></a>01053     CALL assert_alloc(status,code,<span class="stringliteral">&#39;b_north&#39;</span>)
+<a name="l01054"></a>01054 
+<a name="l01055"></a>01055     <span class="keyword">ALLOCATE</span>(b_south(0:nmmax, 0:chunksize-1),stat = status)
+<a name="l01056"></a>01056     CALL assert_alloc(status,code,<span class="stringliteral">&#39;b_south&#39;</span>)
+<a name="l01057"></a>01057 
+<a name="l01058"></a>01058     <span class="keyword">IF</span> (.not. DO_openmp()) <span class="keyword">THEN</span>
+<a name="l01059"></a>01059        <span class="keyword">ALLOCATE</span>(dalm(0:1,0:nlmax), stat = status)
+<a name="l01060"></a>01060        CALL assert_alloc(status,code,<span class="stringliteral">&#39;dalm&#39;</span>)
+<a name="l01061"></a>01061        <span class="keyword">ALLOCATE</span>(ring(0:nphmx-1),stat = status)
+<a name="l01062"></a>01062        CALL assert_alloc(status,code,<span class="stringliteral">&#39;ring&#39;</span>)
+<a name="l01063"></a>01063     <span class="keyword">ENDIF</span>
+<a name="l01064"></a>01064 
+<a name="l01065"></a>01065 
+<a name="l01066"></a>01066     <span class="comment">!     ------------ Compute required bessel FUNCTIONs ----------------</span>
+<a name="l01067"></a>01067 
+<a name="l01068"></a>01068     CALL <a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">gen_jln</a>(jlns, kln, rho, nnmax, nlmax)
 <a name="l01069"></a>01069 
 <a name="l01070"></a>01070 
-<a name="l01071"></a>01071     <span class="comment">!     ------------ Compute required bessel FUNCTIONs ----------------</span>
+<a name="l01071"></a>01071     <span class="comment">!     ------------ initiate variables and arrays ----------------</span>
 <a name="l01072"></a>01072 
-<a name="l01073"></a>01073     CALL <a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">gen_jln</a>(jlns, kln, rho, nnmax, nlmax)
+<a name="l01073"></a>01073     map = 0.0 <span class="comment">! set the whole map to zero</span>
 <a name="l01074"></a>01074 
-<a name="l01075"></a>01075 
-<a name="l01076"></a>01076     <span class="comment">!     ------------ initiate variables and arrays ----------------</span>
-<a name="l01077"></a>01077 
-<a name="l01078"></a>01078     map = 0.0 <span class="comment">! set the whole map to zero</span>
+<a name="l01075"></a>01075     <span class="comment">! loop on chunks</span>
+<a name="l01076"></a>01076     <span class="keyword">DO</span> ichunk = 0, nchunks-1
+<a name="l01077"></a>01077        lchk = ichunk * chunksize + 1
+<a name="l01078"></a>01078        uchk = min(lchk+chunksize - 1, nrings)
 <a name="l01079"></a>01079 
-<a name="l01080"></a>01080     <span class="comment">! loop on chunks</span>
-<a name="l01081"></a>01081     <span class="keyword">DO</span> ichunk = 0, nchunks-1
-<a name="l01082"></a>01082        lchk = ichunk * chunksize + 1
-<a name="l01083"></a>01083        uchk = min(lchk+chunksize - 1, nrings)
-<a name="l01084"></a>01084 
-<a name="l01085"></a>01085        <span class="keyword">DO</span> ith = lchk, uchk
-<a name="l01086"></a>01086           ithl = ith - lchk <span class="comment">!local index</span>
-<a name="l01087"></a>01087           <span class="comment">! get pixel location information</span>
-<a name="l01088"></a>01088           CALL get_pixel_layout(nsmax, ith, cth, sth(ithl), nph(ithl), startpix(ithl), kphi0(ithl))
-<a name="l01089"></a>01089        <span class="keyword">ENDDO</span>
-<a name="l01090"></a>01090 
-<a name="l01091"></a>01091        b_north(:,:) = 0_dpc <span class="comment">! pad with zeros</span>
-<a name="l01092"></a>01092        b_south(:,:) = 0_dpc
-<a name="l01093"></a>01093 
-<a name="l01094"></a>01094        <span class="comment">!$OMP parallel default(none) NUM_THREADS(8) &amp;</span>
-<a name="l01095"></a>01095        <span class="comment">!$OMP shared(nlmax, nmmax, sth, lchk, uchk, plm, b_north, b_south, n_lm, jlns, cln, almn, nnmax) &amp;</span>
-<a name="l01096"></a>01096        <span class="comment">!$OMP private(dalm, b_ns, status, m, ith, ithl, l_min, l_start, l, ll, i_mm)</span>
+<a name="l01080"></a>01080        <span class="keyword">DO</span> ith = lchk, uchk
+<a name="l01081"></a>01081           ithl = ith - lchk <span class="comment">!local index</span>
+<a name="l01082"></a>01082           <span class="comment">! get pixel location information</span>
+<a name="l01083"></a>01083           CALL get_pixel_layout(nsmax, ith, cth, sth(ithl), nph(ithl), startpix(ithl), kphi0(ithl))
+<a name="l01084"></a>01084        <span class="keyword">ENDDO</span>
+<a name="l01085"></a>01085 
+<a name="l01086"></a>01086        b_north(:,:) = 0_dpc <span class="comment">! pad with zeros</span>
+<a name="l01087"></a>01087        b_south(:,:) = 0_dpc
+<a name="l01088"></a>01088 
+<a name="l01089"></a>01089        <span class="comment">!$OMP parallel default(none) NUM_THREADS(8) &amp;</span>
+<a name="l01090"></a>01090        <span class="comment">!$OMP shared(nlmax, nmmax, sth, lchk, uchk, plm, b_north, b_south, n_lm, jlns, cln, almn, nnmax) &amp;</span>
+<a name="l01091"></a>01091        <span class="comment">!$OMP private(dalm, b_ns, status, m, ith, ithl, l_min, l_start, l, ll, i_mm)</span>
+<a name="l01092"></a>01092 
+<a name="l01093"></a>01093        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l01094"></a>01094           <span class="keyword">ALLOCATE</span>(dalm(0:1,0:nlmax), stat = status)
+<a name="l01095"></a>01095           CALL assert_alloc(status,code,<span class="stringliteral">&#39;dalm&#39;</span>)
+<a name="l01096"></a>01096        <span class="keyword">ENDIF</span>
 <a name="l01097"></a>01097 
-<a name="l01098"></a>01098        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l01099"></a>01099           <span class="keyword">ALLOCATE</span>(dalm(0:1,0:nlmax), stat = status)
-<a name="l01100"></a>01100           CALL assert_alloc(status,code,<span class="stringliteral">&#39;dalm&#39;</span>)
-<a name="l01101"></a>01101        <span class="keyword">ENDIF</span>
-<a name="l01102"></a>01102 
-<a name="l01103"></a>01103 
-<a name="l01104"></a>01104        <span class="comment">!$OMP DO schedule(dynamic,1)</span>
-<a name="l01105"></a>01105        <span class="keyword">DO</span> m = 0, nmmax
-<a name="l01106"></a>01106        dalm = 0.0_dp
-<a name="l01107"></a>01107        <span class="comment">! extract needed alm under memory and CPU efficient form</span>
-<a name="l01108"></a>01108           <span class="keyword">DO</span> ll = m, nlmax
-<a name="l01109"></a>01109              <span class="keyword">DO</span> n = 0, nnmax
-<a name="l01110"></a>01110                 dalm(0,ll) = dalm(0,ll) + <span class="keywordtype">REAL(almn(n,ll,m),kind=dp)</span> * jlns(ll,n) * cln(ll,n)
-<a name="l01111"></a>01111                 dalm(1,ll) = dalm(1,ll) + aimag(almn(n,ll,m)) * jlns(ll,n) * cln(ll,n)
-<a name="l01112"></a>01112              <span class="keyword">ENDDO</span>
-<a name="l01113"></a>01113           <span class="keyword">ENDDO</span>
-<a name="l01114"></a>01114           <span class="keyword">DO</span> ithl = 0, uchk - lchk
-<a name="l01115"></a>01115              l_min = l_min_ylm(m, sth(ithl))
-<a name="l01116"></a>01116              <span class="keyword">IF</span> (nlmax &gt;= l_min) <span class="keyword">THEN</span> <span class="comment">! skip calculations when Ylm too small</span>
-<a name="l01117"></a>01117                 ith = ithl + lchk
-<a name="l01118"></a>01118                 i_mm = n_lm * (ith-1) + ((2_I8B*nlmax + 3 - m)*m)/2 <span class="comment">! location of Ym,m for ring ith</span>
-<a name="l01119"></a>01119 
-<a name="l01120"></a>01120                 <span class="comment">!           ---------- l = m ----------</span>
-<a name="l01121"></a>01121 
-<a name="l01122"></a>01122                 <span class="keyword">IF</span> (m &gt;= l_min) <span class="keyword">THEN</span>
-<a name="l01123"></a>01123                    b_ns( 1) = cmplx(plm(i_mm) * dalm(0,m), plm(i_mm) * dalm(1,m), kind=DP)
-<a name="l01124"></a>01124                    b_ns(-1) = 0.0_dpc
-<a name="l01125"></a>01125                 <span class="keyword">ELSE</span>
-<a name="l01126"></a>01126                    b_ns = 0.0_dpc
-<a name="l01127"></a>01127                 <span class="keyword">ENDIF</span>
-<a name="l01128"></a>01128 
-<a name="l01129"></a>01129                 <span class="comment">!           ---------- l &gt; m ----------</span>
-<a name="l01130"></a>01130                 l_start = max(m+1, l_min) <span class="comment">! odd values of (l+m)</span>
-<a name="l01131"></a>01131                 <span class="keyword">IF</span> (mod(m+l_start,2) == 0) l_start = l_start+1
-<a name="l01132"></a>01132                 <span class="keyword">DO</span> l = l_start, nlmax, 2
-<a name="l01133"></a>01133                    b_ns(-1) = b_ns(-1) + &amp;
-<a name="l01134"></a>01134                         &amp; cmplx(plm(i_mm+l-m) * dalm(0,l), plm(i_mm+l-m)*dalm(1,l), kind=DP)
-<a name="l01135"></a>01135                 <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
-<a name="l01136"></a>01136 
-<a name="l01137"></a>01137                 l_start = max(m+2, l_min) <span class="comment">! even values of (l+m)</span>
-<a name="l01138"></a>01138                 <span class="keyword">IF</span> (mod(m+l_start,2) == 1) l_start = l_start+1
-<a name="l01139"></a>01139                 <span class="keyword">DO</span> l = l_start, nlmax, 2
-<a name="l01140"></a>01140                    b_ns(1)  = b_ns(1) + &amp;
-<a name="l01141"></a>01141                         &amp; cmplx(plm(i_mm+l-m) * dalm(0,l), plm(i_mm+l-m)*dalm(1,l),kind=DP) 
-<a name="l01142"></a>01142                 <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
-<a name="l01143"></a>01143 
-<a name="l01144"></a>01144                 b_north(m,ithl) = b_ns(1) + b_ns(-1)
-<a name="l01145"></a>01145                 b_south(m,ithl) = b_ns(1) - b_ns(-1)
-<a name="l01146"></a>01146              <span class="keyword">ENDIF</span> <span class="comment">! test on nlmax</span>
-<a name="l01147"></a>01147           <span class="keyword">ENDDO</span> <span class="comment">! loop on rings (ithl)</span>
-<a name="l01148"></a>01148        <span class="keyword">ENDDO</span> <span class="comment">! loop on m</span>
-<a name="l01149"></a>01149        <span class="comment">!$OMP END DO</span>
+<a name="l01098"></a>01098 
+<a name="l01099"></a>01099        <span class="comment">!$OMP DO schedule(dynamic,1)</span>
+<a name="l01100"></a>01100        <span class="keyword">DO</span> m = 0, nmmax
+<a name="l01101"></a>01101        dalm = 0.0_dp
+<a name="l01102"></a>01102        <span class="comment">! extract needed alm under memory and CPU efficient form</span>
+<a name="l01103"></a>01103           <span class="keyword">DO</span> ll = m, nlmax
+<a name="l01104"></a>01104              <span class="keyword">DO</span> n = 0, nnmax
+<a name="l01105"></a>01105                 dalm(0,ll) = dalm(0,ll) + <span class="keywordtype">REAL(almn(n,ll,m),kind=dp)</span> * jlns(ll,n) * cln(ll,n)
+<a name="l01106"></a>01106                 dalm(1,ll) = dalm(1,ll) + aimag(almn(n,ll,m)) * jlns(ll,n) * cln(ll,n)
+<a name="l01107"></a>01107              <span class="keyword">ENDDO</span>
+<a name="l01108"></a>01108           <span class="keyword">ENDDO</span>
+<a name="l01109"></a>01109           <span class="keyword">DO</span> ithl = 0, uchk - lchk
+<a name="l01110"></a>01110              l_min = l_min_ylm(m, sth(ithl))
+<a name="l01111"></a>01111              <span class="keyword">IF</span> (nlmax &gt;= l_min) <span class="keyword">THEN</span> <span class="comment">! skip calculations when Ylm too small</span>
+<a name="l01112"></a>01112                 ith = ithl + lchk
+<a name="l01113"></a>01113                 i_mm = n_lm * (ith-1) + ((2_I8B*nlmax + 3 - m)*m)/2 <span class="comment">! location of Ym,m for ring ith</span>
+<a name="l01114"></a>01114 
+<a name="l01115"></a>01115                 <span class="comment">!           ---------- l = m ----------</span>
+<a name="l01116"></a>01116 
+<a name="l01117"></a>01117                 <span class="keyword">IF</span> (m &gt;= l_min) <span class="keyword">THEN</span>
+<a name="l01118"></a>01118                    b_ns( 1) = cmplx(plm(i_mm) * dalm(0,m), plm(i_mm) * dalm(1,m), kind=DP)
+<a name="l01119"></a>01119                    b_ns(-1) = 0.0_dpc
+<a name="l01120"></a>01120                 <span class="keyword">ELSE</span>
+<a name="l01121"></a>01121                    b_ns = 0.0_dpc
+<a name="l01122"></a>01122                 <span class="keyword">ENDIF</span>
+<a name="l01123"></a>01123 
+<a name="l01124"></a>01124                 <span class="comment">!           ---------- l &gt; m ----------</span>
+<a name="l01125"></a>01125                 l_start = max(m+1, l_min) <span class="comment">! odd values of (l+m)</span>
+<a name="l01126"></a>01126                 <span class="keyword">IF</span> (mod(m+l_start,2) == 0) l_start = l_start+1
+<a name="l01127"></a>01127                 <span class="keyword">DO</span> l = l_start, nlmax, 2
+<a name="l01128"></a>01128                    b_ns(-1) = b_ns(-1) + &amp;
+<a name="l01129"></a>01129                         &amp; cmplx(plm(i_mm+l-m) * dalm(0,l), plm(i_mm+l-m)*dalm(1,l), kind=DP)
+<a name="l01130"></a>01130                 <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
+<a name="l01131"></a>01131 
+<a name="l01132"></a>01132                 l_start = max(m+2, l_min) <span class="comment">! even values of (l+m)</span>
+<a name="l01133"></a>01133                 <span class="keyword">IF</span> (mod(m+l_start,2) == 1) l_start = l_start+1
+<a name="l01134"></a>01134                 <span class="keyword">DO</span> l = l_start, nlmax, 2
+<a name="l01135"></a>01135                    b_ns(1)  = b_ns(1) + &amp;
+<a name="l01136"></a>01136                         &amp; cmplx(plm(i_mm+l-m) * dalm(0,l), plm(i_mm+l-m)*dalm(1,l),kind=DP) 
+<a name="l01137"></a>01137                 <span class="keyword">ENDDO</span> <span class="comment">! loop on l</span>
+<a name="l01138"></a>01138 
+<a name="l01139"></a>01139                 b_north(m,ithl) = b_ns(1) + b_ns(-1)
+<a name="l01140"></a>01140                 b_south(m,ithl) = b_ns(1) - b_ns(-1)
+<a name="l01141"></a>01141              <span class="keyword">ENDIF</span> <span class="comment">! test on nlmax</span>
+<a name="l01142"></a>01142           <span class="keyword">ENDDO</span> <span class="comment">! loop on rings (ithl)</span>
+<a name="l01143"></a>01143        <span class="keyword">ENDDO</span> <span class="comment">! loop on m</span>
+<a name="l01144"></a>01144        <span class="comment">!$OMP END DO</span>
+<a name="l01145"></a>01145 
+<a name="l01146"></a>01146        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l01147"></a>01147           <span class="keyword">deALLOCATE</span> (dalm)
+<a name="l01148"></a>01148        <span class="keyword">ENDIF</span>
+<a name="l01149"></a>01149        <span class="comment">!$OMP END parallel</span>
 <a name="l01150"></a>01150 
-<a name="l01151"></a>01151        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l01152"></a>01152           <span class="keyword">deALLOCATE</span> (dalm)
-<a name="l01153"></a>01153        <span class="keyword">ENDIF</span>
-<a name="l01154"></a>01154        <span class="comment">!$OMP END parallel</span>
-<a name="l01155"></a>01155 
-<a name="l01156"></a>01156        <span class="comment">!$OMP parallel default(none) NUM_THREADS(8) &amp;</span>
-<a name="l01157"></a>01157        <span class="comment">!$OMP  shared(nsmax, nlmax, nmmax, npix, nrings, nphmx, &amp;</span>
-<a name="l01158"></a>01158        <span class="comment">!$OMP      lchk, uchk, b_north, b_south, nph, startpix, kphi0, map) &amp;</span>
-<a name="l01159"></a>01159        <span class="comment">!$OMP  private(ithl, nphl, istart_north, istart_south, &amp;</span>
-<a name="l01160"></a>01160        <span class="comment">!$OMP      ith, ring, status)</span>
-<a name="l01161"></a>01161        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l01162"></a>01162           <span class="keyword">ALLOCATE</span>(ring(0:nphmx-1),stat = status)
-<a name="l01163"></a>01163           CALL assert_alloc(status,code,<span class="stringliteral">&#39;ring&#39;</span>)
-<a name="l01164"></a>01164        <span class="keyword">ENDIF</span>
-<a name="l01165"></a>01165        <span class="comment">!$OMP DO schedule(dynamic,1)</span>
-<a name="l01166"></a>01166        <span class="keyword">DO</span> ithl = 0, uchk - lchk
-<a name="l01167"></a>01167           nphl = nph(ithl)
-<a name="l01168"></a>01168           istart_north = startpix(ithl)
-<a name="l01169"></a>01169           istart_south = npix-istart_north-nphl
-<a name="l01170"></a>01170           ith  = ithl + lchk
-<a name="l01171"></a>01171 
-<a name="l01172"></a>01172           CALL ring_synthesis(nsmax,nlmax,nmmax,b_north(0,ithl),nphl,ring,kphi0(ithl))   <span class="comment">! north hemisph. + equator</span>
-<a name="l01173"></a>01173           map(istart_north:istart_north+nphl-1,1) = map(istart_north:istart_north+nphl-1,1) + ring(0:nphl-1)
-<a name="l01174"></a>01174 
-<a name="l01175"></a>01175           <span class="keyword">IF</span> (ith &lt; nrings) <span class="keyword">THEN</span>
-<a name="l01176"></a>01176              CALL ring_synthesis(nsmax,nlmax,nmmax,b_south(0,ithl),nphl,ring,kphi0(ithl)) <span class="comment">! south hemisph. w/o equat</span>
-<a name="l01177"></a>01177              map(istart_south:istart_south+nphl-1,1) = map(istart_south:istart_south+nphl-1,1) + ring(0:nphl-1)
-<a name="l01178"></a>01178           <span class="keyword">ENDIF</span>
-<a name="l01179"></a>01179        <span class="keyword">ENDDO</span> <span class="comment">! loop on ithl</span>
-<a name="l01180"></a>01180        <span class="comment">!$OMP END DO</span>
-<a name="l01181"></a>01181        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
-<a name="l01182"></a>01182           <span class="keyword">deALLOCATE</span>(ring)
-<a name="l01183"></a>01183        <span class="keyword">ENDIF</span>
-<a name="l01184"></a>01184        <span class="comment">!$OMP END parallel</span>
-<a name="l01185"></a>01185     <span class="keyword">ENDDO</span>    <span class="comment">! loop on chunks</span>
-<a name="l01186"></a>01186 
-<a name="l01187"></a>01187     <span class="comment">!     --------------------</span>
-<a name="l01188"></a>01188     <span class="comment">!     free memory and exit</span>
-<a name="l01189"></a>01189     <span class="comment">!     --------------------</span>
-<a name="l01190"></a>01190     <span class="keyword">IF</span> (.not.DO_openmp()) <span class="keyword">THEN</span>
-<a name="l01191"></a>01191        <span class="keyword">deALLOCATE</span> (ring,dalm)
-<a name="l01192"></a>01192     <span class="keyword">ENDIF</span>
-<a name="l01193"></a>01193     <span class="keyword">deALLOCATE</span>(b_north, b_south)
-<a name="l01194"></a>01194     RETURN
-<a name="l01195"></a>01195 
-<a name="l01196"></a>01196 <span class="keyword">  END SUBROUTINE almn2rmap</span>
-<a name="l01197"></a>01197 
-<a name="l01198"></a>01198   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01151"></a>01151        <span class="comment">!$OMP parallel default(none) NUM_THREADS(8) &amp;</span>
+<a name="l01152"></a>01152        <span class="comment">!$OMP  shared(nsmax, nlmax, nmmax, npix, nrings, nphmx, &amp;</span>
+<a name="l01153"></a>01153        <span class="comment">!$OMP      lchk, uchk, b_north, b_south, nph, startpix, kphi0, map) &amp;</span>
+<a name="l01154"></a>01154        <span class="comment">!$OMP  private(ithl, nphl, istart_north, istart_south, &amp;</span>
+<a name="l01155"></a>01155        <span class="comment">!$OMP      ith, ring, status)</span>
+<a name="l01156"></a>01156        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l01157"></a>01157           <span class="keyword">ALLOCATE</span>(ring(0:nphmx-1),stat = status)
+<a name="l01158"></a>01158           CALL assert_alloc(status,code,<span class="stringliteral">&#39;ring&#39;</span>)
+<a name="l01159"></a>01159        <span class="keyword">ENDIF</span>
+<a name="l01160"></a>01160        <span class="comment">!$OMP DO schedule(dynamic,1)</span>
+<a name="l01161"></a>01161        <span class="keyword">DO</span> ithl = 0, uchk - lchk
+<a name="l01162"></a>01162           nphl = nph(ithl)
+<a name="l01163"></a>01163           istart_north = startpix(ithl)
+<a name="l01164"></a>01164           istart_south = npix-istart_north-nphl
+<a name="l01165"></a>01165           ith  = ithl + lchk
+<a name="l01166"></a>01166 
+<a name="l01167"></a>01167           CALL ring_synthesis(nsmax,nlmax,nmmax,b_north(0,ithl),nphl,ring,kphi0(ithl))   <span class="comment">! north hemisph. + equator</span>
+<a name="l01168"></a>01168           map(istart_north:istart_north+nphl-1,1) = map(istart_north:istart_north+nphl-1,1) + ring(0:nphl-1)
+<a name="l01169"></a>01169 
+<a name="l01170"></a>01170           <span class="keyword">IF</span> (ith &lt; nrings) <span class="keyword">THEN</span>
+<a name="l01171"></a>01171              CALL ring_synthesis(nsmax,nlmax,nmmax,b_south(0,ithl),nphl,ring,kphi0(ithl)) <span class="comment">! south hemisph. w/o equat</span>
+<a name="l01172"></a>01172              map(istart_south:istart_south+nphl-1,1) = map(istart_south:istart_south+nphl-1,1) + ring(0:nphl-1)
+<a name="l01173"></a>01173           <span class="keyword">ENDIF</span>
+<a name="l01174"></a>01174        <span class="keyword">ENDDO</span> <span class="comment">! loop on ithl</span>
+<a name="l01175"></a>01175        <span class="comment">!$OMP END DO</span>
+<a name="l01176"></a>01176        <span class="keyword">IF</span> (DO_openmp()) <span class="keyword">THEN</span>
+<a name="l01177"></a>01177           <span class="keyword">deALLOCATE</span>(ring)
+<a name="l01178"></a>01178        <span class="keyword">ENDIF</span>
+<a name="l01179"></a>01179        <span class="comment">!$OMP END parallel</span>
+<a name="l01180"></a>01180     <span class="keyword">ENDDO</span>    <span class="comment">! loop on chunks</span>
+<a name="l01181"></a>01181 
+<a name="l01182"></a>01182     <span class="comment">!     --------------------</span>
+<a name="l01183"></a>01183     <span class="comment">!     free memory and exit</span>
+<a name="l01184"></a>01184     <span class="comment">!     --------------------</span>
+<a name="l01185"></a>01185     <span class="keyword">IF</span> (.not.DO_openmp()) <span class="keyword">THEN</span>
+<a name="l01186"></a>01186        <span class="keyword">deALLOCATE</span> (ring,dalm)
+<a name="l01187"></a>01187     <span class="keyword">ENDIF</span>
+<a name="l01188"></a>01188     <span class="keyword">deALLOCATE</span>(b_north, b_south)
+<a name="l01189"></a>01189     RETURN
+<a name="l01190"></a>01190 
+<a name="l01191"></a>01191 <span class="keyword">  END SUBROUTINE almn2rmap</span>
+<a name="l01192"></a>01192 
+<a name="l01193"></a>01193   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01194"></a>01194 
+<a name="l01198"></a><a class="code" href="namespacef3dex__transforms.html#a02b926f933d186f2c9d9ab6d478a1601">01198</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a02b926f933d186f2c9d9ab6d478a1601">gen_qln</a>(qln, nnmax, nlmax)
 <a name="l01199"></a>01199 
-<a name="l01200"></a><a class="code" href="namespacef3dex__transforms.html#a02b926f933d186f2c9d9ab6d478a1601">01200</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a02b926f933d186f2c9d9ab6d478a1601">gen_qln</a>(qln, nnmax, nlmax)
+<a name="l01200"></a>01200     <span class="keyword">IMPLICIT NONE</span>
 <a name="l01201"></a>01201 
-<a name="l01202"></a>01202     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01203"></a>01203 
-<a name="l01204"></a>01204     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, l, nrr, maxrt, lastRoot, err
-<a name="l01205"></a>01205     PARAMETER(maxrt = 1000)
-<a name="l01206"></a>01206     <span class="keywordtype">REAL(DP)</span> :: rmax, order,A,B, A_before
-<a name="l01207"></a>01207     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: qln
-<a name="l01208"></a>01208     <span class="comment">! REAL*8, DIMENSION(1:maxrt) :: roots</span>
-<a name="l01209"></a>01209     <span class="keywordtype">REAL*8</span>, <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">allocatable</span> :: roots
-<a name="l01210"></a>01210     <span class="keywordtype">character(LEN=*)</span>, <span class="keywordtype">parameter</span> :: code = <span class="stringliteral">&#39;BESSEL&#39;</span>
-<a name="l01211"></a>01211     <span class="keywordtype">INTEGER(I4B)</span> :: status
+<a name="l01202"></a>01202     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, l, nrr, maxrt, lastRoot, err
+<a name="l01203"></a>01203     PARAMETER(maxrt = 1000)
+<a name="l01204"></a>01204     <span class="keywordtype">REAL(DP)</span> :: rmax, order,A,B, A_before
+<a name="l01205"></a>01205     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: qln
+<a name="l01206"></a>01206     <span class="comment">! REAL*8, DIMENSION(1:maxrt) :: roots</span>
+<a name="l01207"></a>01207     <span class="keywordtype">REAL*8</span>, <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">allocatable</span> :: roots
+<a name="l01208"></a>01208     <span class="keywordtype">character(LEN=*)</span>, <span class="keywordtype">parameter</span> :: code = <span class="stringliteral">&#39;gen_qln&#39;</span>
+<a name="l01209"></a>01209     <span class="keywordtype">INTEGER(I4B)</span> :: status
+<a name="l01210"></a>01210 
+<a name="l01211"></a>01211     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,start=.TRUE.)
 <a name="l01212"></a>01212 
-<a name="l01213"></a>01213     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
-<a name="l01214"></a>01214     PRINT*,<span class="stringliteral">&quot;   Computing scaling coefficients...&quot;</span>
-<a name="l01215"></a>01215     PRINT*,<span class="stringliteral">&quot;-----------------------&quot;</span>
+<a name="l01213"></a>01213     <span class="comment">!$OMP parallel &amp;</span>
+<a name="l01214"></a>01214     <span class="comment">!$OMP shared(qln,rmax,nnmax,nlmax,status) &amp;</span>
+<a name="l01215"></a>01215     <span class="comment">!$OMP private(roots,order,A,B,A_before,l,nrr,lastRoot,err)</span>
 <a name="l01216"></a>01216 
-<a name="l01217"></a>01217 
-<a name="l01218"></a>01218     <span class="comment">!$OMP parallel &amp;</span>
-<a name="l01219"></a>01219     <span class="comment">!$OMP shared(qln,rmax,nnmax,nlmax,status) &amp;</span>
-<a name="l01220"></a>01220     <span class="comment">!$OMP private(roots,order,A,B,A_before,l,nrr,lastRoot,err)</span>
-<a name="l01221"></a>01221 
-<a name="l01222"></a>01222     <span class="keyword">ALLOCATE</span>(roots(1:maxrt),stat = status)
-<a name="l01223"></a>01223     CALL assert_alloc(status,code,<span class="stringliteral">&#39;roots&#39;</span>)
-<a name="l01224"></a>01224 
-<a name="l01225"></a>01225     <span class="comment">!$OMP DO schedule(dynamic,1)</span>
-<a name="l01226"></a>01226     <span class="keyword">DO</span> l = 0, nlmax
+<a name="l01217"></a>01217     <span class="keyword">ALLOCATE</span>(roots(1:maxrt),stat = status)
+<a name="l01218"></a>01218     CALL assert_alloc(status,code,<span class="stringliteral">&#39;roots&#39;</span>)
+<a name="l01219"></a>01219 
+<a name="l01220"></a>01220     <span class="comment">!$OMP DO schedule(dynamic,1)</span>
+<a name="l01221"></a>01221     <span class="keyword">DO</span> l = 0, nlmax
+<a name="l01222"></a>01222 
+<a name="l01223"></a>01223        order = <span class="keywordtype">REAL(l)</span> + 0.5_dp
+<a name="l01224"></a>01224        lastRoot = 1
+<a name="l01225"></a>01225 
+<a name="l01226"></a>01226        PRINT*, <span class="stringliteral">&quot;Order l =&quot;</span>,l
 <a name="l01227"></a>01227 
-<a name="l01228"></a>01228        order = <span class="keywordtype">REAL(l)</span> + 0.5_dp
-<a name="l01229"></a>01229        lastRoot = 1
+<a name="l01228"></a>01228        A=0.0
+<a name="l01229"></a>01229        B=2000.0
 <a name="l01230"></a>01230 
-<a name="l01231"></a>01231        PRINT*, <span class="stringliteral">&quot;Order l =&quot;</span>,l
+<a name="l01231"></a>01231        <span class="keyword">DO</span> <span class="keyword">WHILE</span> ( lastRoot .LT. nnmax)
 <a name="l01232"></a>01232 
-<a name="l01233"></a>01233        A=0.0
-<a name="l01234"></a>01234        B=2000.0
-<a name="l01235"></a>01235 
-<a name="l01236"></a>01236        <span class="keyword">DO</span> <span class="keyword">WHILE</span> ( lastRoot .LT. nnmax)
-<a name="l01237"></a>01237 
-<a name="l01238"></a>01238           roots = 0.0_sp
-<a name="l01239"></a>01239           A_before = A
-<a name="l01240"></a>01240           CALL ROOTBESSJ( order, A, B, maxrt, nrr, err, roots )
-<a name="l01241"></a>01241           <span class="comment">!  PRINT*,&quot;number of roots found&quot;,nrr,err</span>
-<a name="l01242"></a>01242           <span class="keyword">IF</span>(nrr .EQ. 0) <span class="keyword">THEN</span>
-<a name="l01243"></a>01243              B = B + 1000.0
-<a name="l01244"></a>01244           <span class="keyword">ELSE</span> <span class="keyword">IF</span>(err .NE. 1) <span class="keyword">THEN</span>
-<a name="l01245"></a>01245              PRINT*,<span class="stringliteral">&quot;err code :&quot;</span>,err
-<a name="l01246"></a>01246              A = A_before
-<a name="l01247"></a>01247              B = (B - A)/2.0 + A
-<a name="l01248"></a>01248           <span class="keyword">ELSE</span>
-<a name="l01249"></a>01249 
-<a name="l01250"></a>01250              <span class="keyword">IF</span>(lastRoot + nrr .LE. nnmax) <span class="keyword">THEN</span>
-<a name="l01251"></a>01251                 qln(l,lastRoot:lastRoot + nrr - 1) = roots(1:nrr)
-<a name="l01252"></a>01252                 lastRoot = lastRoot + nrr - 1
-<a name="l01253"></a>01253              <span class="keyword">ELSE</span>
-<a name="l01254"></a>01254                 qln(l,lastRoot:nnmax) = roots(1: nnmax - lastRoot + 1)
-<a name="l01255"></a>01255                 lastRoot = nnmax
-<a name="l01256"></a>01256              <span class="keyword">ENDIF</span>
-<a name="l01257"></a>01257              B = A + 2048.0
-<a name="l01258"></a>01258           <span class="keyword">ENDIF</span>
-<a name="l01259"></a>01259 
-<a name="l01260"></a>01260        <span class="keyword">ENDDO</span>
+<a name="l01233"></a>01233           roots = 0.0_sp
+<a name="l01234"></a>01234           A_before = A
+<a name="l01235"></a>01235           CALL ROOTBESSJ( order, A, B, maxrt, nrr, err, roots )
+<a name="l01236"></a>01236           <span class="comment">!  PRINT*,&quot;number of roots found&quot;,nrr,err</span>
+<a name="l01237"></a>01237           <span class="keyword">IF</span>(nrr .EQ. 0) <span class="keyword">THEN</span>
+<a name="l01238"></a>01238              B = B + 1000.0
+<a name="l01239"></a>01239           <span class="keyword">ELSE</span> <span class="keyword">IF</span>(err .NE. 1) <span class="keyword">THEN</span>
+<a name="l01240"></a>01240              PRINT*,<span class="stringliteral">&quot;err code :&quot;</span>,err
+<a name="l01241"></a>01241              A = A_before
+<a name="l01242"></a>01242              B = (B - A)/2.0 + A
+<a name="l01243"></a>01243           <span class="keyword">ELSE</span>
+<a name="l01244"></a>01244 
+<a name="l01245"></a>01245              <span class="keyword">IF</span>(lastRoot + nrr .LE. nnmax) <span class="keyword">THEN</span>
+<a name="l01246"></a>01246                 qln(l,lastRoot:lastRoot + nrr - 1) = roots(1:nrr)
+<a name="l01247"></a>01247                 lastRoot = lastRoot + nrr - 1
+<a name="l01248"></a>01248              <span class="keyword">ELSE</span>
+<a name="l01249"></a>01249                 qln(l,lastRoot:nnmax) = roots(1: nnmax - lastRoot + 1)
+<a name="l01250"></a>01250                 lastRoot = nnmax
+<a name="l01251"></a>01251              <span class="keyword">ENDIF</span>
+<a name="l01252"></a>01252              B = A + 2048.0
+<a name="l01253"></a>01253           <span class="keyword">ENDIF</span>
+<a name="l01254"></a>01254 
+<a name="l01255"></a>01255        <span class="keyword">ENDDO</span>
+<a name="l01256"></a>01256 
+<a name="l01257"></a>01257     <span class="keyword">ENDDO</span>
+<a name="l01258"></a>01258     <span class="comment">!$OMP END DO</span>
+<a name="l01259"></a>01259     <span class="keyword">deALLOCATE</span>(roots)
+<a name="l01260"></a>01260     <span class="comment">!$OMP END parallel</span>
 <a name="l01261"></a>01261 
-<a name="l01262"></a>01262     <span class="keyword">ENDDO</span>
-<a name="l01263"></a>01263     <span class="comment">!$OMP END DO</span>
-<a name="l01264"></a>01264     <span class="keyword">deALLOCATE</span>(roots)
-<a name="l01265"></a>01265     <span class="comment">!$OMP END parallel</span>
-<a name="l01266"></a>01266 
-<a name="l01267"></a>01267     PRINT*,<span class="stringliteral">&quot;-----------------------&quot;</span>
-<a name="l01268"></a>01268     PRINT*,<span class="stringliteral">&quot;   Done.&quot;</span>
-<a name="l01269"></a>01269     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
-<a name="l01270"></a>01270 
-<a name="l01271"></a>01271 
-<a name="l01272"></a>01272 <span class="keyword">  END SUBROUTINE gen_qln</span>
+<a name="l01262"></a>01262     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,fin=.TRUE.)
+<a name="l01263"></a>01263 
+<a name="l01264"></a>01264 <span class="keyword">  END SUBROUTINE gen_qln</span>
+<a name="l01265"></a>01265 
+<a name="l01266"></a>01266   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01267"></a>01267 
+<a name="l01272"></a><a class="code" href="namespacef3dex__transforms.html#a4b80bc7cad52998fd0aff935a1695ee7">01272</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a4b80bc7cad52998fd0aff935a1695ee7">gen_kln</a>(kln, nnmax, nlmax, rmax)
 <a name="l01273"></a>01273 
-<a name="l01274"></a>01274   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01274"></a>01274     <span class="keyword">IMPLICIT NONE</span>
 <a name="l01275"></a>01275 
-<a name="l01276"></a><a class="code" href="namespacef3dex__transforms.html#a4b80bc7cad52998fd0aff935a1695ee7">01276</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a4b80bc7cad52998fd0aff935a1695ee7">gen_kln</a>(kln, nnmax, nlmax, rmax)
-<a name="l01277"></a>01277 
-<a name="l01278"></a>01278     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01279"></a>01279 
-<a name="l01280"></a>01280     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, l, nrr
-<a name="l01281"></a>01281     <span class="keywordtype">REAL(DP)</span> :: rmax, order
-<a name="l01282"></a>01282     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: kln
-<a name="l01283"></a>01283     <span class="comment">! REAL*8, DIMENSION(1:1000) :: roots</span>
-<a name="l01284"></a>01284 
-<a name="l01285"></a>01285     <span class="comment">! DO l = 0, nlmax</span>
+<a name="l01276"></a>01276     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, l, nrr
+<a name="l01277"></a>01277     <span class="keywordtype">REAL(DP)</span> :: rmax, order
+<a name="l01278"></a>01278     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: kln
+<a name="l01279"></a>01279     <span class="comment">! REAL*8, DIMENSION(1:1000) :: roots</span>
+<a name="l01280"></a>01280 
+<a name="l01281"></a>01281     <span class="comment">! DO l = 0, nlmax</span>
+<a name="l01282"></a>01282     <span class="comment">!</span>
+<a name="l01283"></a>01283     <span class="comment">!     order = REAL(l) + 0.5_dp</span>
+<a name="l01284"></a>01284     <span class="comment">!</span>
+<a name="l01285"></a>01285     <span class="comment">!     roots = 0.0_sp</span>
 <a name="l01286"></a>01286     <span class="comment">!</span>
-<a name="l01287"></a>01287     <span class="comment">!     order = REAL(l) + 0.5_dp</span>
+<a name="l01287"></a>01287     <span class="comment">!     CALL ROOTBESSJ( order, nrr, roots )</span>
 <a name="l01288"></a>01288     <span class="comment">!</span>
-<a name="l01289"></a>01289     <span class="comment">!     roots = 0.0_sp</span>
-<a name="l01290"></a>01290     <span class="comment">!</span>
-<a name="l01291"></a>01291     <span class="comment">!     CALL ROOTBESSJ( order, nrr, roots )</span>
-<a name="l01292"></a>01292     <span class="comment">!</span>
-<a name="l01293"></a>01293     <span class="comment">!     !PRINT*,order,nrr,roots</span>
-<a name="l01294"></a>01294     <span class="comment">!     !IF (nrr &lt;= nnmax) THEN</span>
-<a name="l01295"></a>01295     <span class="comment">!     !   PRINT*, &quot;ERROR during roots computation&quot;</span>
-<a name="l01296"></a>01296     <span class="comment">!     !   STOP</span>
-<a name="l01297"></a>01297     <span class="comment">!     !ELSE</span>
+<a name="l01289"></a>01289     <span class="comment">!     !PRINT*,order,nrr,roots</span>
+<a name="l01290"></a>01290     <span class="comment">!     !IF (nrr &lt;= nnmax) THEN</span>
+<a name="l01291"></a>01291     <span class="comment">!     !   PRINT*, &quot;ERROR during roots computation&quot;</span>
+<a name="l01292"></a>01292     <span class="comment">!     !   STOP</span>
+<a name="l01293"></a>01293     <span class="comment">!     !ELSE</span>
+<a name="l01294"></a>01294     <span class="comment">!</span>
+<a name="l01295"></a>01295     <span class="comment">!     kln(l,1:nnmax) = roots(1:(nnmax)) / rmax</span>
+<a name="l01296"></a>01296     <span class="comment">!</span>
+<a name="l01297"></a>01297     <span class="comment">!     !ENDIF</span>
 <a name="l01298"></a>01298     <span class="comment">!</span>
-<a name="l01299"></a>01299     <span class="comment">!     kln(l,1:nnmax) = roots(1:(nnmax)) / rmax</span>
-<a name="l01300"></a>01300     <span class="comment">!</span>
-<a name="l01301"></a>01301     <span class="comment">!     !ENDIF</span>
-<a name="l01302"></a>01302     <span class="comment">!</span>
-<a name="l01303"></a>01303     <span class="comment">! ENDDO</span>
+<a name="l01299"></a>01299     <span class="comment">! ENDDO</span>
+<a name="l01300"></a>01300 
+<a name="l01301"></a>01301     CALL <a class="code" href="namespacef3dex__transforms.html#a02b926f933d186f2c9d9ab6d478a1601">gen_qln</a>(kln,nnmax,nlmax)
+<a name="l01302"></a>01302 
+<a name="l01303"></a>01303     kln = kln / rmax
 <a name="l01304"></a>01304 
-<a name="l01305"></a>01305     CALL <a class="code" href="namespacef3dex__transforms.html#a02b926f933d186f2c9d9ab6d478a1601">gen_qln</a>(kln,nnmax,nlmax)
-<a name="l01306"></a>01306 
-<a name="l01307"></a>01307     kln = kln / rmax
-<a name="l01308"></a>01308 
+<a name="l01305"></a>01305 
+<a name="l01306"></a>01306 <span class="keyword">  END SUBROUTINE gen_kln</span>
+<a name="l01307"></a>01307 
+<a name="l01308"></a>01308   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l01309"></a>01309 
-<a name="l01310"></a>01310 <span class="keyword">  END SUBROUTINE gen_kln</span>
-<a name="l01311"></a>01311 
-<a name="l01312"></a>01312   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l01313"></a>01313 
-<a name="l01314"></a><a class="code" href="namespacef3dex__transforms.html#a2cd270ebc1186ae3872ab2e0068cff9d">01314</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a2cd270ebc1186ae3872ab2e0068cff9d">logrange</a>( x , mn , mx , npts )
-<a name="l01315"></a>01315 
-<a name="l01316"></a>01316     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01317"></a>01317 
-<a name="l01318"></a>01318     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(1:npts)</span> :: x
-<a name="l01319"></a>01319     <span class="keywordtype">REAL(DP)</span> :: mn, mx, rg
-<a name="l01320"></a>01320     <span class="keywordtype">INTEGER</span> :: npts, i
-<a name="l01321"></a>01321 
-<a name="l01322"></a>01322     rg = (log10(mx)-log10(mn))/<span class="keywordtype">REAL</span>(npts)
-<a name="l01323"></a>01323 
-<a name="l01324"></a>01324     <span class="keyword">DO</span> i = 1, npts
-<a name="l01325"></a>01325        x(i) = (10)**(<span class="keywordtype">REAL</span>(i)*rg + log10(mn))
-<a name="l01326"></a>01326     <span class="keyword">ENDDO</span>
+<a name="l01311"></a><a class="code" href="namespacef3dex__transforms.html#a2cd270ebc1186ae3872ab2e0068cff9d">01311</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a2cd270ebc1186ae3872ab2e0068cff9d">logrange</a>( x , mn , mx , npts )
+<a name="l01312"></a>01312 
+<a name="l01313"></a>01313     <span class="keyword">IMPLICIT NONE</span>
+<a name="l01314"></a>01314 
+<a name="l01315"></a>01315     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(1:npts)</span> :: x
+<a name="l01316"></a>01316     <span class="keywordtype">REAL(DP)</span> :: mn, mx, rg
+<a name="l01317"></a>01317     <span class="keywordtype">INTEGER</span> :: npts, i
+<a name="l01318"></a>01318 
+<a name="l01319"></a>01319     rg = (log10(mx)-log10(mn))/<span class="keywordtype">REAL</span>(npts)
+<a name="l01320"></a>01320 
+<a name="l01321"></a>01321     <span class="keyword">DO</span> i = 1, npts
+<a name="l01322"></a>01322        x(i) = (10)**(<span class="keywordtype">REAL</span>(i)*rg + log10(mn))
+<a name="l01323"></a>01323     <span class="keyword">ENDDO</span>
+<a name="l01324"></a>01324 
+<a name="l01325"></a>01325     RETURN
+<a name="l01326"></a>01326 <span class="keyword">  END SUBROUTINE logrange</span>
 <a name="l01327"></a>01327 
-<a name="l01328"></a>01328     RETURN
-<a name="l01329"></a>01329 <span class="keyword">  END SUBROUTINE logrange</span>
-<a name="l01330"></a>01330 
-<a name="l01331"></a>01331   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l01332"></a>01332 
-<a name="l01333"></a><a class="code" href="namespacef3dex__transforms.html#aa6cd797c56b97503bf2d52131f6e5554">01333</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#aa6cd797c56b97503bf2d52131f6e5554">gen_cln</a>(cln, kln, nnmax, nlmax, rmax)
-<a name="l01334"></a>01334 
-<a name="l01335"></a>01335     <span class="keyword">IMPLICIT NONE</span>
+<a name="l01328"></a>01328   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01329"></a>01329 
+<a name="l01335"></a><a class="code" href="namespacef3dex__transforms.html#aa6cd797c56b97503bf2d52131f6e5554">01335</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#aa6cd797c56b97503bf2d52131f6e5554">gen_cln</a>(cln, kln, nnmax, nlmax, rmax)
 <a name="l01336"></a>01336 
-<a name="l01337"></a>01337     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, l, n, k
-<a name="l01338"></a>01338     <span class="keywordtype">REAL(DP)</span> :: rmax, tempval
-<a name="l01339"></a>01339     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: kln
-<a name="l01340"></a>01340     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: cln
-<a name="l01341"></a>01341 
-<a name="l01342"></a>01342     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
-<a name="l01343"></a>01343     PRINT*,<span class="stringliteral">&quot;   Computing normalization coefficients...&quot;</span>
-<a name="l01344"></a>01344 
-<a name="l01345"></a>01345     <span class="comment">!$OMP PARALLEL &amp;</span>
-<a name="l01346"></a>01346     <span class="comment">!$OMP SHARED(cln,rmax,kln,nnmax,nlmax) &amp;</span>
-<a name="l01347"></a>01347     <span class="comment">!$OMP PRIVATE(l,n,k,tempval)   </span>
-<a name="l01348"></a>01348 
-<a name="l01349"></a>01349     <span class="comment">!$OMP DO SCHEDULE(DYNAMIC,1)  </span>
-<a name="l01350"></a>01350     <span class="keyword">DO</span> l = 0, nlmax 
-<a name="l01351"></a>01351        <span class="keyword">DO</span> n = 1, nnmax   
-<a name="l01352"></a>01352           k = n+1
-<a name="l01353"></a>01353           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( k , kln(l,n)*rmax, tempval )
-<a name="l01354"></a>01354           cln(l,n) = ( sqrt(2.0)*rmax**(-1.5) ) / (kln(l,n)*tempval)
-<a name="l01355"></a>01355        <span class="keyword">ENDDO</span>
-<a name="l01356"></a>01356     <span class="keyword">ENDDO</span>
-<a name="l01357"></a>01357     <span class="comment">!$OMP END DO</span>
-<a name="l01358"></a>01358     <span class="comment">!$OMP END PARALLEL    </span>
-<a name="l01359"></a>01359 
-<a name="l01360"></a>01360     PRINT*,<span class="stringliteral">&quot;   Done.&quot;</span>
-<a name="l01361"></a>01361     PRINT*,<span class="stringliteral">&quot;------------------------------------------------&quot;</span>
+<a name="l01337"></a>01337     <span class="keyword">IMPLICIT NONE</span>
+<a name="l01338"></a>01338 
+<a name="l01339"></a>01339     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax, nlmax, l, n, k
+<a name="l01340"></a>01340     <span class="keywordtype">REAL(DP)</span> :: rmax, tempval
+<a name="l01341"></a>01341     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: kln
+<a name="l01342"></a>01342     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: cln
+<a name="l01343"></a>01343 
+<a name="l01344"></a>01344     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,start=.TRUE.)
+<a name="l01345"></a>01345 
+<a name="l01346"></a>01346     <span class="comment">!$OMP PARALLEL &amp;</span>
+<a name="l01347"></a>01347     <span class="comment">!$OMP SHARED(cln,rmax,kln,nnmax,nlmax) &amp;</span>
+<a name="l01348"></a>01348     <span class="comment">!$OMP PRIVATE(l,n,k,tempval)   </span>
+<a name="l01349"></a>01349 
+<a name="l01350"></a>01350     <span class="comment">!$OMP DO SCHEDULE(DYNAMIC,1)  </span>
+<a name="l01351"></a>01351     <span class="keyword">DO</span> l = 0, nlmax 
+<a name="l01352"></a>01352        <span class="keyword">DO</span> n = 1, nnmax   
+<a name="l01353"></a>01353           k = n+1
+<a name="l01354"></a>01354           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( k , kln(l,n)*rmax, tempval )
+<a name="l01355"></a>01355           cln(l,n) = ( sqrt(2.0)*rmax**(-1.5) ) / (kln(l,n)*tempval)
+<a name="l01356"></a>01356        <span class="keyword">ENDDO</span>
+<a name="l01357"></a>01357     <span class="keyword">ENDDO</span>
+<a name="l01358"></a>01358     <span class="comment">!$OMP END DO</span>
+<a name="l01359"></a>01359     <span class="comment">!$OMP END PARALLEL    </span>
+<a name="l01360"></a>01360 
+<a name="l01361"></a>01361     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,fin=.TRUE.)
 <a name="l01362"></a>01362 
 <a name="l01363"></a>01363 <span class="keyword">  END SUBROUTINE gen_cln</span>
 <a name="l01364"></a>01364 
 <a name="l01365"></a>01365   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l01366"></a>01366 
-<a name="l01367"></a><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">01367</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">gen_jln</a>(jlns, kln, rho, nnmax, nlmax)
-<a name="l01368"></a>01368 
-<a name="l01369"></a>01369     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01370"></a>01370 
-<a name="l01371"></a>01371     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax,nlmax,n,l
-<a name="l01372"></a>01372     <span class="keywordtype">REAL(DP)</span> :: rho, jln
-<a name="l01373"></a>01373     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: kln
-<a name="l01374"></a>01374     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: jlns      
+<a name="l01372"></a><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">01372</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">gen_jln</a>(jlns, kln, rho, nnmax, nlmax)
+<a name="l01373"></a>01373 
+<a name="l01374"></a>01374     <span class="keyword">IMPLICIT NONE</span>
 <a name="l01375"></a>01375 
-<a name="l01376"></a>01376     <span class="comment">!$OMP PARALLEL &amp;</span>
-<a name="l01377"></a>01377     <span class="comment">!$OMP SHARED(jlns,kln,rho,nnmax,nlmax) &amp;</span>
-<a name="l01378"></a>01378     <span class="comment">!$OMP PRIVATE(jln,l,n)   </span>
-<a name="l01379"></a>01379 
-<a name="l01380"></a>01380     <span class="comment">!$OMP DO SCHEDULE(RUNTIME)</span>
-<a name="l01381"></a>01381     <span class="keyword">DO</span> n=1,nnmax   
-<a name="l01382"></a>01382        <span class="keyword">DO</span> l=0,nlmax
-<a name="l01383"></a>01383           <span class="comment">!PRINT*,n,l,OMP_GET_THREAD_NUM()</span>
-<a name="l01384"></a>01384           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*rho , jln )
-<a name="l01385"></a>01385           jlns(l,n) = kln(l,n) * jln
-<a name="l01386"></a>01386        <span class="keyword">ENDDO</span>
-<a name="l01387"></a>01387     <span class="keyword">ENDDO</span>
-<a name="l01388"></a>01388     <span class="comment">!$OMP END DO</span>
-<a name="l01389"></a>01389     <span class="comment">!$OMP END PARALLEL</span>
-<a name="l01390"></a>01390 
-<a name="l01391"></a>01391     RETURN
-<a name="l01392"></a>01392 
-<a name="l01393"></a>01393 <span class="keyword">  END SUBROUTINE gen_jln</span>
-<a name="l01394"></a>01394 
-<a name="l01395"></a>01395   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l01396"></a>01396 
-<a name="l01401"></a><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">01401</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>(L,X,JL)
-<a name="l01402"></a>01402 
-<a name="l01403"></a>01403 
-<a name="l01404"></a>01404     <span class="comment">!!== MODIFIED SUBROUTINE FOR SPHERICAL BESSEL FUNCTIONS.                       ==!!</span>
-<a name="l01405"></a>01405     <span class="comment">!!== CORRECTED THE SMALL BUGS IN PACKAGE CMBFAST&amp;CAMB(for l=4,5, x~0.001-0.002)==!! </span>
-<a name="l01406"></a>01406     <span class="comment">!!== CORRECTED THE SIGN OF J_L(X) FOR X&lt;0 CASE                                 ==!!</span>
-<a name="l01407"></a>01407     <span class="comment">!!== WORKS FASTER AND MORE ACCURATE FOR LOW L, X&lt;&lt;L, AND L&lt;&lt;X cases            ==!! </span>
-<a name="l01408"></a>01408     <span class="comment">!!== zqhuang@astro.utoronto.ca                                                 ==!!</span>
-<a name="l01409"></a>01409     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01410"></a>01410     <span class="keywordtype">INTEGER</span> L
-<a name="l01411"></a>01411     <span class="keywordtype">REAL*8</span> X,JL
-<a name="l01412"></a>01412     <span class="keywordtype">REAL*8</span> AX,AX2
-<a name="l01413"></a>01413     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::LN2=0.6931471805599453094D0
-<a name="l01414"></a>01414     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::ONEMLN2=0.30685281944005469058277D0
-<a name="l01415"></a>01415     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID2=1.5707963267948966192313217D0
-<a name="l01416"></a>01416     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID4=0.78539816339744830961566084582D0
-<a name="l01417"></a>01417     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::ROOTPI12 = 21.269446210866192327578D0
-<a name="l01418"></a>01418     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA1 =   2.6789385347077476336556D0 <span class="comment">!/* Gamma FUNCTION of 1/3 */</span>
-<a name="l01419"></a>01419     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA2 =   1.3541179394264004169452D0 <span class="comment">!/* Gamma FUNCTION of 2/3 */</span>
-<a name="l01420"></a>01420     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PI=3.141592653589793238463D0
-<a name="l01421"></a>01421     <span class="keywordtype">REAL*8</span> NU,NU2,BETA,BETA2,COSB
-<a name="l01422"></a>01422     <span class="keywordtype">REAL*8</span> sx,sx2
-<a name="l01423"></a>01423     <span class="keywordtype">REAL*8</span> cotb,cot3b,cot6b,secb,sec2b
-<a name="l01424"></a>01424     <span class="keywordtype">REAL*8</span> trigarg,expterm,L3
-<a name="l01425"></a>01425 
-<a name="l01426"></a>01426     <span class="keyword">IF</span>(L.LT.0)<span class="keyword">THEN</span>
-<a name="l01427"></a>01427        <span class="keyword">write</span>(*,*) <span class="stringliteral">&#39;Can not evaluate Spherical Bessel Function with index l&lt;0&#39;</span>
-<a name="l01428"></a>01428        STOP
-<a name="l01429"></a>01429     <span class="keyword">ENDIF</span>
-<a name="l01430"></a>01430     AX=DABS(X)
-<a name="l01431"></a>01431     AX2=AX**2
-<a name="l01432"></a>01432     <span class="keyword">IF</span>(L.LT.7)<span class="keyword">THEN</span>
-<a name="l01433"></a>01433        <span class="keyword">IF</span>(L.EQ.0)<span class="keyword">THEN</span>
-<a name="l01434"></a>01434           <span class="keyword">IF</span>(AX.LT.1.D-1)<span class="keyword">THEN</span>
-<a name="l01435"></a>01435              JL=1.D0-AX2/6.D0*(1.D0-AX2/20.D0)
-<a name="l01436"></a>01436           <span class="keyword">ELSE</span>
-<a name="l01437"></a>01437              JL=DSIN(AX)/AX
-<a name="l01438"></a>01438           <span class="keyword">ENDIF</span>
-<a name="l01439"></a>01439 
-<a name="l01440"></a>01440        ELSEIF(L.EQ.1)<span class="keyword">THEN</span>
-<a name="l01441"></a>01441           <span class="keyword">IF</span>(AX.LT.2.D-1)<span class="keyword">THEN</span>
-<a name="l01442"></a>01442              JL=AX/3.D0*(1.D0-AX2/10.D0*(1.D0-AX2/28.D0))
-<a name="l01443"></a>01443           <span class="keyword">ELSE</span>
-<a name="l01444"></a>01444              JL=(DSIN(AX)/AX-DCOS(AX))/AX
-<a name="l01445"></a>01445           <span class="keyword">ENDIF</span>
-<a name="l01446"></a>01446        ELSEIF(L.EQ.2)<span class="keyword">THEN</span>
-<a name="l01447"></a>01447           <span class="keyword">IF</span>(AX.LT.3.D-1)<span class="keyword">THEN</span>
-<a name="l01448"></a>01448              JL=AX2/15.D0*(1.D0-AX2/14.D0*(1.D0-AX2/36.D0))
-<a name="l01449"></a>01449           <span class="keyword">ELSE</span>
-<a name="l01450"></a>01450              JL=(-3.0D0*DCOS(AX)/AX-DSIN(AX)*(1.D0-3.D0/AX2))/AX
-<a name="l01451"></a>01451           <span class="keyword">ENDIF</span>
-<a name="l01452"></a>01452        ELSEIF(L.EQ.3)<span class="keyword">THEN</span>
-<a name="l01453"></a>01453           <span class="keyword">IF</span>(AX.LT.4.D-1)<span class="keyword">THEN</span>
-<a name="l01454"></a>01454              JL=AX*AX2/105.D0*(1.D0-AX2/18.D0*(1.D0-AX2/44.D0))
-<a name="l01455"></a>01455           <span class="keyword">ELSE</span>
-<a name="l01456"></a>01456              JL=(DCOS(AX)*(1.D0-15.D0/AX2)-DSIN(AX)*(6.D0-15.D0/AX2)/AX)/AX
-<a name="l01457"></a>01457           <span class="keyword">ENDIF</span>
-<a name="l01458"></a>01458        ELSEIF(L.EQ.4)<span class="keyword">THEN</span>
-<a name="l01459"></a>01459           <span class="keyword">IF</span>(AX.LT.6.D-1)<span class="keyword">THEN</span>
-<a name="l01460"></a>01460              JL=AX2**2/945.D0*(1.D0-AX2/22.D0*(1.D0-AX2/52.D0))
-<a name="l01461"></a>01461           <span class="keyword">ELSE</span>
-<a name="l01462"></a>01462              JL=(DSIN(AX)*(1.D0-(45.D0-105.D0/AX2)/AX2)+DCOS(AX)*(10.D0-105.D0/AX2)/AX)/AX
-<a name="l01463"></a>01463           <span class="keyword">ENDIF</span>
-<a name="l01464"></a>01464        ELSEIF(L.EQ.5)<span class="keyword">THEN</span>
-<a name="l01465"></a>01465           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
-<a name="l01466"></a>01466              JL=AX2**2*AX/10395.D0*(1.D0-AX2/26.D0*(1.D0-AX2/60.D0))
-<a name="l01467"></a>01467           <span class="keyword">ELSE</span>
-<a name="l01468"></a>01468              JL=(DSIN(AX)*(15.D0-(420.D0-945.D0/AX2)/AX2)/AX-DCOS(AX)*(1.D0-(105.D0-945.0d0/AX2)/AX2))/AX
-<a name="l01469"></a>01469           <span class="keyword">ENDIF</span>
-<a name="l01470"></a>01470        <span class="keyword">ELSE</span>
-<a name="l01471"></a>01471           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
-<a name="l01472"></a>01472              JL=AX2**3/135135.D0*(1.D0-AX2/30.D0*(1.D0-AX2/68.D0))
-<a name="l01473"></a>01473           <span class="keyword">ELSE</span>
-<a name="l01474"></a>01474              JL=(DSIN(AX)*(-1.D0+(210.D0-(4725.D0-10395.D0/AX2)/AX2)/AX2)+ &amp;
-<a name="l01475"></a>01475                   DCOS(AX)*(-21.D0+(1260.D0-10395.D0/AX2)/AX2)/AX)/AX
-<a name="l01476"></a>01476           <span class="keyword">ENDIF</span>
-<a name="l01477"></a>01477        <span class="keyword">ENDIF</span>
-<a name="l01478"></a>01478     <span class="keyword">ELSE</span>
-<a name="l01479"></a>01479        NU=0.5D0+L
-<a name="l01480"></a>01480        NU2=NU**2
-<a name="l01481"></a>01481        <span class="keyword">IF</span>(AX.LT.1.D-40)<span class="keyword">THEN</span>
-<a name="l01482"></a>01482           JL=0.D0
-<a name="l01483"></a>01483        ELSEIF((AX2/L).LT.5.D-1)<span class="keyword">THEN</span>
-<a name="l01484"></a>01484           JL=DEXP(L*DLOG(AX/NU)-LN2+NU*ONEMLN2-(1.D0-(1.D0-3.5D0/NU2)/NU2/30.D0)/12.D0/NU) &amp;
-<a name="l01485"></a>01485                /NU*(1.D0-AX2/(4.D0*NU+4.D0)*(1.D0-AX2/(8.D0*NU+16.D0)*(1.D0-AX2/(12.D0*NU+36.D0))))
-<a name="l01486"></a>01486        ELSEIF((<span class="keywordtype">REAL</span>(L)**2/AX).LT.5.D-1)THEN
-<a name="l01487"></a>01487           BETA=AX-PID2*(L+1)
-<a name="l01488"></a>01488           JL=(DCOS(BETA)*(1.D0-(NU2-0.25D0)*(NU2-2.25D0)/8.D0/AX2*(1.D0-(NU2-6.25)*(NU2-12.25D0)/48.D0/AX2)) &amp;
-<a name="l01489"></a>01489                -DSIN(BETA)*(NU2-0.25D0)/2.D0/AX* (1.D0-(NU2-2.25D0)*(NU2-6.25D0)/24.D0/AX2*(1.D0-(NU2-12.25)* &amp;
-<a name="l01490"></a>01490                (NU2-20.25)/80.D0/AX2)) )/AX   
-<a name="l01491"></a>01491        <span class="keyword">ELSE</span>
-<a name="l01492"></a>01492           L3=NU**0.325
-<a name="l01493"></a>01493           <span class="keyword">IF</span>(AX .LT. NU-1.31*L3) <span class="keyword">THEN</span>
-<a name="l01494"></a>01494              COSB=NU/AX
-<a name="l01495"></a>01495              SX = DSQRT(NU2-AX2)
-<a name="l01496"></a>01496              COTB=NU/SX
-<a name="l01497"></a>01497              SECB=AX/NU
-<a name="l01498"></a>01498              BETA=DLOG(COSB+SX/AX)
-<a name="l01499"></a>01499              COT3B=COTB**3
-<a name="l01500"></a>01500              COT6B=COT3B**2
-<a name="l01501"></a>01501              SEC2B=SECB**2
-<a name="l01502"></a>01502              EXPTERM=( (2.D0+3.D0*SEC2B)*COT3B/24.D0 &amp;
-<a name="l01503"></a>01503                   - ( (4.D0+SEC2B)*SEC2B*COT6B/16.D0 &amp;
-<a name="l01504"></a>01504                   + ((16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B/5760.D0 &amp;
-<a name="l01505"></a>01505                   + (32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B/128.D0/NU)*COT6B/NU) &amp;
-<a name="l01506"></a>01506                   /NU)/NU
-<a name="l01507"></a>01507              JL=DSQRT(COTB*COSB)/(2.D0*NU)*DEXP(-NU*BETA+NU/COTB-EXPTERM)
-<a name="l01508"></a>01508 
-<a name="l01509"></a>01509              <span class="comment">!          /**************** Region 2: x &gt;&gt; l ****************/</span>
-<a name="l01510"></a>01510 
-<a name="l01511"></a>01511           ELSEIF (AX .GT. NU+1.48*L3) <span class="keyword">THEN</span>
-<a name="l01512"></a>01512              COSB=NU/AX
-<a name="l01513"></a>01513              SX=DSQRT(AX2-NU2)
-<a name="l01514"></a>01514              COTB=NU/SX
-<a name="l01515"></a>01515              SECB=AX/NU
-<a name="l01516"></a>01516              BETA=DACOS(COSB)
-<a name="l01517"></a>01517              COT3B=COTB**3
-<a name="l01518"></a>01518              COT6B=COT3B**2
-<a name="l01519"></a>01519              SEC2B=SECB**2
-<a name="l01520"></a>01520              TRIGARG=NU/COTB-NU*BETA-PID4 &amp;
-<a name="l01521"></a>01521                   -((2.0+3.0*SEC2B)*COT3B/24.D0  &amp;
-<a name="l01522"></a>01522                   +(16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B*COT6B/5760.D0/NU2)/NU
-<a name="l01523"></a>01523              EXPTERM=( (4.D0+sec2b)*sec2b*cot6b/16.D0 &amp;
-<a name="l01524"></a>01524                   -(32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B**2/128.D0/NU2)/NU2
-<a name="l01525"></a>01525              JL=DSQRT(COTB*COSB)/NU*DEXP(-EXPTERM)*DCOS(TRIGARG)
-<a name="l01526"></a>01526 
-<a name="l01527"></a>01527              <span class="comment">!          /***************** Region 3: x near l ****************/</span>
-<a name="l01528"></a>01528 
-<a name="l01529"></a>01529           <span class="keyword">ELSE</span>
-<a name="l01530"></a>01530              BETA=AX-NU
-<a name="l01531"></a>01531              BETA2=BETA**2
-<a name="l01532"></a>01532              SX=6.D0/AX
-<a name="l01533"></a>01533              SX2=SX**2
-<a name="l01534"></a>01534              SECB=SX**0.3333333333333333d0
-<a name="l01535"></a>01535              SEC2B=SECB**2
-<a name="l01536"></a>01536              JL=( GAMMA1*SECB + BETA*GAMMA2*SEC2B &amp;
-<a name="l01537"></a>01537                   -(BETA2/18.D0-1.D0/45.D0)*BETA*SX*SECB*GAMMA1 &amp;
-<a name="l01538"></a>01538                   -((BETA2-1.D0)*BETA2/36.D0+1.D0/420.D0)*SX*SEC2B*GAMMA2   &amp;
-<a name="l01539"></a>01539                   +(((BETA2/1620.D0-7.D0/3240.D0)*BETA2+1.D0/648.D0)*BETA2-1.D0/8100.D0)*SX2*SECB*GAMMA1 &amp;
-<a name="l01540"></a>01540                   +(((BETA2/4536.D0-1.D0/810.D0)*BETA2+19.D0/11340.D0)*BETA2-13.D0/28350.D0)*BETA*SX2*SEC2B*GAMMA2 &amp;
-<a name="l01541"></a>01541                   -((((BETA2/349920.D0-1.D0/29160.D0)*BETA2+71.D0/583200.D0)*BETA2-121.D0/874800.D0)* &amp;
-<a name="l01542"></a>01542                   BETA2+7939.D0/224532000.D0)*BETA*SX2*SX*SECB*GAMMA1)*DSQRT(SX)/ROOTPI12
-<a name="l01543"></a>01543           <span class="keyword">ENDIF</span>
-<a name="l01544"></a>01544        <span class="keyword">ENDIF</span>
-<a name="l01545"></a>01545     <span class="keyword">ENDIF</span>
-<a name="l01546"></a>01546     <span class="keyword">IF</span>(X.LT.0.AND.MOD(L,2).NE.0)JL=-JL
-<a name="l01547"></a>01547 
-<a name="l01548"></a>01548 
-<a name="l01549"></a>01549 <span class="keyword">  END SUBROUTINE BJL</span>
-<a name="l01550"></a>01550 
-<a name="l01551"></a>01551   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01376"></a>01376     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax,nlmax,n,l
+<a name="l01377"></a>01377     <span class="keywordtype">REAL(DP)</span> :: rho, jln
+<a name="l01378"></a>01378     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: kln
+<a name="l01379"></a>01379     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: jlns      
+<a name="l01380"></a>01380 
+<a name="l01381"></a>01381     <span class="comment">!$OMP PARALLEL &amp;</span>
+<a name="l01382"></a>01382     <span class="comment">!$OMP SHARED(jlns,kln,rho,nnmax,nlmax) &amp;</span>
+<a name="l01383"></a>01383     <span class="comment">!$OMP PRIVATE(jln,l,n)   </span>
+<a name="l01384"></a>01384 
+<a name="l01385"></a>01385     <span class="comment">!$OMP DO SCHEDULE(RUNTIME)</span>
+<a name="l01386"></a>01386     <span class="keyword">DO</span> n=1,nnmax   
+<a name="l01387"></a>01387        <span class="keyword">DO</span> l=0,nlmax
+<a name="l01388"></a>01388           <span class="comment">!PRINT*,n,l,OMP_GET_THREAD_NUM()</span>
+<a name="l01389"></a>01389           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*rho , jln )
+<a name="l01390"></a>01390           jlns(l,n) = kln(l,n) * jln
+<a name="l01391"></a>01391        <span class="keyword">ENDDO</span>
+<a name="l01392"></a>01392     <span class="keyword">ENDDO</span>
+<a name="l01393"></a>01393     <span class="comment">!$OMP END DO</span>
+<a name="l01394"></a>01394     <span class="comment">!$OMP END PARALLEL</span>
+<a name="l01395"></a>01395 
+<a name="l01396"></a>01396     RETURN
+<a name="l01397"></a>01397 
+<a name="l01398"></a>01398 <span class="keyword">  END SUBROUTINE gen_jln</span>
+<a name="l01399"></a>01399 
+<a name="l01400"></a>01400   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01401"></a>01401 
+<a name="l01406"></a><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">01406</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>(L,X,JL)
+<a name="l01407"></a>01407 
+<a name="l01408"></a>01408 
+<a name="l01409"></a>01409     <span class="comment">!!== MODIFIED SUBROUTINE FOR SPHERICAL BESSEL FUNCTIONS.                       ==!!</span>
+<a name="l01410"></a>01410     <span class="comment">!!== CORRECTED THE SMALL BUGS IN PACKAGE CMBFAST&amp;CAMB(for l=4,5, x~0.001-0.002)==!! </span>
+<a name="l01411"></a>01411     <span class="comment">!!== CORRECTED THE SIGN OF J_L(X) FOR X&lt;0 CASE                                 ==!!</span>
+<a name="l01412"></a>01412     <span class="comment">!!== WORKS FASTER AND MORE ACCURATE FOR LOW L, X&lt;&lt;L, AND L&lt;&lt;X cases            ==!! </span>
+<a name="l01413"></a>01413     <span class="comment">!!== zqhuang@astro.utoronto.ca                                                 ==!!</span>
+<a name="l01414"></a>01414     <span class="keyword">IMPLICIT NONE</span>
+<a name="l01415"></a>01415     <span class="keywordtype">INTEGER</span> L
+<a name="l01416"></a>01416     <span class="keywordtype">REAL*8</span> X,JL
+<a name="l01417"></a>01417     <span class="keywordtype">REAL*8</span> AX,AX2
+<a name="l01418"></a>01418     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::LN2=0.6931471805599453094D0
+<a name="l01419"></a>01419     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::ONEMLN2=0.30685281944005469058277D0
+<a name="l01420"></a>01420     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID2=1.5707963267948966192313217D0
+<a name="l01421"></a>01421     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID4=0.78539816339744830961566084582D0
+<a name="l01422"></a>01422     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::ROOTPI12 = 21.269446210866192327578D0
+<a name="l01423"></a>01423     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA1 =   2.6789385347077476336556D0 <span class="comment">!/* Gamma FUNCTION of 1/3 */</span>
+<a name="l01424"></a>01424     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA2 =   1.3541179394264004169452D0 <span class="comment">!/* Gamma FUNCTION of 2/3 */</span>
+<a name="l01425"></a>01425     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PI=3.141592653589793238463D0
+<a name="l01426"></a>01426     <span class="keywordtype">REAL*8</span> NU,NU2,BETA,BETA2,COSB
+<a name="l01427"></a>01427     <span class="keywordtype">REAL*8</span> sx,sx2
+<a name="l01428"></a>01428     <span class="keywordtype">REAL*8</span> cotb,cot3b,cot6b,secb,sec2b
+<a name="l01429"></a>01429     <span class="keywordtype">REAL*8</span> trigarg,expterm,L3
+<a name="l01430"></a>01430 
+<a name="l01431"></a>01431     <span class="keyword">IF</span>(L.LT.0)<span class="keyword">THEN</span>
+<a name="l01432"></a>01432        <span class="keyword">write</span>(*,*) <span class="stringliteral">&#39;Can not evaluate Spherical Bessel Function with index l&lt;0&#39;</span>
+<a name="l01433"></a>01433        STOP
+<a name="l01434"></a>01434     <span class="keyword">ENDIF</span>
+<a name="l01435"></a>01435     AX=DABS(X)
+<a name="l01436"></a>01436     AX2=AX**2
+<a name="l01437"></a>01437     <span class="keyword">IF</span>(L.LT.7)<span class="keyword">THEN</span>
+<a name="l01438"></a>01438        <span class="keyword">IF</span>(L.EQ.0)<span class="keyword">THEN</span>
+<a name="l01439"></a>01439           <span class="keyword">IF</span>(AX.LT.1.D-1)<span class="keyword">THEN</span>
+<a name="l01440"></a>01440              JL=1.D0-AX2/6.D0*(1.D0-AX2/20.D0)
+<a name="l01441"></a>01441           <span class="keyword">ELSE</span>
+<a name="l01442"></a>01442              JL=DSIN(AX)/AX
+<a name="l01443"></a>01443           <span class="keyword">ENDIF</span>
+<a name="l01444"></a>01444 
+<a name="l01445"></a>01445        ELSEIF(L.EQ.1)<span class="keyword">THEN</span>
+<a name="l01446"></a>01446           <span class="keyword">IF</span>(AX.LT.2.D-1)<span class="keyword">THEN</span>
+<a name="l01447"></a>01447              JL=AX/3.D0*(1.D0-AX2/10.D0*(1.D0-AX2/28.D0))
+<a name="l01448"></a>01448           <span class="keyword">ELSE</span>
+<a name="l01449"></a>01449              JL=(DSIN(AX)/AX-DCOS(AX))/AX
+<a name="l01450"></a>01450           <span class="keyword">ENDIF</span>
+<a name="l01451"></a>01451        ELSEIF(L.EQ.2)<span class="keyword">THEN</span>
+<a name="l01452"></a>01452           <span class="keyword">IF</span>(AX.LT.3.D-1)<span class="keyword">THEN</span>
+<a name="l01453"></a>01453              JL=AX2/15.D0*(1.D0-AX2/14.D0*(1.D0-AX2/36.D0))
+<a name="l01454"></a>01454           <span class="keyword">ELSE</span>
+<a name="l01455"></a>01455              JL=(-3.0D0*DCOS(AX)/AX-DSIN(AX)*(1.D0-3.D0/AX2))/AX
+<a name="l01456"></a>01456           <span class="keyword">ENDIF</span>
+<a name="l01457"></a>01457        ELSEIF(L.EQ.3)<span class="keyword">THEN</span>
+<a name="l01458"></a>01458           <span class="keyword">IF</span>(AX.LT.4.D-1)<span class="keyword">THEN</span>
+<a name="l01459"></a>01459              JL=AX*AX2/105.D0*(1.D0-AX2/18.D0*(1.D0-AX2/44.D0))
+<a name="l01460"></a>01460           <span class="keyword">ELSE</span>
+<a name="l01461"></a>01461              JL=(DCOS(AX)*(1.D0-15.D0/AX2)-DSIN(AX)*(6.D0-15.D0/AX2)/AX)/AX
+<a name="l01462"></a>01462           <span class="keyword">ENDIF</span>
+<a name="l01463"></a>01463        ELSEIF(L.EQ.4)<span class="keyword">THEN</span>
+<a name="l01464"></a>01464           <span class="keyword">IF</span>(AX.LT.6.D-1)<span class="keyword">THEN</span>
+<a name="l01465"></a>01465              JL=AX2**2/945.D0*(1.D0-AX2/22.D0*(1.D0-AX2/52.D0))
+<a name="l01466"></a>01466           <span class="keyword">ELSE</span>
+<a name="l01467"></a>01467              JL=(DSIN(AX)*(1.D0-(45.D0-105.D0/AX2)/AX2)+DCOS(AX)*(10.D0-105.D0/AX2)/AX)/AX
+<a name="l01468"></a>01468           <span class="keyword">ENDIF</span>
+<a name="l01469"></a>01469        ELSEIF(L.EQ.5)<span class="keyword">THEN</span>
+<a name="l01470"></a>01470           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
+<a name="l01471"></a>01471              JL=AX2**2*AX/10395.D0*(1.D0-AX2/26.D0*(1.D0-AX2/60.D0))
+<a name="l01472"></a>01472           <span class="keyword">ELSE</span>
+<a name="l01473"></a>01473              JL=(DSIN(AX)*(15.D0-(420.D0-945.D0/AX2)/AX2)/AX-DCOS(AX)*(1.D0-(105.D0-945.0d0/AX2)/AX2))/AX
+<a name="l01474"></a>01474           <span class="keyword">ENDIF</span>
+<a name="l01475"></a>01475        <span class="keyword">ELSE</span>
+<a name="l01476"></a>01476           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
+<a name="l01477"></a>01477              JL=AX2**3/135135.D0*(1.D0-AX2/30.D0*(1.D0-AX2/68.D0))
+<a name="l01478"></a>01478           <span class="keyword">ELSE</span>
+<a name="l01479"></a>01479              JL=(DSIN(AX)*(-1.D0+(210.D0-(4725.D0-10395.D0/AX2)/AX2)/AX2)+ &amp;
+<a name="l01480"></a>01480                   DCOS(AX)*(-21.D0+(1260.D0-10395.D0/AX2)/AX2)/AX)/AX
+<a name="l01481"></a>01481           <span class="keyword">ENDIF</span>
+<a name="l01482"></a>01482        <span class="keyword">ENDIF</span>
+<a name="l01483"></a>01483     <span class="keyword">ELSE</span>
+<a name="l01484"></a>01484        NU=0.5D0+L
+<a name="l01485"></a>01485        NU2=NU**2
+<a name="l01486"></a>01486        <span class="keyword">IF</span>(AX.LT.1.D-40)<span class="keyword">THEN</span>
+<a name="l01487"></a>01487           JL=0.D0
+<a name="l01488"></a>01488        ELSEIF((AX2/L).LT.5.D-1)<span class="keyword">THEN</span>
+<a name="l01489"></a>01489           JL=DEXP(L*DLOG(AX/NU)-LN2+NU*ONEMLN2-(1.D0-(1.D0-3.5D0/NU2)/NU2/30.D0)/12.D0/NU) &amp;
+<a name="l01490"></a>01490                /NU*(1.D0-AX2/(4.D0*NU+4.D0)*(1.D0-AX2/(8.D0*NU+16.D0)*(1.D0-AX2/(12.D0*NU+36.D0))))
+<a name="l01491"></a>01491        ELSEIF((<span class="keywordtype">REAL</span>(L)**2/AX).LT.5.D-1)THEN
+<a name="l01492"></a>01492           BETA=AX-PID2*(L+1)
+<a name="l01493"></a>01493           JL=(DCOS(BETA)*(1.D0-(NU2-0.25D0)*(NU2-2.25D0)/8.D0/AX2*(1.D0-(NU2-6.25)*(NU2-12.25D0)/48.D0/AX2)) &amp;
+<a name="l01494"></a>01494                -DSIN(BETA)*(NU2-0.25D0)/2.D0/AX* (1.D0-(NU2-2.25D0)*(NU2-6.25D0)/24.D0/AX2*(1.D0-(NU2-12.25)* &amp;
+<a name="l01495"></a>01495                (NU2-20.25)/80.D0/AX2)) )/AX   
+<a name="l01496"></a>01496        <span class="keyword">ELSE</span>
+<a name="l01497"></a>01497           L3=NU**0.325
+<a name="l01498"></a>01498           <span class="keyword">IF</span>(AX .LT. NU-1.31*L3) <span class="keyword">THEN</span>
+<a name="l01499"></a>01499              COSB=NU/AX
+<a name="l01500"></a>01500              SX = DSQRT(NU2-AX2)
+<a name="l01501"></a>01501              COTB=NU/SX
+<a name="l01502"></a>01502              SECB=AX/NU
+<a name="l01503"></a>01503              BETA=DLOG(COSB+SX/AX)
+<a name="l01504"></a>01504              COT3B=COTB**3
+<a name="l01505"></a>01505              COT6B=COT3B**2
+<a name="l01506"></a>01506              SEC2B=SECB**2
+<a name="l01507"></a>01507              EXPTERM=( (2.D0+3.D0*SEC2B)*COT3B/24.D0 &amp;
+<a name="l01508"></a>01508                   - ( (4.D0+SEC2B)*SEC2B*COT6B/16.D0 &amp;
+<a name="l01509"></a>01509                   + ((16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B/5760.D0 &amp;
+<a name="l01510"></a>01510                   + (32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B/128.D0/NU)*COT6B/NU) &amp;
+<a name="l01511"></a>01511                   /NU)/NU
+<a name="l01512"></a>01512              JL=DSQRT(COTB*COSB)/(2.D0*NU)*DEXP(-NU*BETA+NU/COTB-EXPTERM)
+<a name="l01513"></a>01513 
+<a name="l01514"></a>01514              <span class="comment">!          /**************** Region 2: x &gt;&gt; l ****************/</span>
+<a name="l01515"></a>01515 
+<a name="l01516"></a>01516           ELSEIF (AX .GT. NU+1.48*L3) <span class="keyword">THEN</span>
+<a name="l01517"></a>01517              COSB=NU/AX
+<a name="l01518"></a>01518              SX=DSQRT(AX2-NU2)
+<a name="l01519"></a>01519              COTB=NU/SX
+<a name="l01520"></a>01520              SECB=AX/NU
+<a name="l01521"></a>01521              BETA=DACOS(COSB)
+<a name="l01522"></a>01522              COT3B=COTB**3
+<a name="l01523"></a>01523              COT6B=COT3B**2
+<a name="l01524"></a>01524              SEC2B=SECB**2
+<a name="l01525"></a>01525              TRIGARG=NU/COTB-NU*BETA-PID4 &amp;
+<a name="l01526"></a>01526                   -((2.0+3.0*SEC2B)*COT3B/24.D0  &amp;
+<a name="l01527"></a>01527                   +(16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B*COT6B/5760.D0/NU2)/NU
+<a name="l01528"></a>01528              EXPTERM=( (4.D0+sec2b)*sec2b*cot6b/16.D0 &amp;
+<a name="l01529"></a>01529                   -(32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B**2/128.D0/NU2)/NU2
+<a name="l01530"></a>01530              JL=DSQRT(COTB*COSB)/NU*DEXP(-EXPTERM)*DCOS(TRIGARG)
+<a name="l01531"></a>01531 
+<a name="l01532"></a>01532              <span class="comment">!          /***************** Region 3: x near l ****************/</span>
+<a name="l01533"></a>01533 
+<a name="l01534"></a>01534           <span class="keyword">ELSE</span>
+<a name="l01535"></a>01535              BETA=AX-NU
+<a name="l01536"></a>01536              BETA2=BETA**2
+<a name="l01537"></a>01537              SX=6.D0/AX
+<a name="l01538"></a>01538              SX2=SX**2
+<a name="l01539"></a>01539              SECB=SX**0.3333333333333333d0
+<a name="l01540"></a>01540              SEC2B=SECB**2
+<a name="l01541"></a>01541              JL=( GAMMA1*SECB + BETA*GAMMA2*SEC2B &amp;
+<a name="l01542"></a>01542                   -(BETA2/18.D0-1.D0/45.D0)*BETA*SX*SECB*GAMMA1 &amp;
+<a name="l01543"></a>01543                   -((BETA2-1.D0)*BETA2/36.D0+1.D0/420.D0)*SX*SEC2B*GAMMA2   &amp;
+<a name="l01544"></a>01544                   +(((BETA2/1620.D0-7.D0/3240.D0)*BETA2+1.D0/648.D0)*BETA2-1.D0/8100.D0)*SX2*SECB*GAMMA1 &amp;
+<a name="l01545"></a>01545                   +(((BETA2/4536.D0-1.D0/810.D0)*BETA2+19.D0/11340.D0)*BETA2-13.D0/28350.D0)*BETA*SX2*SEC2B*GAMMA2 &amp;
+<a name="l01546"></a>01546                   -((((BETA2/349920.D0-1.D0/29160.D0)*BETA2+71.D0/583200.D0)*BETA2-121.D0/874800.D0)* &amp;
+<a name="l01547"></a>01547                   BETA2+7939.D0/224532000.D0)*BETA*SX2*SX*SECB*GAMMA1)*DSQRT(SX)/ROOTPI12
+<a name="l01548"></a>01548           <span class="keyword">ENDIF</span>
+<a name="l01549"></a>01549        <span class="keyword">ENDIF</span>
+<a name="l01550"></a>01550     <span class="keyword">ENDIF</span>
+<a name="l01551"></a>01551     <span class="keyword">IF</span>(X.LT.0.AND.MOD(L,2).NE.0)JL=-JL
 <a name="l01552"></a>01552 
-<a name="l01553"></a>01553 <span class="keyword">END MODULE f3dex_transforms</span>
+<a name="l01553"></a>01553 <span class="keyword">  END SUBROUTINE BJL</span>
+<a name="l01554"></a>01554 
+<a name="l01555"></a>01555   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01556"></a>01556 
+<a name="l01557"></a>01557 <span class="keyword">END MODULE f3dex_transforms</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -1619,7 +1605,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 3 2011 18:14:23 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:45 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

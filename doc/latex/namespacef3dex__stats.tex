@@ -5,12 +5,36 @@
 \subsection*{Functions/Subroutines}
 \begin{DoxyCompactItemize}
 \item 
+REAL(DP) \hyperlink{namespacef3dex__stats_a2c704cb2c5b38f77b70a5c9783660912}{CMODULE} (a)
+\begin{DoxyCompactList}\small\item\em Computes the module of a complex number. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__stats_af82543b20c426be1736a4fed0d1ca80c}{almn2cln\_\-naive} (nnmax, nlmax, nmmax, almn, cln)
-\item 
+\begin{DoxyCompactList}\small\item\em Naive estimator for the almn's. \end{DoxyCompactList}\item 
 REAL(DP) \hyperlink{namespacef3dex__stats_afc9d6ca61536648a01f8b6769080283e}{dzrel} (cplxnb, cplxnbref)
-\item 
+\begin{DoxyCompactList}\small\item\em Relative error betwee two complex numbers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__stats_a1f360b2a41b5a63c3379390a55ef07b2}{legendre\_\-vec} (x, pl, nlmax)
+\begin{DoxyCompactList}\small\item\em Computes legendre coefs of a double using recurrence. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__stats_aa2fb45e013179295e3b876ced9eff015}{legendre\_\-mat} (x, pl, nc, nlmax)
+\begin{DoxyCompactList}\small\item\em Computes legendre coefs of an array using recurrence. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__stats_ac34a6421249816395b51048aa0a3dde3}{gen\_\-angles\_\-map} (npix, ang\_\-map, nside, nested, mask)
+\begin{DoxyCompactList}\small\item\em Generates $<$xxt$>$ correlation angles map. \end{DoxyCompactList}\item 
 REAL(DP) \hyperlink{namespacef3dex__stats_a70ed2d6cd6c25b9cd95b04e9223e5828}{dzabs} (cplxnb, cplxnbref)
-\end{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex__stats_ae67784686a6f0a1d26c1cef84c250b0d}{EYEMAT} (A, s, e, val)
+\begin{DoxyCompactList}\small\item\em Creates eye matrix. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__stats_a564304481b43b3d55989683f03460410}{INVERSE} (A, n, res)
+\begin{DoxyCompactList}\small\item\em Inverts matrix. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__stats_afeef2b0049256649535f458d01e901c8}{map2cl\_\-QML} (map, cl, nside, nlmax, nlmax\_\-recon, covarnoise, cltheo, logicalmask, covarest)
+\begin{DoxyCompactList}\small\item\em Computes QML estimator of a healpix (masked) map. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__stats_aeff76c576e1699da5b3aa1f4efa4335d}{map2cl\_\-PCL} (map, cl, nside, nlmax, nlmax\_\-recon, logicalmask, covarest)
+\begin{DoxyCompactList}\small\item\em Computes QML estimator of a healpix (masked) map. \end{DoxyCompactList}\item 
+REAL(DP) \hyperlink{namespacef3dex__stats_af0a10f88c8029206196ea18b3ad579ba}{BILIN\_\-FORM\_\-PAR} (x, A, y, s, e)
+\begin{DoxyCompactList}\small\item\em Parallel bilinear form. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__stats_a046613d05a3a2eb1808a7ee99fba7509}{MATMUL\_\-PAR} (A, B, C, s, d1, d2, d3)
+\begin{DoxyCompactList}\small\item\em Parallel matrix multiplication. \end{DoxyCompactList}\item 
+REAL(DP) \hyperlink{namespacef3dex__stats_aa88d6eefa32a9edc04b3d93af96f5a2e}{TRACE} (mat, s, e)
+\begin{DoxyCompactList}\small\item\em TRACE. \end{DoxyCompactList}\item 
+REAL(DP) \hyperlink{namespacef3dex__stats_ae106140bb309de7d7779b6b086050bf4}{TRACEPROD} (mat1, mat2, s, e)
+\begin{DoxyCompactList}\small\item\em TRACE of a product of matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function/Subroutine Documentation}
@@ -29,7 +53,67 @@ REAL(DP) \hyperlink{namespacef3dex__stats_a70ed2d6cd6c25b9cd95b04e9223e5828}{dza
 \label{namespacef3dex__stats_af82543b20c426be1736a4fed0d1ca80c}
 
 
-Definition at line 15 of file f3dex\_\-stats.f90.
+Naive estimator for the almn's. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em alm(0:nnmax,0:nlmax,0:nmmax))} & : input almn's \\
+\hline
+\mbox{\tt in}  & {\em (nnmax,nlmax,nmmax)} & : bounds \\
+\hline
+\mbox{\tt out}  & {\em cl(0:nlmax,0:nnmax)} & : output power spectrum \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 32 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_af0a10f88c8029206196ea18b3ad579ba}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!BILIN\_\-FORM\_\-PAR@{BILIN\_\-FORM\_\-PAR}}
+\index{BILIN\_\-FORM\_\-PAR@{BILIN\_\-FORM\_\-PAR}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{BILIN\_\-FORM\_\-PAR}]{\setlength{\rightskip}{0pt plus 5cm}REAL(DP) f3dex\_\-stats::BILIN\_\-FORM\_\-PAR (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(s:e)}]{x, }
+\item[{REAL(DP),dimension(s:e,s:e)}]{A, }
+\item[{REAL(DP),dimension(s:e)}]{y, }
+\item[{INTEGER(I4B)}]{s, }
+\item[{INTEGER(I4B)}]{e}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_af0a10f88c8029206196ea18b3ad579ba}
+
+
+Parallel bilinear form. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em (} & x(s:e),y(s:e) ) : left and right vectors \\
+\hline
+\mbox{\tt in}  & {\em A(s:e,s:e)} & : middle matrix \\
+\hline
+\mbox{\tt in}  & {\em (s,e)} & : bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 509 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_a2c704cb2c5b38f77b70a5c9783660912}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!CMODULE@{CMODULE}}
+\index{CMODULE@{CMODULE}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{CMODULE}]{\setlength{\rightskip}{0pt plus 5cm}REAL(DP) f3dex\_\-stats::CMODULE (
+\begin{DoxyParamCaption}
+\item[{COMPLEX(DPC)}]{a}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_a2c704cb2c5b38f77b70a5c9783660912}
+
+
+Computes the module of a complex number. 
+
+
+
+Definition at line 18 of file f3dex\_\-stats.f90.
 
 \hypertarget{namespacef3dex__stats_a70ed2d6cd6c25b9cd95b04e9223e5828}{
 \index{f3dex\_\-stats@{f3dex\_\-stats}!dzabs@{dzabs}}
@@ -43,7 +127,7 @@ Definition at line 15 of file f3dex\_\-stats.f90.
 \label{namespacef3dex__stats_a70ed2d6cd6c25b9cd95b04e9223e5828}
 
 
-Definition at line 79 of file f3dex\_\-stats.f90.
+Definition at line 193 of file f3dex\_\-stats.f90.
 
 \hypertarget{namespacef3dex__stats_afc9d6ca61536648a01f8b6769080283e}{
 \index{f3dex\_\-stats@{f3dex\_\-stats}!dzrel@{dzrel}}
@@ -57,5 +141,337 @@ Definition at line 79 of file f3dex\_\-stats.f90.
 \label{namespacef3dex__stats_afc9d6ca61536648a01f8b6769080283e}
 
 
-Definition at line 47 of file f3dex\_\-stats.f90.
+Relative error betwee two complex numbers. 
+
+
+
+Definition at line 63 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_ae67784686a6f0a1d26c1cef84c250b0d}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!EYEMAT@{EYEMAT}}
+\index{EYEMAT@{EYEMAT}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{EYEMAT}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::EYEMAT (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(s:e,s:e)}]{A, }
+\item[{INTEGER}]{s, }
+\item[{INTEGER}]{e, }
+\item[{REAL(DP),optional}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_ae67784686a6f0a1d26c1cef84c250b0d}
+
+
+Creates eye matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em A(s:e,s:e)} & : input matrix \\
+\hline
+\mbox{\tt in}  & {\em (s,e)} & : bounds \mbox{[}in\mbox{]} val : value to put on the diagonal \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 224 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_ac34a6421249816395b51048aa0a3dde3}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!gen\_\-angles\_\-map@{gen\_\-angles\_\-map}}
+\index{gen\_\-angles\_\-map@{gen\_\-angles\_\-map}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{gen\_\-angles\_\-map}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::gen\_\-angles\_\-map (
+\begin{DoxyParamCaption}
+\item[{INTEGER(I4B)}]{npix, }
+\item[{REAL(DP),dimension(0:npix-\/1,0:npix-\/1)}]{ang\_\-map, }
+\item[{INTEGER(I4B)}]{nside, }
+\item[{LOGICAL,optional}]{nested, }
+\item[{LOGICAL,dimension(0:12$\ast$nside$\ast$$\ast$2-\/1),optional}]{mask}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_ac34a6421249816395b51048aa0a3dde3}
+
+
+Generates $<$xxt$>$ correlation angles map. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em (npix,nside)} & : number of pixels and Healpix parameter \\
+\hline
+\mbox{\tt out}  & {\em ang\_\-map(0:npix-\/1,0:npix-\/1)} & : angular map \\
+\hline
+\mbox{\tt in}  & {\em nested} & : logical for Healpix mode \\
+\hline
+\mbox{\tt in}  & {\em mask} & : optional mask \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 139 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_a564304481b43b3d55989683f03460410}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!INVERSE@{INVERSE}}
+\index{INVERSE@{INVERSE}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{INVERSE}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::INVERSE (
+\begin{DoxyParamCaption}
+\item[{DOUBLE PRECISION,dimension(n,n)}]{A, }
+\item[{INTEGER}]{n, }
+\item[{LOGICAL}]{res}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_a564304481b43b3d55989683f03460410}
+
+
+Inverts matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em inout\mbox{]}} & A(n,n) : input/output matrix \\
+\hline
+\mbox{\tt in}  & {\em n} & : bounds \mbox{[}out\mbox{]} res : output result logical \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 246 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_aa2fb45e013179295e3b876ced9eff015}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!legendre\_\-mat@{legendre\_\-mat}}
+\index{legendre\_\-mat@{legendre\_\-mat}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{legendre\_\-mat}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::legendre\_\-mat (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(0:nc-\/1)}]{x, }
+\item[{REAL(DP),dimension(0:nc-\/1, 0:nlmax)}]{pl, }
+\item[{INTEGER(I4B)}]{nc, }
+\item[{INTEGER(I4B)}]{nlmax}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_aa2fb45e013179295e3b876ced9eff015}
+
+
+Computes legendre coefs of an array using recurrence. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em x(0:nc-\/1)} & : abs \\
+\hline
+\mbox{\tt out}  & {\em pl(0:nc-\/1,0:nlmax)} & : legendre matrix \mbox{[}in\mbox{]} (nc,nlmax) : dimensions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 120 of file f3dex\_\-stats.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__stats_a1f360b2a41b5a63c3379390a55ef07b2}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!legendre\_\-vec@{legendre\_\-vec}}
+\index{legendre\_\-vec@{legendre\_\-vec}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{legendre\_\-vec}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::legendre\_\-vec (
+\begin{DoxyParamCaption}
+\item[{REAL(DP)}]{x, }
+\item[{REAL(DP),dimension(0:nlmax)}]{pl, }
+\item[{INTEGER(I4B)}]{nlmax}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_a1f360b2a41b5a63c3379390a55ef07b2}
+
+
+Computes legendre coefs of a double using recurrence. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em x(0:nc-\/1)} & : abs \\
+\hline
+\mbox{\tt out}  & {\em pl(0:nc-\/1,0:nlmax)} & : legendre matrix \mbox{[}in\mbox{]} (nc,nlmax) : dimensions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 99 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_aeff76c576e1699da5b3aa1f4efa4335d}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!map2cl\_\-PCL@{map2cl\_\-PCL}}
+\index{map2cl\_\-PCL@{map2cl\_\-PCL}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{map2cl\_\-PCL}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::map2cl\_\-PCL (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(0:(12$\ast$nside$\ast$nside-\/1))}]{map, }
+\item[{REAL(DP),dimension(0:nlmax\_\-recon)}]{cl, }
+\item[{INTEGER(I4B)}]{nside, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{INTEGER(I4B)}]{nlmax\_\-recon, }
+\item[{LOGICAL,dimension(0:(12$\ast$nside$\ast$nside-\/1))}]{logicalmask, }
+\item[{REAL(DP),dimension(0:nlmax\_\-recon),optional}]{covarest}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_aeff76c576e1699da5b3aa1f4efa4335d}
+
+
+Computes QML estimator of a healpix (masked) map. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em map(0:12$\ast$nside$\ast$nside-\/1)} & : input healpix map \\
+\hline
+\mbox{\tt out}  & {\em cl(0:nlmax)} & : output power spectrum estimates \\
+\hline
+\mbox{\tt in}  & {\em nside} & : healpix parameter \\
+\hline
+\mbox{\tt in}  & {\em nlmax} & : input nlmax for the theory signal covariance \\
+\hline
+\mbox{\tt in}  & {\em nlmax\_\-recon} & : lmax for the reconstruction and estimation \\
+\hline
+\mbox{\tt in}  & {\em logicalmask(0:12$\ast$nside$\ast$nside-\/1)} & : (optional) healpix logical mask \\
+\hline
+\mbox{\tt out}  & {\em covarest} & : (optional) output covariance of the noise \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 411 of file f3dex\_\-stats.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__stats_afeef2b0049256649535f458d01e901c8}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!map2cl\_\-QML@{map2cl\_\-QML}}
+\index{map2cl\_\-QML@{map2cl\_\-QML}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{map2cl\_\-QML}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::map2cl\_\-QML (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(0:(12$\ast$nside$\ast$nside-\/1))}]{map, }
+\item[{REAL(DP),dimension(0:nlmax\_\-recon)}]{cl, }
+\item[{INTEGER(I4B)}]{nside, }
+\item[{INTEGER(I4B)}]{nlmax, }
+\item[{INTEGER(I4B)}]{nlmax\_\-recon, }
+\item[{REAL(DP),dimension(0:12$\ast$nside$\ast$$\ast$2-\/1,0:12$\ast$nside$\ast$$\ast$2-\/1)}]{covarnoise, }
+\item[{REAL(DP),dimension(0:nlmax)}]{cltheo, }
+\item[{LOGICAL,dimension(0:(12$\ast$nside$\ast$nside-\/1)),optional}]{logicalmask, }
+\item[{REAL(DP),dimension(0:nlmax\_\-recon),optional}]{covarest}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_afeef2b0049256649535f458d01e901c8}
+
+
+Computes QML estimator of a healpix (masked) map. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em map(0:12$\ast$nside$\ast$nside-\/1)} & : input healpix map \\
+\hline
+\mbox{\tt out}  & {\em cl(0:nlmax)} & : output power spectrum estimates \\
+\hline
+\mbox{\tt in}  & {\em nside} & : healpix parameter \\
+\hline
+\mbox{\tt in}  & {\em nlmax} & : input nlmax for the theory signal covariance \\
+\hline
+\mbox{\tt in}  & {\em nlmax\_\-recon} & : lmax for the reconstruction and estimation \\
+\hline
+\mbox{\tt in}  & {\em covarnoise} & : covariance matrix of the noise \\
+\hline
+\mbox{\tt in}  & {\em cltheo} & : theoretical power spectrum \\
+\hline
+\mbox{\tt in}  & {\em logicalmask(0:12$\ast$nside$\ast$nside-\/1)} & : (optional) healpix logical mask \\
+\hline
+\mbox{\tt out}  & {\em covarest} & : (optional) output covariance of the noise \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 280 of file f3dex\_\-stats.f90.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{namespacef3dex__stats_a046613d05a3a2eb1808a7ee99fba7509}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!MATMUL\_\-PAR@{MATMUL\_\-PAR}}
+\index{MATMUL\_\-PAR@{MATMUL\_\-PAR}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{MATMUL\_\-PAR}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-stats::MATMUL\_\-PAR (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(s:d1,s:d2)}]{A, }
+\item[{REAL(DP),dimension(s:d2,s:d3)}]{B, }
+\item[{REAL(DP),dimension(s:d1,s:d3)}]{C, }
+\item[{INTEGER(I4B)}]{s, }
+\item[{INTEGER(I4B)}]{d1, }
+\item[{INTEGER(I4B)}]{d2, }
+\item[{INTEGER(I4B)}]{d3}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_a046613d05a3a2eb1808a7ee99fba7509}
+
+
+Parallel matrix multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em A(s:d1,s:d2)} & : first matrix \\
+\hline
+\mbox{\tt in}  & {\em B(s:d2,s:d3)} & : second matrix \\
+\hline
+\mbox{\tt in}  & {\em C(s:d1,s:d3)} & : output matrix \\
+\hline
+\mbox{\tt in}  & {\em (s,d1,d2,d3)} & : bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 538 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_aa88d6eefa32a9edc04b3d93af96f5a2e}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!TRACE@{TRACE}}
+\index{TRACE@{TRACE}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{TRACE}]{\setlength{\rightskip}{0pt plus 5cm}REAL(DP) f3dex\_\-stats::TRACE (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(s:e,s:e),intent(in)}]{mat, }
+\item[{INTEGER(I4B)}]{s, }
+\item[{INTEGER(I4B)}]{e}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_aa88d6eefa32a9edc04b3d93af96f5a2e}
+
+
+TRACE. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mat(s:e,s:e)} & : input matrix \\
+\hline
+\mbox{\tt in}  & {\em (s,e)} & : bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 563 of file f3dex\_\-stats.f90.
+
+\hypertarget{namespacef3dex__stats_ae106140bb309de7d7779b6b086050bf4}{
+\index{f3dex\_\-stats@{f3dex\_\-stats}!TRACEPROD@{TRACEPROD}}
+\index{TRACEPROD@{TRACEPROD}!f3dex_stats@{f3dex\_\-stats}}
+\subsubsection[{TRACEPROD}]{\setlength{\rightskip}{0pt plus 5cm}REAL(DP) f3dex\_\-stats::TRACEPROD (
+\begin{DoxyParamCaption}
+\item[{REAL(DP),dimension(s:e,s:e),intent(in)}]{mat1, }
+\item[{REAL(DP),dimension(s:e,s:e),intent(in)}]{mat2, }
+\item[{INTEGER(I4B)}]{s, }
+\item[{INTEGER(I4B)}]{e}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__stats_ae106140bb309de7d7779b6b086050bf4}
+
+
+TRACE of a product of matrices. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mat1(s:e,s:e)} & : input matrix 1 \\
+\hline
+\mbox{\tt in}  & {\em mat2(s:e,s:e)} & : input matrix 2 \\
+\hline
+\mbox{\tt in}  & {\em (s,e)} & : bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 589 of file f3dex\_\-stats.f90.
 

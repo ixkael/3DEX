@@ -5,9 +5,9 @@ digraph G
   rankdir=LR;
   Node1 [label="f3dex_cosmotools::cosmo_z2s",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="f3dex_cosmotools::chi_z0",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__cosmotools.html#abdbb37c7c522bf29ebf089412b9d7854"];
+  Node2 [label="f3dex_cosmotools::chi_z0",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__cosmotools.html#abdbb37c7c522bf29ebf089412b9d7854",tooltip="Raw chi to rad conversion, using QUADPACK integration."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="f3dex_cosmotools::fz",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__cosmotools.html#abba0e9b02d0f46a5abce5a0830da7f4d"];
+  Node3 [label="f3dex_cosmotools::fz",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__cosmotools.html#abba0e9b02d0f46a5abce5a0830da7f4d",tooltip="Cosmological function."];
   Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="qagp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$quadpack_8f90.html#a99cf2a02a14029fad4762555f04cac0e"];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

@@ -69,12 +69,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#aab1f14e65c2837494cb15ff4fd54b372">cln2fits</a> (filename, cln, kln, nlmax, nnmax, header, nlheader)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write power spectrum to file.  <a href="#aab1f14e65c2837494cb15ff4fd54b372"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a3bb8fd149a1c137d3176d484e28bbef0">almn2fits</a> (filename, almn, kln, cln, nlmax, nmmax, nnmax, header, nlheader)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a_lmn's to file.  <a href="#a3bb8fd149a1c137d3176d484e28bbef0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a106cd0d1eb3bcd38d2c43228f499f57b">fits2almn</a> (filename, nnmax, nlmax, nmmax, almn, kln, cln, header, nlheader)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts almn's from fits file.  <a href="#a106cd0d1eb3bcd38d2c43228f499f57b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a83e1158f828e86e43f1dc68bc0e7c59b">f90ftpcld</a> (unit, colnum, frow, felem, np, data, status)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#ada7b447f4ace46eabf663495c3a8c8c2">f90ftgcvd</a> (unit, colnum, frow, felem, np, nullval, data, anynull, status)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#ab7baecf48bb7833c32bc7be570f947c1">f90ftgkyd</a> (unit, keyword, value, comment, status)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a0d143b6a055e5c50c19b86e75d94c663">get_clean_header</a> (unit, header, filename, error, xalso, xonly)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#ae6aed20f64a46bb7d9d33b1c56f89cd0">bitab2fits</a> (file, tab, dim1start, dim1end, dim2start, dim2end)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write bi-tab to file.  <a href="#ae6aed20f64a46bb7d9d33b1c56f89cd0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a5c4a0cf23d0152d7449eb2afb09ad563">fits2bitab</a> (file, tab, dim1start, dim1end, dim2start, dim2end)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read bi-tab from file.  <a href="#a5c4a0cf23d0152d7449eb2afb09ad563"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a98c44872e5b5937bef4cccfcc2a21c43">tritab2fits</a> (file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write tri-tab to file.  <a href="#a98c44872e5b5937bef4cccfcc2a21c43"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a1daf125726e201b6f4f84e709e23ccc0">fits2tritab</a> (file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read tri-tab from file.  <a href="#a1daf125726e201b6f4f84e709e23ccc0"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">REAL(kind=SP), parameter, private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__fitstools.html#a7841ef704a851792da5858a872caa0e4">s_bad_value</a> = HPX_SBADVAL</td></tr>
@@ -148,7 +159,20 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00164">164</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+<p>Write a_lmn's to file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>: fits file for output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">almn</td><td>: Fourier-bessel decomposition </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">kln</td><td>: k spectrum </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cln</td><td>: normalization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(nlmax,nmmax,nnmax)</td><td>: n-m-l limits </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(header,nlheader)</td><td>: headers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00178">178</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -157,6 +181,70 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="ae6aed20f64a46bb7d9d33b1c56f89cd0"></a><!-- doxytag: member="f3dex_fitstools::bitab2fits" ref="ae6aed20f64a46bb7d9d33b1c56f89cd0" args="(file, tab, dim1start, dim1end, dim2start, dim2end)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine f3dex_fitstools::bitab2fits </td>
+          <td>(</td>
+          <td class="paramtype">CHARACTER(len=FILENAMELEN)&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end)&#160;</td>
+          <td class="paramname"><em>tab</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Write bi-tab to file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>: fits file for output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tab</td><td>: bi-array to write </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim1start,dim1en)</td><td>: first dim bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim2start,dim2en)</td><td>: first dim bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00667">667</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 </div>
 </div>
@@ -215,7 +303,19 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00018">18</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+<p>Write power spectrum to file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>: fits file for output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cln</td><td>: power spectrum </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">kln</td><td>: k spectrum </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(nlmax,nnmax)</td><td>: n-l limits </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(header,nlheader)</td><td>: headers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00025">25</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -294,7 +394,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00542">542</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00563">563</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 </div>
 </div>
@@ -341,7 +441,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00554">554</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00575">575</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 </div>
 </div>
@@ -400,7 +500,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00532">532</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00553">553</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 </div>
 </div>
@@ -471,7 +571,20 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00338">338</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+<p>Extracts almn's from fits file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>: fits file </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">almn</td><td>: Fourier-bessel decomposition </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">kln</td><td>: k spectrum </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cln</td><td>: normalization </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(nlmax,nmmax,nnmax)</td><td>: n-m-l limits </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(header,nlheader)</td><td>: headers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00359">359</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -480,6 +593,147 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="a5c4a0cf23d0152d7449eb2afb09ad563"></a><!-- doxytag: member="f3dex_fitstools::fits2bitab" ref="a5c4a0cf23d0152d7449eb2afb09ad563" args="(file, tab, dim1start, dim1end, dim2start, dim2end)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine f3dex_fitstools::fits2bitab </td>
+          <td>(</td>
+          <td class="paramtype">CHARACTER(len=FILENAMELEN)&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end)&#160;</td>
+          <td class="paramname"><em>tab</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Read bi-tab from file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>: input fits file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tab</td><td>: bi-array to write </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim1start,dim1en)</td><td>: first dim bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim2start,dim2en)</td><td>: first dim bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00706">706</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1daf125726e201b6f4f84e709e23ccc0"></a><!-- doxytag: member="f3dex_fitstools::fits2tritab" ref="a1daf125726e201b6f4f84e709e23ccc0" args="(file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine f3dex_fitstools::fits2tritab </td>
+          <td>(</td>
+          <td class="paramtype">CHARACTER(len=FILENAMELEN)&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end,dim3start:dim3end)&#160;</td>
+          <td class="paramname"><em>tab</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim3start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim3end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Read tri-tab from file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>: input fits file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tab</td><td>: tri-array to write </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim1start,dim1en)</td><td>: first dim bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim2start,dim2en)</td><td>: first dim bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim3start,dim3en)</td><td>: first dim bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00798">798</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 </div>
 </div>
@@ -532,7 +786,84 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00566">566</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00587">587</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a98c44872e5b5937bef4cccfcc2a21c43"></a><!-- doxytag: member="f3dex_fitstools::tritab2fits" ref="a98c44872e5b5937bef4cccfcc2a21c43" args="(file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine f3dex_fitstools::tritab2fits </td>
+          <td>(</td>
+          <td class="paramtype">CHARACTER(len=FILENAMELEN)&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end,dim3start:dim3end)&#160;</td>
+          <td class="paramname"><em>tab</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim1end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim2end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim3start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>dim3end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Write tri-tab to file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>: fits file for output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tab</td><td>: tri-array to write </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim1start,dim1en)</td><td>: first dim bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim2start,dim2en)</td><td>: first dim bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(dim3start,dim3en)</td><td>: first dim bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__fitstools_8f90_source.html#l00753">753</a> of file <a class="el" href="f3dex__fitstools_8f90_source.html">f3dex_fitstools.f90</a>.</p>
 
 </div>
 </div>
@@ -582,7 +913,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 3 2011 18:14:23 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:45 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

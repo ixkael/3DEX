@@ -16,15 +16,15 @@ subroutine \hyperlink{namespacef3dex__transforms_a4675d50d585b89b97772a0fa7dde4c
 subroutine \hyperlink{namespacef3dex__transforms_a3e792eb35f030b601d9262ac031cfdb9}{almn2rmap} (map, almn, rho, nsmax, nnmax, nlmax, nmmax, kln, cln, plm)
 \item 
 subroutine \hyperlink{namespacef3dex__transforms_a02b926f933d186f2c9d9ab6d478a1601}{gen\_\-qln} (qln, nnmax, nlmax)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes series of roots of Bessel functions. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__transforms_a4b80bc7cad52998fd0aff935a1695ee7}{gen\_\-kln} (kln, nnmax, nlmax, rmax)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes k spectrum. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__transforms_a2cd270ebc1186ae3872ab2e0068cff9d}{logrange} (x, mn, mx, npts)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates a logrange. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__transforms_aa6cd797c56b97503bf2d52131f6e5554}{gen\_\-cln} (cln, kln, nnmax, nlmax, rmax)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes series of normalization coefficients. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__transforms_ad1ab102a8307876c7af8bd6868ea7ef2}{gen\_\-jln} (jlns, kln, rho, nnmax, nlmax)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes series of jl(kln r) \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__transforms_a9b68481c890d75c3e3f4cbd4a7109830}{BJL} (L, X, JL)
 \begin{DoxyCompactList}\small\item\em Compute the value of the l-\/th order spherical bessel FUNCTION at x. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
@@ -57,7 +57,7 @@ REAL(kind=DP), parameter, private \hyperlink{namespacef3dex__transforms_a179e008
 \label{namespacef3dex__transforms_a3e792eb35f030b601d9262ac031cfdb9}
 
 
-Definition at line 1014 of file f3dex\_\-transforms.f90.
+Definition at line 1009 of file f3dex\_\-transforms.f90.
 
 
 
@@ -108,7 +108,7 @@ Compute the value of the l-\/th order spherical bessel FUNCTION at x.
 \end{DoxyParams}
 
 
-Definition at line 1401 of file f3dex\_\-transforms.f90.
+Definition at line 1406 of file f3dex\_\-transforms.f90.
 
 \hypertarget{namespacef3dex__transforms_a4675d50d585b89b97772a0fa7dde4c5f}{
 \index{f3dex\_\-transforms@{f3dex\_\-transforms}!fieldalmn2overalmn@{fieldalmn2overalmn}}
@@ -127,7 +127,7 @@ Definition at line 1401 of file f3dex\_\-transforms.f90.
 \label{namespacef3dex__transforms_a4675d50d585b89b97772a0fa7dde4c5f}
 
 
-Definition at line 988 of file f3dex\_\-transforms.f90.
+Definition at line 983 of file f3dex\_\-transforms.f90.
 
 
 
@@ -149,7 +149,22 @@ Here is the call graph for this function:
 \label{namespacef3dex__transforms_aa6cd797c56b97503bf2d52131f6e5554}
 
 
-Definition at line 1333 of file f3dex\_\-transforms.f90.
+Computes series of normalization coefficients. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em cln(0:nlmax,1:nnmax)} & : output normalization coefficients \\
+\hline
+\mbox{\tt in}  & {\em kln(0:nlmax,1:nnmax)} & : k spectrum \\
+\hline
+\mbox{\tt in}  & {\em (nnmax,nlmax)} & : bounds \\
+\hline
+\mbox{\tt in}  & {\em rmax} & : R max value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1335 of file f3dex\_\-transforms.f90.
 
 
 
@@ -171,7 +186,22 @@ Here is the call graph for this function:
 \label{namespacef3dex__transforms_ad1ab102a8307876c7af8bd6868ea7ef2}
 
 
-Definition at line 1367 of file f3dex\_\-transforms.f90.
+Computes series of jl(kln r) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em jlns(0:nlmax,1:nnmax)} & : jlns \\
+\hline
+\mbox{\tt in}  & {\em kln(0:nlmax,1:nnmax)} & : k spectrum \\
+\hline
+\mbox{\tt in}  & {\em rho} & : double radius value \\
+\hline
+\mbox{\tt in}  & {\em (nnmax,nlmax)} & : bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1372 of file f3dex\_\-transforms.f90.
 
 
 
@@ -192,7 +222,20 @@ Here is the call graph for this function:
 \label{namespacef3dex__transforms_a4b80bc7cad52998fd0aff935a1695ee7}
 
 
-Definition at line 1276 of file f3dex\_\-transforms.f90.
+Computes k spectrum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em kln(0:nlmax,1:nnmax)} & : k spectrum \\
+\hline
+\mbox{\tt in}  & {\em (nnmax,nlmax)} & : bounds \\
+\hline
+\mbox{\tt in}  & {\em rmax} & : R max value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1272 of file f3dex\_\-transforms.f90.
 
 
 
@@ -212,7 +255,23 @@ Here is the call graph for this function:
 \label{namespacef3dex__transforms_a02b926f933d186f2c9d9ab6d478a1601}
 
 
-Definition at line 1200 of file f3dex\_\-transforms.f90.
+Computes series of roots of Bessel functions. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em qln(0:nlmax,1:nnmax)} & : roots \\
+\hline
+\mbox{\tt in}  & {\em (nnmax,nlmax)} & : bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1198 of file f3dex\_\-transforms.f90.
+
+
+
+Here is the call graph for this function:
+
 
 \hypertarget{namespacef3dex__transforms_a2cd270ebc1186ae3872ab2e0068cff9d}{
 \index{f3dex\_\-transforms@{f3dex\_\-transforms}!logrange@{logrange}}
@@ -228,7 +287,11 @@ Definition at line 1200 of file f3dex\_\-transforms.f90.
 \label{namespacef3dex__transforms_a2cd270ebc1186ae3872ab2e0068cff9d}
 
 
-Definition at line 1314 of file f3dex\_\-transforms.f90.
+Generates a logrange. 
+
+
+
+Definition at line 1311 of file f3dex\_\-transforms.f90.
 
 \hypertarget{namespacef3dex__transforms_aa03041ae9480a0e4abc522b846a40cc8}{
 \index{f3dex\_\-transforms@{f3dex\_\-transforms}!survey2almn\_\-opt@{survey2almn\_\-opt}}
@@ -295,7 +358,7 @@ Performs the Fourier-\/Bessel decomposition (backward algorithm) of a discrete s
 \end{DoxyParams}
 
 
-Definition at line 910 of file f3dex\_\-transforms.f90.
+Definition at line 905 of file f3dex\_\-transforms.f90.
 
 
 

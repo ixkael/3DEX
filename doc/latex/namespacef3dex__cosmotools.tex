@@ -11,31 +11,29 @@ type \hyperlink{typef3dex__cosmotools_1_1recognized_params}{recognizedParams}
 \begin{DoxyCompactItemize}
 \item 
 subroutine \hyperlink{namespacef3dex__cosmotools_abeb005e8bef92ebc0927b69db637906d}{equatorial2galactic\_\-deg} (delta, alpha, b, l)
-\item 
+\begin{DoxyCompactList}\small\item\em Equatorial to galactic coordinates conversion (in degrees) \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_a0caf479bc891741c90e36f878444e333}{inquireAndDelete} (filename)
-\item 
-LOGICAL \hyperlink{namespacef3dex__cosmotools_ae0ff007b365be41cbcf5e7ed24cccac2}{DOesFileExists} (filename)
-\item 
+\begin{DoxyCompactList}\small\item\em Inquire file and delete it if necessary. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_a36578d36cffe32d26a9fd914d032ef3a}{read\_\-survey} (file, nbptsmax, nbcolsinfile, nbpts, surveytemp)
-\item 
+\begin{DoxyCompactList}\small\item\em Read list of coordinates from a file, using a larger array. \end{DoxyCompactList}\item 
 REAL(DP) \hyperlink{namespacef3dex__cosmotools_a25e2703c39b2d99c864537823f2f8402}{int\_\-NC} (x, f, n)
-\item 
+\begin{DoxyCompactList}\small\item\em Newton cotes integration using QUADRULE package. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_a78ae43d2bd5f180e65c710dc694bcee4}{cosmo\_\-z2s} (h\_\-in, omega\_\-m\_\-in, omega\_\-l\_\-in, omega\_\-b\_\-in, wa\_\-in, w0\_\-in, z, nbpts\_\-in, sk)
-\item 
+\begin{DoxyCompactList}\small\item\em Converts series of redshift values into radial coordinates. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_abdbb37c7c522bf29ebf089412b9d7854}{chi\_\-z0} (zin, chi)
-\item 
+\begin{DoxyCompactList}\small\item\em Raw chi to rad conversion, using QUADPACK integration. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_aae4fa92003adf2bfde48fa0dfcbf6b51}{chi\_\-z1} (zin, chi)
-\item 
+\begin{DoxyCompactList}\small\item\em Raw chi to rad conversion, using QUADPACK integration. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_a6c29a874ae95da9fb207a2f63729eecf}{chi\_\-z2} (zin, chi)
-\item 
+\begin{DoxyCompactList}\small\item\em Raw chi to rad conversion, using QUADRULE integration. \end{DoxyCompactList}\item 
 REAL \hyperlink{namespacef3dex__cosmotools_abba0e9b02d0f46a5abce5a0830da7f4d}{fz} (z)
-\item 
+\begin{DoxyCompactList}\small\item\em Cosmological function. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_a609d3f29da9fc1be3bf27757e25532eb}{txtfile2parameters} (paramfile, params)
-\item 
+\begin{DoxyCompactList}\small\item\em Scope and scan for parameters. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_a8405dbd12e86a408520f40f1b0a68919}{getParameters\_\-survey2almn} (multiscale, zbounds, nr, nside, nnmax, nlmax, nmmax, iter\_\-order, nbpts, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, paramfile, almnoutfile, clnoutfile, h, w0, wa, omega\_\-l, omega\_\-b, omega\_\-m, rmaxinput)
-\item 
+\begin{DoxyCompactList}\small\item\em Extracts parameters. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__cosmotools_aaef3c07f112a83e6ff7a2762d5202fae}{extractFromFile} (nbpts, nr, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, survey)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Extracts parameters from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -58,7 +56,18 @@ REAL(DP), parameter \hyperlink{namespacef3dex__cosmotools_a8953fe6dc399fcf889789
 \label{namespacef3dex__cosmotools_abdbb37c7c522bf29ebf089412b9d7854}
 
 
-Definition at line 183 of file f3dex\_\-cosmotools.f90.
+Raw chi to rad conversion, using QUADPACK integration. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em zin} & : input value \\
+\hline
+\mbox{\tt out}  & {\em chi} & : output value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 189 of file f3dex\_\-cosmotools.f90.
 
 
 
@@ -77,7 +86,18 @@ Here is the call graph for this function:
 \label{namespacef3dex__cosmotools_aae4fa92003adf2bfde48fa0dfcbf6b51}
 
 
-Definition at line 209 of file f3dex\_\-cosmotools.f90.
+Raw chi to rad conversion, using QUADPACK integration. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em zin} & : input value \\
+\hline
+\mbox{\tt out}  & {\em chi} & : output value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 218 of file f3dex\_\-cosmotools.f90.
 
 
 
@@ -96,7 +116,18 @@ Here is the call graph for this function:
 \label{namespacef3dex__cosmotools_a6c29a874ae95da9fb207a2f63729eecf}
 
 
-Definition at line 254 of file f3dex\_\-cosmotools.f90.
+Raw chi to rad conversion, using QUADRULE integration. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em zin} & : input value \\
+\hline
+\mbox{\tt out}  & {\em chi} & : output value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 266 of file f3dex\_\-cosmotools.f90.
 
 
 
@@ -122,25 +153,27 @@ Here is the call graph for this function:
 \label{namespacef3dex__cosmotools_a78ae43d2bd5f180e65c710dc694bcee4}
 
 
-Definition at line 113 of file f3dex\_\-cosmotools.f90.
+Converts series of redshift values into radial coordinates. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em (h\_\-in,omega\_\-m\_\-in,omega\_\-l\_\-in,omega\_\-b\_\-in,wa\_\-in,w0\_\-in)} & : cosmological parameters \\
+\hline
+\mbox{\tt in}  & {\em z(1:nbpts\_\-in)} & : input array \\
+\hline
+\mbox{\tt in}  & {\em nbpts\_\-in} & : input dimension \\
+\hline
+\mbox{\tt out}  & {\em sk(1:nbpts\_\-in)} & : output array \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 116 of file f3dex\_\-cosmotools.f90.
 
 
 
 Here is the call graph for this function:
 
-
-\hypertarget{namespacef3dex__cosmotools_ae0ff007b365be41cbcf5e7ed24cccac2}{
-\index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!DOesFileExists@{DOesFileExists}}
-\index{DOesFileExists@{DOesFileExists}!f3dex_cosmotools@{f3dex\_\-cosmotools}}
-\subsubsection[{DOesFileExists}]{\setlength{\rightskip}{0pt plus 5cm}LOGICAL f3dex\_\-cosmotools::DOesFileExists (
-\begin{DoxyParamCaption}
-\item[{CHARACTER(len=FILENAMELEN)}]{filename}
-\end{DoxyParamCaption}
-)}}
-\label{namespacef3dex__cosmotools_ae0ff007b365be41cbcf5e7ed24cccac2}
-
-
-Definition at line 55 of file f3dex\_\-cosmotools.f90.
 
 \hypertarget{namespacef3dex__cosmotools_abeb005e8bef92ebc0927b69db637906d}{
 \index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!equatorial2galactic\_\-deg@{equatorial2galactic\_\-deg}}
@@ -156,7 +189,18 @@ Definition at line 55 of file f3dex\_\-cosmotools.f90.
 \label{namespacef3dex__cosmotools_abeb005e8bef92ebc0927b69db637906d}
 
 
-Definition at line 27 of file f3dex\_\-cosmotools.f90.
+Equatorial to galactic coordinates conversion (in degrees) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em (delta,alpha)} & : Doubles (equatorial) \\
+\hline
+\mbox{\tt in}  & {\em (b,l)} & : Doubles (galactic) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 30 of file f3dex\_\-cosmotools.f90.
 
 \hypertarget{namespacef3dex__cosmotools_aaef3c07f112a83e6ff7a2762d5202fae}{
 \index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!extractFromFile@{extractFromFile}}
@@ -177,7 +221,11 @@ Definition at line 27 of file f3dex\_\-cosmotools.f90.
 \label{namespacef3dex__cosmotools_aaef3c07f112a83e6ff7a2762d5202fae}
 
 
-Definition at line 905 of file f3dex\_\-cosmotools.f90.
+Extracts parameters from file. 
+
+
+
+Definition at line 926 of file f3dex\_\-cosmotools.f90.
 
 
 
@@ -195,7 +243,16 @@ Here is the call graph for this function:
 \label{namespacef3dex__cosmotools_abba0e9b02d0f46a5abce5a0830da7f4d}
 
 
-Definition at line 294 of file f3dex\_\-cosmotools.f90.
+Cosmological function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em z} & : redshift \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 308 of file f3dex\_\-cosmotools.f90.
 
 \hypertarget{namespacef3dex__cosmotools_a8405dbd12e86a408520f40f1b0a68919}{
 \index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!getParameters\_\-survey2almn@{getParameters\_\-survey2almn}}
@@ -232,7 +289,11 @@ Definition at line 294 of file f3dex\_\-cosmotools.f90.
 \label{namespacef3dex__cosmotools_a8405dbd12e86a408520f40f1b0a68919}
 
 
-Definition at line 545 of file f3dex\_\-cosmotools.f90.
+Extracts parameters. 
+
+
+
+Definition at line 564 of file f3dex\_\-cosmotools.f90.
 
 
 
@@ -250,7 +311,16 @@ Here is the call graph for this function:
 \label{namespacef3dex__cosmotools_a0caf479bc891741c90e36f878444e333}
 
 
-Definition at line 39 of file f3dex\_\-cosmotools.f90.
+Inquire file and delete it if necessary. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & : string \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file f3dex\_\-cosmotools.f90.
 
 \hypertarget{namespacef3dex__cosmotools_a25e2703c39b2d99c864537823f2f8402}{
 \index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!int\_\-NC@{int\_\-NC}}
@@ -265,7 +335,20 @@ Definition at line 39 of file f3dex\_\-cosmotools.f90.
 \label{namespacef3dex__cosmotools_a25e2703c39b2d99c864537823f2f8402}
 
 
-Definition at line 94 of file f3dex\_\-cosmotools.f90.
+Newton cotes integration using QUADRULE package. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em x(1:n)} & : input abs \\
+\hline
+\mbox{\tt in}  & {\em f(1:n)} & : input coords \\
+\hline
+\mbox{\tt in}  & {\em n} & : dimension \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file f3dex\_\-cosmotools.f90.
 
 
 
@@ -287,7 +370,22 @@ Here is the call graph for this function:
 \label{namespacef3dex__cosmotools_a36578d36cffe32d26a9fd914d032ef3a}
 
 
-Definition at line 68 of file f3dex\_\-cosmotools.f90.
+Read list of coordinates from a file, using a larger array. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & : input file \\
+\hline
+\mbox{\tt in}  & {\em file} & : (nbptsmax, nbcolsinfile) : bounds of the temp array / of the survey \\
+\hline
+\mbox{\tt out}  & {\em surveytemp} & : output array \\
+\hline
+\mbox{\tt out}  & {\em nbpts} & : actual number of coordinates read \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 65 of file f3dex\_\-cosmotools.f90.
 
 \hypertarget{namespacef3dex__cosmotools_a609d3f29da9fc1be3bf27757e25532eb}{
 \index{f3dex\_\-cosmotools@{f3dex\_\-cosmotools}!txtfile2parameters@{txtfile2parameters}}
@@ -301,7 +399,18 @@ Definition at line 68 of file f3dex\_\-cosmotools.f90.
 \label{namespacef3dex__cosmotools_a609d3f29da9fc1be3bf27757e25532eb}
 
 
-Definition at line 310 of file f3dex\_\-cosmotools.f90.
+Scope and scan for parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em paramfile} & : input file \\
+\hline
+\mbox{\tt out}  & {\em params} & : output values (special TYPE) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 327 of file f3dex\_\-cosmotools.f90.
 
 
 

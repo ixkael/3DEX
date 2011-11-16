@@ -6,11 +6,11 @@
 \begin{DoxyCompactItemize}
 \item 
 subroutine \hyperlink{namespacef3dex__fitstools_aab1f14e65c2837494cb15ff4fd54b372}{cln2fits} (filename, cln, kln, nlmax, nnmax, header, nlheader)
-\item 
+\begin{DoxyCompactList}\small\item\em Write power spectrum to file. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__fitstools_a3bb8fd149a1c137d3176d484e28bbef0}{almn2fits} (filename, almn, kln, cln, nlmax, nmmax, nnmax, header, nlheader)
-\item 
+\begin{DoxyCompactList}\small\item\em Write a\_\-lmn's to file. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__fitstools_a106cd0d1eb3bcd38d2c43228f499f57b}{fits2almn} (filename, nnmax, nlmax, nmmax, almn, kln, cln, header, nlheader)
-\item 
+\begin{DoxyCompactList}\small\item\em Extracts almn's from fits file. \end{DoxyCompactList}\item 
 subroutine \hyperlink{namespacef3dex__fitstools_a83e1158f828e86e43f1dc68bc0e7c59b}{f90ftpcld} (unit, colnum, frow, felem, np, data, status)
 \item 
 subroutine \hyperlink{namespacef3dex__fitstools_ada7b447f4ace46eabf663495c3a8c8c2}{f90ftgcvd} (unit, colnum, frow, felem, np, nullval, data, anynull, status)
@@ -18,7 +18,15 @@ subroutine \hyperlink{namespacef3dex__fitstools_ada7b447f4ace46eabf663495c3a8c8c
 subroutine \hyperlink{namespacef3dex__fitstools_ab7baecf48bb7833c32bc7be570f947c1}{f90ftgkyd} (unit, keyword, value, comment, status)
 \item 
 subroutine \hyperlink{namespacef3dex__fitstools_a0d143b6a055e5c50c19b86e75d94c663}{get\_\-clean\_\-header} (unit, header, filename, error, xalso, xonly)
-\end{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacef3dex__fitstools_ae6aed20f64a46bb7d9d33b1c56f89cd0}{bitab2fits} (file, tab, dim1start, dim1end, dim2start, dim2end)
+\begin{DoxyCompactList}\small\item\em Write bi-\/tab to file. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__fitstools_a5c4a0cf23d0152d7449eb2afb09ad563}{fits2bitab} (file, tab, dim1start, dim1end, dim2start, dim2end)
+\begin{DoxyCompactList}\small\item\em Read bi-\/tab from file. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__fitstools_a98c44872e5b5937bef4cccfcc2a21c43}{tritab2fits} (file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end)
+\begin{DoxyCompactList}\small\item\em Write tri-\/tab to file. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacef3dex__fitstools_a1daf125726e201b6f4f84e709e23ccc0}{fits2tritab} (file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end)
+\begin{DoxyCompactList}\small\item\em Read tri-\/tab from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -48,12 +56,64 @@ REAL(kind=DP), parameter, private \hyperlink{namespacef3dex__fitstools_ae70f4f4f
 \label{namespacef3dex__fitstools_a3bb8fd149a1c137d3176d484e28bbef0}
 
 
-Definition at line 164 of file f3dex\_\-fitstools.f90.
+Write a\_\-lmn's to file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & : fits file for output \\
+\hline
+\mbox{\tt in}  & {\em almn} & : Fourier-\/bessel decomposition \\
+\hline
+\mbox{\tt in}  & {\em kln} & : k spectrum \\
+\hline
+\mbox{\tt in}  & {\em cln} & : normalization \\
+\hline
+\mbox{\tt in}  & {\em (nlmax,nmmax,nnmax)} & : n-\/m-\/l limits \\
+\hline
+\mbox{\tt in}  & {\em (header,nlheader)} & : headers \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 178 of file f3dex\_\-fitstools.f90.
 
 
 
 Here is the call graph for this function:
 
+
+\hypertarget{namespacef3dex__fitstools_ae6aed20f64a46bb7d9d33b1c56f89cd0}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!bitab2fits@{bitab2fits}}
+\index{bitab2fits@{bitab2fits}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{bitab2fits}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::bitab2fits (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(len=FILENAMELEN)}]{file, }
+\item[{REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end)}]{tab, }
+\item[{INTEGER(I4B)}]{dim1start, }
+\item[{INTEGER(I4B)}]{dim1end, }
+\item[{INTEGER(I4B)}]{dim2start, }
+\item[{INTEGER(I4B)}]{dim2end}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_ae6aed20f64a46bb7d9d33b1c56f89cd0}
+
+
+Write bi-\/tab to file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & : fits file for output \\
+\hline
+\mbox{\tt in}  & {\em tab} & : bi-\/array to write \\
+\hline
+\mbox{\tt in}  & {\em (dim1start,dim1en)} & : first dim bounds \\
+\hline
+\mbox{\tt in}  & {\em (dim2start,dim2en)} & : first dim bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 667 of file f3dex\_\-fitstools.f90.
 
 \hypertarget{namespacef3dex__fitstools_aab1f14e65c2837494cb15ff4fd54b372}{
 \index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!cln2fits@{cln2fits}}
@@ -72,7 +132,24 @@ Here is the call graph for this function:
 \label{namespacef3dex__fitstools_aab1f14e65c2837494cb15ff4fd54b372}
 
 
-Definition at line 18 of file f3dex\_\-fitstools.f90.
+Write power spectrum to file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & : fits file for output \\
+\hline
+\mbox{\tt in}  & {\em cln} & : power spectrum \\
+\hline
+\mbox{\tt in}  & {\em kln} & : k spectrum \\
+\hline
+\mbox{\tt in}  & {\em (nlmax,nnmax)} & : n-\/l limits \\
+\hline
+\mbox{\tt in}  & {\em (header,nlheader)} & : headers \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 25 of file f3dex\_\-fitstools.f90.
 
 
 
@@ -98,7 +175,7 @@ Here is the call graph for this function:
 \label{namespacef3dex__fitstools_ada7b447f4ace46eabf663495c3a8c8c2}
 
 
-Definition at line 542 of file f3dex\_\-fitstools.f90.
+Definition at line 563 of file f3dex\_\-fitstools.f90.
 
 \hypertarget{namespacef3dex__fitstools_ab7baecf48bb7833c32bc7be570f947c1}{
 \index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!f90ftgkyd@{f90ftgkyd}}
@@ -115,7 +192,7 @@ Definition at line 542 of file f3dex\_\-fitstools.f90.
 \label{namespacef3dex__fitstools_ab7baecf48bb7833c32bc7be570f947c1}
 
 
-Definition at line 554 of file f3dex\_\-fitstools.f90.
+Definition at line 575 of file f3dex\_\-fitstools.f90.
 
 \hypertarget{namespacef3dex__fitstools_a83e1158f828e86e43f1dc68bc0e7c59b}{
 \index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!f90ftpcld@{f90ftpcld}}
@@ -134,7 +211,7 @@ Definition at line 554 of file f3dex\_\-fitstools.f90.
 \label{namespacef3dex__fitstools_a83e1158f828e86e43f1dc68bc0e7c59b}
 
 
-Definition at line 532 of file f3dex\_\-fitstools.f90.
+Definition at line 553 of file f3dex\_\-fitstools.f90.
 
 \hypertarget{namespacef3dex__fitstools_a106cd0d1eb3bcd38d2c43228f499f57b}{
 \index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!fits2almn@{fits2almn}}
@@ -155,12 +232,101 @@ Definition at line 532 of file f3dex\_\-fitstools.f90.
 \label{namespacef3dex__fitstools_a106cd0d1eb3bcd38d2c43228f499f57b}
 
 
-Definition at line 338 of file f3dex\_\-fitstools.f90.
+Extracts almn's from fits file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & : fits file \\
+\hline
+\mbox{\tt out}  & {\em almn} & : Fourier-\/bessel decomposition \\
+\hline
+\mbox{\tt out}  & {\em kln} & : k spectrum \\
+\hline
+\mbox{\tt out}  & {\em cln} & : normalization \\
+\hline
+\mbox{\tt in}  & {\em (nlmax,nmmax,nnmax)} & : n-\/m-\/l limits \\
+\hline
+\mbox{\tt in}  & {\em (header,nlheader)} & : headers \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 359 of file f3dex\_\-fitstools.f90.
 
 
 
 Here is the call graph for this function:
 
+
+\hypertarget{namespacef3dex__fitstools_a5c4a0cf23d0152d7449eb2afb09ad563}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!fits2bitab@{fits2bitab}}
+\index{fits2bitab@{fits2bitab}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{fits2bitab}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::fits2bitab (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(len=FILENAMELEN)}]{file, }
+\item[{REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end)}]{tab, }
+\item[{INTEGER(I4B)}]{dim1start, }
+\item[{INTEGER(I4B)}]{dim1end, }
+\item[{INTEGER(I4B)}]{dim2start, }
+\item[{INTEGER(I4B)}]{dim2end}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_a5c4a0cf23d0152d7449eb2afb09ad563}
+
+
+Read bi-\/tab from file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & : input fits file \\
+\hline
+\mbox{\tt in}  & {\em tab} & : bi-\/array to write \\
+\hline
+\mbox{\tt in}  & {\em (dim1start,dim1en)} & : first dim bounds \\
+\hline
+\mbox{\tt in}  & {\em (dim2start,dim2en)} & : first dim bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 706 of file f3dex\_\-fitstools.f90.
+
+\hypertarget{namespacef3dex__fitstools_a1daf125726e201b6f4f84e709e23ccc0}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!fits2tritab@{fits2tritab}}
+\index{fits2tritab@{fits2tritab}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{fits2tritab}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::fits2tritab (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(len=FILENAMELEN)}]{file, }
+\item[{REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end,dim3start:dim3end)}]{tab, }
+\item[{INTEGER(I4B)}]{dim1start, }
+\item[{INTEGER(I4B)}]{dim1end, }
+\item[{INTEGER(I4B)}]{dim2start, }
+\item[{INTEGER(I4B)}]{dim2end, }
+\item[{INTEGER(I4B)}]{dim3start, }
+\item[{INTEGER(I4B)}]{dim3end}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_a1daf125726e201b6f4f84e709e23ccc0}
+
+
+Read tri-\/tab from file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & : input fits file \\
+\hline
+\mbox{\tt in}  & {\em tab} & : tri-\/array to write \\
+\hline
+\mbox{\tt in}  & {\em (dim1start,dim1en)} & : first dim bounds \\
+\hline
+\mbox{\tt in}  & {\em (dim2start,dim2en)} & : first dim bounds \\
+\hline
+\mbox{\tt in}  & {\em (dim3start,dim3en)} & : first dim bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 798 of file f3dex\_\-fitstools.f90.
 
 \hypertarget{namespacef3dex__fitstools_a0d143b6a055e5c50c19b86e75d94c663}{
 \index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!get\_\-clean\_\-header@{get\_\-clean\_\-header}}
@@ -178,7 +344,44 @@ Here is the call graph for this function:
 \label{namespacef3dex__fitstools_a0d143b6a055e5c50c19b86e75d94c663}
 
 
-Definition at line 566 of file f3dex\_\-fitstools.f90.
+Definition at line 587 of file f3dex\_\-fitstools.f90.
+
+\hypertarget{namespacef3dex__fitstools_a98c44872e5b5937bef4cccfcc2a21c43}{
+\index{f3dex\_\-fitstools@{f3dex\_\-fitstools}!tritab2fits@{tritab2fits}}
+\index{tritab2fits@{tritab2fits}!f3dex_fitstools@{f3dex\_\-fitstools}}
+\subsubsection[{tritab2fits}]{\setlength{\rightskip}{0pt plus 5cm}subroutine f3dex\_\-fitstools::tritab2fits (
+\begin{DoxyParamCaption}
+\item[{CHARACTER(len=FILENAMELEN)}]{file, }
+\item[{REAL(DP),dimension(dim1start:dim1end,dim2start:dim2end,dim3start:dim3end)}]{tab, }
+\item[{INTEGER(I4B)}]{dim1start, }
+\item[{INTEGER(I4B)}]{dim1end, }
+\item[{INTEGER(I4B)}]{dim2start, }
+\item[{INTEGER(I4B)}]{dim2end, }
+\item[{INTEGER(I4B)}]{dim3start, }
+\item[{INTEGER(I4B)}]{dim3end}
+\end{DoxyParamCaption}
+)}}
+\label{namespacef3dex__fitstools_a98c44872e5b5937bef4cccfcc2a21c43}
+
+
+Write tri-\/tab to file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & : fits file for output \\
+\hline
+\mbox{\tt in}  & {\em tab} & : tri-\/array to write \\
+\hline
+\mbox{\tt in}  & {\em (dim1start,dim1en)} & : first dim bounds \\
+\hline
+\mbox{\tt in}  & {\em (dim2start,dim2en)} & : first dim bounds \\
+\hline
+\mbox{\tt in}  & {\em (dim3start,dim3en)} & : first dim bounds \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 753 of file f3dex\_\-fitstools.f90.
 
 
 

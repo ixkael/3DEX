@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>3DEX: /Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90 File Reference</title>
+<title>3DEX: /Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90 File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -62,7 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#namespaces">Modules</a> &#124;
 <a href="#func-members">Functions/Subroutines</a>  </div>
   <div class="headertitle">
-<div class="title">/Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90 File Reference</div>  </div>
+<div class="title">/Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90 File Reference</div>  </div>
 </div>
 <div class="contents">
 
@@ -73,9 +73,35 @@ Modules</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html">f3dex_stats</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">REAL(DP)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#a2c704cb2c5b38f77b70a5c9783660912">f3dex_stats::CMODULE</a> (a)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the module of a complex number.  <a href="#a2c704cb2c5b38f77b70a5c9783660912"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#af82543b20c426be1736a4fed0d1ca80c">f3dex_stats::almn2cln_naive</a> (nnmax, nlmax, nmmax, almn, cln)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Naive estimator for the almn's.  <a href="#af82543b20c426be1736a4fed0d1ca80c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">REAL(DP)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#afc9d6ca61536648a01f8b6769080283e">f3dex_stats::dzrel</a> (cplxnb, cplxnbref)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative error betwee two complex numbers.  <a href="#afc9d6ca61536648a01f8b6769080283e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#a1f360b2a41b5a63c3379390a55ef07b2">f3dex_stats::legendre_vec</a> (x, pl, nlmax)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes legendre coefs of a double using recurrence.  <a href="#a1f360b2a41b5a63c3379390a55ef07b2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#aa2fb45e013179295e3b876ced9eff015">f3dex_stats::legendre_mat</a> (x, pl, nc, nlmax)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes legendre coefs of an array using recurrence.  <a href="#aa2fb45e013179295e3b876ced9eff015"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">f3dex_stats::gen_angles_map</a> (npix, ang_map, nside, nested, mask)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates &lt;xxt&gt; correlation angles map.  <a href="#ac34a6421249816395b51048aa0a3dde3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">REAL(DP)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#a70ed2d6cd6c25b9cd95b04e9223e5828">f3dex_stats::dzabs</a> (cplxnb, cplxnbref)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#ae67784686a6f0a1d26c1cef84c250b0d">f3dex_stats::EYEMAT</a> (A, s, e, val)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates eye matrix.  <a href="#ae67784686a6f0a1d26c1cef84c250b0d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#a564304481b43b3d55989683f03460410">f3dex_stats::INVERSE</a> (A, n, res)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverts matrix.  <a href="#a564304481b43b3d55989683f03460410"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#afeef2b0049256649535f458d01e901c8">f3dex_stats::map2cl_QML</a> (map, cl, nside, nlmax, nlmax_recon, covarnoise, cltheo, logicalmask, covarest)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes QML estimator of a healpix (masked) map.  <a href="#afeef2b0049256649535f458d01e901c8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#aeff76c576e1699da5b3aa1f4efa4335d">f3dex_stats::map2cl_PCL</a> (map, cl, nside, nlmax, nlmax_recon, logicalmask, covarest)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes QML estimator of a healpix (masked) map.  <a href="#aeff76c576e1699da5b3aa1f4efa4335d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">REAL(DP)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#af0a10f88c8029206196ea18b3ad579ba">f3dex_stats::BILIN_FORM_PAR</a> (x, A, y, s, e)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Parallel bilinear form.  <a href="#af0a10f88c8029206196ea18b3ad579ba"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#a046613d05a3a2eb1808a7ee99fba7509">f3dex_stats::MATMUL_PAR</a> (A, B, C, s, d1, d2, d3)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Parallel matrix multiplication.  <a href="#a046613d05a3a2eb1808a7ee99fba7509"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">REAL(DP)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#aa88d6eefa32a9edc04b3d93af96f5a2e">f3dex_stats::TRACE</a> (mat, s, e)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TRACE.  <a href="#aa88d6eefa32a9edc04b3d93af96f5a2e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">REAL(DP)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__stats.html#ae106140bb309de7d7779b6b086050bf4">f3dex_stats::TRACEPROD</a> (mat1, mat2, s, e)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TRACE of a product of matrices.  <a href="#ae106140bb309de7d7779b6b086050bf4"></a><br/></td></tr>
 </table>
 </div>
 <!-- window showing the filter options -->
@@ -92,7 +118,7 @@ Functions/Subroutines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 3 2011 18:14:23 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:45 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

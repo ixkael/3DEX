@@ -16,14 +16,11 @@ PROGRAM compute_qln
   INTEGER(i4b):: rdstatus, status, n_args
   REAL(DP), DIMENSION(:,:), allocatable :: qln
   INTEGER(I4B)  :: nnmax, nlmax
-  CHARACTER(len=*), PARAMETER :: code = "gen_qln"
+  CHARACTER(len=*), PARAMETER :: code = "compute_qln"
   LOGICAL(LGT) ::  fileexists
   REAL(DP), DIMENSION(:,:,:), ALLOCATABLE :: tod
   
-  PRINT*," "
-  PRINT*,"================================================"
-  PRINT*,"COMPUTE_QLN"
-  PRINT*," "
+  CALL message(code,start=.TRUE.)
 
   n_args = nArguments()
 
@@ -41,19 +38,13 @@ PROGRAM compute_qln
   ALLOCATE(qln(0:nlmax,1:nnmax),stat = status)
   CALL assert_alloc(status,code,'qln')
 
-  PRINT*,"Generating qln coefficients"
+  CALL message(code,msg="Generating qln coefficients")
   CALL gen_qln(qln, nnmax, nlmax)
-  PRINT*,"Done."
   
-  PRINT*," "
-  PRINT*,"Exporting coefficients"
+  CALL message(code,msg="Exporting coefficients")
   header(:) = ' '
   CALL bitab2fits( qlnfile, qln, 0, nlmax, 1, nnmax )
-  PRINT*,"Done."
  
-  PRINT*," "
-  PRINT*,"COMPUTE_QLN : terminated."
-  PRINT*,"================================================"
-  PRINT*," "
+  CALL message(code,fin=.TRUE.)
 
 END PROGRAM compute_qln

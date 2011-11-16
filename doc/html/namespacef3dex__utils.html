@@ -67,13 +67,127 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a> (code, msg, i, i2, msg2, start, fin)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Print preformated messages.  <a href="#a92226ca7c662562058c56ba005f6fc36"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LOGICAL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#ad4cb6613ee589637f453ef808466a0f9">assert_DP</a> (r1, r2, prec)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert if two doubles are equal.  <a href="#ad4cb6613ee589637f453ef808466a0f9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LOGICAL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#a234414d8daaf5e3bfd03754331b467ed">assert_DPARR</a> (r1, r2, len, prec)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert if two arrays are equal.  <a href="#a234414d8daaf5e3bfd03754331b467ed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#aa75468d58041cdc91e52ce3fadb073b3">bubblesort</a> (Y, N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Classical bubble sort.  <a href="#aa75468d58041cdc91e52ce3fadb073b3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#a2cce76cb1a695da8315cbf60507ec322">BSORT</a> (X, IY, N)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw function doing bubble sort.  <a href="#a2cce76cb1a695da8315cbf60507ec322"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">REAL(kind=8)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#ac5aa172010ec6cd9bd4c5273904b0405">wtime</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Measures system time.  <a href="#ac5aa172010ec6cd9bd4c5273904b0405"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#a8b9740b049b3d24092401ae075810f51">PRINT_spectrum</a> (spectr, nllim, nnlim, nlmax, nnmax, txt)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Print spectrum in a preformated way.  <a href="#a8b9740b049b3d24092401ae075810f51"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef3dex__utils.html#aeba2230de9ec307ae71577d102a0d91d">PRINT_almn</a> (almn, nllim, nmlim, nnlim, nlmax, nmmax, nnmax, txt)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Print spectrum in a preformated way.  <a href="#aeba2230de9ec307ae71577d102a0d91d"></a><br/></td></tr>
 </table>
 <hr/><h2>Function/Subroutine Documentation</h2>
+<a class="anchor" id="ad4cb6613ee589637f453ef808466a0f9"></a><!-- doxytag: member="f3dex_utils::assert_DP" ref="ad4cb6613ee589637f453ef808466a0f9" args="(r1, r2, prec)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LOGICAL f3dex_utils::assert_DP </td>
+          <td>(</td>
+          <td class="paramtype">REAL(DP)&#160;</td>
+          <td class="paramname"><em>r1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">REAL(DP)&#160;</td>
+          <td class="paramname"><em>r2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>prec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assert if two doubles are equal. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">(r1,r2)</td><td>: two doubles </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">prec</td><td>: precision digits </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00068">68</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a234414d8daaf5e3bfd03754331b467ed"></a><!-- doxytag: member="f3dex_utils::assert_DPARR" ref="a234414d8daaf5e3bfd03754331b467ed" args="(r1, r2, len, prec)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LOGICAL f3dex_utils::assert_DPARR </td>
+          <td>(</td>
+          <td class="paramtype">REAL(DP),dimension(0:len-1)&#160;</td>
+          <td class="paramname"><em>r1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">REAL(DP),dimension(0:len-1)&#160;</td>
+          <td class="paramname"><em>r2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B)&#160;</td>
+          <td class="paramname"><em>prec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assert if two arrays are equal. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">(r1,r2)</td><td>: two arrays </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>: array length </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">prec</td><td>: precision digits </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00085">85</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe src="namespacef3dex__utils_a234414d8daaf5e3bfd03754331b467ed_cgraph.svg" width="398" height="38" frameborder="0" scrolling="no"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a2cce76cb1a695da8315cbf60507ec322"></a><!-- doxytag: member="f3dex_utils::BSORT" ref="a2cce76cb1a695da8315cbf60507ec322" args="(X, IY, N)" -->
 <div class="memitem">
 <div class="memproto">
@@ -105,7 +219,17 @@ Functions/Subroutines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00035">35</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
+<p>Raw function doing bubble sort. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">X</td><td>: Initial vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">IY</td><td>: Temp array </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">N</td><td>: Array length </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00131">131</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
 
 </div>
 </div>
@@ -134,7 +258,16 @@ Functions/Subroutines</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00015">15</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
+<p>Classical bubble sort. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">Y</td><td>: Initial vector </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">N</td><td>: Array length </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00107">107</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -143,6 +276,76 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="a92226ca7c662562058c56ba005f6fc36"></a><!-- doxytag: member="f3dex_utils::message" ref="a92226ca7c662562058c56ba005f6fc36" args="(code, msg, i, i2, msg2, start, fin)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine f3dex_utils::message </td>
+          <td>(</td>
+          <td class="paramtype">CHARACTER(LEN=*)&#160;</td>
+          <td class="paramname"><em>code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CHARACTER(LEN=*),optional&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B),optional&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">INTEGER(I4B),optional&#160;</td>
+          <td class="paramname"><em>i2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CHARACTER(LEN=*),optional&#160;</td>
+          <td class="paramname"><em>msg2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LOGICAL,optional&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LOGICAL,optional&#160;</td>
+          <td class="paramname"><em>fin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Print preformated messages. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">code</td><td>: code message </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(msg,i,msg2,i2)</td><td>: str/int/str/int chain </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">start</td><td>: If present, starting code message </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fin</td><td>: If present, ending code message </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00020">20</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
 
 </div>
 </div>
@@ -207,7 +410,18 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00108">108</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
+<p>Print spectrum in a preformated way. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">almn</td><td>: Power spectrum (two-array) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(nllim,nmlim,nnlim)</td><td>: Print limit </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(nlmax,nmmax,nnmax)</td><td>: Inner bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">txt</td><td>: Additional text </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00215">215</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
 
 </div>
 </div>
@@ -260,7 +474,18 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00087">87</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
+<p>Print spectrum in a preformated way. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">spectr</td><td>: Power spectrum (two-array) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(nllim,nnlim)</td><td>: Print limit </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">(nlmax,nnmax)</td><td>: Inner bounds </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">txt</td><td>: Additional text </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00189">189</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
 
 </div>
 </div>
@@ -278,7 +503,9 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00068">68</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
+<p>Measures system time. </p>
+
+<p>Definition at line <a class="el" href="f3dex__utils_8f90_source.html#l00165">165</a> of file <a class="el" href="f3dex__utils_8f90_source.html">f3dex_utils.f90</a>.</p>
 
 </div>
 </div>
@@ -297,7 +524,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 3 2011 18:14:23 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:45 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

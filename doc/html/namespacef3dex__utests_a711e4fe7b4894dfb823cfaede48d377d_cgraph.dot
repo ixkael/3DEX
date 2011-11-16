@@ -1,0 +1,13 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="f3dex_utests::utest_bilini_form_par",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="f3dex_utils::assert_DP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__utils.html#ad4cb6613ee589637f453ef808466a0f9",tooltip="Assert if two doubles are equal."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="f3dex_stats::BILIN_FORM_PAR",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__stats.html#af0a10f88c8029206196ea18b3ad579ba",tooltip="Parallel bilinear form."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="f3dex_utils::wtime",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacef3dex__utils.html#ac5aa172010ec6cd9bd4c5273904b0405",tooltip="Measures system time."];
+}
