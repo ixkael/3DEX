@@ -1,13 +1,13 @@
 ===================
  3DEX version 1.0
 ===================
+Paper : http://arxiv.org/abs/1111.3591
 
 3DEX is a Fortran package providing programs and functions 
 to perform fast Fourier-Bessel decomposition of 3D fields.
 
-It is distributed in the hope that it will be useful, 
-but without any warranty. See the GNU General Public 
-License for more details.
+It is distributed in the hope that it will be useful, but without
+any warranty. See the CeCILL License for more details.
 
 Please contact the authors if you have any question, 
 demand or proposal of new features.
@@ -19,12 +19,17 @@ AUTHORS
 
 REQUIREMENTS 
 -------------------
- Healpix (v2.12 or higher)
- and Healpix requirements (cfitsio, etc)
+ Working C, Cxx, MPI and Fortran compilers
+   For example : cc, cxx, mpicxx, gfortran. 
+ CFITSIO  (export CFITSIO=...)
+ BLAS     (export BLAS=...)
+ LAPACK   (export LAPACK=...)
+ HEALPIX  (export HEALPIX=...)
 
 INSTALLATION - HEALPIX-LIKE
 -------------------
- Please run the ./configure command.
+ Please run the ./configure command 
+ and answer the questions.
  It will edit the 'Makefile'
  Then, run 'make' as usual
  'make clean' to delete .o files
@@ -32,37 +37,46 @@ INSTALLATION - HEALPIX-LIKE
  
 INSTALLATION WITH CMAKE
 -------------------
-  'export CFITSIO=/usr/local/lib' to locate cfitsio library (libcfitsio.a)
-  'export HEALPIX=/Users/silver/software/Healpix_2.20a'  to locate Healpix (Fortran build)
-  'mkdir build' to create a temporary directory (name doesn't matter)
-  'cd build' to use the correct path
-  'cmake ..' to launch cmake in the main project root directory
-  'make' to compile and build the F90 tree, libraries and executables
-  'make install' to install programs, modules and the library in /bin, /include and /lib
+  Make sure you have exported the variables
+  CFITSIO, BLAS, LAPACK and HEALPIX in your PATH.
+  Then just run the script './CMakeInstall'
+  In case you want to clean, the Makefile is located
+  in the build/ directory ('make clean', 'make tidy').
 
 NOTE
 -------------------
+  3DEX is under CeCILL license, and any user must cite 
+  the source and the ArXiV paper http://arxiv.org/abs/1111.3591.
   The library architecture and the installation scripts
   are directly inspired by the HEALPix package, 
-  which is under GPL 3.0 license.
+  which is under GPL License.
+
+RECOMMENDATIONS FOR USE
+-------------------
+
 
 AVAILABLE FEATURES
 -------------------
  > survey2almn
     Fourier-Bessel decomposition from a raw survey/sample (normal mode)
-    Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
+    Test: 
+    bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
     
  > survey2almn_lm
     Fourier-Bessel decomposition from a raw survey/sample (slower, but low-memory requirements. Suitable for Nside>1024)
-    Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
+    Test: 
+    bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
  
  > survey2almn_interactive 
     Interactive Fourier-Bessel decomposition (with redshift to distance conversion using fiducial)
-    Test: bin/survey2almn_interactive test/parameters.txt (and just type test/2mrs30.out)
+    Test: 
+    bin/survey2almn_interactive test/parameters.txt 
+    (and just type test/2mrs30.out)
  
  > almn2rmap
     Extract FB decomposition from .fits file and reconstructs the smoothed field at given distance
-    Test: bin/almnfile2rmap out/almn.fits map.fits 400.0 256 10 10 2000.0
+    Test: 
+    bin/almnfile2rmap out/almn.fits out/map.fits 400.0 256 10 10 2000.0
  
  > almn2cln
  	Extract FB decomposition from .fits file, compute the spectrum and exports .fits
@@ -70,12 +84,10 @@ AVAILABLE FEATURES
   
  > survey2almn_cxx
     Test: 
-      cd test
-      ../bin/survey2almn qlnTable_2000_3000.fits params.txt almn.fits 256 2000 50 50 50
+    bin/survey2almn_cxx res/qlnTable_2000_3000.fits res/params.txt out/almn.fits 256 2000 20 20 20
 
  > survey2almn_mpi
-    Test:
-      cd test
-      mpirun -np 4 ../bin/survey2almn_mpi qlnTable_2000_3000.fits params.txt almn.fits 256 2000 15 15 16
+    Test: 
+    mpirun -np 4 bin/survey2almn_mpi res/qlnTable_2000_3000.fits res/params.txt almn.fits 256 2000 15 15 16
 
 

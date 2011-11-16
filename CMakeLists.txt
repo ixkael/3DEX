@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 2.6)
 
+INCLUDE (CheckLibraryExists)
+INCLUDE (FindMPI)
+# http://www.cmake.org/Wiki/CMake:How_To_Write_Platform_Checks
+# http://www.cmake.org/cmake/help/cmake2.6docs.html
+
 ############################################################
 # FORTRAN support                                          #
 ############################################################
@@ -13,7 +18,10 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/lib)
 
 # LAPACK
-link_directories($ENV{LAPACK})
+CHECK_LIBRARY_EXISTS(liblapack.a DGETRF $ENV{LAPACK} foundLapack) 
+if (foundLapack)
+   link_directories($ENV{LAPACK})
+endif (foundLapack)
 
 # CFITSIO
 link_directories($ENV{CFITSIO})
@@ -59,25 +67,36 @@ endforeach (p)
 # CXX support                                              #
 ############################################################
 
-# HEALPIX cxx support
-if(APPLE)
-  include_directories($ENV{HEALPIX}/src/cxx/osx/include)
-  link_directories($ENV{HEALPIX}/src/cxx/osx/lib)
-elseif(UNIX)
-  include_directories($ENV{HEALPIX}/src/cxx/generic_gcc/include)
-  link_directories($ENV{HEALPIX}/src/cxx/generic_gcc/lib)
-endif(APPLE)
+find_package(MPI REQUIRED)
+if (MPI_FOUND)
 
-set(CMAKE_C_COMPILER mpicc)
-set(CMAKE_CXX_COMPILER mpicxx)
+  if(APPLE)
+    include_directories($ENV{HEALPIX}/src/cxx/osx/include)
+    link_directories($ENV{HEALPIX}/src/cxx/osx/lib)
+  elseif(UNIX)
+    include_directories($ENV{HEALPIX}/src/cxx/generic_gcc/include)
+    link_directories($ENV{HEALPIX}/src/cxx/generic_gcc/lib)
+  endif(APPLE)
 
-set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -fno-common -fPIC -fopenmp")
-set(CXX_LIBS "-lhealpix_cxx -lcfitsio -lcxxsupport -lc_utils -lfftpack -lhealpix -lhpxgif -lgfortran")
+  set(CMAKE_C_COMPILER mpicc)
+  set(CMAKE_CXX_COMPILER mpicxx)
 
-add_executable(survey2almn_cxx src/cxx/sbtools.cpp src/cxx/survey.cpp src/cxx/survey2almn.cpp)
-target_link_libraries(survey2almn_cxx ${3DEXTAG} ${CXX_LIBS})
+  set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -fno-common -fPIC -fopenmp")
+  set(CXX_LIBS "-lhealpix_cxx -lcfitsio -lcxxsupport -lc_utils -lfftpack -lhealpix -lhpxgif -lgfortran")
 
-add_executable(survey2almn_mpi src/cxx/sbtools.cpp src/cxx/survey.cpp src/cxx/survey2almn_mpi.cpp)
-target_link_libraries(survey2almn_mpi ${3DEXTAG} ${CXX_LIBS})
+  add_executable(survey2almn_cxx src/cxx/sbtools.cpp src/cxx/survey.cpp src/cxx/survey2almn.cpp)
+  target_link_libraries(survey2almn_cxx ${3DEXTAG} ${CXX_LIBS})
+
+  add_executable(survey2almn_mpi src/cxx/sbtools.cpp src/cxx/survey.cpp src/cxx/survey2almn_mpi.cpp)
+  target_link_libraries(survey2almn_mpi ${3DEXTAG} ${CXX_LIBS})
+
+endif (MPI_FOUND)
 
 ############################################################
+# Test framework                                           #
+############################################################
+
+enable_testing()
+
+# AUX_SOURCE_DIRECTORY(dir TESTS) 
+add_test(unitarytests ${EXECUTABLE_OUTPUT_PATH}/utests)

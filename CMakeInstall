@@ -12,6 +12,7 @@ mkdir build
 cd build
 cmake ..
 make
+make test
 
 # Moving Fortran modules to include dir
 if [[ ! -d "include" ]] ; then
