@@ -3,6 +3,23 @@
 *.o
 *.mod
 *.a
+*~
+work/
+res/*
+src/r
+src/idl/perso
+Makefile
+Makefile_tmp
+src/idl/.*
+out/
+lib/
+include/
+bin/
+build/
+oldversion/
+res/2mrs*
+res/horizon_01_30k.txt
+TODO
 
 # As well as usual OSX files
 .DS_Store
