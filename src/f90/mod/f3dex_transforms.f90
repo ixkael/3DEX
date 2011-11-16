@@ -1340,6 +1340,7 @@ CONTAINS
     REAL(DP) :: rmax, tempval
     REAl(DP), DIMENSION(0:nlmax,1:nnmax) :: kln
     REAl(DP), DIMENSION(0:nlmax,1:nnmax) :: cln
+    CHARACTER(LEN=*), PARAMETER :: code = 'gen_cln'
 
     CALL message(code,start=.TRUE.)
 

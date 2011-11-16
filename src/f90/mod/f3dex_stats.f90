@@ -416,7 +416,7 @@ CONTAINS
     REAL(DP), DIMENSION(0:(12*nside*nside-1)) :: map
     REAL(DP), DIMENSION(0:nlmax_recon) :: cl
     REAL(DP), DIMENSION(0:nlmax_recon), OPTIONAL :: covarest
-    LOGICAL, DIMENSION(0:(12*nside*nside-1)) :: logicalmask
+    LOGICAL, DIMENSION(0:(12*nside*nside-1)), OPTIONAL :: logicalmask
     INTEGER(I4B), DIMENSION(0:(12*nside*nside-1)) :: subscr
     REAL(DP), DIMENSION(:,:), ALLOCATABLE :: El, F, ang_map
     REAL(DP), DIMENSION(:,:,:), ALLOCATABLE :: Pl
