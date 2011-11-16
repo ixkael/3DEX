@@ -19,8 +19,9 @@ AUTHORS
 
 REQUIREMENTS 
 -------------------
- Healpix (v2.12 or higher)
- and Healpix requirements (cfitsio, etc)
+ CFITSIO
+ LAPACK and BLAS
+ HEALPIX
 
 INSTALLATION - HEALPIX-LIKE
 -------------------
@@ -34,6 +35,7 @@ INSTALLATION WITH CMAKE
 -------------------
   'export CFITSIO=/usr/local/lib' to locate cfitsio library (libcfitsio.a)
   'export HEALPIX=/Users/silver/software/Healpix_2.20a'  to locate Healpix (Fortran build)
+  'export LAPACK=/usr/local/lib' to locate LAPACK
   'mkdir build' to create a temporary directory (name doesn't matter)
   'cd build' to use the correct path
   'cmake ..' to launch cmake in the main project root directory
@@ -44,26 +46,38 @@ NOTE
 -------------------
   The library architecture and the installation scripts
   are directly inspired by the HEALPix package, 
-  which is under GPL 3.0 license.
+  which is under CeCILL license.
 
 AVAILABLE FEATURES
 -------------------
  > survey2almn
     Fourier-Bessel decomposition from a raw survey/sample (normal mode)
-    Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
+    Test: bin/survey2almn res/horizon_005_60k.txt out/almn.fits out/cln.fits 20 20 256 2000.0
     
  > survey2almn_lm
     Fourier-Bessel decomposition from a raw survey/sample (slower, but low-memory requirements. Suitable for Nside>1024)
-    Test: bin/survey2almn test/horizon_005_60k.txt out/almn.fits out/cln.fits 50 50 256 2000.0
+    Test: bin/survey2almn_lm res/horizon_005_60k.txt out/almn.fits out/cln.fits 20 20 256 2000.0
  
  > survey2almn_interactive 
     Interactive Fourier-Bessel decomposition (with redshift to distance conversion using fiducial)
-    Test: bin/survey2almn_interactive test/parameters.txt (and just type test/2mrs30.out)
+    Test: bin/survey2almn_interactive res/parameters.txt (and just type test/2mrs30.out)
  
  > almn2rmap
     Extract FB decomposition from .fits file and reconstructs the smoothed field at given distance
-    Test: bin/almnfile2rmap out/almn.fits map.fits 400.0 256 10 10 2000.0
+    Test: bin/almnfile2rmap out/almn.fits map.fits 400.0 256 20 20 2000.0
  
  > almn2cln
  	Extract FB decomposition from .fits file, compute the spectrum and exports .fits
- 	Test: bin/almn2cln out/almn.fits out/cln.fits 50 50
+ 	Test: bin/almn2cln out/almn.fits out/cln.fits 20 20
+
+ > compute_qml_pl
+ 	Computes Pl matrices for PCL and QML estimators and store it in .fits
+ 	Test: bin/compute_qml_pl qml_16_16_ring.fits 16 16 RING
+ 	
+ > compute_qln
+ 	Computes qln zeros of the Bessel functions and store it in .fits
+ 	Test: bin/compute_qln out/qln_10_10.fits 10 10
+ 	
+ > compute_legen_plm
+ 	Computes Plm legendre coefficients for Healpix map and store it in .fits
+ 	Test: bin/compute_legen_plm plm_16_16.fits 16 16
