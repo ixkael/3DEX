@@ -3,7 +3,7 @@
 ===================
 Paper : http://arxiv.org/abs/1111.3591
 
-3DEX is a Fortran package providing programs and functions 
+3DEX is a Fortran/CXX package providing programs and functions 
 to perform fast Fourier-Bessel decomposition of 3D fields.
 
 It is distributed in the hope that it will be useful, but without

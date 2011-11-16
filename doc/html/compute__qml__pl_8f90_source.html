@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>3DEX: /Users/silver/Dropbox/3DEX/src/f90/compute_qml_pl/compute_qml_pl.f90 Source File</title>
+<title>3DEX: /Users/bl/Dropbox/3DEX/src/f90/compute_qml_pl/compute_qml_pl.f90 Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -29,6 +29,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Types&#160;List</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -58,7 +59,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/Users/silver/Dropbox/3DEX/src/f90/compute_qml_pl/compute_qml_pl.f90</div>  </div>
+<div class="title">/Users/bl/Dropbox/3DEX/src/f90/compute_qml_pl/compute_qml_pl.f90</div>  </div>
 </div>
 <div class="contents">
 <a href="compute__qml__pl_8f90.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="compute__qml__pl_8f90.html#a874d0882e4da31f68f7b367d2a615239">00001</a> <span class="keyword">PROGRAM</span> <a class="code" href="compute__qml__pl_8f90.html#a874d0882e4da31f68f7b367d2a615239">compute_qml_pl</a>
@@ -73,91 +74,90 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010   USE <span class="keywordflow">f3dex_stats</span>
 <a name="l00011"></a>00011   USE <span class="keywordflow">f3dex_fitstools</span>
 <a name="l00012"></a>00012   USE <span class="keywordflow">f3dex_utils</span>
-<a name="l00013"></a>00013   USE <span class="keywordflow">f3dex_utests</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015   USE <span class="keywordflow">healpix_types</span>
-<a name="l00016"></a>00016   USE <span class="keywordflow">healpix_modules</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018   <span class="keywordtype">INTEGER(I4B)</span> :: nbpts, status, n_args,  npix, nside, nlmax, l
-<a name="l00019"></a>00019   <span class="keywordtype">CHARACTER(len=FILENAMELEN)</span> ::  filename, arg, nlmaxchar, nsidechar, hpxmode
-<a name="l00020"></a>00020   <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: Pl
-<a name="l00021"></a>00021   <span class="keywordtype">CHARACTER(len=*)</span>, <span class="keywordtype">PARAMETER</span>   :: code = <span class="stringliteral">&quot;compute_qml_pl&quot;</span>
-<a name="l00022"></a>00022   <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: ang_map, Pl1, Pl2
-<a name="l00023"></a>00023   <span class="keywordtype">LOGICAL</span> :: fileexists
-<a name="l00024"></a>00024   
-<a name="l00025"></a>00025   CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,start=.TRUE.)
-<a name="l00026"></a>00026   
-<a name="l00027"></a>00027   n_args = nArguments()
-<a name="l00028"></a>00028   
-<a name="l00029"></a>00029   CALL getArgument(1, arg)
-<a name="l00030"></a>00030   filename = trim(adjustl(arg))
-<a name="l00031"></a>00031   <span class="keyword">INQUIRE</span>( file=filename, exist=fileexists)
-<a name="l00032"></a>00032   <span class="keyword">IF</span>( fileexists .eqv. .TRUE. ) CALL fatal_error(<span class="stringliteral">&quot;filename : this file already exists!&quot;</span>)
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034   call getArgument(2, arg)
-<a name="l00035"></a>00035   <span class="keyword">read</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nlmax
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037   call getArgument(3, arg)
-<a name="l00038"></a>00038   <span class="keyword">read</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nside
-<a name="l00039"></a>00039   
-<a name="l00040"></a>00040   CALL getArgument(4, arg)
-<a name="l00041"></a>00041   hpxmode = trim(adjustl(arg))
-<a name="l00042"></a>00042   
-<a name="l00043"></a>00043   npix=12*nside**2 
-<a name="l00044"></a>00044   
-<a name="l00045"></a>00045   <span class="keyword">ALLOCATE</span>(ang_map(0:npix-1,0:npix-1),stat = status)
-<a name="l00046"></a>00046   CALL assert_alloc(status,code,<span class="stringliteral">&#39;ang_map&#39;</span>)
-<a name="l00047"></a>00047   
-<a name="l00048"></a>00048   <span class="keyword">IF</span>( hpxmode == <span class="stringliteral">&quot;nested&quot;</span> .OR. hpxmode == <span class="stringliteral">&quot;NESTED&quot;</span> ) <span class="keyword">THEN</span>
-<a name="l00049"></a>00049     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;Nested scheme&quot;</span>)
-<a name="l00050"></a>00050      CALL <a class="code" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">gen_angles_map</a>(npix, ang_map, nside, nested=.TRUE.)
-<a name="l00051"></a>00051   <span class="keyword">ELSE</span> <span class="keyword">IF</span>( hpxmode == <span class="stringliteral">&quot;ring&quot;</span> .OR. hpxmode == <span class="stringliteral">&quot;RING&quot;</span> ) <span class="keyword">THEN</span>
-<a name="l00052"></a>00052      CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;Ring scheme&quot;</span>)
-<a name="l00053"></a>00053      CALL <a class="code" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">gen_angles_map</a>(npix, ang_map, nside, nested=.FALSE.)  
-<a name="l00054"></a>00054   <span class="keyword">ELSE</span>
-<a name="l00055"></a>00055      PRINT*,<span class="stringliteral">&quot;ERROR : you must provide NESTED or RING as fourth argument&quot;</span>
-<a name="l00056"></a>00056      STOP
-<a name="l00057"></a>00057   <span class="keyword">ENDIF</span>
-<a name="l00058"></a>00058   
-<a name="l00059"></a>00059   <span class="keyword">ALLOCATE</span>(Pl(0:npix-1,0:npix-1,0:nlmax),stat = status)
-<a name="l00060"></a>00060   CALL assert_alloc(status,code,<span class="stringliteral">&#39;Pl&#39;</span>)
-<a name="l00061"></a>00061   
-<a name="l00062"></a>00062   CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;Generating pl matrices using recurrence&quot;</span>)
-<a name="l00063"></a>00063   <span class="keyword">DO</span> l=0, nlmax
-<a name="l00064"></a>00064    CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;l&quot;</span>,i=l,msg2=<span class="stringliteral">&quot;/&quot;</span>,i2=nlmax)
-<a name="l00065"></a>00065        <span class="keyword">IF</span>( l .EQ. 0 )<span class="keyword">THEN</span>
-<a name="l00066"></a>00066          Pl(0:npix-1,0:npix-1,0) = 1.0
-<a name="l00067"></a>00067        <span class="keyword">ELSE</span> <span class="keyword">IF</span>( l .EQ. 1 ) <span class="keyword">THEN</span>
-<a name="l00068"></a>00068             Pl(0:npix-1,0:npix-1,1) = ang_map
-<a name="l00069"></a>00069        <span class="keyword">ELSE</span>
-<a name="l00070"></a>00070            Pl(0:npix-1,0:npix-1,l) = &amp;
-<a name="l00071"></a>00071             &amp; ( (2.0*<span class="keywordtype">REAL</span>(l)-1.0) * ang_map * Pl(0:npix-1,0:npix-1,l-1) 
-<a name="l00072"></a>00072              - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) ) / REAL(l)
-<a name="l00073"></a>00073        END IF
-<a name="l00074"></a>00074        <span class="comment">!Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l)</span>
-<a name="l00075"></a>00075   <span class="keyword">ENDDO</span>
-<a name="l00076"></a>00076   
-<a name="l00077"></a>00077   <span class="keyword">DO</span> l = 0, nlmax
-<a name="l00078"></a>00078      Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l) * (2.0_dp*<span class="keywordtype">REAL</span>(l)+1.0_dp)/FOURPI
-<a name="l00079"></a>00079   <span class="keyword">ENDDO</span>
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081   <span class="comment">!WRITE(nlmaxchar,&#39;(I2)&#39;) nlmax</span>
-<a name="l00082"></a>00082   <span class="comment">!WRITE(nsidechar,&#39;(I2)&#39;) nside</span>
-<a name="l00083"></a>00083   <span class="comment">!filename = &quot;qm_plmat_0_&quot; // trim(nlmaxchar) // &quot;_&quot; &amp;</span>
-<a name="l00084"></a>00084   <span class="comment">!      &amp; // trim(nsidechar) // &quot;.fits&quot;</span>
-<a name="l00085"></a>00085   <span class="comment">!print*,&quot;FILE : &quot;,trim(filename)</span>
-<a name="l00086"></a>00086   
-<a name="l00087"></a>00087   PRINT*,<span class="stringliteral">&quot;Exporting coefficients&quot;</span>
-<a name="l00088"></a>00088   CALL <a class="code" href="namespacef3dex__fitstools.html#a98c44872e5b5937bef4cccfcc2a21c43">tritab2fits</a>( filename, Pl, 0, npix-1, 0, npix-1, 0, nlmax )
-<a name="l00089"></a>00089   PRINT*,<span class="stringliteral">&quot;Done.&quot;</span>
-<a name="l00090"></a>00090  
-<a name="l00091"></a>00091   <span class="comment">!CALL fits2tritab( filename, Pl, 0, npix-1, 0, npix-1, 0, nlmax )</span>
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093   <span class="keyword">DEALLOCATE</span>( Pl, ang_map )
-<a name="l00094"></a>00094   
-<a name="l00095"></a>00095   CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,fin=.TRUE.)
-<a name="l00096"></a>00096   
-<a name="l00097"></a>00097 <span class="keyword">END PROGRAM compute_qml_pl</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014   USE <span class="keywordflow">healpix_types</span>
+<a name="l00015"></a>00015   USE <span class="keywordflow">healpix_modules</span>
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017   <span class="keywordtype">INTEGER(I4B)</span> :: nbpts, status, n_args,  npix, nside, nlmax, l
+<a name="l00018"></a>00018   <span class="keywordtype">CHARACTER(len=FILENAMELEN)</span> ::  filename, arg, nlmaxchar, nsidechar, hpxmode
+<a name="l00019"></a>00019   <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: Pl
+<a name="l00020"></a>00020   <span class="keywordtype">CHARACTER(len=*)</span>, <span class="keywordtype">PARAMETER</span>   :: code = <span class="stringliteral">&quot;compute_qml_pl&quot;</span>
+<a name="l00021"></a>00021   <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: ang_map, Pl1, Pl2
+<a name="l00022"></a>00022   <span class="keywordtype">LOGICAL</span> :: fileexists
+<a name="l00023"></a>00023   
+<a name="l00024"></a>00024   CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,start=.TRUE.)
+<a name="l00025"></a>00025   
+<a name="l00026"></a>00026   n_args = nArguments()
+<a name="l00027"></a>00027   
+<a name="l00028"></a>00028   CALL getArgument(1, arg)
+<a name="l00029"></a>00029   filename = trim(adjustl(arg))
+<a name="l00030"></a>00030   <span class="keyword">INQUIRE</span>( file=filename, exist=fileexists)
+<a name="l00031"></a>00031   <span class="keyword">IF</span>( fileexists .eqv. .TRUE. ) CALL fatal_error(<span class="stringliteral">&quot;filename : this file already exists!&quot;</span>)
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033   call getArgument(2, arg)
+<a name="l00034"></a>00034   <span class="keyword">read</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nlmax
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036   call getArgument(3, arg)
+<a name="l00037"></a>00037   <span class="keyword">read</span>(arg,<span class="stringliteral">&#39;(I4)&#39;</span>) nside
+<a name="l00038"></a>00038   
+<a name="l00039"></a>00039   CALL getArgument(4, arg)
+<a name="l00040"></a>00040   hpxmode = trim(adjustl(arg))
+<a name="l00041"></a>00041   
+<a name="l00042"></a>00042   npix=12*nside**2 
+<a name="l00043"></a>00043   
+<a name="l00044"></a>00044   <span class="keyword">ALLOCATE</span>(ang_map(0:npix-1,0:npix-1),stat = status)
+<a name="l00045"></a>00045   CALL assert_alloc(status,code,<span class="stringliteral">&#39;ang_map&#39;</span>)
+<a name="l00046"></a>00046   
+<a name="l00047"></a>00047   <span class="keyword">IF</span>( hpxmode == <span class="stringliteral">&quot;nested&quot;</span> .OR. hpxmode == <span class="stringliteral">&quot;NESTED&quot;</span> ) <span class="keyword">THEN</span>
+<a name="l00048"></a>00048     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;Nested scheme&quot;</span>)
+<a name="l00049"></a>00049      CALL <a class="code" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">gen_angles_map</a>(npix, ang_map, nside, nested=.TRUE.)
+<a name="l00050"></a>00050   <span class="keyword">ELSE</span> <span class="keyword">IF</span>( hpxmode == <span class="stringliteral">&quot;ring&quot;</span> .OR. hpxmode == <span class="stringliteral">&quot;RING&quot;</span> ) <span class="keyword">THEN</span>
+<a name="l00051"></a>00051      CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;Ring scheme&quot;</span>)
+<a name="l00052"></a>00052      CALL <a class="code" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">gen_angles_map</a>(npix, ang_map, nside, nested=.FALSE.)  
+<a name="l00053"></a>00053   <span class="keyword">ELSE</span>
+<a name="l00054"></a>00054      PRINT*,<span class="stringliteral">&quot;ERROR : you must provide NESTED or RING as fourth argument&quot;</span>
+<a name="l00055"></a>00055      STOP
+<a name="l00056"></a>00056   <span class="keyword">ENDIF</span>
+<a name="l00057"></a>00057   
+<a name="l00058"></a>00058   <span class="keyword">ALLOCATE</span>(Pl(0:npix-1,0:npix-1,0:nlmax),stat = status)
+<a name="l00059"></a>00059   CALL assert_alloc(status,code,<span class="stringliteral">&#39;Pl&#39;</span>)
+<a name="l00060"></a>00060   
+<a name="l00061"></a>00061   CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;Generating pl matrices using recurrence&quot;</span>)
+<a name="l00062"></a>00062   <span class="keyword">DO</span> l=0, nlmax
+<a name="l00063"></a>00063    CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,msg=<span class="stringliteral">&quot;l&quot;</span>,i=l,msg2=<span class="stringliteral">&quot;/&quot;</span>,i2=nlmax)
+<a name="l00064"></a>00064        <span class="keyword">IF</span>( l .EQ. 0 )<span class="keyword">THEN</span>
+<a name="l00065"></a>00065          Pl(0:npix-1,0:npix-1,0) = 1.0
+<a name="l00066"></a>00066        <span class="keyword">ELSE</span> <span class="keyword">IF</span>( l .EQ. 1 ) <span class="keyword">THEN</span>
+<a name="l00067"></a>00067             Pl(0:npix-1,0:npix-1,1) = ang_map
+<a name="l00068"></a>00068        <span class="keyword">ELSE</span>
+<a name="l00069"></a>00069            Pl(0:npix-1,0:npix-1,l) = &amp;
+<a name="l00070"></a>00070             &amp; ( (2.0*<span class="keywordtype">REAL</span>(l)-1.0) * ang_map * Pl(0:npix-1,0:npix-1,l-1) 
+<a name="l00071"></a>00071              - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) ) / REAL(l)
+<a name="l00072"></a>00072        END IF
+<a name="l00073"></a>00073        <span class="comment">!Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l)</span>
+<a name="l00074"></a>00074   <span class="keyword">ENDDO</span>
+<a name="l00075"></a>00075   
+<a name="l00076"></a>00076   <span class="keyword">DO</span> l = 0, nlmax
+<a name="l00077"></a>00077      Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l) * (2.0_dp*<span class="keywordtype">REAL</span>(l)+1.0_dp)/FOURPI
+<a name="l00078"></a>00078   <span class="keyword">ENDDO</span>
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080   <span class="comment">!WRITE(nlmaxchar,&#39;(I2)&#39;) nlmax</span>
+<a name="l00081"></a>00081   <span class="comment">!WRITE(nsidechar,&#39;(I2)&#39;) nside</span>
+<a name="l00082"></a>00082   <span class="comment">!filename = &quot;qm_plmat_0_&quot; // trim(nlmaxchar) // &quot;_&quot; &amp;</span>
+<a name="l00083"></a>00083   <span class="comment">!      &amp; // trim(nsidechar) // &quot;.fits&quot;</span>
+<a name="l00084"></a>00084   <span class="comment">!print*,&quot;FILE : &quot;,trim(filename)</span>
+<a name="l00085"></a>00085   
+<a name="l00086"></a>00086   PRINT*,<span class="stringliteral">&quot;Exporting coefficients&quot;</span>
+<a name="l00087"></a>00087   CALL <a class="code" href="namespacef3dex__fitstools.html#a98c44872e5b5937bef4cccfcc2a21c43">tritab2fits</a>( filename, Pl, 0, npix-1, 0, npix-1, 0, nlmax )
+<a name="l00088"></a>00088   PRINT*,<span class="stringliteral">&quot;Done.&quot;</span>
+<a name="l00089"></a>00089  
+<a name="l00090"></a>00090   <span class="comment">!CALL fits2tritab( filename, Pl, 0, npix-1, 0, npix-1, 0, nlmax )</span>
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092   <span class="keyword">DEALLOCATE</span>( Pl, ang_map )
+<a name="l00093"></a>00093   
+<a name="l00094"></a>00094   CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,fin=.TRUE.)
+<a name="l00095"></a>00095   
+<a name="l00096"></a>00096 <span class="keyword">END PROGRAM compute_qml_pl</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -165,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -174,7 +174,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:44 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 15:27:15 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

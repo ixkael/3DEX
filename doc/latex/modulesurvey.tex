@@ -1,0 +1,300 @@
+\hypertarget{modulesurvey}{
+\section{survey Module Reference}
+\label{modulesurvey}\index{survey@{survey}}
+}
+
+
+{\ttfamily \#include $<$survey.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{modulesurvey_a86ebece36d2a27e7fd987af51c49e701}{survey} ()
+\item 
+bool \hyperlink{modulesurvey_ae0f55914ed9cbf025c736c1eab33ca5a}{fromSurveyFile} (char $\ast$filename, bool loadSurvey=true)
+\item 
+void \hyperlink{modulesurvey_a9863bbe173e7851032f7dce80e132742}{applySelectionFunction} (\hyperlink{moduleselection_function}{selectionFunction}$<$ double $>$ \&function)
+\item 
+bool \hyperlink{modulesurvey_ab5972963fd7ffceca5cd23e4af986323}{toSurveyFile} (char $\ast$filename)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+arr2$<$ double $>$ \hyperlink{modulesurvey_ad31303c9a3c7a5001561118b97890e76}{data}
+\item 
+std::string \hyperlink{modulesurvey_a6dad0d753c416bddadd0fdb79fc2a6bc}{dataFile}
+\item 
+int \hyperlink{modulesurvey_a25e30c3a15c8da2d421a85cd18f8e6ed}{nbCols}
+\item 
+int \hyperlink{modulesurvey_a642ce97be4d3188b72efb912bf4f68f6}{colPhi}
+\item 
+int \hyperlink{modulesurvey_ada2038b3c76983d5da9c9e4b64758d98}{colTheta}
+\item 
+int \hyperlink{modulesurvey_a8cbaccb2ed0adf76727b20fcdde2d8d3}{colZ}
+\item 
+int \hyperlink{modulesurvey_a42026eb359cbe1fb070ffef2e444aecb}{colM}
+\item 
+coordsys \hyperlink{modulesurvey_ac98a933e4c00622128991d1b60009307}{coords}
+\item 
+bool \hyperlink{modulesurvey_a8f30a6ca63dd3c3abe8ed1700849b399}{rad}
+\item 
+bool \hyperlink{modulesurvey_a31df3e0a4afb61109790b98e8dc7cebf}{sorted}
+\item 
+bool \hyperlink{modulesurvey_af50a00fbd76d31c442c83c310673bc48}{redshift}
+\item 
+double \hyperlink{modulesurvey_a5ecdf494143dc4405d8bfa1bd8aac977}{convfc}
+\item 
+double \hyperlink{modulesurvey_aaf7661ce71838ee82daf689fa3376e50}{h}
+\item 
+double \hyperlink{modulesurvey_a0bd34c61702e99cc51bc42e60b27addb}{omg\_\-l}
+\item 
+double \hyperlink{modulesurvey_a80706db19f844bda5bb06fcded22c3d3}{omg\_\-m}
+\item 
+double \hyperlink{modulesurvey_a4125c25d288280ab388ce51932f20bb4}{omg\_\-b}
+\item 
+double \hyperlink{modulesurvey_a496fd2e71e2da932fb9c6f591cd98bf5}{wa}
+\item 
+double \hyperlink{modulesurvey_ad51507ebe1e5898954d5fb5d0b318c61}{w0}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 36 of file survey.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{modulesurvey_a86ebece36d2a27e7fd987af51c49e701}{
+\index{survey@{survey}!survey@{survey}}
+\index{survey@{survey}!survey@{survey}}
+\subsubsection[{survey}]{\setlength{\rightskip}{0pt plus 5cm}survey::survey (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{modulesurvey_a86ebece36d2a27e7fd987af51c49e701}
+Creates an empty survey 
+
+Definition at line 42 of file survey.h.
+
+
+
+\subsection{Member Function/Subroutine Documentation}
+\hypertarget{modulesurvey_a9863bbe173e7851032f7dce80e132742}{
+\index{survey@{survey}!applySelectionFunction@{applySelectionFunction}}
+\index{applySelectionFunction@{applySelectionFunction}!survey@{survey}}
+\subsubsection[{applySelectionFunction}]{\setlength{\rightskip}{0pt plus 5cm}void survey::applySelectionFunction (
+\begin{DoxyParamCaption}
+\item[{{\bf selectionFunction}$<$ double $>$ \&}]{function}
+\end{DoxyParamCaption}
+)}}
+\label{modulesurvey_a9863bbe173e7851032f7dce80e132742}
+Applies a radial selection function to the catalog. 
+
+Definition at line 167 of file survey.cpp.
+
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{modulesurvey_ae0f55914ed9cbf025c736c1eab33ca5a}{
+\index{survey@{survey}!fromSurveyFile@{fromSurveyFile}}
+\index{fromSurveyFile@{fromSurveyFile}!survey@{survey}}
+\subsubsection[{fromSurveyFile}]{\setlength{\rightskip}{0pt plus 5cm}bool survey::fromSurveyFile (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filename, }
+\item[{bool}]{loadSurvey = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}}
+\label{modulesurvey_ae0f55914ed9cbf025c736c1eab33ca5a}
+Loads a survey from a parameter file (if loadSurvey=false only the parameters are read not the actual data) 
+
+Definition at line 22 of file survey.cpp.
+
+\hypertarget{modulesurvey_ab5972963fd7ffceca5cd23e4af986323}{
+\index{survey@{survey}!toSurveyFile@{toSurveyFile}}
+\index{toSurveyFile@{toSurveyFile}!survey@{survey}}
+\subsubsection[{toSurveyFile}]{\setlength{\rightskip}{0pt plus 5cm}bool survey::toSurveyFile (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}
+\label{modulesurvey_ab5972963fd7ffceca5cd23e4af986323}
+Saves the survey by creating a parameter file along with the actual data file. 
+
+Definition at line 106 of file survey.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{modulesurvey_a42026eb359cbe1fb070ffef2e444aecb}{
+\index{survey@{survey}!colM@{colM}}
+\index{colM@{colM}!survey@{survey}}
+\subsubsection[{colM}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf survey::colM}}}
+\label{modulesurvey_a42026eb359cbe1fb070ffef2e444aecb}
+
+
+Definition at line 54 of file survey.h.
+
+\hypertarget{modulesurvey_a642ce97be4d3188b72efb912bf4f68f6}{
+\index{survey@{survey}!colPhi@{colPhi}}
+\index{colPhi@{colPhi}!survey@{survey}}
+\subsubsection[{colPhi}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf survey::colPhi}}}
+\label{modulesurvey_a642ce97be4d3188b72efb912bf4f68f6}
+
+
+Definition at line 54 of file survey.h.
+
+\hypertarget{modulesurvey_ada2038b3c76983d5da9c9e4b64758d98}{
+\index{survey@{survey}!colTheta@{colTheta}}
+\index{colTheta@{colTheta}!survey@{survey}}
+\subsubsection[{colTheta}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf survey::colTheta}}}
+\label{modulesurvey_ada2038b3c76983d5da9c9e4b64758d98}
+
+
+Definition at line 54 of file survey.h.
+
+\hypertarget{modulesurvey_a8cbaccb2ed0adf76727b20fcdde2d8d3}{
+\index{survey@{survey}!colZ@{colZ}}
+\index{colZ@{colZ}!survey@{survey}}
+\subsubsection[{colZ}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf survey::colZ}}}
+\label{modulesurvey_a8cbaccb2ed0adf76727b20fcdde2d8d3}
+
+
+Definition at line 54 of file survey.h.
+
+\hypertarget{modulesurvey_a5ecdf494143dc4405d8bfa1bd8aac977}{
+\index{survey@{survey}!convfc@{convfc}}
+\index{convfc@{convfc}!survey@{survey}}
+\subsubsection[{convfc}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf survey::convfc}}}
+\label{modulesurvey_a5ecdf494143dc4405d8bfa1bd8aac977}
+
+
+Definition at line 57 of file survey.h.
+
+\hypertarget{modulesurvey_ac98a933e4c00622128991d1b60009307}{
+\index{survey@{survey}!coords@{coords}}
+\index{coords@{coords}!survey@{survey}}
+\subsubsection[{coords}]{\setlength{\rightskip}{0pt plus 5cm}coordsys {\bf survey::coords}}}
+\label{modulesurvey_ac98a933e4c00622128991d1b60009307}
+
+
+Definition at line 55 of file survey.h.
+
+\hypertarget{modulesurvey_ad31303c9a3c7a5001561118b97890e76}{
+\index{survey@{survey}!data@{data}}
+\index{data@{data}!survey@{survey}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}arr2$<$double$>$ {\bf survey::data}}}
+\label{modulesurvey_ad31303c9a3c7a5001561118b97890e76}
+
+
+Definition at line 39 of file survey.h.
+
+\hypertarget{modulesurvey_a6dad0d753c416bddadd0fdb79fc2a6bc}{
+\index{survey@{survey}!dataFile@{dataFile}}
+\index{dataFile@{dataFile}!survey@{survey}}
+\subsubsection[{dataFile}]{\setlength{\rightskip}{0pt plus 5cm}std::string {\bf survey::dataFile}}}
+\label{modulesurvey_a6dad0d753c416bddadd0fdb79fc2a6bc}
+
+
+Definition at line 53 of file survey.h.
+
+\hypertarget{modulesurvey_aaf7661ce71838ee82daf689fa3376e50}{
+\index{survey@{survey}!h@{h}}
+\index{h@{h}!survey@{survey}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf survey::h}}}
+\label{modulesurvey_aaf7661ce71838ee82daf689fa3376e50}
+
+
+Definition at line 57 of file survey.h.
+
+\hypertarget{modulesurvey_a25e30c3a15c8da2d421a85cd18f8e6ed}{
+\index{survey@{survey}!nbCols@{nbCols}}
+\index{nbCols@{nbCols}!survey@{survey}}
+\subsubsection[{nbCols}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf survey::nbCols}}}
+\label{modulesurvey_a25e30c3a15c8da2d421a85cd18f8e6ed}
+
+
+Definition at line 54 of file survey.h.
+
+\hypertarget{modulesurvey_a4125c25d288280ab388ce51932f20bb4}{
+\index{survey@{survey}!omg\_\-b@{omg\_\-b}}
+\index{omg\_\-b@{omg\_\-b}!survey@{survey}}
+\subsubsection[{omg\_\-b}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf survey::omg\_\-b}}}
+\label{modulesurvey_a4125c25d288280ab388ce51932f20bb4}
+
+
+Definition at line 57 of file survey.h.
+
+\hypertarget{modulesurvey_a0bd34c61702e99cc51bc42e60b27addb}{
+\index{survey@{survey}!omg\_\-l@{omg\_\-l}}
+\index{omg\_\-l@{omg\_\-l}!survey@{survey}}
+\subsubsection[{omg\_\-l}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf survey::omg\_\-l}}}
+\label{modulesurvey_a0bd34c61702e99cc51bc42e60b27addb}
+
+
+Definition at line 57 of file survey.h.
+
+\hypertarget{modulesurvey_a80706db19f844bda5bb06fcded22c3d3}{
+\index{survey@{survey}!omg\_\-m@{omg\_\-m}}
+\index{omg\_\-m@{omg\_\-m}!survey@{survey}}
+\subsubsection[{omg\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf survey::omg\_\-m}}}
+\label{modulesurvey_a80706db19f844bda5bb06fcded22c3d3}
+
+
+Definition at line 57 of file survey.h.
+
+\hypertarget{modulesurvey_a8f30a6ca63dd3c3abe8ed1700849b399}{
+\index{survey@{survey}!rad@{rad}}
+\index{rad@{rad}!survey@{survey}}
+\subsubsection[{rad}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf survey::rad}}}
+\label{modulesurvey_a8f30a6ca63dd3c3abe8ed1700849b399}
+
+
+Definition at line 56 of file survey.h.
+
+\hypertarget{modulesurvey_af50a00fbd76d31c442c83c310673bc48}{
+\index{survey@{survey}!redshift@{redshift}}
+\index{redshift@{redshift}!survey@{survey}}
+\subsubsection[{redshift}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf survey::redshift}}}
+\label{modulesurvey_af50a00fbd76d31c442c83c310673bc48}
+
+
+Definition at line 56 of file survey.h.
+
+\hypertarget{modulesurvey_a31df3e0a4afb61109790b98e8dc7cebf}{
+\index{survey@{survey}!sorted@{sorted}}
+\index{sorted@{sorted}!survey@{survey}}
+\subsubsection[{sorted}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf survey::sorted}}}
+\label{modulesurvey_a31df3e0a4afb61109790b98e8dc7cebf}
+
+
+Definition at line 56 of file survey.h.
+
+\hypertarget{modulesurvey_ad51507ebe1e5898954d5fb5d0b318c61}{
+\index{survey@{survey}!w0@{w0}}
+\index{w0@{w0}!survey@{survey}}
+\subsubsection[{w0}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf survey::w0}}}
+\label{modulesurvey_ad51507ebe1e5898954d5fb5d0b318c61}
+
+
+Definition at line 57 of file survey.h.
+
+\hypertarget{modulesurvey_a496fd2e71e2da932fb9c6f591cd98bf5}{
+\index{survey@{survey}!wa@{wa}}
+\index{wa@{wa}!survey@{survey}}
+\subsubsection[{wa}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf survey::wa}}}
+\label{modulesurvey_a496fd2e71e2da932fb9c6f591cd98bf5}
+
+
+Definition at line 57 of file survey.h.
+
+
+
+The documentation for this module was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/Users/bl/Dropbox/3DEX/src/cxx/\hyperlink{survey_8h}{survey.h}\item 
+/Users/bl/Dropbox/3DEX/src/cxx/\hyperlink{survey_8cpp}{survey.cpp}\end{DoxyCompactItemize}

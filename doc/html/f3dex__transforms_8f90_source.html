@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>3DEX: /Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90 Source File</title>
+<title>3DEX: /Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90 Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -29,6 +29,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Types&#160;List</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -58,7 +59,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90</div>  </div>
+<div class="title">/Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_transforms.f90</div>  </div>
 </div>
 <div class="contents">
 <a href="f3dex__transforms_8f90.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="namespacef3dex__transforms.html">00001</a> <span class="keyword">MODULE</span> f3dex_transforms
@@ -707,7 +708,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00644"></a>00644     <span class="comment">!$OMP shared(survey, nsmax, nbpts, iprings) &amp;</span>
 <a name="l00645"></a>00645     <span class="comment">!$OMP private(p)</span>
 <a name="l00646"></a>00646     <span class="keyword">DO</span> p = 1, nbpts
-<a name="l00647"></a>00647        CALL ang2pix_ring(nsmax, survey(p,2), survey(p,1), iprings(p)) 
+<a name="l00647"></a>00647        CALL ang2pix_ring(nsmax, <a class="code" href="modulesurvey.html">survey</a>(p,2), <a class="code" href="modulesurvey.html">survey</a>(p,1), iprings(p)) 
 <a name="l00648"></a>00648     <span class="keyword">ENDDO</span>
 <a name="l00649"></a>00649     <span class="comment">!$OMP END parallel DO</span>
 <a name="l00650"></a>00650 
@@ -762,7 +763,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00699"></a>00699 
 <a name="l00700"></a>00700           <span class="comment">!$OMP DO reduction(+:map_north, map_south) schedule(dynamic,1024) </span>
 <a name="l00701"></a>00701           <span class="keyword">DO</span> p=1, nbpts
-<a name="l00702"></a>00702              r = survey(p,3)
+<a name="l00702"></a>00702              r = <a class="code" href="modulesurvey.html">survey</a>(p,3)
 <a name="l00703"></a>00703              ipring = iprings(p)
 <a name="l00704"></a>00704              <span class="keyword">DO</span> l=0, nlmax
 <a name="l00705"></a>00705                 CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*r, jln ) 
@@ -959,7 +960,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00896"></a>00896   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l00897"></a>00897 
 <a name="l00905"></a><a class="code" href="namespacef3dex__transforms.html#ae19f381573ccd64c64102bbd4181483f">00905</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#ae19f381573ccd64c64102bbd4181483f">survey2almn_srs</a>( nsmax, nnmax, nlmax, nmmax, rmax, nbpts, &amp;
-<a name="l00906"></a>00906        &amp; zbounds, survey, kln, almn)
+<a name="l00906"></a>00906        &amp; zbounds, <a class="code" href="modulesurvey.html">survey</a>, kln, almn)
 <a name="l00907"></a>00907     <span class="comment">!</span>
 <a name="l00908"></a>00908     <span class="keywordtype">INTEGER(I4B)</span>  :: status, nbpts, ipring, nrr, nb_iter
 <a name="l00909"></a>00909     <span class="keywordtype">INTEGER(I4B)</span>  :: nsmax, nnmax, nlmax, nmmax, n, p, k, m, l
@@ -1000,7 +1001,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00944"></a>00944 
 <a name="l00945"></a>00945        <span class="keyword">DO</span> p = 1, nbpts
 <a name="l00946"></a>00946           <span class="comment">!</span>
-<a name="l00947"></a>00947           surveytemp(1:3) = survey(p,1:3)
+<a name="l00947"></a>00947           surveytemp(1:3) = <a class="code" href="modulesurvey.html">survey</a>(p,1:3)
 <a name="l00948"></a>00948           CALL ang2pix_ring(nsmax, surveytemp(2), surveytemp(1), ipring)
 <a name="l00949"></a>00949           <span class="comment">!  </span>
 <a name="l00950"></a>00950           <span class="keyword">DO</span> l = 0, nlmax
@@ -1383,212 +1384,213 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01340"></a>01340     <span class="keywordtype">REAL(DP)</span> :: rmax, tempval
 <a name="l01341"></a>01341     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: kln
 <a name="l01342"></a>01342     <span class="keywordtype">REAl(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax,1:nnmax)</span> :: cln
-<a name="l01343"></a>01343 
-<a name="l01344"></a>01344     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,start=.TRUE.)
-<a name="l01345"></a>01345 
-<a name="l01346"></a>01346     <span class="comment">!$OMP PARALLEL &amp;</span>
-<a name="l01347"></a>01347     <span class="comment">!$OMP SHARED(cln,rmax,kln,nnmax,nlmax) &amp;</span>
-<a name="l01348"></a>01348     <span class="comment">!$OMP PRIVATE(l,n,k,tempval)   </span>
-<a name="l01349"></a>01349 
-<a name="l01350"></a>01350     <span class="comment">!$OMP DO SCHEDULE(DYNAMIC,1)  </span>
-<a name="l01351"></a>01351     <span class="keyword">DO</span> l = 0, nlmax 
-<a name="l01352"></a>01352        <span class="keyword">DO</span> n = 1, nnmax   
-<a name="l01353"></a>01353           k = n+1
-<a name="l01354"></a>01354           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( k , kln(l,n)*rmax, tempval )
-<a name="l01355"></a>01355           cln(l,n) = ( sqrt(2.0)*rmax**(-1.5) ) / (kln(l,n)*tempval)
-<a name="l01356"></a>01356        <span class="keyword">ENDDO</span>
-<a name="l01357"></a>01357     <span class="keyword">ENDDO</span>
-<a name="l01358"></a>01358     <span class="comment">!$OMP END DO</span>
-<a name="l01359"></a>01359     <span class="comment">!$OMP END PARALLEL    </span>
-<a name="l01360"></a>01360 
-<a name="l01361"></a>01361     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,fin=.TRUE.)
-<a name="l01362"></a>01362 
-<a name="l01363"></a>01363 <span class="keyword">  END SUBROUTINE gen_cln</span>
-<a name="l01364"></a>01364 
-<a name="l01365"></a>01365   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l01366"></a>01366 
-<a name="l01372"></a><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">01372</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">gen_jln</a>(jlns, kln, rho, nnmax, nlmax)
-<a name="l01373"></a>01373 
-<a name="l01374"></a>01374     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01375"></a>01375 
-<a name="l01376"></a>01376     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax,nlmax,n,l
-<a name="l01377"></a>01377     <span class="keywordtype">REAL(DP)</span> :: rho, jln
-<a name="l01378"></a>01378     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: kln
-<a name="l01379"></a>01379     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: jlns      
-<a name="l01380"></a>01380 
-<a name="l01381"></a>01381     <span class="comment">!$OMP PARALLEL &amp;</span>
-<a name="l01382"></a>01382     <span class="comment">!$OMP SHARED(jlns,kln,rho,nnmax,nlmax) &amp;</span>
-<a name="l01383"></a>01383     <span class="comment">!$OMP PRIVATE(jln,l,n)   </span>
-<a name="l01384"></a>01384 
-<a name="l01385"></a>01385     <span class="comment">!$OMP DO SCHEDULE(RUNTIME)</span>
-<a name="l01386"></a>01386     <span class="keyword">DO</span> n=1,nnmax   
-<a name="l01387"></a>01387        <span class="keyword">DO</span> l=0,nlmax
-<a name="l01388"></a>01388           <span class="comment">!PRINT*,n,l,OMP_GET_THREAD_NUM()</span>
-<a name="l01389"></a>01389           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*rho , jln )
-<a name="l01390"></a>01390           jlns(l,n) = kln(l,n) * jln
-<a name="l01391"></a>01391        <span class="keyword">ENDDO</span>
-<a name="l01392"></a>01392     <span class="keyword">ENDDO</span>
-<a name="l01393"></a>01393     <span class="comment">!$OMP END DO</span>
-<a name="l01394"></a>01394     <span class="comment">!$OMP END PARALLEL</span>
-<a name="l01395"></a>01395 
-<a name="l01396"></a>01396     RETURN
-<a name="l01397"></a>01397 
-<a name="l01398"></a>01398 <span class="keyword">  END SUBROUTINE gen_jln</span>
-<a name="l01399"></a>01399 
-<a name="l01400"></a>01400   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l01401"></a>01401 
-<a name="l01406"></a><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">01406</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>(L,X,JL)
-<a name="l01407"></a>01407 
+<a name="l01343"></a>01343     <span class="keywordtype">CHARACTER(LEN=*)</span>, <span class="keywordtype">PARAMETER</span> :: code = <span class="stringliteral">&#39;gen_cln&#39;</span>
+<a name="l01344"></a>01344 
+<a name="l01345"></a>01345     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,start=.TRUE.)
+<a name="l01346"></a>01346 
+<a name="l01347"></a>01347     <span class="comment">!$OMP PARALLEL &amp;</span>
+<a name="l01348"></a>01348     <span class="comment">!$OMP SHARED(cln,rmax,kln,nnmax,nlmax) &amp;</span>
+<a name="l01349"></a>01349     <span class="comment">!$OMP PRIVATE(l,n,k,tempval)   </span>
+<a name="l01350"></a>01350 
+<a name="l01351"></a>01351     <span class="comment">!$OMP DO SCHEDULE(DYNAMIC,1)  </span>
+<a name="l01352"></a>01352     <span class="keyword">DO</span> l = 0, nlmax 
+<a name="l01353"></a>01353        <span class="keyword">DO</span> n = 1, nnmax   
+<a name="l01354"></a>01354           k = n+1
+<a name="l01355"></a>01355           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( k , kln(l,n)*rmax, tempval )
+<a name="l01356"></a>01356           cln(l,n) = ( sqrt(2.0)*rmax**(-1.5) ) / (kln(l,n)*tempval)
+<a name="l01357"></a>01357        <span class="keyword">ENDDO</span>
+<a name="l01358"></a>01358     <span class="keyword">ENDDO</span>
+<a name="l01359"></a>01359     <span class="comment">!$OMP END DO</span>
+<a name="l01360"></a>01360     <span class="comment">!$OMP END PARALLEL    </span>
+<a name="l01361"></a>01361 
+<a name="l01362"></a>01362     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code,fin=.TRUE.)
+<a name="l01363"></a>01363 
+<a name="l01364"></a>01364 <span class="keyword">  END SUBROUTINE gen_cln</span>
+<a name="l01365"></a>01365 
+<a name="l01366"></a>01366   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01367"></a>01367 
+<a name="l01373"></a><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">01373</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#ad1ab102a8307876c7af8bd6868ea7ef2">gen_jln</a>(jlns, kln, rho, nnmax, nlmax)
+<a name="l01374"></a>01374 
+<a name="l01375"></a>01375     <span class="keyword">IMPLICIT NONE</span>
+<a name="l01376"></a>01376 
+<a name="l01377"></a>01377     <span class="keywordtype">INTEGER(I4B)</span> :: nnmax,nlmax,n,l
+<a name="l01378"></a>01378     <span class="keywordtype">REAL(DP)</span> :: rho, jln
+<a name="l01379"></a>01379     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: kln
+<a name="l01380"></a>01380     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">dimension(0:nlmax,1:nnmax)</span> :: jlns      
+<a name="l01381"></a>01381 
+<a name="l01382"></a>01382     <span class="comment">!$OMP PARALLEL &amp;</span>
+<a name="l01383"></a>01383     <span class="comment">!$OMP SHARED(jlns,kln,rho,nnmax,nlmax) &amp;</span>
+<a name="l01384"></a>01384     <span class="comment">!$OMP PRIVATE(jln,l,n)   </span>
+<a name="l01385"></a>01385 
+<a name="l01386"></a>01386     <span class="comment">!$OMP DO SCHEDULE(RUNTIME)</span>
+<a name="l01387"></a>01387     <span class="keyword">DO</span> n=1,nnmax   
+<a name="l01388"></a>01388        <span class="keyword">DO</span> l=0,nlmax
+<a name="l01389"></a>01389           <span class="comment">!PRINT*,n,l,OMP_GET_THREAD_NUM()</span>
+<a name="l01390"></a>01390           CALL <a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>( l , kln(l,n)*rho , jln )
+<a name="l01391"></a>01391           jlns(l,n) = kln(l,n) * jln
+<a name="l01392"></a>01392        <span class="keyword">ENDDO</span>
+<a name="l01393"></a>01393     <span class="keyword">ENDDO</span>
+<a name="l01394"></a>01394     <span class="comment">!$OMP END DO</span>
+<a name="l01395"></a>01395     <span class="comment">!$OMP END PARALLEL</span>
+<a name="l01396"></a>01396 
+<a name="l01397"></a>01397     RETURN
+<a name="l01398"></a>01398 
+<a name="l01399"></a>01399 <span class="keyword">  END SUBROUTINE gen_jln</span>
+<a name="l01400"></a>01400 
+<a name="l01401"></a>01401   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01402"></a>01402 
+<a name="l01407"></a><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">01407</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__transforms.html#a9b68481c890d75c3e3f4cbd4a7109830">BJL</a>(L,X,JL)
 <a name="l01408"></a>01408 
-<a name="l01409"></a>01409     <span class="comment">!!== MODIFIED SUBROUTINE FOR SPHERICAL BESSEL FUNCTIONS.                       ==!!</span>
-<a name="l01410"></a>01410     <span class="comment">!!== CORRECTED THE SMALL BUGS IN PACKAGE CMBFAST&amp;CAMB(for l=4,5, x~0.001-0.002)==!! </span>
-<a name="l01411"></a>01411     <span class="comment">!!== CORRECTED THE SIGN OF J_L(X) FOR X&lt;0 CASE                                 ==!!</span>
-<a name="l01412"></a>01412     <span class="comment">!!== WORKS FASTER AND MORE ACCURATE FOR LOW L, X&lt;&lt;L, AND L&lt;&lt;X cases            ==!! </span>
-<a name="l01413"></a>01413     <span class="comment">!!== zqhuang@astro.utoronto.ca                                                 ==!!</span>
-<a name="l01414"></a>01414     <span class="keyword">IMPLICIT NONE</span>
-<a name="l01415"></a>01415     <span class="keywordtype">INTEGER</span> L
-<a name="l01416"></a>01416     <span class="keywordtype">REAL*8</span> X,JL
-<a name="l01417"></a>01417     <span class="keywordtype">REAL*8</span> AX,AX2
-<a name="l01418"></a>01418     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::LN2=0.6931471805599453094D0
-<a name="l01419"></a>01419     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::ONEMLN2=0.30685281944005469058277D0
-<a name="l01420"></a>01420     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID2=1.5707963267948966192313217D0
-<a name="l01421"></a>01421     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID4=0.78539816339744830961566084582D0
-<a name="l01422"></a>01422     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::ROOTPI12 = 21.269446210866192327578D0
-<a name="l01423"></a>01423     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA1 =   2.6789385347077476336556D0 <span class="comment">!/* Gamma FUNCTION of 1/3 */</span>
-<a name="l01424"></a>01424     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA2 =   1.3541179394264004169452D0 <span class="comment">!/* Gamma FUNCTION of 2/3 */</span>
-<a name="l01425"></a>01425     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PI=3.141592653589793238463D0
-<a name="l01426"></a>01426     <span class="keywordtype">REAL*8</span> NU,NU2,BETA,BETA2,COSB
-<a name="l01427"></a>01427     <span class="keywordtype">REAL*8</span> sx,sx2
-<a name="l01428"></a>01428     <span class="keywordtype">REAL*8</span> cotb,cot3b,cot6b,secb,sec2b
-<a name="l01429"></a>01429     <span class="keywordtype">REAL*8</span> trigarg,expterm,L3
-<a name="l01430"></a>01430 
-<a name="l01431"></a>01431     <span class="keyword">IF</span>(L.LT.0)<span class="keyword">THEN</span>
-<a name="l01432"></a>01432        <span class="keyword">write</span>(*,*) <span class="stringliteral">&#39;Can not evaluate Spherical Bessel Function with index l&lt;0&#39;</span>
-<a name="l01433"></a>01433        STOP
-<a name="l01434"></a>01434     <span class="keyword">ENDIF</span>
-<a name="l01435"></a>01435     AX=DABS(X)
-<a name="l01436"></a>01436     AX2=AX**2
-<a name="l01437"></a>01437     <span class="keyword">IF</span>(L.LT.7)<span class="keyword">THEN</span>
-<a name="l01438"></a>01438        <span class="keyword">IF</span>(L.EQ.0)<span class="keyword">THEN</span>
-<a name="l01439"></a>01439           <span class="keyword">IF</span>(AX.LT.1.D-1)<span class="keyword">THEN</span>
-<a name="l01440"></a>01440              JL=1.D0-AX2/6.D0*(1.D0-AX2/20.D0)
-<a name="l01441"></a>01441           <span class="keyword">ELSE</span>
-<a name="l01442"></a>01442              JL=DSIN(AX)/AX
-<a name="l01443"></a>01443           <span class="keyword">ENDIF</span>
-<a name="l01444"></a>01444 
-<a name="l01445"></a>01445        ELSEIF(L.EQ.1)<span class="keyword">THEN</span>
-<a name="l01446"></a>01446           <span class="keyword">IF</span>(AX.LT.2.D-1)<span class="keyword">THEN</span>
-<a name="l01447"></a>01447              JL=AX/3.D0*(1.D0-AX2/10.D0*(1.D0-AX2/28.D0))
-<a name="l01448"></a>01448           <span class="keyword">ELSE</span>
-<a name="l01449"></a>01449              JL=(DSIN(AX)/AX-DCOS(AX))/AX
-<a name="l01450"></a>01450           <span class="keyword">ENDIF</span>
-<a name="l01451"></a>01451        ELSEIF(L.EQ.2)<span class="keyword">THEN</span>
-<a name="l01452"></a>01452           <span class="keyword">IF</span>(AX.LT.3.D-1)<span class="keyword">THEN</span>
-<a name="l01453"></a>01453              JL=AX2/15.D0*(1.D0-AX2/14.D0*(1.D0-AX2/36.D0))
-<a name="l01454"></a>01454           <span class="keyword">ELSE</span>
-<a name="l01455"></a>01455              JL=(-3.0D0*DCOS(AX)/AX-DSIN(AX)*(1.D0-3.D0/AX2))/AX
-<a name="l01456"></a>01456           <span class="keyword">ENDIF</span>
-<a name="l01457"></a>01457        ELSEIF(L.EQ.3)<span class="keyword">THEN</span>
-<a name="l01458"></a>01458           <span class="keyword">IF</span>(AX.LT.4.D-1)<span class="keyword">THEN</span>
-<a name="l01459"></a>01459              JL=AX*AX2/105.D0*(1.D0-AX2/18.D0*(1.D0-AX2/44.D0))
-<a name="l01460"></a>01460           <span class="keyword">ELSE</span>
-<a name="l01461"></a>01461              JL=(DCOS(AX)*(1.D0-15.D0/AX2)-DSIN(AX)*(6.D0-15.D0/AX2)/AX)/AX
-<a name="l01462"></a>01462           <span class="keyword">ENDIF</span>
-<a name="l01463"></a>01463        ELSEIF(L.EQ.4)<span class="keyword">THEN</span>
-<a name="l01464"></a>01464           <span class="keyword">IF</span>(AX.LT.6.D-1)<span class="keyword">THEN</span>
-<a name="l01465"></a>01465              JL=AX2**2/945.D0*(1.D0-AX2/22.D0*(1.D0-AX2/52.D0))
-<a name="l01466"></a>01466           <span class="keyword">ELSE</span>
-<a name="l01467"></a>01467              JL=(DSIN(AX)*(1.D0-(45.D0-105.D0/AX2)/AX2)+DCOS(AX)*(10.D0-105.D0/AX2)/AX)/AX
-<a name="l01468"></a>01468           <span class="keyword">ENDIF</span>
-<a name="l01469"></a>01469        ELSEIF(L.EQ.5)<span class="keyword">THEN</span>
-<a name="l01470"></a>01470           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
-<a name="l01471"></a>01471              JL=AX2**2*AX/10395.D0*(1.D0-AX2/26.D0*(1.D0-AX2/60.D0))
-<a name="l01472"></a>01472           <span class="keyword">ELSE</span>
-<a name="l01473"></a>01473              JL=(DSIN(AX)*(15.D0-(420.D0-945.D0/AX2)/AX2)/AX-DCOS(AX)*(1.D0-(105.D0-945.0d0/AX2)/AX2))/AX
-<a name="l01474"></a>01474           <span class="keyword">ENDIF</span>
-<a name="l01475"></a>01475        <span class="keyword">ELSE</span>
-<a name="l01476"></a>01476           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
-<a name="l01477"></a>01477              JL=AX2**3/135135.D0*(1.D0-AX2/30.D0*(1.D0-AX2/68.D0))
-<a name="l01478"></a>01478           <span class="keyword">ELSE</span>
-<a name="l01479"></a>01479              JL=(DSIN(AX)*(-1.D0+(210.D0-(4725.D0-10395.D0/AX2)/AX2)/AX2)+ &amp;
-<a name="l01480"></a>01480                   DCOS(AX)*(-21.D0+(1260.D0-10395.D0/AX2)/AX2)/AX)/AX
-<a name="l01481"></a>01481           <span class="keyword">ENDIF</span>
-<a name="l01482"></a>01482        <span class="keyword">ENDIF</span>
-<a name="l01483"></a>01483     <span class="keyword">ELSE</span>
-<a name="l01484"></a>01484        NU=0.5D0+L
-<a name="l01485"></a>01485        NU2=NU**2
-<a name="l01486"></a>01486        <span class="keyword">IF</span>(AX.LT.1.D-40)<span class="keyword">THEN</span>
-<a name="l01487"></a>01487           JL=0.D0
-<a name="l01488"></a>01488        ELSEIF((AX2/L).LT.5.D-1)<span class="keyword">THEN</span>
-<a name="l01489"></a>01489           JL=DEXP(L*DLOG(AX/NU)-LN2+NU*ONEMLN2-(1.D0-(1.D0-3.5D0/NU2)/NU2/30.D0)/12.D0/NU) &amp;
-<a name="l01490"></a>01490                /NU*(1.D0-AX2/(4.D0*NU+4.D0)*(1.D0-AX2/(8.D0*NU+16.D0)*(1.D0-AX2/(12.D0*NU+36.D0))))
-<a name="l01491"></a>01491        ELSEIF((<span class="keywordtype">REAL</span>(L)**2/AX).LT.5.D-1)THEN
-<a name="l01492"></a>01492           BETA=AX-PID2*(L+1)
-<a name="l01493"></a>01493           JL=(DCOS(BETA)*(1.D0-(NU2-0.25D0)*(NU2-2.25D0)/8.D0/AX2*(1.D0-(NU2-6.25)*(NU2-12.25D0)/48.D0/AX2)) &amp;
-<a name="l01494"></a>01494                -DSIN(BETA)*(NU2-0.25D0)/2.D0/AX* (1.D0-(NU2-2.25D0)*(NU2-6.25D0)/24.D0/AX2*(1.D0-(NU2-12.25)* &amp;
-<a name="l01495"></a>01495                (NU2-20.25)/80.D0/AX2)) )/AX   
-<a name="l01496"></a>01496        <span class="keyword">ELSE</span>
-<a name="l01497"></a>01497           L3=NU**0.325
-<a name="l01498"></a>01498           <span class="keyword">IF</span>(AX .LT. NU-1.31*L3) <span class="keyword">THEN</span>
-<a name="l01499"></a>01499              COSB=NU/AX
-<a name="l01500"></a>01500              SX = DSQRT(NU2-AX2)
-<a name="l01501"></a>01501              COTB=NU/SX
-<a name="l01502"></a>01502              SECB=AX/NU
-<a name="l01503"></a>01503              BETA=DLOG(COSB+SX/AX)
-<a name="l01504"></a>01504              COT3B=COTB**3
-<a name="l01505"></a>01505              COT6B=COT3B**2
-<a name="l01506"></a>01506              SEC2B=SECB**2
-<a name="l01507"></a>01507              EXPTERM=( (2.D0+3.D0*SEC2B)*COT3B/24.D0 &amp;
-<a name="l01508"></a>01508                   - ( (4.D0+SEC2B)*SEC2B*COT6B/16.D0 &amp;
-<a name="l01509"></a>01509                   + ((16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B/5760.D0 &amp;
-<a name="l01510"></a>01510                   + (32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B/128.D0/NU)*COT6B/NU) &amp;
-<a name="l01511"></a>01511                   /NU)/NU
-<a name="l01512"></a>01512              JL=DSQRT(COTB*COSB)/(2.D0*NU)*DEXP(-NU*BETA+NU/COTB-EXPTERM)
-<a name="l01513"></a>01513 
-<a name="l01514"></a>01514              <span class="comment">!          /**************** Region 2: x &gt;&gt; l ****************/</span>
-<a name="l01515"></a>01515 
-<a name="l01516"></a>01516           ELSEIF (AX .GT. NU+1.48*L3) <span class="keyword">THEN</span>
-<a name="l01517"></a>01517              COSB=NU/AX
-<a name="l01518"></a>01518              SX=DSQRT(AX2-NU2)
-<a name="l01519"></a>01519              COTB=NU/SX
-<a name="l01520"></a>01520              SECB=AX/NU
-<a name="l01521"></a>01521              BETA=DACOS(COSB)
-<a name="l01522"></a>01522              COT3B=COTB**3
-<a name="l01523"></a>01523              COT6B=COT3B**2
-<a name="l01524"></a>01524              SEC2B=SECB**2
-<a name="l01525"></a>01525              TRIGARG=NU/COTB-NU*BETA-PID4 &amp;
-<a name="l01526"></a>01526                   -((2.0+3.0*SEC2B)*COT3B/24.D0  &amp;
-<a name="l01527"></a>01527                   +(16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B*COT6B/5760.D0/NU2)/NU
-<a name="l01528"></a>01528              EXPTERM=( (4.D0+sec2b)*sec2b*cot6b/16.D0 &amp;
-<a name="l01529"></a>01529                   -(32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B**2/128.D0/NU2)/NU2
-<a name="l01530"></a>01530              JL=DSQRT(COTB*COSB)/NU*DEXP(-EXPTERM)*DCOS(TRIGARG)
-<a name="l01531"></a>01531 
-<a name="l01532"></a>01532              <span class="comment">!          /***************** Region 3: x near l ****************/</span>
-<a name="l01533"></a>01533 
-<a name="l01534"></a>01534           <span class="keyword">ELSE</span>
-<a name="l01535"></a>01535              BETA=AX-NU
-<a name="l01536"></a>01536              BETA2=BETA**2
-<a name="l01537"></a>01537              SX=6.D0/AX
-<a name="l01538"></a>01538              SX2=SX**2
-<a name="l01539"></a>01539              SECB=SX**0.3333333333333333d0
-<a name="l01540"></a>01540              SEC2B=SECB**2
-<a name="l01541"></a>01541              JL=( GAMMA1*SECB + BETA*GAMMA2*SEC2B &amp;
-<a name="l01542"></a>01542                   -(BETA2/18.D0-1.D0/45.D0)*BETA*SX*SECB*GAMMA1 &amp;
-<a name="l01543"></a>01543                   -((BETA2-1.D0)*BETA2/36.D0+1.D0/420.D0)*SX*SEC2B*GAMMA2   &amp;
-<a name="l01544"></a>01544                   +(((BETA2/1620.D0-7.D0/3240.D0)*BETA2+1.D0/648.D0)*BETA2-1.D0/8100.D0)*SX2*SECB*GAMMA1 &amp;
-<a name="l01545"></a>01545                   +(((BETA2/4536.D0-1.D0/810.D0)*BETA2+19.D0/11340.D0)*BETA2-13.D0/28350.D0)*BETA*SX2*SEC2B*GAMMA2 &amp;
-<a name="l01546"></a>01546                   -((((BETA2/349920.D0-1.D0/29160.D0)*BETA2+71.D0/583200.D0)*BETA2-121.D0/874800.D0)* &amp;
-<a name="l01547"></a>01547                   BETA2+7939.D0/224532000.D0)*BETA*SX2*SX*SECB*GAMMA1)*DSQRT(SX)/ROOTPI12
-<a name="l01548"></a>01548           <span class="keyword">ENDIF</span>
-<a name="l01549"></a>01549        <span class="keyword">ENDIF</span>
-<a name="l01550"></a>01550     <span class="keyword">ENDIF</span>
-<a name="l01551"></a>01551     <span class="keyword">IF</span>(X.LT.0.AND.MOD(L,2).NE.0)JL=-JL
-<a name="l01552"></a>01552 
-<a name="l01553"></a>01553 <span class="keyword">  END SUBROUTINE BJL</span>
-<a name="l01554"></a>01554 
-<a name="l01555"></a>01555   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l01556"></a>01556 
-<a name="l01557"></a>01557 <span class="keyword">END MODULE f3dex_transforms</span>
+<a name="l01409"></a>01409 
+<a name="l01410"></a>01410     <span class="comment">!!== MODIFIED SUBROUTINE FOR SPHERICAL BESSEL FUNCTIONS.                       ==!!</span>
+<a name="l01411"></a>01411     <span class="comment">!!== CORRECTED THE SMALL BUGS IN PACKAGE CMBFAST&amp;CAMB(for l=4,5, x~0.001-0.002)==!! </span>
+<a name="l01412"></a>01412     <span class="comment">!!== CORRECTED THE SIGN OF J_L(X) FOR X&lt;0 CASE                                 ==!!</span>
+<a name="l01413"></a>01413     <span class="comment">!!== WORKS FASTER AND MORE ACCURATE FOR LOW L, X&lt;&lt;L, AND L&lt;&lt;X cases            ==!! </span>
+<a name="l01414"></a>01414     <span class="comment">!!== zqhuang@astro.utoronto.ca                                                 ==!!</span>
+<a name="l01415"></a>01415     <span class="keyword">IMPLICIT NONE</span>
+<a name="l01416"></a>01416     <span class="keywordtype">INTEGER</span> L
+<a name="l01417"></a>01417     <span class="keywordtype">REAL*8</span> X,JL
+<a name="l01418"></a>01418     <span class="keywordtype">REAL*8</span> AX,AX2
+<a name="l01419"></a>01419     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::LN2=0.6931471805599453094D0
+<a name="l01420"></a>01420     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::ONEMLN2=0.30685281944005469058277D0
+<a name="l01421"></a>01421     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID2=1.5707963267948966192313217D0
+<a name="l01422"></a>01422     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PID4=0.78539816339744830961566084582D0
+<a name="l01423"></a>01423     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::ROOTPI12 = 21.269446210866192327578D0
+<a name="l01424"></a>01424     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA1 =   2.6789385347077476336556D0 <span class="comment">!/* Gamma FUNCTION of 1/3 */</span>
+<a name="l01425"></a>01425     <span class="keywordtype">REAL</span>,<span class="keywordtype">parameter</span>::GAMMA2 =   1.3541179394264004169452D0 <span class="comment">!/* Gamma FUNCTION of 2/3 */</span>
+<a name="l01426"></a>01426     <span class="keywordtype">REAL</span>,<span class="keywordtype">PARAMETER</span>::PI=3.141592653589793238463D0
+<a name="l01427"></a>01427     <span class="keywordtype">REAL*8</span> NU,NU2,BETA,BETA2,COSB
+<a name="l01428"></a>01428     <span class="keywordtype">REAL*8</span> sx,sx2
+<a name="l01429"></a>01429     <span class="keywordtype">REAL*8</span> cotb,cot3b,cot6b,secb,sec2b
+<a name="l01430"></a>01430     <span class="keywordtype">REAL*8</span> trigarg,expterm,L3
+<a name="l01431"></a>01431 
+<a name="l01432"></a>01432     <span class="keyword">IF</span>(L.LT.0)<span class="keyword">THEN</span>
+<a name="l01433"></a>01433        <span class="keyword">write</span>(*,*) <span class="stringliteral">&#39;Can not evaluate Spherical Bessel Function with index l&lt;0&#39;</span>
+<a name="l01434"></a>01434        STOP
+<a name="l01435"></a>01435     <span class="keyword">ENDIF</span>
+<a name="l01436"></a>01436     AX=DABS(X)
+<a name="l01437"></a>01437     AX2=AX**2
+<a name="l01438"></a>01438     <span class="keyword">IF</span>(L.LT.7)<span class="keyword">THEN</span>
+<a name="l01439"></a>01439        <span class="keyword">IF</span>(L.EQ.0)<span class="keyword">THEN</span>
+<a name="l01440"></a>01440           <span class="keyword">IF</span>(AX.LT.1.D-1)<span class="keyword">THEN</span>
+<a name="l01441"></a>01441              JL=1.D0-AX2/6.D0*(1.D0-AX2/20.D0)
+<a name="l01442"></a>01442           <span class="keyword">ELSE</span>
+<a name="l01443"></a>01443              JL=DSIN(AX)/AX
+<a name="l01444"></a>01444           <span class="keyword">ENDIF</span>
+<a name="l01445"></a>01445 
+<a name="l01446"></a>01446        ELSEIF(L.EQ.1)<span class="keyword">THEN</span>
+<a name="l01447"></a>01447           <span class="keyword">IF</span>(AX.LT.2.D-1)<span class="keyword">THEN</span>
+<a name="l01448"></a>01448              JL=AX/3.D0*(1.D0-AX2/10.D0*(1.D0-AX2/28.D0))
+<a name="l01449"></a>01449           <span class="keyword">ELSE</span>
+<a name="l01450"></a>01450              JL=(DSIN(AX)/AX-DCOS(AX))/AX
+<a name="l01451"></a>01451           <span class="keyword">ENDIF</span>
+<a name="l01452"></a>01452        ELSEIF(L.EQ.2)<span class="keyword">THEN</span>
+<a name="l01453"></a>01453           <span class="keyword">IF</span>(AX.LT.3.D-1)<span class="keyword">THEN</span>
+<a name="l01454"></a>01454              JL=AX2/15.D0*(1.D0-AX2/14.D0*(1.D0-AX2/36.D0))
+<a name="l01455"></a>01455           <span class="keyword">ELSE</span>
+<a name="l01456"></a>01456              JL=(-3.0D0*DCOS(AX)/AX-DSIN(AX)*(1.D0-3.D0/AX2))/AX
+<a name="l01457"></a>01457           <span class="keyword">ENDIF</span>
+<a name="l01458"></a>01458        ELSEIF(L.EQ.3)<span class="keyword">THEN</span>
+<a name="l01459"></a>01459           <span class="keyword">IF</span>(AX.LT.4.D-1)<span class="keyword">THEN</span>
+<a name="l01460"></a>01460              JL=AX*AX2/105.D0*(1.D0-AX2/18.D0*(1.D0-AX2/44.D0))
+<a name="l01461"></a>01461           <span class="keyword">ELSE</span>
+<a name="l01462"></a>01462              JL=(DCOS(AX)*(1.D0-15.D0/AX2)-DSIN(AX)*(6.D0-15.D0/AX2)/AX)/AX
+<a name="l01463"></a>01463           <span class="keyword">ENDIF</span>
+<a name="l01464"></a>01464        ELSEIF(L.EQ.4)<span class="keyword">THEN</span>
+<a name="l01465"></a>01465           <span class="keyword">IF</span>(AX.LT.6.D-1)<span class="keyword">THEN</span>
+<a name="l01466"></a>01466              JL=AX2**2/945.D0*(1.D0-AX2/22.D0*(1.D0-AX2/52.D0))
+<a name="l01467"></a>01467           <span class="keyword">ELSE</span>
+<a name="l01468"></a>01468              JL=(DSIN(AX)*(1.D0-(45.D0-105.D0/AX2)/AX2)+DCOS(AX)*(10.D0-105.D0/AX2)/AX)/AX
+<a name="l01469"></a>01469           <span class="keyword">ENDIF</span>
+<a name="l01470"></a>01470        ELSEIF(L.EQ.5)<span class="keyword">THEN</span>
+<a name="l01471"></a>01471           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
+<a name="l01472"></a>01472              JL=AX2**2*AX/10395.D0*(1.D0-AX2/26.D0*(1.D0-AX2/60.D0))
+<a name="l01473"></a>01473           <span class="keyword">ELSE</span>
+<a name="l01474"></a>01474              JL=(DSIN(AX)*(15.D0-(420.D0-945.D0/AX2)/AX2)/AX-DCOS(AX)*(1.D0-(105.D0-945.0d0/AX2)/AX2))/AX
+<a name="l01475"></a>01475           <span class="keyword">ENDIF</span>
+<a name="l01476"></a>01476        <span class="keyword">ELSE</span>
+<a name="l01477"></a>01477           <span class="keyword">IF</span>(AX.LT.1.D0)<span class="keyword">THEN</span>
+<a name="l01478"></a>01478              JL=AX2**3/135135.D0*(1.D0-AX2/30.D0*(1.D0-AX2/68.D0))
+<a name="l01479"></a>01479           <span class="keyword">ELSE</span>
+<a name="l01480"></a>01480              JL=(DSIN(AX)*(-1.D0+(210.D0-(4725.D0-10395.D0/AX2)/AX2)/AX2)+ &amp;
+<a name="l01481"></a>01481                   DCOS(AX)*(-21.D0+(1260.D0-10395.D0/AX2)/AX2)/AX)/AX
+<a name="l01482"></a>01482           <span class="keyword">ENDIF</span>
+<a name="l01483"></a>01483        <span class="keyword">ENDIF</span>
+<a name="l01484"></a>01484     <span class="keyword">ELSE</span>
+<a name="l01485"></a>01485        NU=0.5D0+L
+<a name="l01486"></a>01486        NU2=NU**2
+<a name="l01487"></a>01487        <span class="keyword">IF</span>(AX.LT.1.D-40)<span class="keyword">THEN</span>
+<a name="l01488"></a>01488           JL=0.D0
+<a name="l01489"></a>01489        ELSEIF((AX2/L).LT.5.D-1)<span class="keyword">THEN</span>
+<a name="l01490"></a>01490           JL=DEXP(L*DLOG(AX/NU)-LN2+NU*ONEMLN2-(1.D0-(1.D0-3.5D0/NU2)/NU2/30.D0)/12.D0/NU) &amp;
+<a name="l01491"></a>01491                /NU*(1.D0-AX2/(4.D0*NU+4.D0)*(1.D0-AX2/(8.D0*NU+16.D0)*(1.D0-AX2/(12.D0*NU+36.D0))))
+<a name="l01492"></a>01492        ELSEIF((<span class="keywordtype">REAL</span>(L)**2/AX).LT.5.D-1)THEN
+<a name="l01493"></a>01493           BETA=AX-PID2*(L+1)
+<a name="l01494"></a>01494           JL=(DCOS(BETA)*(1.D0-(NU2-0.25D0)*(NU2-2.25D0)/8.D0/AX2*(1.D0-(NU2-6.25)*(NU2-12.25D0)/48.D0/AX2)) &amp;
+<a name="l01495"></a>01495                -DSIN(BETA)*(NU2-0.25D0)/2.D0/AX* (1.D0-(NU2-2.25D0)*(NU2-6.25D0)/24.D0/AX2*(1.D0-(NU2-12.25)* &amp;
+<a name="l01496"></a>01496                (NU2-20.25)/80.D0/AX2)) )/AX   
+<a name="l01497"></a>01497        <span class="keyword">ELSE</span>
+<a name="l01498"></a>01498           L3=NU**0.325
+<a name="l01499"></a>01499           <span class="keyword">IF</span>(AX .LT. NU-1.31*L3) <span class="keyword">THEN</span>
+<a name="l01500"></a>01500              COSB=NU/AX
+<a name="l01501"></a>01501              SX = DSQRT(NU2-AX2)
+<a name="l01502"></a>01502              COTB=NU/SX
+<a name="l01503"></a>01503              SECB=AX/NU
+<a name="l01504"></a>01504              BETA=DLOG(COSB+SX/AX)
+<a name="l01505"></a>01505              COT3B=COTB**3
+<a name="l01506"></a>01506              COT6B=COT3B**2
+<a name="l01507"></a>01507              SEC2B=SECB**2
+<a name="l01508"></a>01508              EXPTERM=( (2.D0+3.D0*SEC2B)*COT3B/24.D0 &amp;
+<a name="l01509"></a>01509                   - ( (4.D0+SEC2B)*SEC2B*COT6B/16.D0 &amp;
+<a name="l01510"></a>01510                   + ((16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B/5760.D0 &amp;
+<a name="l01511"></a>01511                   + (32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B/128.D0/NU)*COT6B/NU) &amp;
+<a name="l01512"></a>01512                   /NU)/NU
+<a name="l01513"></a>01513              JL=DSQRT(COTB*COSB)/(2.D0*NU)*DEXP(-NU*BETA+NU/COTB-EXPTERM)
+<a name="l01514"></a>01514 
+<a name="l01515"></a>01515              <span class="comment">!          /**************** Region 2: x &gt;&gt; l ****************/</span>
+<a name="l01516"></a>01516 
+<a name="l01517"></a>01517           ELSEIF (AX .GT. NU+1.48*L3) <span class="keyword">THEN</span>
+<a name="l01518"></a>01518              COSB=NU/AX
+<a name="l01519"></a>01519              SX=DSQRT(AX2-NU2)
+<a name="l01520"></a>01520              COTB=NU/SX
+<a name="l01521"></a>01521              SECB=AX/NU
+<a name="l01522"></a>01522              BETA=DACOS(COSB)
+<a name="l01523"></a>01523              COT3B=COTB**3
+<a name="l01524"></a>01524              COT6B=COT3B**2
+<a name="l01525"></a>01525              SEC2B=SECB**2
+<a name="l01526"></a>01526              TRIGARG=NU/COTB-NU*BETA-PID4 &amp;
+<a name="l01527"></a>01527                   -((2.0+3.0*SEC2B)*COT3B/24.D0  &amp;
+<a name="l01528"></a>01528                   +(16.D0-(1512.D0+(3654.D0+375.D0*SEC2B)*SEC2B)*SEC2B)*COT3B*COT6B/5760.D0/NU2)/NU
+<a name="l01529"></a>01529              EXPTERM=( (4.D0+sec2b)*sec2b*cot6b/16.D0 &amp;
+<a name="l01530"></a>01530                   -(32.D0+(288.D0+(232.D0+13.D0*SEC2B)*SEC2B)*SEC2B)*SEC2B*COT6B**2/128.D0/NU2)/NU2
+<a name="l01531"></a>01531              JL=DSQRT(COTB*COSB)/NU*DEXP(-EXPTERM)*DCOS(TRIGARG)
+<a name="l01532"></a>01532 
+<a name="l01533"></a>01533              <span class="comment">!          /***************** Region 3: x near l ****************/</span>
+<a name="l01534"></a>01534 
+<a name="l01535"></a>01535           <span class="keyword">ELSE</span>
+<a name="l01536"></a>01536              BETA=AX-NU
+<a name="l01537"></a>01537              BETA2=BETA**2
+<a name="l01538"></a>01538              SX=6.D0/AX
+<a name="l01539"></a>01539              SX2=SX**2
+<a name="l01540"></a>01540              SECB=SX**0.3333333333333333d0
+<a name="l01541"></a>01541              SEC2B=SECB**2
+<a name="l01542"></a>01542              JL=( GAMMA1*SECB + BETA*GAMMA2*SEC2B &amp;
+<a name="l01543"></a>01543                   -(BETA2/18.D0-1.D0/45.D0)*BETA*SX*SECB*GAMMA1 &amp;
+<a name="l01544"></a>01544                   -((BETA2-1.D0)*BETA2/36.D0+1.D0/420.D0)*SX*SEC2B*GAMMA2   &amp;
+<a name="l01545"></a>01545                   +(((BETA2/1620.D0-7.D0/3240.D0)*BETA2+1.D0/648.D0)*BETA2-1.D0/8100.D0)*SX2*SECB*GAMMA1 &amp;
+<a name="l01546"></a>01546                   +(((BETA2/4536.D0-1.D0/810.D0)*BETA2+19.D0/11340.D0)*BETA2-13.D0/28350.D0)*BETA*SX2*SEC2B*GAMMA2 &amp;
+<a name="l01547"></a>01547                   -((((BETA2/349920.D0-1.D0/29160.D0)*BETA2+71.D0/583200.D0)*BETA2-121.D0/874800.D0)* &amp;
+<a name="l01548"></a>01548                   BETA2+7939.D0/224532000.D0)*BETA*SX2*SX*SECB*GAMMA1)*DSQRT(SX)/ROOTPI12
+<a name="l01549"></a>01549           <span class="keyword">ENDIF</span>
+<a name="l01550"></a>01550        <span class="keyword">ENDIF</span>
+<a name="l01551"></a>01551     <span class="keyword">ENDIF</span>
+<a name="l01552"></a>01552     <span class="keyword">IF</span>(X.LT.0.AND.MOD(L,2).NE.0)JL=-JL
+<a name="l01553"></a>01553 
+<a name="l01554"></a>01554 <span class="keyword">  END SUBROUTINE BJL</span>
+<a name="l01555"></a>01555 
+<a name="l01556"></a>01556   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l01557"></a>01557 
+<a name="l01558"></a>01558 <span class="keyword">END MODULE f3dex_transforms</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -1596,7 +1598,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1605,7 +1607,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:45 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 15:27:15 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

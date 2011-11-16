@@ -16,13 +16,13 @@ CONTAINS
 
   !> Computes the module of a complex number
   REAL(DP) FUNCTION CMODULE(a)
-  
-     COMPLEX(DPC) :: a
-     
-     CMODULE = (REAL(a))**2 + (AIMAG(a))**2
-  
+
+    COMPLEX(DPC) :: a
+
+    CMODULE = (REAL(a))**2 + (AIMAG(a))**2
+
   END FUNCTION CMODULE
-  	  
+
   ! ---------------------------------------------------------------------------------------!    
 
   !> Naive estimator for the almn's
@@ -137,7 +137,7 @@ CONTAINS
   !!@param[in] nested : logical for Healpix mode
   !!@param[in] mask : optional mask
   SUBROUTINE gen_angles_map(npix, ang_map, nside, nested, mask)
-  
+
     INTEGER(I4B) :: status, p, t, nside, loc, npix
     LOGICAL, OPTIONAL :: nested
     REAL(DP), DIMENSION(0:npix-1,0:npix-1) :: ang_map
@@ -145,51 +145,51 @@ CONTAINS
     REAL(DP), DIMENSION(:,:), ALLOCATABLE :: thetaphis
     CHARACTER(LEN=*), PARAMETER :: code = 'gen_angles_map'
     REAL(DP) :: phi, theta1, theta2, phi1, phi2
-        
+
     ALLOCATE(thetaphis(0:npix-1,1:2),stat = status)
     CALL assert_alloc(status,code,'thetas')
-        	
+
     loc = 0
     IF( present(nested) .AND. nested .EQV. .TRUE.) THEN
        DO p = 0, 12*nside*nside-1
           IF( present(mask) ) THEN
-              IF( mask(p) .EQV. .TRUE. ) THEN
-              	  CALL pix2ang_nest(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
-              	  loc = loc + 1
-              ENDIF
-           ELSE
-              CALL pix2ang_nest(nside, p, thetaphis(p,1),thetaphis(p,2) )
-           ENDIF
+             IF( mask(p) .EQV. .TRUE. ) THEN
+                CALL pix2ang_nest(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
+                loc = loc + 1
+             ENDIF
+          ELSE
+             CALL pix2ang_nest(nside, p, thetaphis(p,1),thetaphis(p,2) )
+          ENDIF
        ENDDO
     ELSE
        DO p = 0, 12*nside*nside-1
           IF( present(mask) ) THEN
-              IF( mask(p) .EQV. .TRUE. ) THEN
-              	  CALL pix2ang_ring(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
-              	  loc = loc + 1
-              ENDIF
-           ELSE
-              CALL pix2ang_ring(nside, p, thetaphis(p,1),thetaphis(p,2) )
-           ENDIF
-       ENDDO	    
+             IF( mask(p) .EQV. .TRUE. ) THEN
+                CALL pix2ang_ring(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
+                loc = loc + 1
+             ENDIF
+          ELSE
+             CALL pix2ang_ring(nside, p, thetaphis(p,1),thetaphis(p,2) )
+          ENDIF
+       ENDDO
     ENDIF
-    
+
     DO p = 0, npix-1
-    	DO t = 0, npix-1
-    	   theta1 = thetaphis(p,1)
-    	   theta2 = thetaphis(t,1)
-    	   phi1 = thetaphis(p,2)
-    	   phi2 = thetaphis(t,2)
-    	   ang_map(p,t) = cos(theta1)*cos(theta2) + sin(theta1)*sin(theta2)*cos(phi1-phi2)
-    	ENDDO
+       DO t = 0, npix-1
+          theta1 = thetaphis(p,1)
+          theta2 = thetaphis(t,1)
+          phi1 = thetaphis(p,2)
+          phi2 = thetaphis(t,2)
+          ang_map(p,t) = cos(theta1)*cos(theta2) + sin(theta1)*sin(theta2)*cos(phi1-phi2)
+       ENDDO
     ENDDO
-  
+
     DEALLOCATE(thetaphis)
-    
-  END SUBROUTINE  
-  
+
+  END SUBROUTINE gen_angles_map
+
   ! ---------------------------------------------------------------------------------------!    
-      
+
   FUNCTION dzabs( cplxnb, cplxnbref )
 
     complex(DP) :: cplxnb, cplxnbref
@@ -214,7 +214,7 @@ CONTAINS
     RETURN 
 
   END FUNCTION dzabs
-  
+
   ! ---------------------------------------------------------------------------------------!    
 
   !> Creates eye matrix
@@ -222,35 +222,35 @@ CONTAINS
   !!@param[in] (s,e) : bounds
   !!@paramts[in] val : value to put on the diagonal
   SUBROUTINE EYEMAT(A,s,e,val)
-  
-     INTEGER :: s, e, i
-     REAL(DP), DIMENSION(s:e,s:e) :: A
-     REAL(DP), OPTIONAL :: val
-     IF(.NOT. present(val))then
-        val=1.0
-     ENDIF
-     
-     A = 0.0
-     DO i=s,e
-     	A(i,i) = val
-     ENDDO
-       
+
+    INTEGER :: s, e, i
+    REAL(DP), DIMENSION(s:e,s:e) :: A
+    REAL(DP), OPTIONAL :: val
+    IF(.NOT. present(val))then
+       val=1.0
+    ENDIF
+
+    A = 0.0
+    DO i=s,e
+       A(i,i) = val
+    ENDDO
+
   END SUBROUTINE EYEMAT
-  	  
- ! ---------------------------------------------------------------------------------------!     
-  
+
+  ! ---------------------------------------------------------------------------------------!     
+
   !> Inverts matrix
   !!@param[inout] A(n,n) : input/output matrix
   !!@param[in] n : bounds
   !!@paramts[out] res : output result logical	  
   SUBROUTINE INVERSE(A,n,res)
-  
+
     IMPLICIT NONE
     LOGICAL res
     INTEGER :: n, prec, i, j, IPIV(n), INFO
     DOUBLE PRECISION A(n,n)
     DOUBLE PRECISION WORK(n*n)
-    
+
     CALL DGETRF( n, n, A, n, IPIV, INFO )
     CALL DGETRI( n, A, n, IPIV, WORK, n*n, INFO )
 
@@ -261,10 +261,10 @@ CONTAINS
     ENDIF
 
     RETURN
-  
+
   END SUBROUTINE INVERSE
 
-    
+
   ! ---------------------------------------------------------------------------------------!    
 
   !> Computes QML estimator of a healpix (masked) map
@@ -294,9 +294,9 @@ CONTAINS
     REAL(DP), DIMENSION(0:12*nside**2-1,0:12*nside**2-1) :: covarnoise
     CHARACTER(LEN=*), PARAMETER :: code = 'map2cl_QML'
     REAL(DP) :: Fll, mapvec, trnoise, val                    
-     
+
     CALL message(code, start=.TRUE.)
-    
+
     IF( present(logicalmask) ) THEN
        npix = COUNT(logicalmask)
     ELSE
@@ -307,28 +307,28 @@ CONTAINS
     ALLOCATE(x(0:npix-1),stat = status)
     CALL assert_alloc(status,code,'x')
     x = PACK(map, mask=logicalmask)
-    
+
     CALL message(code, msg="Generating masked angular map")
     ALLOCATE(ang_map(0:npix-1,0:npix-1),stat = status)
     CALL assert_alloc(status,code,'ang_map')
     CALL gen_angles_map(npix, ang_map, nside, nested=.FALSE., mask=logicalmask) 
- 
+
     ALLOCATE(Pl(0:npix-1,0:npix-1,0:nlmax),stat = status)
     CALL assert_alloc(status,code,'Pl')
     DO l=0, nlmax
        CALL message(code, msg="Legendre matrices :", i=l, msg2="/", i2=nlmax)
        IF( l .EQ. 0 )THEN
-    	    Pl(0:npix-1,0:npix-1,0) = 1.0_dp
+          Pl(0:npix-1,0:npix-1,0) = 1.0_dp
        ELSE IF( l .EQ. 1 ) THEN
-       	    Pl(0:npix-1,0:npix-1,1) = ang_map
+          Pl(0:npix-1,0:npix-1,1) = ang_map
        ELSE
-       	   Pl(0:npix-1,0:npix-1,l) = &
-       	    & ( (2.0_dp*REAL(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * &
-       	    	& Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &
-       	    & - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
+          Pl(0:npix-1,0:npix-1,l) = &
+               & ( (2.0_dp*REAL(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * &
+               & Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &
+               & - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
        END IF
        Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l) * (2.0_dp*REAL(l)+1.0_dp)/FOURPI
-    ENDDO 
+    ENDDO
     DEALLOCATE( ang_map )
 
     CALL message(code, msg="Creating signal covariance matrix")
@@ -337,17 +337,17 @@ CONTAINS
     covar = 0.0
     DO l=0, nlmax
        covar = covar + Pl(0:npix-1,0:npix-1,l)*cltheo(l)
-    ENDDO    
-    
+    ENDDO
+
     CALL message(code, msg="Adding noise to signal covariance matrix")
     covar(0:npix-1,0:npix-1) = covar(0:npix-1,0:npix-1) + covarnoise(0:npix-1,0:npix-1)
-    
+
     CALL message(code, msg="Inverting signal+noise matrix")
     CALL INVERSE(covar(0:npix-1,0:npix-1),npix,res)
     IF( res .EQV. .FALSE. )THEN
-    	PRINT*,"PROBLEM WITH INVERSION"
+       PRINT*,"PROBLEM WITH INVERSION"
     ENDIF
-    
+
     ALLOCATE(F(0:nlmax_recon,0:nlmax_recon),stat = status)
     CALL assert_alloc(status,code,'F')
     ALLOCATE(y(0:nlmax_recon),stat = status)
@@ -356,15 +356,15 @@ CONTAINS
     !$OMP PARALLEL DEFAULT(none) &
     !$OMP SHARED(nlmax_recon, map, covar, cl, Pl, npix, F, y, x, covarest) & 
     !$OMP PRIVATE(l, ll, Fll, El, status)
-    	    
+
     ALLOCATE(El(0:npix-1,0:npix-1),stat = status)
     CALL assert_alloc(status,code,'El')  
-    
+
     !$OMP DO
     DO l=0, nlmax_recon
        CALL message(code, msg="Power spectrum estimation :", i=l, msg2="/", i2=nlmax_recon)
        El(0:npix-1,0:npix-1) = MATMUL( covar(0:npix-1,0:npix-1), &
-          & MATMUL( Pl(0:npix-1,0:npix-1,l), covar(0:npix-1,0:npix-1) ) )
+            & MATMUL( Pl(0:npix-1,0:npix-1,l), covar(0:npix-1,0:npix-1) ) )
        DO ll=0, nlmax_recon
           Fll = TRACEPROD(El(0:npix-1,0:npix-1),Pl(0:npix-1,0:npix-1,ll),0,npix-1)
           F(ll,l) = Fll    
@@ -372,33 +372,33 @@ CONTAINS
        y(l) = DOT_PRODUCT( x, MATMUL( El(0:npix-1,0:npix-1), x ) )
     ENDDO
     !$OMP END DO
-    
+
     DEALLOCATE(El)
-    
+
     !$OMP END PARALLEL
-    
+
     CALL message(code, msg="Inverting Fisher matrix")
     CALL INVERSE(F(0:nlmax_recon,0:nlmax_recon),nlmax_recon+1,res)
     IF( res .EQV. .FALSE. )THEN
-    	PRINT*,"PROBLEM WITH INVERSION"
+       PRINT*,"PROBLEM WITH INVERSION"
     ENDIF
-    
+
     CALL message(code, msg="Evaluating final estimates")
     cl = MATMUL( F(0:nlmax_recon,0:nlmax_recon), y(0:nlmax_recon) )  
-    
+
     IF( present(covarest) ) THEN
        DO l=0, nlmax_recon
           covarest(l) = F(l,l)
        ENDDO
     ENDIF
-    
+
     DEALLOCATE(F, covar, Pl, x, y)
-    
+
     CALL message(code, fin=.TRUE.)
 
   END SUBROUTINE map2cl_QML
-  
-   ! ---------------------------------------------------------------------------------------!    
+
+  ! ---------------------------------------------------------------------------------------!    
 
   !> Computes QML estimator of a healpix (masked) map
   !!@param[in] map(0:12*nside*nside-1) : input healpix map
@@ -423,20 +423,20 @@ CONTAINS
     REAL(DP), DIMENSION(:), ALLOCATABLE :: x, y
     CHARACTER(LEN=*), PARAMETER :: code = 'map2cl_PCL'
     REAL(DP) :: Fll, mapvec, trnoise, val                    
-         
+
     CALL message(code, start=.TRUE.)
-    
+
     IF( present(logicalmask) ) THEN
        npix = COUNT(logicalmask)
     ELSE
        npix = 12*nside*nside
     ENDIF
     CALL message(code, msg="Initial map has",i=npix,msg2="pixels")
-    
+
     ALLOCATE(x(0:npix-1),stat = status)
     CALL assert_alloc(status,code,'x')
     x = PACK(map, mask=logicalmask)
-    
+
     CALL message(code, msg="Generating masked angular map")
     ALLOCATE(ang_map(0:npix-1,0:npix-1),stat = status)
     CALL assert_alloc(status,code,'ang_map')
@@ -447,19 +447,19 @@ CONTAINS
     DO l=0, nlmax
        CALL message(code, msg="Legendre matrices :", i=l, msg2="/", i2=nlmax)
        IF( l .EQ. 0 )THEN
-    	    Pl(0:npix-1,0:npix-1,0) = 1.0_dp
+          Pl(0:npix-1,0:npix-1,0) = 1.0_dp
        ELSE IF( l .EQ. 1 ) THEN
-       	    Pl(0:npix-1,0:npix-1,1) = ang_map
+          Pl(0:npix-1,0:npix-1,1) = ang_map
        ELSE
-       	   Pl(0:npix-1,0:npix-1,l) = &
-       	    & ( (2.0_dp*REAL(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * &
-       	    	& Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &
-       	    & - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
+          Pl(0:npix-1,0:npix-1,l) = &
+               & ( (2.0_dp*REAL(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * &
+               & Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &
+               & - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
        END IF
        Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l) * (2.0_dp*REAL(l)+1.0_dp)/FOURPI
-    ENDDO 
+    ENDDO
     DEALLOCATE( ang_map )
-        
+
     ALLOCATE(F(0:nlmax_recon,0:nlmax_recon),stat = status)
     CALL assert_alloc(status,code,'F')
     ALLOCATE(y(0:nlmax_recon),stat = status)
@@ -477,29 +477,29 @@ CONTAINS
        y(l) = DOT_PRODUCT( x, MATMUL( Pl(0:npix-1,0:npix-1,l), x ) )
     ENDDO
     !$OMP END PARALLEL DO
-    
+
     CALL message(code, msg="Inverting Fisher matrix")
     CALL INVERSE(F(0:nlmax_recon,0:nlmax_recon),nlmax_recon+1,res)
     IF( res .EQV. .FALSE. )THEN
-    	PRINT*,"PROBLEM WITH INVERSION"
+       PRINT*,"PROBLEM WITH INVERSION"
     ENDIF
 
     CALL message(code, msg="Evaluating final estimates")
     cl(0:nlmax_recon) = MATMUL( F(0:nlmax_recon,0:nlmax_recon), y(0:nlmax_recon) )    
-    
+
     IF( present(covarest) ) THEN
        DO l=0, nlmax_recon
           covarest(l) = F(l,l)
        ENDDO
     ENDIF
-    
+
     DEALLOCATE(F, Pl, x, y)
-    
+
     CALL message(code, fin=.TRUE.)
 
   END SUBROUTINE map2cl_PCL
-  
-  
+
+
   ! ---------------------------------------------------------------------------------------!   
 
   !> Parallel bilinear form
@@ -507,27 +507,27 @@ CONTAINS
   !!@param[in] A(s:e,s:e) : middle matrix
   !!@param[in] (s,e) : bounds
   REAL(DP) FUNCTION BILIN_FORM_PAR( x, A, y, s, e )     
-     
+
     INTEGER(I4B) :: s, e, i, j, k
     REAL(DP), DIMENSION(s:e) :: x, y
     REAL(DP), DIMENSION(s:e,s:e) :: A
     REAL(DP) :: val
-    
+
     val = 0.0_dp
     !$OMP PARALLEL DO REDUCTION(+:val) &
     !$OMP SHARED(x,A,y,s,e) & 
     !$OMP PRIVATE(i,j)	
     DO i=s,e
-    	val = val + x(i) * DOT_PRODUCT( A(i,s:e), y(s:e) )
+       val = val + x(i) * DOT_PRODUCT( A(i,s:e), y(s:e) )
     ENDDO
     !$OMP END PARALLEL DO
-  
+
     BILIN_FORM_PAR = val
-    
+
     RETURN
-    	
+
   END FUNCTION BILIN_FORM_PAR
-  
+
   ! ---------------------------------------------------------------------------------------!   
 
   !> Parallel matrix multiplication
@@ -541,7 +541,7 @@ CONTAINS
     REAL(DP), DIMENSION(s:d1,s:d2) :: A
     REAL(DP), DIMENSION(s:d2,s:d3) :: B
     REAL(DP), DIMENSION(s:d1,s:d3) :: C
-    
+
     !$OMP PARALLEL DO &
     !$OMP SHARED(A,B,C,s,d1,d2,d3) &
     !$OMP PRIVATE(i,j)
@@ -551,10 +551,10 @@ CONTAINS
        ENDDO
     ENDDO
     !$OMP END PARALLEL DO
-	
+
     RETURN
   END SUBROUTINE MATMUL_PAR
-  
+
   ! ---------------------------------------------------------------------------------------!   
 
   !> TRACE
@@ -565,7 +565,7 @@ CONTAINS
     INTEGER(I4B) :: i, s, e
     REAL(DP), INTENT(IN),  DIMENSION(s:e,s:e) :: mat
     REAL(DP) :: val
-    
+
     val = 0.0
     !$OMP PARALLEL DO REDUCTION(+:val) &
     !$OMP SHARED(mat,s,e) & 
@@ -574,12 +574,12 @@ CONTAINS
        val = val + mat(i,i)
     ENDDO
     !$OMP END PARALLEL DO
-    	
+
     TRACE = val
-    	
+
     RETURN
   END FUNCTION TRACE
-  
+
   ! ---------------------------------------------------------------------------------------!   
 
   !> TRACE of a product of matrices
@@ -591,7 +591,7 @@ CONTAINS
     INTEGER(I4B) :: i, s, e
     REAL(DP), INTENT(IN),  DIMENSION(s:e,s:e) :: mat1, mat2
     REAL(DP) :: val
-    
+
     val = 0.0
     !$OMP PARALLEL DO REDUCTION(+:val) &
     !$OMP SHARED(mat1,mat2,s,e) &
@@ -600,9 +600,9 @@ CONTAINS
        val = val + DOT_PRODUCT(mat1(i,s:e),mat2(s:e,i))
     ENDDO
     !$OMP END PARALLEL DO
-    
+
     TRACEPROD = val
-    	
+
     RETURN
   END FUNCTION TRACEPROD
 

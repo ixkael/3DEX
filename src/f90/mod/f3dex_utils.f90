@@ -18,48 +18,48 @@ CONTAINS
   !!@param[in] start : If present, starting code message
   !!@param[in] fin : If present, ending code message 
   SUBROUTINE message(code, msg, i, i2, msg2, start, fin)
-  
-     CHARACTER(LEN=*) :: code
-     CHARACTER(LEN=100) :: realmsg, conv
-     INTEGER(I4B), OPTIONAL :: i, i2
-     CHARACTER(LEN=*), OPTIONAL :: msg, msg2
-     LOGICAL, OPTIONAL :: start, fin
-     
-     IF( PRESENT(start) .AND. start .EQV. .TRUE. ) THEN
-     	 realmsg = "   Starting routine " // trim(code)
-     	 !PRINT*," "
-     	 PRINT*,"================================================"
-     	 PRINT*,trim(realmsg)
-     	 IF( present(msg) )  PRINT*, ("   " // trim(msg))
-     	 PRINT*,"------------------------------------------------"
-     ELSEIF( PRESENT(fin) .AND. fin .EQV. .TRUE. ) THEN
-     	 realmsg = "   " // trim(code) // " terminated"
-     	 PRINT*,"------------------------------------------------"
-     	 PRINT*,trim(realmsg)
-     	 IF( present(msg) )  PRINT*, ("   " // trim(msg))
-     	 PRINT*,"================================================"
-     	 !PRINT*," "
-     ELSE
-     	 IF( present(msg) ) THEN
-     	    realmsg = trim(code) // " > " // trim(msg)
-     	    IF( present(i) .AND. present(msg2) ) THEN
-     	       WRITE(conv,'(I5)') i
-     	       realmsg = trim(realmsg) // trim(conv) // "   " // trim(msg2)
-     	    ENDIF
-     	    IF( present(i2) ) THEN
-     	       WRITE(conv,'(I5)') i2
-     	       realmsg = trim(realmsg) // trim(conv)
-     	    ENDIF
-     	 ELSE
-     	    realmsg = trim(code) 
-     	 ENDIF
-     	 PRINT*, trim(realmsg)
-     ENDIF
 
-  
-  END SUBROUTINE 
-    
-    
+    CHARACTER(LEN=*) :: code
+    CHARACTER(LEN=100) :: realmsg, conv
+    INTEGER(I4B), OPTIONAL :: i, i2
+    CHARACTER(LEN=*), OPTIONAL :: msg, msg2
+    LOGICAL, OPTIONAL :: start, fin
+
+    IF( PRESENT(start) .AND. start .EQV. .TRUE. ) THEN
+       realmsg = "   Starting routine " // trim(code)
+       !PRINT*," "
+       PRINT*,"================================================"
+       PRINT*,trim(realmsg)
+       IF( present(msg) )  PRINT*, ("   " // trim(msg))
+       PRINT*,"------------------------------------------------"
+    ELSEIF( PRESENT(fin) .AND. fin .EQV. .TRUE. ) THEN
+       realmsg = "   " // trim(code) // " terminated"
+       PRINT*,"------------------------------------------------"
+       PRINT*,trim(realmsg)
+       IF( present(msg) )  PRINT*, ("   " // trim(msg))
+       PRINT*,"================================================"
+       !PRINT*," "
+    ELSE
+       IF( present(msg) ) THEN
+          realmsg = trim(code) // " > " // trim(msg)
+          IF( present(i) .AND. present(msg2) ) THEN
+             WRITE(conv,'(I5)') i
+             realmsg = trim(realmsg) // trim(conv) // "   " // trim(msg2)
+          ENDIF
+          IF( present(i2) ) THEN
+             WRITE(conv,'(I5)') i2
+             realmsg = trim(realmsg) // trim(conv)
+          ENDIF
+       ELSE
+          realmsg = trim(code) 
+       ENDIF
+       PRINT*, trim(realmsg)
+    ENDIF
+
+
+  END SUBROUTINE message
+
+
   ! ---------------------------------------------------------------------------------------!     
 
   !> Assert if two doubles are equal
@@ -73,10 +73,10 @@ CONTAINS
     assert_DP = ( floor( abs(r1 - r2)*10**prec ) .EQ. 0 )
 
     RETURN 
-    
+
   END FUNCTION assert_DP
 
- ! ---------------------------------------------------------------------------------------!     
+  ! ---------------------------------------------------------------------------------------!     
 
   !> Assert if two arrays are equal
   !!@param[in] (r1,r2) : two arrays
@@ -96,7 +96,7 @@ CONTAINS
     assert_DPARR = res
 
     RETURN 
-    
+
   END FUNCTION assert_DPARR
 
   ! ---------------------------------------------------------------------------------------!     
@@ -155,83 +155,83 @@ CONTAINS
           JMAX=JMAX-1
 200       CONTINUE
 
-300 RETURN
+300       RETURN
 
-  END SUBROUTINE BSORT
+        END SUBROUTINE BSORT
 
-  ! ---------------------------------------------------------------------------------------!     
+        ! ---------------------------------------------------------------------------------------!     
 
-  !> Measures system time
-  FUNCTION wtime( )
+        !> Measures system time
+        FUNCTION wtime( )
 
-    implicit none
+          implicit none
 
-    INTEGER ( kind = 4 ) clock_max
-    INTEGER ( kind = 4 ) clock_rate
-    INTEGER ( kind = 4 ) clock_reading
-    REAL    ( kind = 8 ) wtime
+          INTEGER ( kind = 4 ) clock_max
+          INTEGER ( kind = 4 ) clock_rate
+          INTEGER ( kind = 4 ) clock_reading
+          REAL    ( kind = 8 ) wtime
 
-    CALL system_clock ( clock_reading, clock_rate, clock_max )
+          CALL system_clock ( clock_reading, clock_rate, clock_max )
 
-    wtime = REAL ( clock_reading, kind = 8 ) &
-         / REAL ( clock_rate, kind = 8 )
+          wtime = REAL ( clock_reading, kind = 8 ) &
+               / REAL ( clock_rate, kind = 8 )
 
-    RETURN
-  END FUNCTION wtime
+          RETURN
+        END FUNCTION wtime
 
-  ! ---------------------------------------------------------------------------------------!    
+        ! ---------------------------------------------------------------------------------------!    
 
-  !> Print spectrum in a preformated way
-  !!@param[in] spectr : Power spectrum (two-array)
-  !!@param[in] (nllim, nnlim) : Print limit
-  !!@param[in] (nlmax, nnmax) : Inner bounds
-  !!@param[in] txt : Additional text
-  SUBROUTINE PRINT_spectrum(spectr, nllim, nnlim, nlmax, nnmax, txt)
+        !> Print spectrum in a preformated way
+        !!@param[in] spectr : Power spectrum (two-array)
+        !!@param[in] (nllim, nnlim) : Print limit
+        !!@param[in] (nlmax, nnmax) : Inner bounds
+        !!@param[in] txt : Additional text
+        SUBROUTINE PRINT_spectrum(spectr, nllim, nnlim, nlmax, nnmax, txt)
 
-    INTEGER(I4B) :: nllim, nnlim, l, n, nnmax, nlmax
-    REAL(DP), intent(IN), DIMENSION(0:nlmax,1:nnmax) :: spectr
-    CHARACTER(len=20) :: nm
-    CHARACTER(len=4) :: txt
+          INTEGER(I4B) :: nllim, nnlim, l, n, nnmax, nlmax
+          REAL(DP), intent(IN), DIMENSION(0:nlmax,1:nnmax) :: spectr
+          CHARACTER(len=20) :: nm
+          CHARACTER(len=4) :: txt
 
-    PRINT*,">> ",txt,"(l,n)"
-111 FORMAT (A,A,I3,A,I3,A)  
-    DO n = 1, nnlim
-       DO l = 0, nllim
-          WRITE(nm,111) trim(txt),'(', l,",", n,")"
-          PRINT*,nm, spectr(l,n)
-       ENDDO
-    ENDDO
-
-
-  END SUBROUTINE PRINT_spectrum
-
-  ! ---------------------------------------------------------------------------------------!     
-
-  !> Print spectrum in a preformated way
-  !!@param[in] almn : Power spectrum (two-array)
-  !!@param[in] (nllim, nmlim, nnlim) : Print limit
-  !!@param[in] (nlmax, nmmax, nnmax) : Inner bounds
-  !!@param[in] txt : Additional text
-  SUBROUTINE PRINT_almn(almn, nllim, nmlim, nnlim, nlmax, nmmax, nnmax, txt)
-
-    INTEGER(I4B) :: nllim, nmlim, nnlim, l, m, n, nnmax, nlmax, nmmax
-    COMPLEX(DPC), intent(IN), DIMENSION(1:nnmax,0:nlmax,0:nmmax) :: almn
-    CHARACTER(len=20) :: nm
-    CHARACTER(len=4) :: txt
-
-    PRINT*,">> ",txt,"(n,l,m)"
-110 FORMAT (A,A,I3,A,I3,A,I3,A)    	
-    DO n = 1, nnlim
-       DO l = 0, nllim
-          DO m = 0, l
-             WRITE(nm,110) trim(txt),'(', n,",",l,",", m,")"
-             PRINT*,nm, almn(n,l,m)
+          PRINT*,">> ",txt,"(l,n)"
+111       FORMAT (A,A,I3,A,I3,A)  
+          DO n = 1, nnlim
+             DO l = 0, nllim
+                WRITE(nm,111) trim(txt),'(', l,",", n,")"
+                PRINT*,nm, spectr(l,n)
+             ENDDO
           ENDDO
-       ENDDO
-    ENDDO
 
-  END SUBROUTINE PRINT_almn
 
-  ! ---------------------------------------------------------------------------------------!     
+        END SUBROUTINE PRINT_spectrum
 
-END MODULE f3dex_utils
+        ! ---------------------------------------------------------------------------------------!     
+
+        !> Print spectrum in a preformated way
+        !!@param[in] almn : Power spectrum (two-array)
+        !!@param[in] (nllim, nmlim, nnlim) : Print limit
+        !!@param[in] (nlmax, nmmax, nnmax) : Inner bounds
+        !!@param[in] txt : Additional text
+        SUBROUTINE PRINT_almn(almn, nllim, nmlim, nnlim, nlmax, nmmax, nnmax, txt)
+
+          INTEGER(I4B) :: nllim, nmlim, nnlim, l, m, n, nnmax, nlmax, nmmax
+          COMPLEX(DPC), intent(IN), DIMENSION(1:nnmax,0:nlmax,0:nmmax) :: almn
+          CHARACTER(len=20) :: nm
+          CHARACTER(len=4) :: txt
+
+          PRINT*,">> ",txt,"(n,l,m)"
+110       FORMAT (A,A,I3,A,I3,A,I3,A)    	
+          DO n = 1, nnlim
+             DO l = 0, nllim
+                DO m = 0, l
+                   WRITE(nm,110) trim(txt),'(', n,",",l,",", m,")"
+                   PRINT*,nm, almn(n,l,m)
+                ENDDO
+             ENDDO
+          ENDDO
+
+        END SUBROUTINE PRINT_almn
+
+        ! ---------------------------------------------------------------------------------------!     
+
+      END MODULE f3dex_utils

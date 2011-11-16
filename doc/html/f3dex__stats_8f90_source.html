@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>3DEX: /Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90 Source File</title>
+<title>3DEX: /Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90 Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -29,6 +29,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Types&#160;List</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -58,7 +59,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/Users/silver/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90</div>  </div>
+<div class="title">/Users/bl/Dropbox/3DEX/src/f90/mod/f3dex_stats.f90</div>  </div>
 </div>
 <div class="contents">
 <a href="f3dex__stats_8f90.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="namespacef3dex__stats.html">00001</a> <span class="keyword">MODULE</span> f3dex_stats
@@ -78,13 +79,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00015"></a>00015   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l00016"></a>00016 
 <a name="l00018"></a><a class="code" href="namespacef3dex__stats.html#a2c704cb2c5b38f77b70a5c9783660912">00018</a>   <span class="keyword">REAL(DP) </span><span class="keyword">FUNCTION </span><a class="code" href="namespacef3dex__stats.html#a2c704cb2c5b38f77b70a5c9783660912">CMODULE</a>(a)
-<a name="l00019"></a>00019   
-<a name="l00020"></a>00020      <span class="keywordtype">COMPLEX(DPC)</span> :: a
-<a name="l00021"></a>00021      
-<a name="l00022"></a>00022      <a class="code" href="namespacef3dex__stats.html#a2c704cb2c5b38f77b70a5c9783660912">CMODULE</a> = (<span class="keywordtype">REAL</span>(a))**2 + (AIMAG(a))**2
-<a name="l00023"></a>00023   
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020     <span class="keywordtype">COMPLEX(DPC)</span> :: a
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022     <a class="code" href="namespacef3dex__stats.html#a2c704cb2c5b38f77b70a5c9783660912">CMODULE</a> = (<span class="keywordtype">REAL</span>(a))**2 + (AIMAG(a))**2
+<a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">  END FUNCTION CMODULE</span>
-<a name="l00025"></a>00025      
+<a name="l00025"></a>00025 
 <a name="l00026"></a>00026   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l00027"></a>00027 
 <a name="l00032"></a><a class="code" href="namespacef3dex__stats.html#af82543b20c426be1736a4fed0d1ca80c">00032</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__stats.html#af82543b20c426be1736a4fed0d1ca80c">almn2cln_naive</a>(nnmax, nlmax, nmmax, almn, cln)
@@ -181,7 +182,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00132"></a>00132   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l00133"></a>00133 
 <a name="l00139"></a><a class="code" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">00139</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">gen_angles_map</a>(npix, ang_map, nside, nested, mask)
-<a name="l00140"></a>00140   
+<a name="l00140"></a>00140 
 <a name="l00141"></a>00141     <span class="keywordtype">INTEGER(I4B)</span> :: status, p, t, nside, loc, npix
 <a name="l00142"></a>00142     <span class="keywordtype">LOGICAL</span>, <span class="keywordtype">OPTIONAL</span> :: nested
 <a name="l00143"></a>00143     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(0:npix-1,0:npix-1)</span> :: ang_map
@@ -189,51 +190,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00145"></a>00145     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: thetaphis
 <a name="l00146"></a>00146     <span class="keywordtype">CHARACTER(LEN=*)</span>, <span class="keywordtype">PARAMETER</span> :: code = <span class="stringliteral">&#39;gen_angles_map&#39;</span>
 <a name="l00147"></a>00147     <span class="keywordtype">REAL(DP)</span> :: phi, theta1, theta2, phi1, phi2
-<a name="l00148"></a>00148         
+<a name="l00148"></a>00148 
 <a name="l00149"></a>00149     <span class="keyword">ALLOCATE</span>(thetaphis(0:npix-1,1:2),stat = status)
 <a name="l00150"></a>00150     CALL assert_alloc(status,code,<span class="stringliteral">&#39;thetas&#39;</span>)
-<a name="l00151"></a>00151          
+<a name="l00151"></a>00151 
 <a name="l00152"></a>00152     loc = 0
 <a name="l00153"></a>00153     <span class="keyword">IF</span>( present(nested) .AND. nested .EQV. .TRUE.) <span class="keyword">THEN</span>
 <a name="l00154"></a>00154        <span class="keyword">DO</span> p = 0, 12*nside*nside-1
 <a name="l00155"></a>00155           <span class="keyword">IF</span>( present(mask) ) <span class="keyword">THEN</span>
-<a name="l00156"></a>00156               <span class="keyword">IF</span>( mask(p) .EQV. .TRUE. ) <span class="keyword">THEN</span>
-<a name="l00157"></a>00157                  CALL pix2ang_nest(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
-<a name="l00158"></a>00158                  loc = loc + 1
-<a name="l00159"></a>00159               <span class="keyword">ENDIF</span>
-<a name="l00160"></a>00160            <span class="keyword">ELSE</span>
-<a name="l00161"></a>00161               CALL pix2ang_nest(nside, p, thetaphis(p,1),thetaphis(p,2) )
-<a name="l00162"></a>00162            <span class="keyword">ENDIF</span>
+<a name="l00156"></a>00156              <span class="keyword">IF</span>( mask(p) .EQV. .TRUE. ) <span class="keyword">THEN</span>
+<a name="l00157"></a>00157                 CALL pix2ang_nest(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
+<a name="l00158"></a>00158                 loc = loc + 1
+<a name="l00159"></a>00159              <span class="keyword">ENDIF</span>
+<a name="l00160"></a>00160           <span class="keyword">ELSE</span>
+<a name="l00161"></a>00161              CALL pix2ang_nest(nside, p, thetaphis(p,1),thetaphis(p,2) )
+<a name="l00162"></a>00162           <span class="keyword">ENDIF</span>
 <a name="l00163"></a>00163        <span class="keyword">ENDDO</span>
 <a name="l00164"></a>00164     <span class="keyword">ELSE</span>
 <a name="l00165"></a>00165        <span class="keyword">DO</span> p = 0, 12*nside*nside-1
 <a name="l00166"></a>00166           <span class="keyword">IF</span>( present(mask) ) <span class="keyword">THEN</span>
-<a name="l00167"></a>00167               <span class="keyword">IF</span>( mask(p) .EQV. .TRUE. ) <span class="keyword">THEN</span>
-<a name="l00168"></a>00168                  CALL pix2ang_ring(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
-<a name="l00169"></a>00169                  loc = loc + 1
-<a name="l00170"></a>00170               <span class="keyword">ENDIF</span>
-<a name="l00171"></a>00171            <span class="keyword">ELSE</span>
-<a name="l00172"></a>00172               CALL pix2ang_ring(nside, p, thetaphis(p,1),thetaphis(p,2) )
-<a name="l00173"></a>00173            <span class="keyword">ENDIF</span>
-<a name="l00174"></a>00174        <span class="keyword">ENDDO</span>     
+<a name="l00167"></a>00167              <span class="keyword">IF</span>( mask(p) .EQV. .TRUE. ) <span class="keyword">THEN</span>
+<a name="l00168"></a>00168                 CALL pix2ang_ring(nside, p, thetaphis(loc,1),thetaphis(loc,2) )
+<a name="l00169"></a>00169                 loc = loc + 1
+<a name="l00170"></a>00170              <span class="keyword">ENDIF</span>
+<a name="l00171"></a>00171           <span class="keyword">ELSE</span>
+<a name="l00172"></a>00172              CALL pix2ang_ring(nside, p, thetaphis(p,1),thetaphis(p,2) )
+<a name="l00173"></a>00173           <span class="keyword">ENDIF</span>
+<a name="l00174"></a>00174        <span class="keyword">ENDDO</span>
 <a name="l00175"></a>00175     <span class="keyword">ENDIF</span>
-<a name="l00176"></a>00176     
+<a name="l00176"></a>00176 
 <a name="l00177"></a>00177     <span class="keyword">DO</span> p = 0, npix-1
-<a name="l00178"></a>00178      <span class="keyword">DO</span> t = 0, npix-1
-<a name="l00179"></a>00179         theta1 = thetaphis(p,1)
-<a name="l00180"></a>00180         theta2 = thetaphis(t,1)
-<a name="l00181"></a>00181         phi1 = thetaphis(p,2)
-<a name="l00182"></a>00182         phi2 = thetaphis(t,2)
-<a name="l00183"></a>00183         ang_map(p,t) = cos(theta1)*cos(theta2) + sin(theta1)*sin(theta2)*cos(phi1-phi2)
-<a name="l00184"></a>00184      <span class="keyword">ENDDO</span>
+<a name="l00178"></a>00178        <span class="keyword">DO</span> t = 0, npix-1
+<a name="l00179"></a>00179           theta1 = thetaphis(p,1)
+<a name="l00180"></a>00180           theta2 = thetaphis(t,1)
+<a name="l00181"></a>00181           phi1 = thetaphis(p,2)
+<a name="l00182"></a>00182           phi2 = thetaphis(t,2)
+<a name="l00183"></a>00183           ang_map(p,t) = cos(theta1)*cos(theta2) + sin(theta1)*sin(theta2)*cos(phi1-phi2)
+<a name="l00184"></a>00184        <span class="keyword">ENDDO</span>
 <a name="l00185"></a>00185     <span class="keyword">ENDDO</span>
-<a name="l00186"></a>00186   
+<a name="l00186"></a>00186 
 <a name="l00187"></a>00187     <span class="keyword">DEALLOCATE</span>(thetaphis)
-<a name="l00188"></a>00188     
-<a name="l00189"></a>00189 <span class="keyword">  END SUBROUTINE  </span>
-<a name="l00190"></a>00190   
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189 <span class="keyword">  END SUBROUTINE gen_angles_map</span>
+<a name="l00190"></a>00190 
 <a name="l00191"></a>00191   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
-<a name="l00192"></a>00192       
+<a name="l00192"></a>00192 
 <a name="l00193"></a><a class="code" href="namespacef3dex__stats.html#a70ed2d6cd6c25b9cd95b04e9223e5828">00193</a>   <span class="keyword">FUNCTION </span><a class="code" href="namespacef3dex__stats.html#a70ed2d6cd6c25b9cd95b04e9223e5828">dzabs</a>( cplxnb, cplxnbref )
 <a name="l00194"></a>00194 
 <a name="l00195"></a>00195     <span class="keywordtype">complex(DP)</span> :: cplxnb, cplxnbref
@@ -258,35 +259,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00214"></a>00214     RETURN 
 <a name="l00215"></a>00215 
 <a name="l00216"></a>00216 <span class="keyword">  END FUNCTION dzabs</span>
-<a name="l00217"></a>00217   
+<a name="l00217"></a>00217 
 <a name="l00218"></a>00218   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l00219"></a>00219 
 <a name="l00224"></a><a class="code" href="namespacef3dex__stats.html#ae67784686a6f0a1d26c1cef84c250b0d">00224</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__stats.html#ae67784686a6f0a1d26c1cef84c250b0d">EYEMAT</a>(A,s,e,val)
-<a name="l00225"></a>00225   
-<a name="l00226"></a>00226      <span class="keywordtype">INTEGER</span> :: s, e, i
-<a name="l00227"></a>00227      <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(s:e,s:e)</span> :: A
-<a name="l00228"></a>00228      <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">OPTIONAL</span> :: val
-<a name="l00229"></a>00229      <span class="keyword">IF</span>(.NOT. present(val))<span class="keyword">then</span>
-<a name="l00230"></a>00230         val=1.0
-<a name="l00231"></a>00231      <span class="keyword">ENDIF</span>
-<a name="l00232"></a>00232      
-<a name="l00233"></a>00233      A = 0.0
-<a name="l00234"></a>00234      <span class="keyword">DO</span> i=s,e
-<a name="l00235"></a>00235       A(i,i) = val
-<a name="l00236"></a>00236      <span class="keyword">ENDDO</span>
-<a name="l00237"></a>00237        
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226     <span class="keywordtype">INTEGER</span> :: s, e, i
+<a name="l00227"></a>00227     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(s:e,s:e)</span> :: A
+<a name="l00228"></a>00228     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">OPTIONAL</span> :: val
+<a name="l00229"></a>00229     <span class="keyword">IF</span>(.NOT. present(val))<span class="keyword">then</span>
+<a name="l00230"></a>00230        val=1.0
+<a name="l00231"></a>00231     <span class="keyword">ENDIF</span>
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233     A = 0.0
+<a name="l00234"></a>00234     <span class="keyword">DO</span> i=s,e
+<a name="l00235"></a>00235        A(i,i) = val
+<a name="l00236"></a>00236     <span class="keyword">ENDDO</span>
+<a name="l00237"></a>00237 
 <a name="l00238"></a>00238 <span class="keyword">  END SUBROUTINE EYEMAT</span>
-<a name="l00239"></a>00239      
-<a name="l00240"></a>00240  <span class="comment">! ---------------------------------------------------------------------------------------!     </span>
-<a name="l00241"></a>00241   
+<a name="l00239"></a>00239 
+<a name="l00240"></a>00240   <span class="comment">! ---------------------------------------------------------------------------------------!     </span>
+<a name="l00241"></a>00241 
 <a name="l00246"></a><a class="code" href="namespacef3dex__stats.html#a564304481b43b3d55989683f03460410">00246</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__stats.html#a564304481b43b3d55989683f03460410">INVERSE</a>(A,n,res)
-<a name="l00247"></a>00247   
+<a name="l00247"></a>00247 
 <a name="l00248"></a>00248     <span class="keyword">IMPLICIT NONE</span>
 <a name="l00249"></a>00249     <span class="keywordtype">LOGICAL</span> res
 <a name="l00250"></a>00250     <span class="keywordtype">INTEGER</span> :: n, prec, i, j, IPIV(n), INFO
 <a name="l00251"></a>00251     <span class="keywordtype">DOUBLE PRECISION</span> A(n,n)
 <a name="l00252"></a>00252     <span class="keywordtype">DOUBLE PRECISION</span> WORK(n*n)
-<a name="l00253"></a>00253     
+<a name="l00253"></a>00253 
 <a name="l00254"></a>00254     CALL DGETRF( n, n, A, n, IPIV, INFO )
 <a name="l00255"></a>00255     CALL DGETRI( n, A, n, IPIV, WORK, n*n, INFO )
 <a name="l00256"></a>00256 
@@ -297,10 +298,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00261"></a>00261     <span class="keyword">ENDIF</span>
 <a name="l00262"></a>00262 
 <a name="l00263"></a>00263     RETURN
-<a name="l00264"></a>00264   
+<a name="l00264"></a>00264 
 <a name="l00265"></a>00265 <span class="keyword">  END SUBROUTINE INVERSE</span>
 <a name="l00266"></a>00266 
-<a name="l00267"></a>00267     
+<a name="l00267"></a>00267 
 <a name="l00268"></a>00268   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l00269"></a>00269 
 <a name="l00280"></a><a class="code" href="namespacef3dex__stats.html#afeef2b0049256649535f458d01e901c8">00280</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__stats.html#afeef2b0049256649535f458d01e901c8">map2cl_QML</a>( map, cl, nside, nlmax, nlmax_recon, covarnoise, cltheo, logicalmask, covarest )
@@ -320,9 +321,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00294"></a>00294     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(0:12*nside**2-1,0:12*nside**2-1)</span> :: covarnoise
 <a name="l00295"></a>00295     <span class="keywordtype">CHARACTER(LEN=*)</span>, <span class="keywordtype">PARAMETER</span> :: code = <span class="stringliteral">&#39;map2cl_QML&#39;</span>
 <a name="l00296"></a>00296     <span class="keywordtype">REAL(DP)</span> :: Fll, mapvec, trnoise, val                    
-<a name="l00297"></a>00297      
+<a name="l00297"></a>00297 
 <a name="l00298"></a>00298     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, start=.TRUE.)
-<a name="l00299"></a>00299     
+<a name="l00299"></a>00299 
 <a name="l00300"></a>00300     <span class="keyword">IF</span>( present(logicalmask) ) <span class="keyword">THEN</span>
 <a name="l00301"></a>00301        npix = COUNT(logicalmask)
 <a name="l00302"></a>00302     <span class="keyword">ELSE</span>
@@ -333,28 +334,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00307"></a>00307     <span class="keyword">ALLOCATE</span>(x(0:npix-1),stat = status)
 <a name="l00308"></a>00308     CALL assert_alloc(status,code,<span class="stringliteral">&#39;x&#39;</span>)
 <a name="l00309"></a>00309     x = PACK(map, mask=logicalmask)
-<a name="l00310"></a>00310     
+<a name="l00310"></a>00310 
 <a name="l00311"></a>00311     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Generating masked angular map&quot;</span>)
 <a name="l00312"></a>00312     <span class="keyword">ALLOCATE</span>(ang_map(0:npix-1,0:npix-1),stat = status)
 <a name="l00313"></a>00313     CALL assert_alloc(status,code,<span class="stringliteral">&#39;ang_map&#39;</span>)
 <a name="l00314"></a>00314     CALL <a class="code" href="namespacef3dex__stats.html#ac34a6421249816395b51048aa0a3dde3">gen_angles_map</a>(npix, ang_map, nside, nested=.FALSE., mask=logicalmask) 
-<a name="l00315"></a>00315  
+<a name="l00315"></a>00315 
 <a name="l00316"></a>00316     <span class="keyword">ALLOCATE</span>(Pl(0:npix-1,0:npix-1,0:nlmax),stat = status)
 <a name="l00317"></a>00317     CALL assert_alloc(status,code,<span class="stringliteral">&#39;Pl&#39;</span>)
 <a name="l00318"></a>00318     <span class="keyword">DO</span> l=0, nlmax
 <a name="l00319"></a>00319        CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Legendre matrices :&quot;</span>, i=l, msg2=<span class="stringliteral">&quot;/&quot;</span>, i2=nlmax)
 <a name="l00320"></a>00320        <span class="keyword">IF</span>( l .EQ. 0 )<span class="keyword">THEN</span>
-<a name="l00321"></a>00321          Pl(0:npix-1,0:npix-1,0) = 1.0_dp
+<a name="l00321"></a>00321           Pl(0:npix-1,0:npix-1,0) = 1.0_dp
 <a name="l00322"></a>00322        <span class="keyword">ELSE</span> <span class="keyword">IF</span>( l .EQ. 1 ) <span class="keyword">THEN</span>
-<a name="l00323"></a>00323             Pl(0:npix-1,0:npix-1,1) = ang_map
+<a name="l00323"></a>00323           Pl(0:npix-1,0:npix-1,1) = ang_map
 <a name="l00324"></a>00324        <span class="keyword">ELSE</span>
-<a name="l00325"></a>00325            Pl(0:npix-1,0:npix-1,l) = &amp;
-<a name="l00326"></a>00326             &amp; ( (2.0_dp*<span class="keywordtype">REAL</span>(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * 
-<a name="l00327"></a>00327               Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &amp;
-<a name="l00328"></a>00328              - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
+<a name="l00325"></a>00325           Pl(0:npix-1,0:npix-1,l) = &amp;
+<a name="l00326"></a>00326                &amp; ( (2.0_dp*<span class="keywordtype">REAL</span>(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * 
+<a name="l00327"></a>00327                 Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &amp;
+<a name="l00328"></a>00328                 - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
 <a name="l00329"></a>00329        END IF
 <a name="l00330"></a>00330        Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l) * (2.0_dp*<span class="keywordtype">REAL</span>(l)+1.0_dp)/FOURPI
-<a name="l00331"></a>00331     <span class="keyword">ENDDO</span> 
+<a name="l00331"></a>00331     <span class="keyword">ENDDO</span>
 <a name="l00332"></a>00332     <span class="keyword">DEALLOCATE</span>( ang_map )
 <a name="l00333"></a>00333 
 <a name="l00334"></a>00334     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Creating signal covariance matrix&quot;</span>)
@@ -363,17 +364,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00337"></a>00337     covar = 0.0
 <a name="l00338"></a>00338     <span class="keyword">DO</span> l=0, nlmax
 <a name="l00339"></a>00339        covar = covar + Pl(0:npix-1,0:npix-1,l)*cltheo(l)
-<a name="l00340"></a>00340     <span class="keyword">ENDDO</span>    
-<a name="l00341"></a>00341     
+<a name="l00340"></a>00340     <span class="keyword">ENDDO</span>
+<a name="l00341"></a>00341 
 <a name="l00342"></a>00342     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Adding noise to signal covariance matrix&quot;</span>)
 <a name="l00343"></a>00343     covar(0:npix-1,0:npix-1) = covar(0:npix-1,0:npix-1) + covarnoise(0:npix-1,0:npix-1)
-<a name="l00344"></a>00344     
+<a name="l00344"></a>00344 
 <a name="l00345"></a>00345     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Inverting signal+noise matrix&quot;</span>)
 <a name="l00346"></a>00346     CALL <a class="code" href="namespacef3dex__stats.html#a564304481b43b3d55989683f03460410">INVERSE</a>(covar(0:npix-1,0:npix-1),npix,res)
 <a name="l00347"></a>00347     <span class="keyword">IF</span>( res .EQV. .FALSE. )<span class="keyword">THEN</span>
-<a name="l00348"></a>00348      PRINT*,<span class="stringliteral">&quot;PROBLEM WITH INVERSION&quot;</span>
+<a name="l00348"></a>00348        PRINT*,<span class="stringliteral">&quot;PROBLEM WITH INVERSION&quot;</span>
 <a name="l00349"></a>00349     <span class="keyword">ENDIF</span>
-<a name="l00350"></a>00350     
+<a name="l00350"></a>00350 
 <a name="l00351"></a>00351     <span class="keyword">ALLOCATE</span>(F(0:nlmax_recon,0:nlmax_recon),stat = status)
 <a name="l00352"></a>00352     CALL assert_alloc(status,code,<span class="stringliteral">&#39;F&#39;</span>)
 <a name="l00353"></a>00353     <span class="keyword">ALLOCATE</span>(y(0:nlmax_recon),stat = status)
@@ -382,15 +383,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00356"></a>00356     <span class="comment">!$OMP PARALLEL DEFAULT(none) &amp;</span>
 <a name="l00357"></a>00357     <span class="comment">!$OMP SHARED(nlmax_recon, map, covar, cl, Pl, npix, F, y, x, covarest) &amp; </span>
 <a name="l00358"></a>00358     <span class="comment">!$OMP PRIVATE(l, ll, Fll, El, status)</span>
-<a name="l00359"></a>00359          
+<a name="l00359"></a>00359 
 <a name="l00360"></a>00360     <span class="keyword">ALLOCATE</span>(El(0:npix-1,0:npix-1),stat = status)
 <a name="l00361"></a>00361     CALL assert_alloc(status,code,<span class="stringliteral">&#39;El&#39;</span>)  
-<a name="l00362"></a>00362     
+<a name="l00362"></a>00362 
 <a name="l00363"></a>00363     <span class="comment">!$OMP DO</span>
 <a name="l00364"></a>00364     <span class="keyword">DO</span> l=0, nlmax_recon
 <a name="l00365"></a>00365        CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Power spectrum estimation :&quot;</span>, i=l, msg2=<span class="stringliteral">&quot;/&quot;</span>, i2=nlmax_recon)
 <a name="l00366"></a>00366        El(0:npix-1,0:npix-1) = MATMUL( covar(0:npix-1,0:npix-1), &amp;
-<a name="l00367"></a>00367           &amp; MATMUL( Pl(0:npix-1,0:npix-1,l), covar(0:npix-1,0:npix-1) ) )
+<a name="l00367"></a>00367             &amp; MATMUL( Pl(0:npix-1,0:npix-1,l), covar(0:npix-1,0:npix-1) ) )
 <a name="l00368"></a>00368        <span class="keyword">DO</span> ll=0, nlmax_recon
 <a name="l00369"></a>00369           Fll = <a class="code" href="namespacef3dex__stats.html#ae106140bb309de7d7779b6b086050bf4">TRACEPROD</a>(El(0:npix-1,0:npix-1),Pl(0:npix-1,0:npix-1,ll),0,npix-1)
 <a name="l00370"></a>00370           F(ll,l) = Fll    
@@ -398,33 +399,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00372"></a>00372        y(l) = DOT_PRODUCT( x, MATMUL( El(0:npix-1,0:npix-1), x ) )
 <a name="l00373"></a>00373     <span class="keyword">ENDDO</span>
 <a name="l00374"></a>00374     <span class="comment">!$OMP END DO</span>
-<a name="l00375"></a>00375     
+<a name="l00375"></a>00375 
 <a name="l00376"></a>00376     <span class="keyword">DEALLOCATE</span>(El)
-<a name="l00377"></a>00377     
+<a name="l00377"></a>00377 
 <a name="l00378"></a>00378     <span class="comment">!$OMP END PARALLEL</span>
-<a name="l00379"></a>00379     
+<a name="l00379"></a>00379 
 <a name="l00380"></a>00380     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Inverting Fisher matrix&quot;</span>)
 <a name="l00381"></a>00381     CALL <a class="code" href="namespacef3dex__stats.html#a564304481b43b3d55989683f03460410">INVERSE</a>(F(0:nlmax_recon,0:nlmax_recon),nlmax_recon+1,res)
 <a name="l00382"></a>00382     <span class="keyword">IF</span>( res .EQV. .FALSE. )<span class="keyword">THEN</span>
-<a name="l00383"></a>00383      PRINT*,<span class="stringliteral">&quot;PROBLEM WITH INVERSION&quot;</span>
+<a name="l00383"></a>00383        PRINT*,<span class="stringliteral">&quot;PROBLEM WITH INVERSION&quot;</span>
 <a name="l00384"></a>00384     <span class="keyword">ENDIF</span>
-<a name="l00385"></a>00385     
+<a name="l00385"></a>00385 
 <a name="l00386"></a>00386     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Evaluating final estimates&quot;</span>)
 <a name="l00387"></a>00387     cl = MATMUL( F(0:nlmax_recon,0:nlmax_recon), y(0:nlmax_recon) )  
-<a name="l00388"></a>00388     
+<a name="l00388"></a>00388 
 <a name="l00389"></a>00389     <span class="keyword">IF</span>( present(covarest) ) <span class="keyword">THEN</span>
 <a name="l00390"></a>00390        <span class="keyword">DO</span> l=0, nlmax_recon
 <a name="l00391"></a>00391           covarest(l) = F(l,l)
 <a name="l00392"></a>00392        <span class="keyword">ENDDO</span>
 <a name="l00393"></a>00393     <span class="keyword">ENDIF</span>
-<a name="l00394"></a>00394     
+<a name="l00394"></a>00394 
 <a name="l00395"></a>00395     <span class="keyword">DEALLOCATE</span>(F, covar, Pl, x, y)
-<a name="l00396"></a>00396     
+<a name="l00396"></a>00396 
 <a name="l00397"></a>00397     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, fin=.TRUE.)
 <a name="l00398"></a>00398 
 <a name="l00399"></a>00399 <span class="keyword">  END SUBROUTINE map2cl_QML</span>
-<a name="l00400"></a>00400   
-<a name="l00401"></a>00401    <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401   <span class="comment">! ---------------------------------------------------------------------------------------!    </span>
 <a name="l00402"></a>00402 
 <a name="l00411"></a><a class="code" href="namespacef3dex__stats.html#aeff76c576e1699da5b3aa1f4efa4335d">00411</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__stats.html#aeff76c576e1699da5b3aa1f4efa4335d">map2cl_PCL</a>( map, cl, nside, nlmax, nlmax_recon, logicalmask, covarest )
 <a name="l00412"></a>00412 
@@ -434,27 +435,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00416"></a>00416     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(0:(12*nside*nside-1))</span> :: map
 <a name="l00417"></a>00417     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax_recon)</span> :: cl
 <a name="l00418"></a>00418     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(0:nlmax_recon)</span>, <span class="keywordtype">OPTIONAL</span> :: covarest
-<a name="l00419"></a>00419     <span class="keywordtype">LOGICAL</span>, <span class="keywordtype">DIMENSION(0:(12*nside*nside-1))</span> :: logicalmask
+<a name="l00419"></a>00419     <span class="keywordtype">LOGICAL</span>, <span class="keywordtype">DIMENSION(0:(12*nside*nside-1))</span>, <span class="keywordtype">OPTIONAL</span> :: logicalmask
 <a name="l00420"></a>00420     <span class="keywordtype">INTEGER(I4B)</span>, <span class="keywordtype">DIMENSION(0:(12*nside*nside-1))</span> :: subscr
 <a name="l00421"></a>00421     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: El, F, ang_map
 <a name="l00422"></a>00422     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:,:,:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: Pl
 <a name="l00423"></a>00423     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: x, y
 <a name="l00424"></a>00424     <span class="keywordtype">CHARACTER(LEN=*)</span>, <span class="keywordtype">PARAMETER</span> :: code = <span class="stringliteral">&#39;map2cl_PCL&#39;</span>
 <a name="l00425"></a>00425     <span class="keywordtype">REAL(DP)</span> :: Fll, mapvec, trnoise, val                    
-<a name="l00426"></a>00426          
+<a name="l00426"></a>00426 
 <a name="l00427"></a>00427     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, start=.TRUE.)
-<a name="l00428"></a>00428     
+<a name="l00428"></a>00428 
 <a name="l00429"></a>00429     <span class="keyword">IF</span>( present(logicalmask) ) <span class="keyword">THEN</span>
 <a name="l00430"></a>00430        npix = COUNT(logicalmask)
 <a name="l00431"></a>00431     <span class="keyword">ELSE</span>
 <a name="l00432"></a>00432        npix = 12*nside*nside
 <a name="l00433"></a>00433     <span class="keyword">ENDIF</span>
 <a name="l00434"></a>00434     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Initial map has&quot;</span>,i=npix,msg2=<span class="stringliteral">&quot;pixels&quot;</span>)
-<a name="l00435"></a>00435     
+<a name="l00435"></a>00435 
 <a name="l00436"></a>00436     <span class="keyword">ALLOCATE</span>(x(0:npix-1),stat = status)
 <a name="l00437"></a>00437     CALL assert_alloc(status,code,<span class="stringliteral">&#39;x&#39;</span>)
 <a name="l00438"></a>00438     x = PACK(map, mask=logicalmask)
-<a name="l00439"></a>00439     
+<a name="l00439"></a>00439 
 <a name="l00440"></a>00440     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Generating masked angular map&quot;</span>)
 <a name="l00441"></a>00441     <span class="keyword">ALLOCATE</span>(ang_map(0:npix-1,0:npix-1),stat = status)
 <a name="l00442"></a>00442     CALL assert_alloc(status,code,<span class="stringliteral">&#39;ang_map&#39;</span>)
@@ -465,19 +466,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00447"></a>00447     <span class="keyword">DO</span> l=0, nlmax
 <a name="l00448"></a>00448        CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Legendre matrices :&quot;</span>, i=l, msg2=<span class="stringliteral">&quot;/&quot;</span>, i2=nlmax)
 <a name="l00449"></a>00449        <span class="keyword">IF</span>( l .EQ. 0 )<span class="keyword">THEN</span>
-<a name="l00450"></a>00450          Pl(0:npix-1,0:npix-1,0) = 1.0_dp
+<a name="l00450"></a>00450           Pl(0:npix-1,0:npix-1,0) = 1.0_dp
 <a name="l00451"></a>00451        <span class="keyword">ELSE</span> <span class="keyword">IF</span>( l .EQ. 1 ) <span class="keyword">THEN</span>
-<a name="l00452"></a>00452             Pl(0:npix-1,0:npix-1,1) = ang_map
+<a name="l00452"></a>00452           Pl(0:npix-1,0:npix-1,1) = ang_map
 <a name="l00453"></a>00453        <span class="keyword">ELSE</span>
-<a name="l00454"></a>00454            Pl(0:npix-1,0:npix-1,l) = &amp;
-<a name="l00455"></a>00455             &amp; ( (2.0_dp*<span class="keywordtype">REAL</span>(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * 
-<a name="l00456"></a>00456               Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &amp;
-<a name="l00457"></a>00457              - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
+<a name="l00454"></a>00454           Pl(0:npix-1,0:npix-1,l) = &amp;
+<a name="l00455"></a>00455                &amp; ( (2.0_dp*<span class="keywordtype">REAL</span>(l)-1.0_dp) * ang_map(0:npix-1,0:npix-1) * 
+<a name="l00456"></a>00456                 Pl(0:npix-1,0:npix-1,l-1) / ( (2.0_dp*REAL(l-1)+1.0_dp)/FOURPI ) &amp;
+<a name="l00457"></a>00457                 - REAL(l-1) * Pl(0:npix-1,0:npix-1,l-2) / ((2.0_dp*REAL(l-2)+1.0_dp)/FOURPI) ) / REAL(l)
 <a name="l00458"></a>00458        END IF
 <a name="l00459"></a>00459        Pl(0:npix-1,0:npix-1,l) = Pl(0:npix-1,0:npix-1,l) * (2.0_dp*<span class="keywordtype">REAL</span>(l)+1.0_dp)/FOURPI
-<a name="l00460"></a>00460     <span class="keyword">ENDDO</span> 
+<a name="l00460"></a>00460     <span class="keyword">ENDDO</span>
 <a name="l00461"></a>00461     <span class="keyword">DEALLOCATE</span>( ang_map )
-<a name="l00462"></a>00462         
+<a name="l00462"></a>00462 
 <a name="l00463"></a>00463     <span class="keyword">ALLOCATE</span>(F(0:nlmax_recon,0:nlmax_recon),stat = status)
 <a name="l00464"></a>00464     CALL assert_alloc(status,code,<span class="stringliteral">&#39;F&#39;</span>)
 <a name="l00465"></a>00465     <span class="keyword">ALLOCATE</span>(y(0:nlmax_recon),stat = status)
@@ -495,53 +496,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00477"></a>00477        y(l) = DOT_PRODUCT( x, MATMUL( Pl(0:npix-1,0:npix-1,l), x ) )
 <a name="l00478"></a>00478     <span class="keyword">ENDDO</span>
 <a name="l00479"></a>00479     <span class="comment">!$OMP END PARALLEL DO</span>
-<a name="l00480"></a>00480     
+<a name="l00480"></a>00480 
 <a name="l00481"></a>00481     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Inverting Fisher matrix&quot;</span>)
 <a name="l00482"></a>00482     CALL <a class="code" href="namespacef3dex__stats.html#a564304481b43b3d55989683f03460410">INVERSE</a>(F(0:nlmax_recon,0:nlmax_recon),nlmax_recon+1,res)
 <a name="l00483"></a>00483     <span class="keyword">IF</span>( res .EQV. .FALSE. )<span class="keyword">THEN</span>
-<a name="l00484"></a>00484      PRINT*,<span class="stringliteral">&quot;PROBLEM WITH INVERSION&quot;</span>
+<a name="l00484"></a>00484        PRINT*,<span class="stringliteral">&quot;PROBLEM WITH INVERSION&quot;</span>
 <a name="l00485"></a>00485     <span class="keyword">ENDIF</span>
 <a name="l00486"></a>00486 
 <a name="l00487"></a>00487     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, msg=<span class="stringliteral">&quot;Evaluating final estimates&quot;</span>)
 <a name="l00488"></a>00488     cl(0:nlmax_recon) = MATMUL( F(0:nlmax_recon,0:nlmax_recon), y(0:nlmax_recon) )    
-<a name="l00489"></a>00489     
+<a name="l00489"></a>00489 
 <a name="l00490"></a>00490     <span class="keyword">IF</span>( present(covarest) ) <span class="keyword">THEN</span>
 <a name="l00491"></a>00491        <span class="keyword">DO</span> l=0, nlmax_recon
 <a name="l00492"></a>00492           covarest(l) = F(l,l)
 <a name="l00493"></a>00493        <span class="keyword">ENDDO</span>
 <a name="l00494"></a>00494     <span class="keyword">ENDIF</span>
-<a name="l00495"></a>00495     
+<a name="l00495"></a>00495 
 <a name="l00496"></a>00496     <span class="keyword">DEALLOCATE</span>(F, Pl, x, y)
-<a name="l00497"></a>00497     
+<a name="l00497"></a>00497 
 <a name="l00498"></a>00498     CALL <a class="code" href="namespacef3dex__utils.html#a92226ca7c662562058c56ba005f6fc36">message</a>(code, fin=.TRUE.)
 <a name="l00499"></a>00499 
 <a name="l00500"></a>00500 <span class="keyword">  END SUBROUTINE map2cl_PCL</span>
-<a name="l00501"></a>00501   
-<a name="l00502"></a>00502   
+<a name="l00501"></a>00501 
+<a name="l00502"></a>00502 
 <a name="l00503"></a>00503   <span class="comment">! ---------------------------------------------------------------------------------------!   </span>
 <a name="l00504"></a>00504 
 <a name="l00509"></a><a class="code" href="namespacef3dex__stats.html#af0a10f88c8029206196ea18b3ad579ba">00509</a>   <span class="keyword">REAL(DP) </span><span class="keyword">FUNCTION </span><a class="code" href="namespacef3dex__stats.html#af0a10f88c8029206196ea18b3ad579ba">BILIN_FORM_PAR</a>( x, A, y, s, e )     
-<a name="l00510"></a>00510      
+<a name="l00510"></a>00510 
 <a name="l00511"></a>00511     <span class="keywordtype">INTEGER(I4B)</span> :: s, e, i, j, k
 <a name="l00512"></a>00512     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(s:e)</span> :: x, y
 <a name="l00513"></a>00513     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(s:e,s:e)</span> :: A
 <a name="l00514"></a>00514     <span class="keywordtype">REAL(DP)</span> :: val
-<a name="l00515"></a>00515     
+<a name="l00515"></a>00515 
 <a name="l00516"></a>00516     val = 0.0_dp
 <a name="l00517"></a>00517     <span class="comment">!$OMP PARALLEL DO REDUCTION(+:val) &amp;</span>
 <a name="l00518"></a>00518     <span class="comment">!$OMP SHARED(x,A,y,s,e) &amp; </span>
 <a name="l00519"></a>00519     <span class="comment">!$OMP PRIVATE(i,j) </span>
 <a name="l00520"></a>00520     <span class="keyword">DO</span> i=s,e
-<a name="l00521"></a>00521      val = val + x(i) * DOT_PRODUCT( A(i,s:e), y(s:e) )
+<a name="l00521"></a>00521        val = val + x(i) * DOT_PRODUCT( A(i,s:e), y(s:e) )
 <a name="l00522"></a>00522     <span class="keyword">ENDDO</span>
 <a name="l00523"></a>00523     <span class="comment">!$OMP END PARALLEL DO</span>
-<a name="l00524"></a>00524   
+<a name="l00524"></a>00524 
 <a name="l00525"></a>00525     <a class="code" href="namespacef3dex__stats.html#af0a10f88c8029206196ea18b3ad579ba">BILIN_FORM_PAR</a> = val
-<a name="l00526"></a>00526     
+<a name="l00526"></a>00526 
 <a name="l00527"></a>00527     RETURN
-<a name="l00528"></a>00528      
+<a name="l00528"></a>00528 
 <a name="l00529"></a>00529 <span class="keyword">  END FUNCTION BILIN_FORM_PAR</span>
-<a name="l00530"></a>00530   
+<a name="l00530"></a>00530 
 <a name="l00531"></a>00531   <span class="comment">! ---------------------------------------------------------------------------------------!   </span>
 <a name="l00532"></a>00532 
 <a name="l00538"></a><a class="code" href="namespacef3dex__stats.html#a046613d05a3a2eb1808a7ee99fba7509">00538</a>   <span class="keyword">SUBROUTINE </span><a class="code" href="namespacef3dex__stats.html#a046613d05a3a2eb1808a7ee99fba7509">MATMUL_PAR</a>(A, B, C, s, d1, d2, d3)
@@ -550,7 +551,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00541"></a>00541     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(s:d1,s:d2)</span> :: A
 <a name="l00542"></a>00542     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(s:d2,s:d3)</span> :: B
 <a name="l00543"></a>00543     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">DIMENSION(s:d1,s:d3)</span> :: C
-<a name="l00544"></a>00544     
+<a name="l00544"></a>00544 
 <a name="l00545"></a>00545     <span class="comment">!$OMP PARALLEL DO &amp;</span>
 <a name="l00546"></a>00546     <span class="comment">!$OMP SHARED(A,B,C,s,d1,d2,d3) &amp;</span>
 <a name="l00547"></a>00547     <span class="comment">!$OMP PRIVATE(i,j)</span>
@@ -560,10 +561,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00551"></a>00551        <span class="keyword">ENDDO</span>
 <a name="l00552"></a>00552     <span class="keyword">ENDDO</span>
 <a name="l00553"></a>00553     <span class="comment">!$OMP END PARALLEL DO</span>
-<a name="l00554"></a>00554  
+<a name="l00554"></a>00554 
 <a name="l00555"></a>00555     RETURN
 <a name="l00556"></a>00556 <span class="keyword">  END SUBROUTINE MATMUL_PAR</span>
-<a name="l00557"></a>00557   
+<a name="l00557"></a>00557 
 <a name="l00558"></a>00558   <span class="comment">! ---------------------------------------------------------------------------------------!   </span>
 <a name="l00559"></a>00559 
 <a name="l00563"></a><a class="code" href="namespacef3dex__stats.html#aa88d6eefa32a9edc04b3d93af96f5a2e">00563</a>   <span class="keyword">REAL(DP) </span><span class="keyword">FUNCTION </span><a class="code" href="namespacef3dex__stats.html#aa88d6eefa32a9edc04b3d93af96f5a2e">TRACE</a>(mat, s, e)
@@ -571,7 +572,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00565"></a>00565     <span class="keywordtype">INTEGER(I4B)</span> :: i, s, e
 <a name="l00566"></a>00566     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">INTENT(IN)</span>,  <span class="keywordtype">DIMENSION(s:e,s:e)</span> :: mat
 <a name="l00567"></a>00567     <span class="keywordtype">REAL(DP)</span> :: val
-<a name="l00568"></a>00568     
+<a name="l00568"></a>00568 
 <a name="l00569"></a>00569     val = 0.0
 <a name="l00570"></a>00570     <span class="comment">!$OMP PARALLEL DO REDUCTION(+:val) &amp;</span>
 <a name="l00571"></a>00571     <span class="comment">!$OMP SHARED(mat,s,e) &amp; </span>
@@ -580,12 +581,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00574"></a>00574        val = val + mat(i,i)
 <a name="l00575"></a>00575     <span class="keyword">ENDDO</span>
 <a name="l00576"></a>00576     <span class="comment">!$OMP END PARALLEL DO</span>
-<a name="l00577"></a>00577      
+<a name="l00577"></a>00577 
 <a name="l00578"></a>00578     <a class="code" href="namespacef3dex__stats.html#aa88d6eefa32a9edc04b3d93af96f5a2e">TRACE</a> = val
-<a name="l00579"></a>00579      
+<a name="l00579"></a>00579 
 <a name="l00580"></a>00580     RETURN
 <a name="l00581"></a>00581 <span class="keyword">  END FUNCTION TRACE</span>
-<a name="l00582"></a>00582   
+<a name="l00582"></a>00582 
 <a name="l00583"></a>00583   <span class="comment">! ---------------------------------------------------------------------------------------!   </span>
 <a name="l00584"></a>00584 
 <a name="l00589"></a><a class="code" href="namespacef3dex__stats.html#ae106140bb309de7d7779b6b086050bf4">00589</a>   <span class="keyword">REAL(DP) </span><span class="keyword">FUNCTION </span><a class="code" href="namespacef3dex__stats.html#ae106140bb309de7d7779b6b086050bf4">TRACEPROD</a>(mat1, mat2, s, e)
@@ -593,7 +594,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00591"></a>00591     <span class="keywordtype">INTEGER(I4B)</span> :: i, s, e
 <a name="l00592"></a>00592     <span class="keywordtype">REAL(DP)</span>, <span class="keywordtype">INTENT(IN)</span>,  <span class="keywordtype">DIMENSION(s:e,s:e)</span> :: mat1, mat2
 <a name="l00593"></a>00593     <span class="keywordtype">REAL(DP)</span> :: val
-<a name="l00594"></a>00594     
+<a name="l00594"></a>00594 
 <a name="l00595"></a>00595     val = 0.0
 <a name="l00596"></a>00596     <span class="comment">!$OMP PARALLEL DO REDUCTION(+:val) &amp;</span>
 <a name="l00597"></a>00597     <span class="comment">!$OMP SHARED(mat1,mat2,s,e) &amp;</span>
@@ -602,9 +603,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00600"></a>00600        val = val + DOT_PRODUCT(mat1(i,s:e),mat2(s:e,i))
 <a name="l00601"></a>00601     <span class="keyword">ENDDO</span>
 <a name="l00602"></a>00602     <span class="comment">!$OMP END PARALLEL DO</span>
-<a name="l00603"></a>00603     
+<a name="l00603"></a>00603 
 <a name="l00604"></a>00604     <a class="code" href="namespacef3dex__stats.html#ae106140bb309de7d7779b6b086050bf4">TRACEPROD</a> = val
-<a name="l00605"></a>00605      
+<a name="l00605"></a>00605 
 <a name="l00606"></a>00606     RETURN
 <a name="l00607"></a>00607 <span class="keyword">  END FUNCTION TRACEPROD</span>
 <a name="l00608"></a>00608 
@@ -619,7 +620,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -628,7 +629,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:45 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 15:27:15 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

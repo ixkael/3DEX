@@ -71,7 +71,7 @@ CONTAINS
 
     nbpts = 0
     OPEN(2,file=file,iostat=rdstatus)
-    
+
     DO WHILE( nbpts < nbptsmax .AND. rdstatus == 0  )  
        DO i=1,nbptsmax
           nbpts = i-1

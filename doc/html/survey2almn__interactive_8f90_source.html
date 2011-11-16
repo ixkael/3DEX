@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>3DEX: /Users/silver/Dropbox/3DEX/src/f90/survey2almn_interactive/survey2almn_interactive.f90 Source File</title>
+<title>3DEX: /Users/bl/Dropbox/3DEX/src/f90/survey2almn_interactive/survey2almn_interactive.f90 Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -29,6 +29,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Types&#160;List</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -58,7 +59,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/Users/silver/Dropbox/3DEX/src/f90/survey2almn_interactive/survey2almn_interactive.f90</div>  </div>
+<div class="title">/Users/bl/Dropbox/3DEX/src/f90/survey2almn_interactive/survey2almn_interactive.f90</div>  </div>
 </div>
 <div class="contents">
 <a href="survey2almn__interactive_8f90.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="survey2almn__interactive_8f90.html#a5dd6c60d380b00c2631dd856147187f5">00001</a> <span class="keyword">PROGRAM</span> <a class="code" href="survey2almn__interactive_8f90.html#a5dd6c60d380b00c2631dd856147187f5">survey2almn_interactive</a>
@@ -146,10 +147,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00083"></a>00083   print*,<span class="stringliteral">&quot; &quot;</span>
 <a name="l00084"></a>00084   print*,<span class="stringliteral">&quot;Extracting data...&quot;</span>
 <a name="l00085"></a>00085 
-<a name="l00086"></a>00086   <span class="keyword">ALLOCATE</span>(survey(1:nbpts, 1:3),stat = status)
+<a name="l00086"></a>00086   <span class="keyword">ALLOCATE</span>(<a class="code" href="modulesurvey.html">survey</a>(1:nbpts, 1:3),stat = status)
 <a name="l00087"></a>00087   call assert_alloc(status,code,<span class="stringliteral">&quot;survey&quot;</span>)
 <a name="l00088"></a>00088 
-<a name="l00089"></a>00089   call <a class="code" href="namespacef3dex__cosmotools.html#aaef3c07f112a83e6ff7a2762d5202fae">extractFromFile</a>( nbpts, nr, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, survey )
+<a name="l00089"></a>00089   call <a class="code" href="namespacef3dex__cosmotools.html#aaef3c07f112a83e6ff7a2762d5202fae">extractFromFile</a>( nbpts, nr, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, <a class="code" href="modulesurvey.html">survey</a> )
 <a name="l00090"></a>00090   print*,<span class="stringliteral">&quot;Data extraction...done&quot;</span>
 <a name="l00091"></a>00091 
 <a name="l00092"></a>00092 
@@ -159,15 +160,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00096"></a>00096      print*,<span class="stringliteral">&quot;Conversion to comoving space&quot;</span>
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098      <span class="keyword">ALLOCATE</span>(tempsurveyconv(1:nbpts),stat = status)
-<a name="l00099"></a>00099      CALL <a class="code" href="namespacef3dex__cosmotools.html#a78ae43d2bd5f180e65c710dc694bcee4">cosmo_z2s</a>( h, omega_m, omega_l, omega_b, wa, w0, survey(:,3) , nbpts, tempsurveyconv )
+<a name="l00099"></a>00099      CALL <a class="code" href="namespacef3dex__cosmotools.html#a78ae43d2bd5f180e65c710dc694bcee4">cosmo_z2s</a>( h, omega_m, omega_l, omega_b, wa, w0, <a class="code" href="modulesurvey.html">survey</a>(:,3) , nbpts, tempsurveyconv )
 <a name="l00100"></a>00100      <span class="comment">!print*,tempsurveyconv</span>
-<a name="l00101"></a>00101      survey(:,3) = tempsurveyconv
+<a name="l00101"></a>00101      <a class="code" href="modulesurvey.html">survey</a>(:,3) = tempsurveyconv
 <a name="l00102"></a>00102      <span class="keyword">DEALLOCATE</span>(tempsurveyconv)
 <a name="l00103"></a>00103      print*,<span class="stringliteral">&quot;Conversion...done&quot;</span>
 <a name="l00104"></a>00104 
 <a name="l00105"></a>00105   <span class="keyword">endif</span>
 <a name="l00106"></a>00106 
-<a name="l00107"></a>00107   rmax = max( rmaxinput,maxval(survey(:,3)) )
+<a name="l00107"></a>00107   rmax = max( rmaxinput,maxval(<a class="code" href="modulesurvey.html">survey</a>(:,3)) )
 <a name="l00108"></a>00108   print*,<span class="stringliteral">&quot;RMAX&quot;</span>,rmax
 <a name="l00109"></a>00109 
 <a name="l00110"></a>00110 
@@ -211,7 +212,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00148"></a>00148 
 <a name="l00149"></a>00149 
 <a name="l00150"></a>00150   CALL <a class="code" href="namespacef3dex__transforms.html#ae19f381573ccd64c64102bbd4181483f">survey2almn_srs</a>( nsmax, nnmax, nlmax, nmmax, rmax, nbpts, &amp;
-<a name="l00151"></a>00151        &amp; zbounds, survey, kln, almnHP)
+<a name="l00151"></a>00151        &amp; zbounds, <a class="code" href="modulesurvey.html">survey</a>, kln, almnHP)
 <a name="l00152"></a>00152 
 <a name="l00153"></a>00153   <span class="comment">!almnHP = almnHP / real(nbpts)</span>
 <a name="l00154"></a>00154 
@@ -427,7 +428,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00364"></a>00364   <span class="comment">!!   DEALLOCATION</span>
 <a name="l00365"></a>00365   <span class="comment">! ------------------------------------------------------------------</span>
 <a name="l00366"></a>00366 
-<a name="l00367"></a>00367   <span class="keyword">deallocate</span>( survey, almnHP, spectrnl )
+<a name="l00367"></a>00367   <span class="keyword">deallocate</span>( <a class="code" href="modulesurvey.html">survey</a>, almnHP, spectrnl )
 <a name="l00368"></a>00368 
 <a name="l00369"></a>00369 <span class="keyword">END PROGRAM survey2almn_interactive</span>
 </pre></div></div>
@@ -437,7 +438,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -446,7 +447,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 01:39:45 for 3DEX by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Nov 16 2011 15:27:15 for 3DEX by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
