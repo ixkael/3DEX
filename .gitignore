@@ -16,8 +16,9 @@ include/
 bin/
 build/
 oldversion/
+res/horizon*
 res/2mrs*
-res/horizon_01_30k.txt
+test/2mrs*
 TODO
 
 # As well as usual OSX files
