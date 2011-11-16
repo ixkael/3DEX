@@ -648,15 +648,12 @@ CONTAINS
     ENDDO
     !$OMP END parallel DO
 
-    PRINT*,"================================================"
-    PRINT*,"   Computing 3D cones and partial maps"
-    PRINT*,"   > ModIFied FFT 3D algorithm"
-    PRINT*,"------------------------------------------------"
+    CALL message(code, start=.TRUE., msg="ModIFied FFT 3D algorithm")
 
     ! loop on chunks
     DO ichunk = 0, nchunks-1 ! for each chunk
 
-       PRINT*,"> Block : ",ichunk+1," on ", nchunks
+       CALL message(code, msg="Block :",i=ichunk+1,msg2=" on ", i2=nchunks)
 
        lchk = ichunk * chunksize + 1  ! first ring of the chunk
        uchk = min(lchk+chunksize - 1, nrings)  ! last ring of the chunk
@@ -881,9 +878,7 @@ CONTAINS
 
     ENDDO ! loop on chunks
 
-    PRINT*,"------------------------------------------------"
-    PRINT*,"   Finished"
-    PRINT*,"================================================"
+    CALL message(code,fin=.TRUE.)
 
     !     --------------------
     !     free memory and exit
@@ -1197,6 +1192,9 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Computes series of roots of Bessel functions
+  !!@param[out] qln(0:nlmax,1:nnmax) : roots
+  !!@param[in] (nnmax,nlmax) : bounds
   SUBROUTINE gen_qln(qln, nnmax, nlmax)
 
     IMPLICIT NONE
@@ -1207,13 +1205,10 @@ CONTAINS
     REAl(DP), DIMENSION(0:nlmax,1:nnmax) :: qln
     !	REAL*8, DIMENSION(1:maxrt) :: roots
     REAL*8, DIMENSION(:), allocatable :: roots
-    character(LEN=*), parameter :: code = 'BESSEL'
+    character(LEN=*), parameter :: code = 'gen_qln'
     INTEGER(I4B) :: status
 
-    PRINT*,"------------------------------------------------"
-    PRINT*,"   Computing scaling coefficients..."
-    PRINT*,"-----------------------"
-
+    CALL message(code,start=.TRUE.)
 
     !$OMP parallel &
     !$OMP shared(qln,rmax,nnmax,nlmax,status) &
@@ -1264,15 +1259,16 @@ CONTAINS
     deALLOCATE(roots)
     !$OMP END parallel
 
-    PRINT*,"-----------------------"
-    PRINT*,"   Done."
-    PRINT*,"------------------------------------------------"
-
+    CALL message(code,fin=.TRUE.)
 
   END SUBROUTINE gen_qln
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Computes k spectrum
+  !!@param[out] kln(0:nlmax,1:nnmax) : k spectrum
+  !!@param[in] (nnmax,nlmax) : bounds
+  !!@param[in] rmax : R max value
   SUBROUTINE gen_kln(kln, nnmax, nlmax, rmax)
 
     IMPLICIT NONE
@@ -1311,6 +1307,7 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Generates a logrange
   SUBROUTINE logrange( x , mn , mx , npts )
 
     IMPLICIT NONE
@@ -1330,6 +1327,11 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Computes series of normalization coefficients
+  !!@param[out] cln(0:nlmax,1:nnmax) : output normalization coefficients
+  !!@param[in] kln(0:nlmax,1:nnmax) : k spectrum
+  !!@param[in] (nnmax,nlmax) : bounds
+  !!@param[in] rmax : R max value
   SUBROUTINE gen_cln(cln, kln, nnmax, nlmax, rmax)
 
     IMPLICIT NONE
@@ -1339,8 +1341,7 @@ CONTAINS
     REAl(DP), DIMENSION(0:nlmax,1:nnmax) :: kln
     REAl(DP), DIMENSION(0:nlmax,1:nnmax) :: cln
 
-    PRINT*,"------------------------------------------------"
-    PRINT*,"   Computing normalization coefficients..."
+    CALL message(code,start=.TRUE.)
 
     !$OMP PARALLEL &
     !$OMP SHARED(cln,rmax,kln,nnmax,nlmax) &
@@ -1357,13 +1358,17 @@ CONTAINS
     !$OMP END DO
     !$OMP END PARALLEL   	
 
-    PRINT*,"   Done."
-    PRINT*,"------------------------------------------------"
+    CALL message(code,fin=.TRUE.)
 
   END SUBROUTINE gen_cln
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Computes series of jl(kln r)
+  !!@param[out] jlns(0:nlmax,1:nnmax) : jlns 
+  !!@param[in] kln(0:nlmax,1:nnmax) : k spectrum
+  !!@param[in] rho : double radius value
+  !!@param[in] (nnmax,nlmax) : bounds
   SUBROUTINE gen_jln(jlns, kln, rho, nnmax, nlmax)
 
     IMPLICIT NONE

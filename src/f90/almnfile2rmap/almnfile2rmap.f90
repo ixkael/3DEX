@@ -14,6 +14,8 @@ PROGRAM almnfile2rmap
   USE misc_utils
   USE fitstools
   USE alm_tools
+  
+  IMPLICIT NONE
 
   REAL(DP) :: rmax              
   REAL*8 :: time1, time2
@@ -24,7 +26,7 @@ PROGRAM almnfile2rmap
   CHARACTER(len=FILENAMELEN) :: headersfile, arg, almninfile, mapoutfile
   REAL(DP), DIMENSION(:,:), ALLOCATABLE :: map, kln, cln, plm 
   COMPLEX(KIND=DP), DIMENSION(:,:,:), ALLOCATABLE :: almn
-  CHARACTER(len=*), PARAMETER :: code = "almn2rmap"
+  CHARACTER(len=*), PARAMETER :: code = "almnfile2rmap"
 
   PRINT*,"=================================================="
   PRINT*," 3DEX F90 LIBRARY"

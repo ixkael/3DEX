@@ -15,6 +15,13 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!     
 
+
+  !> Write power spectrum to file
+  !!@param[in] filename : fits file for output
+  !!@param[in] cln : power spectrum
+  !!@param[in] kln : k spectrum
+  !!@param[in] (nlmax,nnmax) : n-l limits
+  !!@param[in] (header,nlheader) : headers
   SUBROUTINE cln2fits( filename, cln, kln, nlmax, nnmax, header, nlheader )
     !
     INTEGER(I4B), INTENT(IN)      ::  nlmax, nnmax, nlheader
@@ -161,6 +168,13 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!     
 
+  !> Write a_lmn's to file
+  !!@param[in] filename : fits file for output
+  !!@param[in] almn : Fourier-bessel decomposition
+  !!@param[in] kln : k spectrum
+  !!@param[in] cln : normalization
+  !!@param[in] (nlmax,nmmax,nnmax) : n-m-l limits
+  !!@param[in] (header,nlheader) : headers
   SUBROUTINE almn2fits( filename, almn, kln, cln, nlmax, nmmax, nnmax, header, nlheader )
     !
     INTEGER(I4B), INTENT(IN)      ::  nlmax, nmmax, nnmax, nlheader
@@ -335,6 +349,13 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!     
 
+  !> Extracts almn's from fits file
+  !!@param[in] filename : fits file
+  !!@param[out] almn : Fourier-bessel decomposition
+  !!@param[out] kln : k spectrum
+  !!@param[out] cln : normalization
+  !!@param[in] (nlmax,nmmax,nnmax) : n-m-l limits
+  !!@param[in] (header,nlheader) : headers
   SUBROUTINE fits2almn(filename, nnmax, nlmax, nmmax, almn, kln, cln, header, nlheader ) 
 
     CHARACTER(LEN=*), INTENT(IN) :: filename
@@ -638,33 +659,38 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!       
 
+  !> Write bi-tab to file
+  !!@param[in] file : fits file for output
+  !!@param[in] tab : bi-array to write
+  !!@param[in] (dim1start, dim1en) : first dim bounds
+  !!@param[in] (dim2start, dim2en) : first dim bounds
    SUBROUTINE bitab2fits( file, tab, dim1start, dim1end, dim2start, dim2end )
    
    CHARACTER(len=FILENAMELEN) ::  file
    CHARACTER(len=80), DIMENSION(1:120) :: header
    INTEGER(I4B) :: status,  dim1start, dim1end, dim2start, dim2end
-   INTEGER(I8B) :: d1, d2, npix, loc
+   INTEGER(I8B) :: d1, d2, npix, loc, pix
    REAL(DP), DIMENSION(dim1start:dim1end,dim2start:dim2end) :: tab
    REAL(DP), DIMENSION(:,:), ALLOCATABLE :: temptab
    CHARACTER(len=*), PARAMETER :: code = "bitab2fits"
   
-   npix = dim2end-dim2start+1
+   npix = (dim1end-dim1start+1)*(dim2end-dim2start+1)
    header(:) = ' '
    loc = 0
+   pix = 0
    
    ALLOCATE( temptab(0:npix-1,1:3),stat = status )
    CALL assert_alloc(status,code,'temptab')
    
    DO d1=dim1start, dim1end
-      temptab = 0.0
-      DO d2=0, npix-1
-         temptab(d2,1) = REAL(d1)
-         temptab(d2,2) = REAL(dim2start+d2)
-         temptab(d2,3) = tab(d1,dim2start+d2)
+      DO d2=dim2start, dim2end
+         temptab(pix,1) = REAL(d1)
+         temptab(pix,2) = REAL(d2)
+         temptab(pix,3) = tab(d1,d2)
+         pix = pix + 1
       ENDDO
-      CALL write_bintabh(temptab, npix, 3, header, 120, file, firstpix=loc)
-      loc = loc + npix
    ENDDO
+   CALL write_bintabh(temptab, npix, 3, header, 120, file, firstpix=loc)
    
    DEALLOCATE(temptab)
 
@@ -672,44 +698,147 @@ CONTAINS
       
   ! ---------------------------------------------------------------------------------------!       
 
+  !> Read bi-tab from file
+  !!@param[in] file : input fits file
+  !!@param[in] tab : bi-array to write
+  !!@param[in] (dim1start, dim1en) : first dim bounds
+  !!@param[in] (dim2start, dim2en) : first dim bounds
    SUBROUTINE fits2bitab( file, tab, dim1start, dim1end, dim2start, dim2end )
    
    CHARACTER(len=FILENAMELEN) ::  file
    CHARACTER(len=80), DIMENSION(1:120) :: header
-   INTEGER(I8B) :: d1, d2, loc, npix, c1, c2
+   INTEGER(I8B) :: d1, d2, loc, npix, c1, c2, pix
    INTEGER(I4B) :: status,  dim1start, dim1end, dim2start, dim2end
    REAL(DP), DIMENSION(dim1start:dim1end,dim2start:dim2end) :: tab
    REAL(DP), DIMENSION(:,:), ALLOCATABLE :: temptab
    REAL(DP) :: c3
    CHARACTER(len=*), PARAMETER :: code = "fits2bitab"
    
-   npix = dim2end-dim2start+1
+   npix = (dim1end-dim1start+1)*(dim2end-dim2start+1)
    header(:) = ' '
    loc = 0
    tab = 0.0
+   pix = 0
    
    ALLOCATE( temptab(0:npix-1,1:3),stat = status )
    CALL assert_alloc(status,code,'temptab')
    
+   CALL input_tod(file, temptab, npix, 3, firstpix=loc)
    DO d1=dim1start, dim1end
-      temptab = -1.0
-      CALL input_tod(file, temptab, npix, 3, firstpix=loc)
-      DO d2=0, npix-1
-         c1 = INT(temptab(d2,1))
-         c2 = INT(temptab(d2,2))
-         c3 = temptab(d2,3)
+      DO d2=dim2start, dim2end
+         c1 = INT(temptab(pix,1))
+         c2 = INT(temptab(pix,2))
+         c3 = temptab(pix,3)
          IF( (c1 .GE. 0.0) .AND. (c2 .GE. 0.0) .AND. &
            & (c1 .GE. dim1start) .AND. (c1 .LE. dim1end) .AND. & 
            & (c2 .GE. dim2start) .AND. (c2 .LE. dim2end) ) THEN
              tab(c1,c2) = c3
          ENDIF
+         pix = pix + 1
+      ENDDO
+   ENDDO
+   
+   DEALLOCATE(temptab)
+   
+   END SUBROUTINE fits2bitab
+   
+  ! ---------------------------------------------------------------------------------------!       
+
+  !> Write tri-tab to file
+  !!@param[in] file : fits file for output
+  !!@param[in] tab : tri-array to write
+  !!@param[in] (dim1start, dim1en) : first dim bounds
+  !!@param[in] (dim2start, dim2en) : first dim bounds
+  !!@param[in] (dim3start, dim3en) : first dim bounds
+   SUBROUTINE tritab2fits( file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end )
+   
+   CHARACTER(len=FILENAMELEN) ::  file
+   CHARACTER(len=80), DIMENSION(1:2) :: header
+   INTEGER(I4B) :: status,  dim1start, dim1end, dim2start, dim2end, dim3start, dim3end
+   INTEGER(I8B) :: d1, d2, d3, npix, loc, pix
+   REAL(DP), DIMENSION(dim1start:dim1end,dim2start:dim2end,dim3start:dim3end) :: tab
+   REAL(DP), DIMENSION(:,:), ALLOCATABLE :: temptab
+   CHARACTER(len=*), PARAMETER :: code = "tritab2fits"
+  
+   npix = (dim2end-dim2start+1)*(dim3end-dim3start+1)
+   header(:) = ' '
+   loc = 0
+   
+   ALLOCATE( temptab(0:npix-1,1:4),stat = status )
+   CALL assert_alloc(status,code,'temptab')
+   
+   DO d1=dim1start, dim1end
+      temptab=0.0
+      pix = 0
+      DO d2=dim2start, dim2end
+      	 DO d3=dim3start, dim3end
+            temptab(pix,1) = REAL(d1)
+            temptab(pix,2) = REAL(d2)
+            temptab(pix,3) = REAL(d3)
+            temptab(pix,4) = tab(d1,d2,d3)
+            pix = pix + 1
+         ENDDO
+      ENDDO
+      CALL write_bintabh(temptab, npix, 4, header, 2, file, firstpix=loc)
+      loc = loc + npix
+   ENDDO
+   
+   DEALLOCATE(temptab)
+
+   END SUBROUTINE tritab2fits
+      
+  ! ---------------------------------------------------------------------------------------!       
+
+  !> Read tri-tab from file
+  !!@param[in] file : input fits file
+  !!@param[in] tab : tri-array to write
+  !!@param[in] (dim1start, dim1en) : first dim bounds
+  !!@param[in] (dim2start, dim2en) : first dim bounds
+  !!@param[in] (dim3start, dim3en) : first dim bounds
+   SUBROUTINE fits2tritab( file, tab, dim1start, dim1end, dim2start, dim2end, dim3start, dim3end )
+   
+   CHARACTER(len=FILENAMELEN) ::  file
+   CHARACTER(len=80), DIMENSION(1:2) :: header
+   INTEGER(I8B) :: d1, d2, d3, loc, npix, c1, c2, c3, pix
+   INTEGER(I4B) :: status,  dim1start, dim1end, dim2start, dim2end, dim3start, dim3end
+   REAL(DP), DIMENSION(dim1start:dim1end,dim2start:dim2end,dim3start:dim3end) :: tab
+   REAL(DP), DIMENSION(:,:), ALLOCATABLE :: temptab
+   REAL(DP) :: c4
+   CHARACTER(len=*), PARAMETER :: code = "fits2tritab"
+   
+   npix = (dim2end-dim2start+1)*(dim3end-dim3start+1)
+   header(:) = ' '
+   loc = 0
+   tab = 0.0
+   
+   ALLOCATE( temptab(0:npix-1,1:4),stat = status )
+   CALL assert_alloc(status,code,'temptab')
+   
+   DO d1=dim1start, dim1end
+      temptab = -1.0
+      CALL input_tod(file, temptab, npix, 4, firstpix=loc)
+      pix = 0
+      DO d2=dim2start, dim2end
+         DO d3=dim3start, dim3end
+            c1 = INT(temptab(pix,1))
+            c2 = INT(temptab(pix,2))
+            c3 = INT(temptab(pix,3))
+            c4 = REAL(temptab(pix,4))
+            IF( (c1 .GE. 0.0) .AND. (c2 .GE. 0.0) .AND. &
+              & (c1 .GE. dim1start) .AND. (c1 .LE. dim1end) .AND. & 
+              & (c2 .GE. dim2start) .AND. (c2 .LE. dim2end) .AND. & 
+              & (c3 .GE. dim3start) .AND. (c3 .LE. dim3end) ) THEN
+                tab(c1,c2,c3) = c4
+            ENDIF
+            pix = pix + 1
+         ENDDO
       ENDDO
       loc = loc + npix
    ENDDO
    
    DEALLOCATE(temptab)
    
-   END SUBROUTINE fits2bitab      
+   END SUBROUTINE fits2tritab 
       
   ! ---------------------------------------------------------------------------------------!       
       

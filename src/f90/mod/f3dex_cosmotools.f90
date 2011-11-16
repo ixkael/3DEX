@@ -24,6 +24,9 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Equatorial to galactic coordinates conversion (in degrees)
+  !!@param[in] (delta, alpha) : Doubles (equatorial)
+  !!@param[in] (b, l) : Doubles (galactic)
   SUBROUTINE equatorial2galactic_deg( delta, alpha, b, l )
 
     REAL(DP) :: delta, alpha, b, l
@@ -36,6 +39,8 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Inquire file and delete it if necessary
+  !!@param[in] filename : string
   SUBROUTINE inquireAndDelete( filename )
 
     CHARACTER(len=FILENAMELEN) :: filename, cmd
@@ -52,19 +57,11 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
-  LOGICAL FUNCTION DOesFileExists( filename )
-
-    CHARACTER(len=FILENAMELEN) :: filename
-    LOGICAL :: filefound
-    INQUIRE(file=filename, exist=filefound)
-
-    DOesFileExists = filefound
-    RETURN
-  END FUNCTION DOesFileExists
-
-  ! ---------------------------------------------------------------------------------------!    
-
-
+  !> Read list of coordinates from a file, using a larger array
+  !!@param[in] file : input file
+  !!@param[in] file : (nbptsmax, nbcolsinfile) : bounds of the temp array / of the survey
+  !!@param[out] surveytemp : output array
+  !!@param[out] nbpts : actual number of coordinates read
   SUBROUTINE read_survey(file, nbptsmax, nbcolsinfile, nbpts, surveytemp)
 
     CHARACTER(len=FILENAMELEN) :: file
@@ -72,25 +69,26 @@ CONTAINS
     CHARACTER(len=*), PARAMETER   :: code = "read_survey"
     REAL(DP), DIMENSION(1:nbptsmax, 1:nbcolsinfile) :: surveytemp
 
+    nbpts = 0
     OPEN(2,file=file,iostat=rdstatus)
-
-    DO WHILE( rdstatus == 0 .AND. nbpts < nbptsmax )  
-
+    
+    DO WHILE( nbpts < nbptsmax .AND. rdstatus == 0  )  
        DO i=1,nbptsmax
           nbpts = i-1
           READ(2,*,iostat = rdstatus,END=61) (surveytemp(i,k),k=1,nbcolsinfile) 
           nbpts = i
        ENDDO
-61     CONTINUE  
-
     ENDDO
+61  CONTINUE
 
   END SUBROUTINE read_survey
 
-
-
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Newton cotes integration using QUADRULE package
+  !!@param[in] x(1:n) : input abs
+  !!@param[in] f(1:n) : input coords
+  !!@param[in] n : dimension
   REAL(DP) FUNCTION int_NC(x, f, n)
     ! Newton-Cotes integration, for f(x) unIFormly discretized
 
@@ -110,6 +108,11 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+  !> Converts series of redshift values into radial coordinates
+  !!@param[in] (h_in, omega_m_in, omega_l_in, omega_b_in, wa_in, w0_in) : cosmological parameters
+  !!@param[in] z(1:nbpts_in) : input array
+  !!@param[in] nbpts_in : input dimension
+  !!@param[out] sk(1:nbpts_in) : output array
   SUBROUTINE cosmo_z2s( h_in, omega_m_in, omega_l_in, omega_b_in, wa_in, w0_in, z, nbpts_in, sk )   ! need in cosmo : h, omega_b, omega_m, omega_l
 
     INTEGER(I4B) :: nbpts_in, nbpts,i
@@ -180,6 +183,9 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!
 
+  !> Raw chi to rad conversion, using QUADPACK integration
+  !!@param[in] zin : input value
+  !!@param[out] chi : output value
   SUBROUTINE chi_z0(zin, chi)
 
     REAL(DP) :: zin, chi
@@ -206,6 +212,9 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!
 
+  !> Raw chi to rad conversion, using QUADPACK integration
+  !!@param[in] zin : input value
+  !!@param[out] chi : output value
   SUBROUTINE chi_z1(zin, chi)
 
     INTEGER(I4B) :: nbpts
@@ -251,6 +260,9 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!
 
+  !> Raw chi to rad conversion, using QUADRULE integration
+  !!@param[in] zin : input value
+  !!@param[out] chi : output value
   SUBROUTINE chi_z2(zin, chi)
 
     INTEGER(I4B) :: nbpts
@@ -291,6 +303,8 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!
 
+  !> Cosmological function
+  !!@param[in] z : redshift
   REAL FUNCTION fz(z)
 
     INTEGER(I4B) :: nbpts
@@ -307,6 +321,9 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!
 
+  !> Scope and scan for parameters
+  !!@param[in] paramfile : input file
+  !!@param[out] params : output values (special TYPE)
   SUBROUTINE txtfile2parameters(paramfile,params)
 
     IMPLICIT NONE
@@ -542,6 +559,8 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+
+  !> Extracts parameters
   SUBROUTINE getParameters_survey2almn(multiscale, zbounds, nr, nside, nnmax, nlmax, nmmax, iter_order, &
        & nbpts, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, paramfile, &
        & almnoutfile, clnoutfile, h, w0, wa, omega_l, omega_b, omega_m, rmaxinput )
@@ -902,6 +921,8 @@ CONTAINS
 
   ! ---------------------------------------------------------------------------------------!    
 
+
+  !> Extracts parameters from file
   SUBROUTINE extractFromFile( nbpts, nr, iwhere, inradian, sorted, convfc, nbcolsinfile, surveyfile, survey )
 
     IMPLICIT NONE
