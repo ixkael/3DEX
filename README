@@ -77,16 +77,18 @@ AVAILABLE FEATURES
     Extract FB decomposition from .fits file and reconstructs the smoothed field at given distance
     Test: 
     bin/almnfile2rmap out/almn.fits out/map.fits 400.0 256 10 10 2000.0
-  
+
  > survey2almn_cxx
     You need to download the QLN table here : https://files.me.com/vladphotograph/m0krmb
-    And store it in the res/ directory.
+    And store it in the res/ directory. 
+    Or you can compute a custom table using: "bin/compute_qln_cxx res/qlnTableCustom.fits 100 50" (100 is lmax and 50 is nmax).
     Test: 
     bin/survey2almn_cxx res/qlnTable_2000_3000.fits res/params.txt out/almn.fits 256 2000 20 20 20
 
  > survey2almn_mpi
     You need to download the QLN table here : https://files.me.com/vladphotograph/m0krmb
     And store it in the res/ directory.
+    Or you can compute a custom table using: "bin/compute_qln_cxx res/qlnTableCustom.fits 100 50" (100 is lmax and 50 is nmax).
     Test: 
     mpirun -np 4 bin/survey2almn_mpi res/qlnTable_2000_3000.fits res/params.txt almn.fits 256 2000 15 15 16
 

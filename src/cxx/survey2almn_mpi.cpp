@@ -69,7 +69,8 @@ int main(int argc, char* argv[]){
 	qln = (double *) malloc((lmax+1)*nmax*sizeof(double));
 	if( load_qln(qlnTableFile, nmax, lmax, qln) != 0){
 	  std::cout << "The specified qlnFile does not have enough coefficients" << std::endl;
-	  return 0;
+	  std::cout << "Computing required qlns" << std::endl;
+	  BesselRoots(nmax, lmax, qln);
 	}
 	if(ProcId == 0){
 	  std::cout << " Done" << std::endl;
